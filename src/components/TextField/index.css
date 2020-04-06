@@ -1,0 +1,69 @@
+.text_field {
+    width: 100%;
+    position: relative;
+}
+
+.text_field > div {
+    height: 48px;
+}
+
+.text_field > p {
+    font-size: 12px;
+    font-weight: 300;
+    line-height: 30px;
+    position: absolute;
+    bottom: -40px;
+}
+
+.text_field input {
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 19px;
+    color: #55678B;
+}
+
+.text_field.text_field2 input {
+    color: #139EEE;
+}
+
+.text_field fieldset {
+    border-radius: 10px;
+    border-width: 2px;
+    border-color: #1B253A;
+}
+
+.sentinel .text_field > div:hover fieldset {
+    border-color: #1B253A;
+}
+
+.text_field .icon {
+    width: 20px;
+}
+
+.text_field_label_div {
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+}
+
+.text_field_label_div + .text_field {
+    margin: 0;
+}
+
+.text_field_label {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 16px;
+    text-transform: uppercase;
+    color: #8EA1C8;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    appearance: none;
+    margin: 0;
+}
+
+.text_field.icon_text_field > div {
+    background: #090F1B;
+}

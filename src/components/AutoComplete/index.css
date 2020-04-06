@@ -1,0 +1,45 @@
+.auto_complete .text_field {
+    margin-top: 16px;
+    margin-bottom: 8px;
+}
+
+.auto_complete .text_field input {
+    padding: 0 4px !important;
+}
+
+.auto_complete .text_field svg {
+    fill: #139eee;
+}
+
+.auto_complete .text_field fieldset {
+    border-color: #1B253A !important;
+}
+
+.auto_complete_popper > div {
+    background: #151E30;
+}
+
+.auto_complete_popper li {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 25px;
+    color: #BBCAE9;
+    padding: 10px 20px;
+}
+
+/* Scroll styles */
+.auto_complete_popper ul::-webkit-scrollbar {
+    border: 0;
+    height: 10px;
+    width: 6px;
+}
+
+.auto_complete_popper ul::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0);
+    display: none;
+}
+
+.auto_complete_popper ul::-webkit-scrollbar-thumb {
+    border-radius: 3px;
+    background: #0B2E49;
+}

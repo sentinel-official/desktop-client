@@ -1,0 +1,28 @@
+.nav_bar {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-grow: 1;
+}
+
+.nav_bar > div {
+    margin: 0 5px;
+}
+
+.nav_bar > div:first-child {
+    margin-left: 0;
+}
+
+.nav_bar > div:last-child {
+    margin-right: 0;
+}
+
+.nav_bar .faucet_button {
+    border-radius: 50px;
+    background: #0ea1ea3b;
+    color: #0ea1ea;
+}
+
+.nav_bar .faucet_button > span:first-child {
+    margin-top: 2px;
+}

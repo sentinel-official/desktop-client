@@ -1,0 +1,16 @@
+.transactions {
+    display: flex;
+    flex-direction: column;
+}
+
+.transactions .heading_section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.transactions .content_section {
+    margin-top: 25px;
+    padding: 0;
+    flex: 1;
+}

@@ -1,0 +1,12 @@
+.refresh_button > button {
+    background: #101623;
+}
+
+.refresh_button .icon {
+    width: 18px;
+    fill: #EEF4FF;
+}
+
+.refresh_button > button:hover {
+    background: #101623;
+}

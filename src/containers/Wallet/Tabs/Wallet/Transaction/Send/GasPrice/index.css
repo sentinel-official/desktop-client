@@ -1,0 +1,47 @@
+.number_text_field {
+    position: relative;
+    margin-top: 16px;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+}
+
+.number_text_field .gas_price {
+    margin: 0;
+}
+
+.number_text_field .gas_price input {
+    padding-right: 50px;
+}
+
+.number_text_field .buttons_div {
+    display: flex;
+    color: #fff;
+    height: 48px;
+    flex-direction: column;
+    position: absolute;
+    right: 0;
+    width: 50px;
+}
+
+.number_text_field .buttons_div button {
+    color: #139EEE;
+    height: 100%;
+    padding: 0;
+    width: 50px;
+    min-width: 50px;
+    border-radius: 0;
+    min-height: 0px;
+    background: #139eee63;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.number_text_field .buttons_div .increment_button {
+    border-radius: 0 10px 0 0;
+    border-bottom: 1px solid #1B253A;
+}
+
+.number_text_field .buttons_div .decrement_button {
+    border-radius: 0 0 10px 0;
+}

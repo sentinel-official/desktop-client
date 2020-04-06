@@ -1,0 +1,140 @@
+.side_bar_tabs {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.side_bar_tabs .side_bar_tab_content {
+    background: #0f1623;
+    min-height: 0;
+    border-radius: 0;
+    height: 100%;
+    width: 100%;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.side_bar_tab_content .tab {
+    color: #3f51b5;
+    background: #0f1623;
+    width: 100%;
+    padding: 20px;
+    border-radius: 0;
+    display: flex;
+    justify-content: flex-start;
+    position: relative;
+    transition: none;
+}
+
+.side_bar_tab_content .tab > span .label {
+    font-size: 13px;
+    line-height: 20px;
+    color: #55678B;
+    margin-left: 20px;
+    min-width: max-content;
+    width: max-content;
+    text-transform: capitalize;
+}
+
+.side_bar_tab_content .active_tab > span .label {
+    color: #fff;
+}
+
+.side_bar_tab_content .tab svg {
+    width: 20px;
+    flex-shrink: 0;
+    fill: #252E40;
+}
+
+.side_bar_tab_content .active_tab {
+    background: #0A0F18;
+}
+
+.side_bar_tab_content .active_tab svg {
+    fill: #139EEE;
+}
+
+.side_bar_tab_content .tab .left_bar {
+    background: #139EEE;
+    width: 0;
+    position: absolute;
+    top: 0;
+    right: 0;
+    border-radius: 20px 0 0 20px;
+    height: 100%;
+    transition: width .2s ease;
+}
+
+.side_bar_tab_content .active_tab .left_bar {
+    width: 3px;
+}
+
+.side_bar.side_bar_open .side_bar_tab_content .item .left_bar {
+    right: 0;
+}
+
+
+/* collapse tab */
+.collapse_tab > span {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.collapse_tab .collapse_button_left {
+    display: flex;
+}
+
+.collapse_button_right img {
+    transform: rotate(-90deg);
+    transition: all .5s ease;
+    display: none;
+}
+
+.side_bar_open .collapse_button_right img {
+    display: block;
+}
+
+/* expand tab */
+.side_bar .expansion_tab {
+    width: 100%;
+}
+
+.expand_tab .collapse_button_right img {
+    transform: rotate(0deg);
+}
+
+.side_bar_tab_content .expand_div button {
+    height: 0;
+    padding: 0;
+}
+
+.side_bar_tab_content .expand_div button > span {
+    display: none;
+}
+
+.side_bar_tab_content .expand_div.expand_active button {
+    padding: 20px;
+    height: 60px;
+}
+
+.side_bar_tab_content .expand_div.expand_active button > span {
+    display: flex;
+}
+
+.side_bar_tab_content .expand_div .active_tab > span .label {
+    color: #55678B;
+    animation: none;
+    padding-left: 20px;
+}
+
+.side_bar_tabs .expand_div {
+    width: 100%;
+    background: #0A0F18;
+    transition: height .5s;
+    height: 0;
+}

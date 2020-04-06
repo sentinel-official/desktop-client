@@ -1,0 +1,19 @@
+.splash {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: #090f1b;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.content_div > div.splash > div {
+    padding: 0;
+}
+
+.splash > div {
+    color: #0da2eb;
+}

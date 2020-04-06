@@ -1,0 +1,22 @@
+.dashboard {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.dashboard > div {
+    background: #090F1B;
+    flex-grow: 1;
+}
+
+.dashboard .dashboard_tab {
+    display: flex;
+    flex-direction: column;
+}
+
+.dashboard .dashboard_tab > div {
+    padding: 40px 0;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
