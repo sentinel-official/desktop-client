@@ -1,0 +1,55 @@
+.card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    min-width: 300px;
+}
+
+.card .amount_value {
+    font-weight: 300;
+    font-size: 22px;
+    line-height: 35px;
+    color: #EEF4FF;
+}
+
+.card .amount_value > b {
+    font-weight: 300;
+    font-size: 15px;
+    line-height: 23px;
+}
+
+.card .wallet_type {
+    display: flex;
+    align-items: flex-end;
+    margin-top: 20px;
+}
+
+.wallet_type .type_name {
+    font-weight: bold;
+    font-size: 15px;
+    line-height: 23px;
+    color: #4E5F82;
+    margin-right: 10px;
+    text-transform: uppercase;
+}
+
+.wallet_type .percentage {
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 23px;
+    color: #31B34E;
+    display: flex;
+    align-items: center;
+}
+
+.wallet_type .percentage .icon {
+    width: 12px;
+    margin-left: 5px;
+}
+
+@media (max-width: 1050px) {
+    .card {
+        min-width: 250px;
+    }
+}

@@ -1,0 +1,7 @@
+.received_tab.sent_tab .right_content > p {
+    color: #FF4B55;
+}
+
+img[alt='Sent log'] {
+    margin-right: 10px;
+}

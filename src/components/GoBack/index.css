@@ -1,0 +1,15 @@
+.go_back {
+    font-size: 16px;
+    line-height: 25px;
+    color: #55678B;
+    display: flex;
+    margin-bottom: 30px;
+    width: max-content;
+    cursor: pointer;
+}
+
+.go_back .icon {
+    width: 10px;
+    margin-right: 10px;
+    margin-bottom: 2px;
+}

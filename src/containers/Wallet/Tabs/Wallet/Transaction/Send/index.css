@@ -1,0 +1,52 @@
+.send_transaction {
+    width: 60%;
+    margin: 40px auto;
+}
+
+.send_transaction .text_field_label {
+    font-size: 16px;
+    line-height: 25px;
+}
+
+.send_transaction > div {
+    margin-bottom: 20px;
+}
+
+.send_transaction .tokens_text_field .input_adornment > p {
+    color: #55678B;
+}
+
+.send_transaction .tokens_text_field {
+    width: 66%;
+}
+
+.send_transaction .tokens_text_field > div {
+    background: #090F1B;
+}
+
+.send_transaction .row {
+    justify-content: space-between;
+}
+
+.send_transaction .tokens_text_field + .select_field {
+    width: 30%;
+}
+
+.send_transaction input,
+.send_transaction .select_field > div > div {
+    background: #090F1B;
+    padding: 0 10px;
+    height: 100%;
+    border-radius: 10px;
+}
+
+.send_transaction input {
+    height: 100%;
+    padding: 0 0 0 10px;
+    color: #fff;
+    border-radius: 0 10px 10px 0;
+}
+
+.send_transaction .button_div {
+    text-align: center;
+}

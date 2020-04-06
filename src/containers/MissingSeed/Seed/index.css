@@ -1,0 +1,46 @@
+.copy_box .missing_seed_title {
+    width: 86%;
+    margin-left: auto;
+    margin-bottom: 20px;
+}
+
+.copy_box .missing_seed_title p {
+    font-size: 18px;
+    line-height: 21px;
+    color: #139EEE;
+}
+
+.copy_box .seed_div.missing_seed {
+    font-size: 18px;
+    line-height: 247.2%;
+    letter-spacing: 0.04em;
+    color: #E3814A;
+    word-spacing: 10px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.copy_box .seed_div.missing_seed > p {
+    margin-right: 10px;
+}
+
+.missing_seed .text_field {
+    width: max-content;
+    margin: 0;
+    justify-content: center;
+}
+
+.missing_seed .text_field > div {
+    width: 100px;
+    margin-right: 10px;
+    background: #000000;
+    height: 30px;
+}
+
+.missing_seed .text_field fieldset {
+    border-color: unset;
+}
+
+.missing_seed .text_field fieldset {
+    border-radius: 5px;
+}

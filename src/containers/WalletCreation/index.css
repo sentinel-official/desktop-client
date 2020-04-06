@@ -1,0 +1,43 @@
+.wallet_creation_div {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.wallet_creation {
+    height: 100%;
+    background: #090F1B;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 400px;
+    text-align: center;
+    margin: auto;
+}
+
+.wallet_creation .heading_text {
+    font-weight: 300;
+    font-size: 36px;
+    line-height: 42px;
+    text-align: center;
+    color: #FFFFFF;
+    margin-bottom: 50px;
+}
+
+.wallet_creation .text_field {
+    margin: 20px 0;
+}
+
+.wallet_creation .text_field:first-child {
+    margin-top: 0;
+}
+
+.wallet_creation .create_account_button {
+    background: #31B34E;
+    width: 100%;
+    margin-top: 50px;
+}
+
+.wallet_creation .create_account_button:hover {
+    background: #1b9837;
+}

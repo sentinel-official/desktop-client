@@ -1,0 +1,63 @@
+{
+  "name": "sentinel-desktop",
+  "version": "0.2.0",
+  "description": "Sentinel Desktop Client",
+  "author": {
+    "name": "Sentinel Development Team",
+    "email": "devs@sentinel.co",
+    "url": "https://sentinel.co"
+  },
+  "license": "MIT",
+  "private": false,
+  "homepage": ".",
+  "main": "public/electron.js",
+  "scripts": {
+    "build": "react-scripts build",
+    "build:app": "GENERATE_SOURCEMAP=false react-scripts build && NODE_ENV=production node build.js",
+    "build:app:development": "react-scripts build && NODE_ENV=development node build.js",
+    "start:app": "react-scripts build && electron .",
+    "start:app:development": "NODE_ENV=development electron .",
+    "start:server": "BROWSER=none HTTPS=true react-scripts start"
+  },
+  "devDependencies": {
+    "@material-ui/core": "^4.9.9",
+    "@material-ui/icons": "^4.9.1",
+    "@material-ui/lab": "^4.0.0-alpha.48",
+    "axios": "^0.19.2",
+    "bech32": "^1.1.3",
+    "classnames": "^2.2.6",
+    "electron": "^8.2.0",
+    "electron-builder": "^22.4.1",
+    "eslint": "^6.8.0",
+    "eslint-config-standard": "^14.1.1",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-react": "^7.19.0",
+    "eslint-plugin-standard": "^4.0.1",
+    "moment": "^2.24.0",
+    "prop-types": "^15.7.2",
+    "qrcode.react": "^1.0.0",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-redux": "^7.2.0",
+    "react-router": "^5.1.2",
+    "react-router-dom": "^5.1.2",
+    "react-scripts": "^3.4.1",
+    "redux": "^4.0.5",
+    "redux-devtools-extension": "^2.13.8",
+    "redux-thunk": "^2.3.0"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

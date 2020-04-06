@@ -1,0 +1,328 @@
+html, body, #root, .sentinel, .main_content, .router {
+    min-height: 100% !important;
+    height: 100%;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+}
+
+html, button, .sentinel, p {
+    font-family: 'Overpass', sans-serif !important;
+}
+
+.sentinel, p {
+    margin: 0;
+}
+
+.main_content {
+    display: flex;
+    background: #090F1B;
+}
+
+.sentinel .content_div {
+    flex: 1 0 auto;
+    width: min-content;
+}
+
+.header + .main_content > .content_div {
+    padding-top: 67px;
+}
+
+.sentinel a, .sentinel a:hover {
+    text-decoration: none;
+}
+
+.sentinel .dvpn_text {
+    text-transform: unset;
+}
+
+.content_div > div header + div > div {
+    height: 100%;
+}
+
+.main_headings {
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 25px;
+    color: #EEF4FF;
+}
+
+.sentinel .wallets .cards_div .hover_button,
+.wallet_transaction .cards_div .hover_button {
+    display: none;
+}
+
+.text_normal {
+    text-transform: none;
+}
+
+/* router */
+.content_div {
+    background: #090F1B;
+    display: flex;
+}
+
+.content_div > div {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.content_div > div header + div {
+    flex: 1;
+    background: #090F1B;
+}
+
+.content_div > div > header,
+.content_div > div > div {
+    padding: 0 40px;
+}
+
+/* scroll bar */
+.content_div > div > header ~ div,
+.scroll_bar_div {
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.content_div > div > header ~ div::-webkit-scrollbar,
+.scroll_bar_div::-webkit-scrollbar {
+    border: 0;
+    height: 10px;
+    width: 6px;
+}
+
+.content_div > div > header ~ div::-webkit-scrollbar-track,
+.scroll_bar_div::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0);
+    display: none;
+}
+
+.content_div > div > header ~ div::-webkit-scrollbar-thumb,
+.scroll_bar_div::-webkit-scrollbar-thumb {
+    border-radius: 3px;
+    background: #0B2E49;
+}
+
+/* horizontal tabs */
+.content_div .horizontal_tabs {
+    background: #090F1B;
+    border-bottom: 1px solid #1E283E;
+    box-shadow: none;
+}
+
+.horizontal_tabs .tab {
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 25px;
+    color: #55678B;
+    padding: 18px 0;
+    width: max-content;
+    min-width: max-content;
+    margin-left: 40px;
+}
+
+.horizontal_tabs .tab[disabled] {
+    padding: 0 20px;
+}
+
+.horizontal_tabs .tab.active_tab {
+    color: #EEF4FF;
+}
+
+.horizontal_tabs .tab:first-child {
+    margin-left: 0;
+    padding-left: 5px;
+}
+
+.horizontal_tabs .tab > span {
+    width: max-content;
+}
+
+.horizontal_tabs .tabs_content > div > span {
+    background: #139EEE;
+    border-radius: 20px 20px 0 0;
+    height: 4px;
+}
+
+.horizontal_tabs .main_bar_div {
+    flex-grow: 1;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+/* card */
+.card {
+    background: #090F1B;
+    border: 1px solid #1B253A;
+    box-sizing: border-box;
+    border-radius: 10px;
+    padding: 25px 30px;
+}
+
+/* row */
+.row {
+    display: flex;
+}
+
+/* blue button */
+.main_button {
+    background: #0077FF;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.05);
+    border-radius: 3px;
+    color: #fff;
+    text-transform: initial;
+    padding-right: 20px;
+    padding-left: 20px;
+    width: max-content;
+}
+
+.main_button:hover {
+    background: #005FCC;
+}
+
+.main_button:disabled {
+    box-shadow: none;
+    background-color: rgba(0, 0, 0, 0.12);
+    color: #fff;
+}
+
+/* information button */
+.sentinel .information_button {
+    margin-left: 10px;
+    width: 20px;
+    height: 20px;
+    min-height: 20px;
+    background: #252E40;
+    font-weight: bold;
+    font-size: 12px;
+    line-height: 14px;
+    text-align: center;
+    color: #8EA1C8;
+}
+
+.information_button .icon {
+    width: 10px;
+}
+
+.sentinel .information_button:hover {
+    background: #3b455a;
+}
+
+div[role='tooltip'] > div {
+    background: #eef4ff;
+    color: #0a0f1b;
+    padding: 3px 10px;
+    border-radius: 10px;
+    font-size: 11px;
+}
+
+/* buttons */
+.sentinel .outlined_button {
+    font-weight: bold;
+    font-size: 12px;
+    line-height: 14px;
+    text-align: center;
+    letter-spacing: 0.01em;
+    color: #55678B;
+    margin: 0;
+    border: 1.13577px solid #141A29;
+    border-radius: 5px;
+    padding: 10px 12px;
+}
+
+.sentinel .normal_button {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+    text-align: center;
+    text-transform: inherit;
+    color: #55678B;
+    padding: 10px 20px;
+}
+
+.sentinel .continue_button {
+    background: #252E40;
+    height: 42px;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 21px;
+    text-align: center;
+    color: #FFFFFF;
+    text-transform: capitalize;
+    padding: 0px 22px;
+}
+
+.sentinel .continue_button:hover {
+    background: #3b455a;
+}
+
+.sentinel .save_button {
+    background: #139EEE;
+    height: 42px;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 21px;
+    text-align: center;
+    color: #FFFFFF;
+    text-transform: capitalize;
+    padding: 0 22px;
+}
+
+.sentinel .save_button:hover {
+    background: #008cde;
+}
+
+.sentinel button[disabled] {
+    color: #eee;
+    background: #eeeeee57;
+    cursor: no-drop;
+    pointer-events: unset;
+}
+
+.sentinel button[disabled]:hover {
+    background: #eeeeee57;
+}
+
+.sentinel .send_button {
+    border-color: #139EEE;
+    border-radius: 50px;
+    padding: 12px 100px;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 31px;
+    color: #FFFFFF;
+}
+
+.sentinel .send_button > span:first-child {
+    line-height: 24px;
+    margin-top: 2px;
+}
+
+.sentinel .send_button:hover {
+    background: #139EEE;
+}
+
+.sentinel .active_button {
+    border: 1px solid #252E40;
+    border-radius: 50px;
+    font-weight: bold;
+    font-size: 12.909px;
+    line-height: 20px;
+    text-align: center;
+    letter-spacing: -0.02em;
+    color: #139EEE;
+    padding: 5px 30px;
+}
+
+/* tab */
+.tab_content_inside > div {
+    padding-top: 40px;
+}

@@ -1,0 +1,44 @@
+.wallet_transaction {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.wallet_transaction .content {
+    display: flex;
+    justify-content: space-between;
+    flex: 1;
+}
+
+.wallet_transaction .cards_div .card {
+    border-color: #139EEE;
+}
+
+.wallet_transaction .transactions {
+    flex: 1;
+    margin-left: 10%;
+    background: #0D1423;
+    border: 1px solid #1B253A;
+    box-sizing: border-box;
+    border-radius: 10px;
+}
+
+.wallet_transaction .transactions .horizontal_tabs,
+.wallet_transaction .transactions .wallet_transaction_tab {
+    background: #0D1423;
+}
+
+.wallet_transaction .transactions .horizontal_tabs .tab {
+    min-width: unset;
+    margin: 0;
+    border-right: 1px solid #172032;
+}
+
+.wallet_transaction .transactions .horizontal_tabs .tab:last-child {
+    border-right: unset;
+}
+
+.wallet_transaction .transactions .horizontal_tabs .tabs_content > div > span {
+    border-radius: 5px 5px 0px 0px;
+    height: 2px;
+}
