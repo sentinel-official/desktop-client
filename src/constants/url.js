@@ -4,7 +4,7 @@ export const KEYS_GET = `${URL}/keys`;
 export const TRANSFER_TOKENS = `${URL}/transfer`;
 export const VALIDATORS_LIST_URL = `${URL}/validators`;
 export const WITHDRAW_ALL_URL = `${URL}/accounts/withdraw-all-rewards`;
-export const FAUCET_URL = 'http://51.83.120.246:8000/transfer';
+export const FAUCET_URL = 'https://faucet.turing.sentinel.co/transfer';
 
 export const getWalletDetailsURL = (address) => {
     return `${URL}/accounts/${address}`;
