@@ -1,7 +1,0 @@
-.create_new_account .account_tab {
-    flex: 1;
-}
-
-.create_new_account .account_tab > div {
-    height: 100%;
-}
