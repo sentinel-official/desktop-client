@@ -19,12 +19,12 @@
     "eject": "react-scripts eject"
   },
   "devDependencies": {
-    "eslint": "^7.9.0",
+    "eslint": "^7.10.0",
     "eslint-config-standard": "^14.1.1",
-    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^4.2.1",
-    "eslint-plugin-react": "^7.21.2",
+    "eslint-plugin-react": "^7.21.3",
     "eslint-plugin-standard": "^4.0.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
