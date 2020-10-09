@@ -1,27 +1,11 @@
-name: Lint
-
+name: CI
 on: push
-
 jobs:
-  run-linters:
-    name: Run linters
+  build:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Check out Git repository
-        uses: actions/checkout@v2
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v1
-        with:
-          node-version: 12
-
-      - name: Install Node.js dependencies
-        run: yarn install
-
-      - name: Run linters
-        uses: wearerequired/lint-action@v1
-        with:
-          github_token: ${{ secrets.github_token }}
-          # Enable linters
-          eslint: true
+      - uses: actions/checkout@v2
+      - name: Install modules
+        run: yarn
+      - name: Run ESLint
+        run: eslint . --ext .js,.jsx,.ts,.tsx
