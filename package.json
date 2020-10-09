@@ -43,6 +43,9 @@
     ]
   },
   "dependencies": {
-    "bootstrap": "^4.5.2"
+    "bootstrap": "^4.5.2",
+    "react-redux": "^7.2.1",
+    "redux": "^4.0.5",
+    "redux-thunk": "^2.3.0"
   }
 }
