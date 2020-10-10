@@ -1,32 +1,14 @@
 import React from 'react';
 import './App.css';
-import store from './store';
-import { connect } from 'react-redux'
-import { loadApplication } from './actions/applicationActions';
+import AppContainer from './containers/AppContainer';
 
-const mapStateToProps = function (state) {
-    return {
-        isLoading: state.application.isLoading
-    }
-}
-class App extends React.Component {
+const App = () => (
+    <div>
+        <AppContainer />
+    </div>
+)
+
+export default App;
 
 
-    componentDidMount() {
-        store.dispatch(loadApplication());
-    }
-
-    render() {
-
-        if (this.props.isLoading)
-            return null;
-
-        return (
-            <div className="App">
-                MyApp
-            </div>
-        );
-    }
-}
-export default connect(mapStateToProps)(App);
 
