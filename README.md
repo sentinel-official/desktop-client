@@ -1,1 +1,1 @@
-# Sentinel Desktop
+# Sentinel Desktop Client

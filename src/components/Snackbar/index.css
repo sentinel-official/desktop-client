@@ -1,8 +1,0 @@
-.sentinel .snackbar {
-    left: 10px;
-    transform: translateX(10px);
-}
-
-.snackbar > div {
-    background: #282525;
-}
