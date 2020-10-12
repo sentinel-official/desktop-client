@@ -1,7 +1,4 @@
-html,
-body,
-.loader-container,
-.loader {
+html, body, .loader-container, .loader {
     height: 100%;
 }
 
