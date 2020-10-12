@@ -1,6 +1,6 @@
-import { LOAD_APP } from './types';
+import { LOAD_APP } from '../constants/appLoader';
 
-export const loadApplication = () => (dispatch => {
+export const loadApplication = () => (dispatch) => {
     const loader = document.querySelector('.loader-container');
     if (loader) {
         loader.remove();
@@ -9,4 +9,4 @@ export const loadApplication = () => (dispatch => {
     dispatch({
         type: LOAD_APP,
     });
-});
+};

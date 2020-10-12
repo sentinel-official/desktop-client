@@ -29,6 +29,6 @@ class AppContainer extends React.Component {
 
 AppContainer.propTypes = {
     isLoading: PropTypes.bool,
-}
+};
 
 export default connect(mapStateToProps)(AppContainer);

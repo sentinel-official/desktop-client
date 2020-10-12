@@ -1,4 +1,4 @@
-import { LOAD_APP } from '../actions/types';
+import { LOAD_APP } from '../constants/appLoader';
 
 const initState = {
     isLoading: true,
