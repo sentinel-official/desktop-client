@@ -1,11 +1,4 @@
-import React from 'react';
 import './App.css';
+import Application from './containers/Application';
 
-const App = () => {
-    return (
-        <div className="App">
-        </div>
-    );
-};
-
-export default App;
+export default Application;
