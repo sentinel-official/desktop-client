@@ -1,0 +1,31 @@
+html,
+body,
+.loader-container,
+.loader {
+    height: 100%;
+}
+
+#logo {
+    margin: 0 auto;
+    display: block;
+    height: 8%;
+}
+
+.loader-container {
+    background-color: #142D51;
+}
+
+.loader {
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.bottom-text {
+    position: absolute;
+    bottom: 5%;
+    text-align: center;
+    width: 100%;
+    color: #808080;
+    font-size: 16px;
+}
