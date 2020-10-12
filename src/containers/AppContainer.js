@@ -15,8 +15,6 @@ class AppContainer extends React.Component {
         store.dispatch(loadApplication());
     }
 
-
-
     render() {
 
         if (this.props.isLoading)
