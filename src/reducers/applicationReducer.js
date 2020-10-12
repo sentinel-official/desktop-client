@@ -1,7 +1,7 @@
 import { LOAD_APP } from '../actions/types';
 
-let initState = {
-    isLoading: true
+const initState = {
+    isLoading: true,
 };
 
 export default function (state = initState, action) {
@@ -9,9 +9,9 @@ export default function (state = initState, action) {
         case LOAD_APP:
             return {
                 ...state,
-                isLoading: false
-            }
+                isLoading: false,
+            };
         default:
-            return state
+            return state;
     }
 }
