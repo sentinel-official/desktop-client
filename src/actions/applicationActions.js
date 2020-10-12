@@ -1,7 +1,6 @@
 import { LOAD_APP } from './types';
 
-export const loadApplication = (() => dispatch => {
-
+export const loadApplication = () => (dispatch => {
     const loader = document.querySelector('.loader-container');
     if (loader) {
         loader.remove();
