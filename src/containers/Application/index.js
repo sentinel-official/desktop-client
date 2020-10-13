@@ -2,6 +2,7 @@ import * as PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 import { load } from '../../actions/application';
+import AppAuthentication from '../AppAuthentication';
 
 class Application extends React.Component {
     componentDidMount () {
@@ -15,7 +16,7 @@ class Application extends React.Component {
 
         return (
             <div className="App">
-                MyApp
+                <AppAuthentication/>
             </div>
         );
     }

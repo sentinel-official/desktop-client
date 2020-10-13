@@ -1,0 +1,1 @@
+export const AUTH_PASSWORD_SET = 'AUTH_PASSWORD_SET';

@@ -1,0 +1,29 @@
+
+.footer{
+    height: 70px;
+    background-color: white;
+    border: 0px solid rgba(0, 0, 0, .1);
+    border-top-width: .5px;
+}
+
+.footer_content{
+    position: relative;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0px 100px;
+}
+
+.footer_button{
+    height: 42px;
+    width: 128px;
+    border: none;
+    background-color: #109FEC;
+    color: white;
+    font-size: larger;
+    border-radius: 50px;
+}
