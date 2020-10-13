@@ -6,7 +6,10 @@ import { setPassword } from '../../actions/account';
 
 const PasswordField = (props) => {
     return (
-        <TextField id="password_text_field" name="password" type="password" value={props.value} onChange={props.onChange}/>
+        <div className={'label_and_field'}>
+            <p>Password</p>
+            <TextField id="password_text_field" name="password" placeholder="Enter Password" type="password" value={props.value} onChange={props.onChange}/>
+        </div>
     );
 };
 
@@ -17,7 +20,7 @@ PasswordField.propTypes = {
 
 const stateToProps = (state) => {
     return {
-        value: state.password,
+        value: state.account.password,
     };
 };
 

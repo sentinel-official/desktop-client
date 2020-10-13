@@ -33,3 +33,8 @@
     padding-bottom: 30px;
     color: #142D51;
 }
+.label_and_field{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}

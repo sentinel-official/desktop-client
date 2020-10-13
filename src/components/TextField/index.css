@@ -4,4 +4,6 @@ input{
     border: none;
     background-color: aliceblue;
     height: 45px;
+    padding-left: 15px;
+    font-family: Roboto;
 }

@@ -3,11 +3,18 @@ import SideLogo from '../../components/SideLogo';
 import Footer from '../../components/Footer';
 import PasswordField from './PasswordField';
 import './index.css';
+import { connect } from 'react-redux';
+import * as PropTypes from 'prop-types';
 
-const AppAuthentication = () => {
-    const onSubmit = (e) => {
+const AppAuthentication = (props) => {
+    const submitHandler = (e) => {
         e.preventDefault();
-        console.log('login form submitted');
+        handleAppAuth();
+    };
+
+    const handleAppAuth = () => {
+        // TODO: handle application authentication
+        console.log(props.passwordValue);
     };
 
     return (
@@ -21,7 +28,7 @@ const AppAuthentication = () => {
                     <div className={'form_title'}>
                         Authenticate Sentinel Client
                     </div>
-                    <form id="login_form" onSubmit={onSubmit}>
+                    <form id="login_form" onSubmit={submitHandler}>
                         <div className="form-group">
                             <PasswordField/>
                         </div>
@@ -31,9 +38,22 @@ const AppAuthentication = () => {
                     <Footer button_name="LOGIN" form_name="login_form"/>
                 </div>
             </div>
-
         </div>
     );
 };
 
-export default AppAuthentication;
+AppAuthentication.propTypes = {
+    passwordValue: PropTypes.string.isRequired,
+};
+
+const stateToProps = (state) => {
+    return {
+        passwordValue: state.account.password,
+    };
+};
+
+const actionsToProps = {
+
+};
+
+export default connect(stateToProps, actionsToProps)(AppAuthentication);
