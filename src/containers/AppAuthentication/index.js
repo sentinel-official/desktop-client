@@ -1,7 +1,7 @@
 import React from 'react';
 import SideLogo from '../../components/SideLogo';
 import Footer from '../../components/Footer';
-import PasswordField from "./PasswordField";
+import PasswordField from './PasswordField';
 import './index.css';
 
 const AppAuthentication = () => {
