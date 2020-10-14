@@ -3,9 +3,9 @@ import './index.css';
 
 const SideLogo = () => {
     return (
-        <div className='sideBar'>
-            <div className='Top'>
-                <img className="sideLogoImg" src={process.env.PUBLIC_URL + '/logo192.png'} alt="Side Logo"/>
+        <div className="sideBar">
+            <div className="Top">
+                <img alt="Side Logo" className="sideLogoImg" src={process.env.PUBLIC_URL + '/logo192.png'}/>
             </div>
             <div className="Bottom">
                 <div className="sideBarText">

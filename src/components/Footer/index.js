@@ -7,7 +7,7 @@ const Footer = (props) => {
     return (
         <div className={'footer'}>
             <Socials/>
-            <div className='submitBtn'>
+            <div className="submitBtn">
                 <input className={'footer_button'} form={props.form_name} type="submit" value={props.button_name}/>
             </div>
         </div>
