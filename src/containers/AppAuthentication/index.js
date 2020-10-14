@@ -34,9 +34,7 @@ const AppAuthentication = (props) => {
                         </div>
                     </form>
                 </div>
-                <div className={'footer'}>
-                    <Footer button_name="LOGIN" form_name="login_form"/>
-                </div>
+                <Footer button_name="LOGIN" form_name="login_form"/>
             </div>
         </div>
     );

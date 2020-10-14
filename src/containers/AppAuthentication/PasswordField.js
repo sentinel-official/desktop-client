@@ -7,8 +7,12 @@ import { setPassword } from '../../actions/account';
 const PasswordField = (props) => {
     return (
         <div className={'label_and_field'}>
-            <p>Password</p>
-            <TextField id="password_text_field" name="password" placeholder="Enter Password" type="password" value={props.value} onChange={props.onChange}/>
+            <div className='label'>
+                PASSWORD
+            </div>
+            <div className='field'>
+                <TextField id="password_text_field" name="password" placeholder="Enter Password" type="password" value={props.value} onChange={props.onChange}/>
+            </div>
         </div>
     );
 };

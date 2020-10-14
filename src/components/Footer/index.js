@@ -6,8 +6,8 @@ import './index.css';
 const Footer = (props) => {
     return (
         <div className={'footer'}>
-            <div className="footer_content">
-                <Socials/>
+            <Socials/>
+            <div className='submitBtn'>
                 <input className={'footer_button'} form={props.form_name} type="submit" value={props.button_name}/>
             </div>
         </div>
