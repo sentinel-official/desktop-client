@@ -1,0 +1,9 @@
+.footer_button{
+    height: 35px;
+    width: 100px;
+    border: none;
+    background-color: #109FEC;
+    color: white;
+    border-radius: 50px;
+    font-size: 14px;
+}

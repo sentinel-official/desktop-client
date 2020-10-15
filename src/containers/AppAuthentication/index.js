@@ -5,6 +5,7 @@ import PasswordField from './PasswordField';
 import './index.css';
 import { connect } from 'react-redux';
 import * as PropTypes from 'prop-types';
+import SubmitButton from './SubmitButton';
 
 const AppAuthentication = (props) => {
     const submitHandler = (e) => {
@@ -34,7 +35,8 @@ const AppAuthentication = (props) => {
                         </div>
                     </form>
                 </div>
-                <Footer button_name="LOGIN" form_name="login_form"/>
+                <Footer/>
+                <SubmitButton form_name="login_form"/>
             </div>
         </div>
     );
