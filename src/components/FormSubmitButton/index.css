@@ -6,4 +6,7 @@
     color: white;
     border-radius: 50px;
     font-size: 14px;
+    position: fixed;
+    bottom: 20px;
+    right: 25px;
 }
