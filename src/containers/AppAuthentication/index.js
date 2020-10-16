@@ -29,7 +29,10 @@ const AppAuthentication = (props) => {
                     <div className={'form_title'}>
                         Authenticate Sentinel Client
                     </div>
-                    <form id="login_form" onSubmit={submitHandler}>
+                    <form
+                        id="login_form"
+                        onSubmit={submitHandler}>
+
                         <div className="form-group">
                             <PasswordField/>
                         </div>

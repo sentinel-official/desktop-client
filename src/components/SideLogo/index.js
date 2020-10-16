@@ -5,7 +5,10 @@ const SideLogo = () => {
     return (
         <div className="sideBar">
             <div className="Top">
-                <img alt="Side Logo" className="sideLogoImg" src={process.env.PUBLIC_URL + '/logo192.png'}/>
+                <img
+                    alt="Side Logo"
+                    className="sideLogoImg"
+                    src={process.env.PUBLIC_URL + '/logo192.png'}/>
             </div>
             <div className="Bottom">
                 <div className="sideBarText">

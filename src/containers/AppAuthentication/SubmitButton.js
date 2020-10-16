@@ -6,7 +6,9 @@ import FormSubmitButton from '../../components/FormSubmitButton';
 const SubmitButton = (props) => {
     return (
         <div className="floatingButton">
-            <FormSubmitButton button_name="LOGIN" form_name={props.form_name}/>
+            <FormSubmitButton
+                button_name="LOGIN"
+                form_name={props.form_name}/>
         </div>
     );
 };
