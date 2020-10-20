@@ -4,9 +4,9 @@ import './index.css';
 
 const FormSubmitButton = (props) => {
     return (
-        <div className="submitBtn">
+        <div className="submit_btn">
             <input
-                className={'footer_button'}
+                className="footer_button"
                 form={props.form_name} type="submit"
                 value={props.button_name}/>
         </div>

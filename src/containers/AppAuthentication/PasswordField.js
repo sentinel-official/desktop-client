@@ -2,11 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import * as PropTypes from 'prop-types';
 import TextField from '../../components/TextField';
-import { setPassword } from '../../actions/account';
+import { setPassword } from '../../actions/application';
 
 const PasswordField = (props) => {
     return (
-        <div className={'label_and_field'}>
+        <div className="label_and_field">
             <div className="label">
                 PASSWORD
             </div>
@@ -30,7 +30,7 @@ PasswordField.propTypes = {
 
 const stateToProps = (state) => {
     return {
-        value: state.account.password,
+        value: state.application.password,
     };
 };
 

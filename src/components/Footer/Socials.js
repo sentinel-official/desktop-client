@@ -1,17 +1,19 @@
 import React from 'react';
 import './index.css';
 
+import { ReactComponent as TwitterLogo } from '../../assets/icons/Twitter.svg';
+import { ReactComponent as TelegramLogo } from '../../assets/icons/Telegram.svg';
+import { ReactComponent as GithubLogo } from '../../assets/icons/Github.svg';
+
 const Socials = (props) => {
     return (
-        <div className={'socials'}>
+        <div className="socials">
             <div className="icon">
                 <a
                     href="https://twitter.com/"
                     rel="noopener noreferrer"
                     target="_blank">
-                    <img
-                        alt="Twitter"
-                        src={process.env.PUBLIC_URL + 'icons/Twitter.svg'}/>
+                    <TwitterLogo/>
                 </a>
             </div>
             <div className="icon">
@@ -19,9 +21,7 @@ const Socials = (props) => {
                     href="https://web.telegram.org/"
                     rel="noopener noreferrer"
                     target="_blank">
-                    <img
-                        alt="Telegram"
-                        src={process.env.PUBLIC_URL + 'icons/Telegram.svg'}/>
+                    <TelegramLogo/>
                 </a>
             </div>
             <div className="icon">
@@ -29,9 +29,7 @@ const Socials = (props) => {
                     href="https://github.com/"
                     rel="noopener noreferrer"
                     target="_blank">
-                    <img
-                        alt="Github"
-                        src={process.env.PUBLIC_URL + 'icons/Github.svg'}/>
+                    <GithubLogo/>
                 </a>
             </div>
         </div>

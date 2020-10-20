@@ -1,5 +1,6 @@
 import React from 'react';
 import './index.css';
+import logo from '../../assets/logo192.png';
 
 const SideLogo = () => {
     return (
@@ -8,7 +9,7 @@ const SideLogo = () => {
                 <img
                     alt="Side Logo"
                     className="sideLogoImg"
-                    src={process.env.PUBLIC_URL + '/logo192.png'}/>
+                    src={logo}/>
             </div>
             <div className="Bottom">
                 <div className="sideBarText">
@@ -16,7 +17,7 @@ const SideLogo = () => {
                     ut labore et dolore magna aliqua. Ut enim ad minim veniam”
                 </div>
                 <div className="sideBarBrand">
-                    S E N T I N E L
+                    SENTINEL
                 </div>
                 <div className="sideBarVersion">
                     v3.01.12

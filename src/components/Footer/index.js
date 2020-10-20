@@ -4,7 +4,7 @@ import './index.css';
 
 const Footer = (props) => {
     return (
-        <div className={'footer'}>
+        <div className="footer">
             <Socials/>
         </div>
     );

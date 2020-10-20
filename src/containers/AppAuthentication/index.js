@@ -19,14 +19,14 @@ const AppAuthentication = (props) => {
     };
 
     return (
-        <div className={'form-container'}>
+        <div className="form-container">
             <div className="side_bar">
                 <SideLogo/>
             </div>
 
-            <div className={'right_half'}>
-                <div className={'main-section'}>
-                    <div className={'form_title'}>
+            <div className="right_half">
+                <div className="main-section">
+                    <div className="form_title">
                         Authenticate Sentinel Client
                     </div>
                     <form
@@ -51,7 +51,7 @@ AppAuthentication.propTypes = {
 
 const stateToProps = (state) => {
     return {
-        passwordValue: state.account.password,
+        passwordValue: state.application.password,
     };
 };
 
