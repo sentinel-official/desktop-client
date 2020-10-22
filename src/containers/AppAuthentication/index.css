@@ -1,39 +1,40 @@
-.form-container{
+.form-container {
     height: 100vh;
     display: flex;
     flex-direction: row;
 }
 
-.side_bar{
+.side_bar {
     width: 30%;
 }
 
-.right_half{
+.right_half {
     width: 70%;
     display: flex;
     flex-direction: column;
 }
 
-.main-section{
+.main-section {
     margin: auto;
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
 
-.input:focus{
+.input:focus {
     font-weight: bolder;
     font-size: 40px;
     padding-bottom: 30px;
 }
 
-.form_title{
+.form_title {
     font-weight: 500;
     font-size: 36px;
-    padding-bottom:60px;
+    padding-bottom: 60px;
     color: #142D51;
 }
-.label_and_field{
+
+.label_and_field {
     display: flex;
     flex-direction: column;
     align-items: stretch;

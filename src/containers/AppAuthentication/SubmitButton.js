@@ -8,13 +8,13 @@ const SubmitButton = (props) => {
         <div className="floating_button">
             <FormSubmitButton
                 button_name="LOGIN"
-                form_name={props.form_name}/>
+                onClick={props.onClick}/>
         </div>
     );
 };
 
 SubmitButton.propTypes = {
-    form_name: PropTypes.string.isRequired,
+    onClick: PropTypes.func.isRequired,
 };
 
 export default SubmitButton;

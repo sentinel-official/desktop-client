@@ -39,7 +39,7 @@ const AppAuthentication = (props) => {
                     </form>
                 </div>
                 <Footer/>
-                <SubmitButton form_name="login_form"/>
+                <SubmitButton onClick={handleAppAuth}/>
             </div>
         </div>
     );
@@ -55,8 +55,6 @@ const stateToProps = (state) => {
     };
 };
 
-const actionsToProps = {
-
-};
+const actionsToProps = {};
 
 export default connect(stateToProps, actionsToProps)(AppAuthentication);

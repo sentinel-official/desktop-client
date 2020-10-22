@@ -4,17 +4,18 @@ import './index.css';
 
 const FormSubmitButton = (props) => {
     return (
-        <div className="submit_btn">
-            <input
-                className="footer_button"
-                form={props.form_name} type="submit"
-                value={props.button_name}/>
-        </div>
+        <input
+            className="footer_button"
+            type="submit"
+            value={props.button_name}
+            onClick={props.onClick}/>
+
     );
 };
 
 FormSubmitButton.propTypes = {
     button_name: PropTypes.string.isRequired,
+    onClick: PropTypes.func.isRequired,
     form_name: PropTypes.string,
 };
 
