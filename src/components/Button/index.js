@@ -5,7 +5,7 @@ import './index.css';
 const Button = (props) => {
     return (
         <input
-            className="button"
+            className="Button"
             type="submit"
             value={props.button_name}
             onClick={props.onClick}/>

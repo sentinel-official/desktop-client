@@ -7,8 +7,8 @@ import { ReactComponent as GithubLogo } from '../../assets/icons/Github.svg';
 
 const Socials = (props) => {
     return (
-        <div className="socials">
-            <div className="icon">
+        <div className="Socials">
+            <div className="Socials-icon">
                 <a
                     href="https://twitter.com/"
                     rel="noopener noreferrer"
@@ -16,7 +16,7 @@ const Socials = (props) => {
                     <TwitterLogo/>
                 </a>
             </div>
-            <div className="icon">
+            <div className="Socials-icon">
                 <a
                     href="https://web.telegram.org/"
                     rel="noopener noreferrer"
@@ -24,7 +24,7 @@ const Socials = (props) => {
                     <TelegramLogo/>
                 </a>
             </div>
-            <div className="icon">
+            <div className="Socials-icon">
                 <a
                     href="https://github.com/"
                     rel="noopener noreferrer"

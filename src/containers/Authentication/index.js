@@ -1,5 +1,5 @@
 import React from 'react';
-import SideLogo from '../../components/SideLogo';
+import Sidebar from '../../components/Sidebar';
 import Footer from '../../components/Footer';
 import PasswordField from './PasswordField';
 import './index.css';
@@ -19,21 +19,21 @@ const Authentication = (props) => {
     };
 
     return (
-        <div className="form-container">
-            <div className="side_bar">
-                <SideLogo/>
+        <div className="Authentication-container">
+            <div className="Authentication-left">
+                <Sidebar/>
             </div>
 
-            <div className="right_half">
-                <div className="main-section">
-                    <div className="form_title">
+            <div className="Authentication-right">
+                <div className="Authentication-main">
+                    <div className="Authentication-title">
                         Authenticate Sentinel Client
                     </div>
                     <form
                         id="login_form"
                         onSubmit={submitHandler}>
 
-                        <div className="form-group">
+                        <div>
                             <PasswordField/>
                         </div>
                     </form>

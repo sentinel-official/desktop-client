@@ -1,11 +1,9 @@
-.socials {
+.Socials {
     display: flex;
     padding-left: 5%;
 }
 
-.icon {
+.Socials-icon {
     padding-left: 20px;
     padding-right: 20px;
 }
-
-

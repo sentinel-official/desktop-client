@@ -1,0 +1,43 @@
+.Sidebar {
+    background-color: #142D51;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: space-between;
+    text-align: center;
+}
+
+.Sidebar-logo {
+    width: 30%;
+    height: auto;
+}
+
+.Sidebar-top {
+    margin-top: 20%;
+}
+
+.Sidebar-bottom {
+    margin-left: 40px;
+    margin-right: 40px;
+    margin-bottom: 20%;
+}
+
+.Sidebar-description {
+    color: grey;
+    font-size: 12px;
+    padding-bottom: 30px;
+}
+
+.Sidebar-brand {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    color: white;
+    font-size: 12px;
+    letter-spacing: 5px;
+}
+
+.Sidebar-version {
+    color: white;
+    font-size: 10px;
+}

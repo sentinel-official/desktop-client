@@ -1,33 +1,27 @@
-.form-container {
+.Authentication-container {
     height: 100vh;
     display: flex;
     flex-direction: row;
 }
 
-.side_bar {
+.Authentication-left {
     width: 30%;
 }
 
-.right_half {
+.Authentication-right {
     width: 70%;
     display: flex;
     flex-direction: column;
 }
 
-.main-section {
+.Authentication-main {
     margin: auto;
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
 
-.input:focus {
-    font-weight: bolder;
-    font-size: 40px;
-    padding-bottom: 30px;
-}
-
-.form_title {
+.Authentication-title {
     font-weight: 500;
     font-size: 36px;
     padding-bottom: 60px;

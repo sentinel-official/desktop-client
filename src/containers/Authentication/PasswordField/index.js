@@ -7,11 +7,11 @@ import './index.css';
 
 const PasswordField = (props) => {
     return (
-        <div className="label_and_field">
-            <div className="label">
+        <div className="PasswordField">
+            <div className="PasswordField-label">
                 PASSWORD
             </div>
-            <div className="field">
+            <div className="PasswordField-field">
                 <TextField
                     id="password_text_field"
                     name="password"

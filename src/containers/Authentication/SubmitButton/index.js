@@ -5,7 +5,7 @@ import Button from '../../../components/Button';
 
 const SubmitButton = (props) => {
     return (
-        <div className="floating-button">
+        <div className="SubmitButton-floating">
             <Button
                 button_name="LOGIN"
                 onClick={props.onClick}/>
