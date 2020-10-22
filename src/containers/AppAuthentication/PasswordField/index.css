@@ -1,0 +1,13 @@
+.label_and_field {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+.label {
+    font-size: 14px;
+    color: grey;
+    padding-left: 28px;
+    text-align: left;
+    padding-bottom: 15px;
+}
