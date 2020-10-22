@@ -2,7 +2,7 @@ import * as PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 import { load } from '../../actions/application';
-import AppAuthentication from '../AppAuthentication';
+import AppAuthentication from '../Authentication';
 
 class Application extends React.Component {
     componentDidMount () {
