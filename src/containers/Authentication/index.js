@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import * as PropTypes from 'prop-types';
 import SubmitButton from './SubmitButton';
 
-const AppAuthentication = (props) => {
+const Authentication = (props) => {
     const submitHandler = (e) => {
         e.preventDefault();
         handleAppAuth();
@@ -45,7 +45,7 @@ const AppAuthentication = (props) => {
     );
 };
 
-AppAuthentication.propTypes = {
+Authentication.propTypes = {
     passwordValue: PropTypes.string.isRequired,
 };
 
@@ -57,4 +57,4 @@ const stateToProps = (state) => {
 
 const actionsToProps = {};
 
-export default connect(stateToProps, actionsToProps)(AppAuthentication);
+export default connect(stateToProps, actionsToProps)(Authentication);

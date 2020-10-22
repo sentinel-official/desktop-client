@@ -1,4 +1,4 @@
 import './App.css';
-import Application from './containers/Application';
+import Loader from './containers/Loader';
 
-export default Application;
+export default Loader;

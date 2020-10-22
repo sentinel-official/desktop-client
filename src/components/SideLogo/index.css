@@ -5,6 +5,7 @@
     flex-direction: column;
     align-items: stretch;
     justify-content: space-between;
+    text-align: center;
 }
 
 .sideLogoImg {
