@@ -1,0 +1,29 @@
+.Authentication-container {
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+}
+
+.Authentication-left {
+    width: 30%;
+}
+
+.Authentication-right {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+}
+
+.Authentication-main {
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.Authentication-title {
+    font-weight: 500;
+    font-size: 36px;
+    padding-bottom: 60px;
+    color: #142D51;
+}
