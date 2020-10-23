@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import * as PropTypes from 'prop-types';
 import TextField from '../../../components/TextField';
-import { setPassword } from '../../../actions/application';
+import { setAuthenticationPassword } from '../../../actions/application';
 import './index.css';
 
 const PasswordField = (props) => {
@@ -36,7 +36,7 @@ const stateToProps = (state) => {
 };
 
 const actionsToProps = {
-    onChange: setPassword,
+    onChange: setAuthenticationPassword,
 };
 
 export default connect(stateToProps, actionsToProps)(PasswordField);

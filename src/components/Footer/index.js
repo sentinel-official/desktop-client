@@ -2,7 +2,7 @@ import React from 'react';
 import Socials from '../Socials';
 import './index.css';
 
-const Footer = (props) => {
+const Footer = () => {
     return (
         <div className="Footer">
             <Socials/>

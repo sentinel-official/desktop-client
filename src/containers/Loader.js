@@ -1,8 +1,8 @@
 import * as PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
-import { load } from '../../actions/application';
-import Authentication from '../Authentication';
+import { load } from '../actions/application';
+import Authentication from './Authentication';
 
 class Loader extends React.Component {
     componentDidMount () {

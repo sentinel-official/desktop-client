@@ -3,7 +3,7 @@ import {
     APPLICATION_LOADING_ERROR,
     APPLICATION_LOADING_IN_PROGRESS,
     APPLICATION_LOADING_SUCCESS,
-    AUTH_PASSWORD_SET,
+    AUTHENTICATION_PASSWORD_SET,
 } from '../constants/application';
 
 const isLoading = (state = false, action) => {
@@ -20,7 +20,7 @@ const isLoading = (state = false, action) => {
 
 const password = (state = '', action) => {
     switch (action.type) {
-    case AUTH_PASSWORD_SET:
+    case AUTHENTICATION_PASSWORD_SET:
         return action.value;
     default:
         return state;

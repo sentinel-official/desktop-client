@@ -2,7 +2,7 @@ import {
     APPLICATION_LOADING_ERROR,
     APPLICATION_LOADING_IN_PROGRESS,
     APPLICATION_LOADING_SUCCESS,
-    AUTH_PASSWORD_SET,
+    AUTHENTICATION_PASSWORD_SET,
 } from '../constants/application';
 
 export const loadingError = () => {
@@ -39,9 +39,9 @@ export const load = () => (dispatch) => {
     dispatch(loadingSuccess());
 };
 
-export const setPassword = (value) => {
+export const setAuthenticationPassword = (value) => {
     return {
-        type: AUTH_PASSWORD_SET,
+        type: AUTHENTICATION_PASSWORD_SET,
         value,
     };
 };

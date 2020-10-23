@@ -7,7 +7,7 @@ const SubmitButton = (props) => {
     return (
         <div className="SubmitButton-floating">
             <Button
-                button_name="LOGIN"
+                name="LOGIN"
                 onClick={props.onClick}/>
         </div>
     );

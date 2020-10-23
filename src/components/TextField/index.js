@@ -9,7 +9,6 @@ const TextField = (props) => {
 
     return (
         <input
-            className="text_field"
             id={props.id}
             name={props.name}
             placeholder={props.placeholder}

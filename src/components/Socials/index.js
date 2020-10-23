@@ -1,11 +1,10 @@
 import React from 'react';
 import './index.css';
-
 import { ReactComponent as TwitterLogo } from '../../assets/icons/Twitter.svg';
 import { ReactComponent as TelegramLogo } from '../../assets/icons/Telegram.svg';
-import { ReactComponent as GithubLogo } from '../../assets/icons/Github.svg';
+import { ReactComponent as GithubLogo } from '../../assets/icons/GitHub.svg';
 
-const Socials = (props) => {
+const Socials = () => {
     return (
         <div className="Socials">
             <div className="Socials-icon">

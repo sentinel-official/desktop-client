@@ -7,16 +7,15 @@ const Button = (props) => {
         <input
             className="Button"
             type="submit"
-            value={props.button_name}
+            value={props.name}
             onClick={props.onClick}/>
 
     );
 };
 
 Button.propTypes = {
-    button_name: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
     onClick: PropTypes.func.isRequired,
-    form_name: PropTypes.string,
 };
 
 export default Button;
