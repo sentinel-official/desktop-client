@@ -1,9 +1,10 @@
 import * as PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
-import { load } from '../../actions/application';
+import { load } from '../actions/application';
+import Authentication from './Authentication';
 
-class Application extends React.Component {
+class Loader extends React.Component {
     componentDidMount () {
         this.props.load();
     }
@@ -15,13 +16,13 @@ class Application extends React.Component {
 
         return (
             <div className="App">
-                MyApp
+                <Authentication/>
             </div>
         );
     }
 }
 
-Application.propTypes = {
+Loader.propTypes = {
     isLoading: PropTypes.bool.isRequired,
     load: PropTypes.func.isRequired,
 };
@@ -36,4 +37,4 @@ const actionsToProps = {
     load,
 };
 
-export default connect(stateToProps, actionsToProps)(Application);
+export default connect(stateToProps, actionsToProps)(Loader);
