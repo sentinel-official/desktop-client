@@ -1,4 +1,4 @@
-package login
+package account
 
 import (
 	"net/http"
@@ -9,7 +9,7 @@ import (
 )
 
 func RegisterRoutes(r *mux.Router, ctx *context.Context) {
-	r.Name("Login").
-		Methods(http.MethodPost).Path("/login").
-		HandlerFunc(HandlerLogin(ctx))
+	r.Name("GetAccount").
+		Methods(http.MethodGet).Path("/accounts/{address}").
+		HandlerFunc(HandlerGetAccount(ctx))
 }

@@ -3,25 +3,17 @@ package keys
 import (
 	"net/http"
 
-	"github.com/cosmos/cosmos-sdk/client/keys"
 	"github.com/cosmos/go-bip39"
 	"github.com/gorilla/mux"
-	"github.com/spf13/viper"
 
+	"github.com/sentinel-official/desktop-client/cli/context"
 	"github.com/sentinel-official/desktop-client/cli/models"
-	"github.com/sentinel-official/desktop-client/cli/types"
 	"github.com/sentinel-official/desktop-client/cli/utils"
 )
 
-func HandlerGetKeys(_ *types.Config) http.HandlerFunc {
+func HandlerGetKeys(ctx *context.Context) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		kb, err := keys.NewKeyBaseFromDir(viper.GetString(types.FlagHome))
-		if err != nil {
-			utils.WriteErrorToResponse(w, 500, 1, err.Error())
-			return
-		}
-
-		infos, err := kb.List()
+		infos, err := ctx.Client().Keybase().List()
 		if err != nil {
 			utils.WriteErrorToResponse(w, 500, 2, err.Error())
 			return
@@ -32,17 +24,11 @@ func HandlerGetKeys(_ *types.Config) http.HandlerFunc {
 	}
 }
 
-func HandlerGetKey(_ *types.Config) http.HandlerFunc {
+func HandlerGetKey(ctx *context.Context) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		kb, err := keys.NewKeyBaseFromDir(viper.GetString(types.FlagHome))
-		if err != nil {
-			utils.WriteErrorToResponse(w, 500, 1, err.Error())
-			return
-		}
-
 		vars := mux.Vars(r)
 
-		info, err := kb.Get(vars["name"])
+		info, err := ctx.Client().Keybase().Get(vars["name"])
 		if err != nil {
 			utils.WriteErrorToResponse(w, 500, 2, err.Error())
 			return
@@ -53,7 +39,7 @@ func HandlerGetKey(_ *types.Config) http.HandlerFunc {
 	}
 }
 
-func HandlerAddKey(_ *types.Config) http.HandlerFunc {
+func HandlerAddKey(ctx *context.Context) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		body, err := NewRequestAddKey(r)
 		if err != nil {
@@ -66,13 +52,7 @@ func HandlerAddKey(_ *types.Config) http.HandlerFunc {
 			return
 		}
 
-		kb, err := keys.NewKeyBaseFromDir(viper.GetString(types.FlagHome))
-		if err != nil {
-			utils.WriteErrorToResponse(w, 500, 3, err.Error())
-			return
-		}
-
-		info, _ := kb.Get(body.Name)
+		info, _ := ctx.Client().Keybase().Get(body.Name)
 		if info != nil {
 			utils.WriteErrorToResponse(w, 400, 4, "duplicate key name")
 			return
@@ -92,7 +72,7 @@ func HandlerAddKey(_ *types.Config) http.HandlerFunc {
 			}
 		}
 
-		info, err = kb.CreateAccount(body.Name, body.Mnemonic, body.BIP39Password, body.Password, 0, 0)
+		info, err = ctx.Client().Keybase().CreateAccount(body.Name, body.Mnemonic, body.BIP39Password, body.Password, 0, 0)
 		if err != nil {
 			utils.WriteErrorToResponse(w, 500, 7, err.Error())
 			return
@@ -103,7 +83,7 @@ func HandlerAddKey(_ *types.Config) http.HandlerFunc {
 	}
 }
 
-func HandlerDeleteKey(_ *types.Config) http.HandlerFunc {
+func HandlerDeleteKey(ctx *context.Context) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		body, err := NewRequestDeleteKey(r)
 		if err != nil {
@@ -116,13 +96,7 @@ func HandlerDeleteKey(_ *types.Config) http.HandlerFunc {
 			return
 		}
 
-		kb, err := keys.NewKeyBaseFromDir(viper.GetString(types.FlagHome))
-		if err != nil {
-			utils.WriteErrorToResponse(w, 500, 3, err.Error())
-			return
-		}
-
-		if err = kb.Delete(body.Name, body.Password, false); err != nil {
+		if err = ctx.Client().Keybase().Delete(body.Name, body.Password, false); err != nil {
 			utils.WriteErrorToResponse(w, 500, 4, err.Error())
 			return
 		}

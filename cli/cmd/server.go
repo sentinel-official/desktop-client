@@ -5,13 +5,20 @@ import (
 	"net/http"
 	"path/filepath"
 
+	clientutils "github.com/cosmos/cosmos-sdk/x/auth/client/utils"
 	"github.com/gorilla/mux"
 	"github.com/rs/cors"
+	"github.com/sentinel-official/hub"
 	"github.com/spf13/cobra"
 
+	"github.com/sentinel-official/desktop-client/cli/context"
+	"github.com/sentinel-official/desktop-client/cli/handlers/account"
+	"github.com/sentinel-official/desktop-client/cli/handlers/bank"
 	"github.com/sentinel-official/desktop-client/cli/handlers/config"
 	"github.com/sentinel-official/desktop-client/cli/handlers/keys"
 	"github.com/sentinel-official/desktop-client/cli/handlers/login"
+	"github.com/sentinel-official/desktop-client/cli/handlers/staking"
+	"github.com/sentinel-official/desktop-client/cli/lite"
 	"github.com/sentinel-official/desktop-client/cli/middlewares"
 	"github.com/sentinel-official/desktop-client/cli/types"
 )
@@ -44,6 +51,21 @@ func ServerCmd() *cobra.Command {
 				return err
 			}
 
+			cdc := hub.MakeCodec()
+
+			client, err := lite.NewClientFromConfig(cfg)
+			if err != nil {
+				return err
+			}
+
+			client.WithCodec(cdc).
+				WithTxEncoder(clientutils.GetTxEncoder(cdc))
+
+			ctx := context.NewContext().
+				WithHome(home).
+				WithConfig(cfg).
+				WithClient(client)
+
 			var (
 				muxRouter         = mux.NewRouter()
 				protectedRouter   = muxRouter.PathPrefix("/api/v1").Subrouter()
@@ -55,12 +77,15 @@ func ServerCmd() *cobra.Command {
 				Handler(http.FileServer(http.Dir(buildFolder)))
 
 			unprotectedRouter.Use(middlewares.AddHeaders)
-			login.RegisterRoutes(unprotectedRouter, cfg)
+			login.RegisterRoutes(unprotectedRouter, ctx)
 
 			protectedRouter.Use(middlewares.AddHeaders)
 			protectedRouter.Use(middlewares.TokenVerify)
-			config.RegisterRoutes(protectedRouter, cfg)
-			keys.RegisterRoutes(protectedRouter, cfg)
+			config.RegisterRoutes(protectedRouter, ctx)
+			keys.RegisterRoutes(protectedRouter, ctx)
+			account.RegisterRoutes(protectedRouter, ctx)
+			bank.RegisterRoutes(protectedRouter, ctx)
+			staking.RegisterRoutes(protectedRouter, ctx)
 
 			corsRouter := cors.New(cors.Options{
 				AllowedMethods: []string{

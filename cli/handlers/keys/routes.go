@@ -5,20 +5,20 @@ import (
 
 	"github.com/gorilla/mux"
 
-	"github.com/sentinel-official/desktop-client/cli/types"
+	"github.com/sentinel-official/desktop-client/cli/context"
 )
 
-func RegisterRoutes(r *mux.Router, cfg *types.Config) {
+func RegisterRoutes(r *mux.Router, ctx *context.Context) {
 	r.Name("GetKeys").
 		Methods(http.MethodGet).Path("/keys").
-		HandlerFunc(HandlerGetKeys(cfg))
+		HandlerFunc(HandlerGetKeys(ctx))
 	r.Name("GetKey").
 		Methods(http.MethodGet).Path("/keys/{name}").
-		HandlerFunc(HandlerGetKey(cfg))
+		HandlerFunc(HandlerGetKey(ctx))
 	r.Name("AddKey").
 		Methods(http.MethodPost).Path("/keys").
-		HandlerFunc(HandlerAddKey(cfg))
+		HandlerFunc(HandlerAddKey(ctx))
 	r.Name("DeleteKey").
 		Methods(http.MethodDelete).Path("/keys/{name}").
-		HandlerFunc(HandlerDeleteKey(cfg))
+		HandlerFunc(HandlerDeleteKey(ctx))
 }

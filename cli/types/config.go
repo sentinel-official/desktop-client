@@ -54,6 +54,12 @@ func NewConfig() *Config {
 	return &Config{}
 }
 
+func (c *Config) Copy() *Config {
+	return &Config{
+		Chain: c.Chain,
+	}
+}
+
 func (c *Config) WithDefaultValues() *Config {
 	c.Chain.BroadcastMode = "block"
 	c.Chain.Fees = ""

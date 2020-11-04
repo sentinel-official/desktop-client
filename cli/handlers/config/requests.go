@@ -7,6 +7,7 @@ import (
 )
 
 type RequestUpdateConfig struct {
+	From  string `json:"from"`
 	Chain struct {
 		BroadcastMode      string  `json:"broadcast_mode"`
 		Fees               string  `json:"fees"`
@@ -30,6 +31,9 @@ func NewRequestUpdateConfig(r *http.Request) (*RequestUpdateConfig, error) {
 }
 
 func (r *RequestUpdateConfig) Validate() error {
+	if r.From == "" {
+		return fmt.Errorf("invalid field From")
+	}
 	if r.Chain.BroadcastMode == "" {
 		return fmt.Errorf("invalid field Chain.BroadcastMode")
 	}
