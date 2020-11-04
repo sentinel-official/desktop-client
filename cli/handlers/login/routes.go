@@ -5,11 +5,11 @@ import (
 
 	"github.com/gorilla/mux"
 
-	"github.com/sentinel-official/desktop-client/cli/types"
+	"github.com/sentinel-official/desktop-client/cli/context"
 )
 
-func RegisterRoutes(r *mux.Router, cfg *types.Config) {
+func RegisterRoutes(r *mux.Router, ctx *context.Context) {
 	r.Name("Login").
 		Methods(http.MethodPost).Path("/login").
-		HandlerFunc(HandlerAuthenticate(cfg))
+		HandlerFunc(HandlerLogin(ctx))
 }
