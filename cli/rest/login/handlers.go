@@ -9,7 +9,6 @@ import (
 
 func HandlerLogin(ctx *context.Context) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-
 		utils.WriteResultToResponse(w, 200, nil)
 	}
 }

@@ -5,6 +5,7 @@ import (
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/x/auth"
+	"github.com/cosmos/cosmos-sdk/x/gov"
 	"github.com/cosmos/cosmos-sdk/x/staking"
 )
 
@@ -93,6 +94,66 @@ func (c *Client) QueryDelegations(address sdk.AccAddress) (staking.Delegations, 
 	}
 
 	var items staking.Delegations
+	if err := c.ctx.Codec.UnmarshalJSON(res, &items); err != nil {
+		return nil, err
+	}
+
+	return items, nil
+}
+
+func (c *Client) QueryProposals() (gov.Proposals, error) {
+	bytes, err := c.ctx.Codec.MarshalJSON(gov.NewQueryProposalsParams(0, 0, nil, nil))
+	if err != nil {
+		return nil, err
+	}
+
+	path := fmt.Sprintf("custom/%s/%s", gov.QuerierRoute, gov.QueryProposals)
+	res, _, err := c.ctx.QueryWithData(path, bytes)
+	if err != nil {
+		return nil, err
+	}
+
+	var items gov.Proposals
+	if err := c.ctx.Codec.UnmarshalJSON(res, &items); err != nil {
+		return nil, err
+	}
+
+	return items, nil
+}
+
+func (c *Client) QueryDeposits(id uint64) (gov.Deposits, error) {
+	bytes, err := c.ctx.Codec.MarshalJSON(gov.NewQueryDepositParams(id, nil))
+	if err != nil {
+		return nil, err
+	}
+
+	path := fmt.Sprintf("custom/%s/%s", gov.QuerierRoute, gov.QueryDeposits)
+	res, _, err := c.ctx.QueryWithData(path, bytes)
+	if err != nil {
+		return nil, err
+	}
+
+	var items gov.Deposits
+	if err := c.ctx.Codec.UnmarshalJSON(res, &items); err != nil {
+		return nil, err
+	}
+
+	return items, nil
+}
+
+func (c *Client) QueryVotes(id uint64) (gov.Votes, error) {
+	bytes, err := c.ctx.Codec.MarshalJSON(gov.NewQueryVoteParams(id, nil))
+	if err != nil {
+		return nil, err
+	}
+
+	path := fmt.Sprintf("custom/%s/%s", gov.QuerierRoute, gov.QueryVotes)
+	res, _, err := c.ctx.QueryWithData(path, bytes)
+	if err != nil {
+		return nil, err
+	}
+
+	var items gov.Votes
 	if err := c.ctx.Codec.UnmarshalJSON(res, &items); err != nil {
 		return nil, err
 	}

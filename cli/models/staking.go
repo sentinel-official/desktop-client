@@ -75,7 +75,7 @@ func NewValidatorFromRaw(v staking.Validator) Validator {
 type Validators []Validator
 
 func NewValidatorsFromRaw(validators staking.Validators) Validators {
-	var _validators Validators
+	_validators := make(Validators, 0, len(validators))
 	for _, validator := range validators {
 		_validators = append(_validators, NewValidatorFromRaw(validator))
 	}
@@ -100,7 +100,7 @@ func NewDelegationFromRaw(delegation staking.Delegation) Delegation {
 type Delegations []Delegation
 
 func NewDelegationsFromRaw(delegations staking.Delegations) Delegations {
-	var _delegations Delegations
+	_delegations := make(Delegations, 0, len(delegations))
 	for _, delegation := range delegations {
 		_delegations = append(_delegations, NewDelegationFromRaw(delegation))
 	}

@@ -18,7 +18,6 @@ import (
 	"github.com/tendermint/tendermint/lite"
 	"github.com/tendermint/tendermint/lite/proxy"
 	"github.com/tendermint/tendermint/rpc/client"
-	rpcclient "github.com/tendermint/tendermint/rpc/client"
 
 	"github.com/sentinel-official/desktop-client/cli/types"
 )
@@ -157,6 +156,6 @@ func (c *Client) WithSimulateAndExecute(t bool) *Client {
 func (c *Client) ChainID() string             { return c.txb.ChainID() }
 func (c *Client) Keybase() crypto.Keybase     { return c.ctx.Keybase }
 func (c *Client) VerifierHome() string        { return c.ctx.VerifierHome }
-func (c *Client) Node() rpcclient.Client      { return c.ctx.Client }
+func (c *Client) Node() client.Client         { return c.ctx.Client }
 func (c *Client) FromAddress() sdk.AccAddress { return c.ctx.FromAddress }
 func (c *Client) FromAddressHex() string      { return common.HexBytes(c.ctx.FromAddress.Bytes()).String() }

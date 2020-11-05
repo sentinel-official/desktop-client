@@ -10,7 +10,7 @@ type Key struct {
 	Type     string `json:"type"`
 	PubKey   string `json:"pub_key"`
 	Address  string `json:"address"`
-	Mnemonic string `json:"mnemonic,omitempty"`
+	Mnemonic string `json:"mnemonic"`
 }
 
 func NewKeyFromRaw(info keys.Info, mnemonic string) Key {
