@@ -47,14 +47,14 @@ func HandlerAddKey(ctx *context.Context) http.HandlerFunc {
 			return
 		}
 
-		if err = body.Validate(); err != nil {
+		if err := body.Validate(); err != nil {
 			utils.WriteErrorToResponse(w, 400, 2, err.Error())
 			return
 		}
 
 		info, _ := ctx.Client().Keybase().Get(body.Name)
 		if info != nil {
-			utils.WriteErrorToResponse(w, 400, 4, "duplicate key name")
+			utils.WriteErrorToResponse(w, 400, 4, "key already exists")
 			return
 		}
 
@@ -91,12 +91,14 @@ func HandlerDeleteKey(ctx *context.Context) http.HandlerFunc {
 			return
 		}
 
-		if err = body.Validate(); err != nil {
+		if err := body.Validate(); err != nil {
 			utils.WriteErrorToResponse(w, 400, 2, err.Error())
 			return
 		}
 
-		if err = ctx.Client().Keybase().Delete(body.Name, body.Password, false); err != nil {
+		vars := mux.Vars(r)
+
+		if err := ctx.Client().Keybase().Delete(vars["name"], body.Password, false); err != nil {
 			utils.WriteErrorToResponse(w, 500, 4, err.Error())
 			return
 		}
