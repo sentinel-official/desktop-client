@@ -49,29 +49,29 @@ func (p *Proposal) Raw() (proposal gov.MsgSubmitProposal, err error) {
 	return proposal, nil
 }
 
-type ProposalDeposits struct {
+type ProposalDeposit struct {
 	FromAddress string       `json:"from_address"`
 	ProposalID  uint64       `json:"proposal_id"`
 	Amount      models.Coins `json:"amount"`
 }
 
-func NewProposalDeposits(fromAddress string, proposalID uint64, deposit models.Coins) *ProposalDeposits {
-	return &ProposalDeposits{
+func NewProposalDeposit(fromAddress string, proposalID uint64, deposit models.Coins) *ProposalDeposit {
+	return &ProposalDeposit{
 		FromAddress: fromAddress,
 		ProposalID:  proposalID,
 		Amount:      deposit,
 	}
 }
 
-func NewProposalDepositsFromRaw(m *gov.MsgDeposit) *ProposalDeposits {
-	return &ProposalDeposits{
+func NewProposalDepositsFromRaw(m *gov.MsgDeposit) *ProposalDeposit {
+	return &ProposalDeposit{
 		FromAddress: common.HexBytes(m.Depositor.Bytes()).String(),
 		ProposalID:  m.ProposalID,
 		Amount:      models.NewCoinsFromRaw(m.Amount),
 	}
 }
 
-func (p *ProposalDeposits) Raw() (deposit gov.MsgDeposit, err error) {
+func (p *ProposalDeposit) Raw() (deposit gov.MsgDeposit, err error) {
 	deposit.Depositor, err = sdk.AccAddressFromHex(p.FromAddress)
 	if err != nil {
 		return deposit, err
@@ -83,29 +83,29 @@ func (p *ProposalDeposits) Raw() (deposit gov.MsgDeposit, err error) {
 	return deposit, nil
 }
 
-type ProposalVotes struct {
+type ProposalVote struct {
 	FromAddress string `json:"from_address"`
 	ProposalID  uint64 `json:"proposal_id"`
 	Option      string `json:"option"`
 }
 
-func NewProposalVotes(fromAddress string, proposalID uint64, option string) *ProposalVotes {
-	return &ProposalVotes{
+func NewProposalVote(fromAddress string, proposalID uint64, option string) *ProposalVote {
+	return &ProposalVote{
 		FromAddress: fromAddress,
 		ProposalID:  proposalID,
 		Option:      option,
 	}
 }
 
-func NewProposalVotesFromRaw(m *gov.MsgVote) *ProposalVotes {
-	return &ProposalVotes{
+func NewProposalVotesFromRaw(m *gov.MsgVote) *ProposalVote {
+	return &ProposalVote{
 		FromAddress: common.HexBytes(m.Voter.Bytes()).String(),
 		ProposalID:  m.ProposalID,
 		Option:      m.Option.String(),
 	}
 }
 
-func (p *ProposalVotes) Raw() (vote gov.MsgVote, err error) {
+func (p *ProposalVote) Raw() (vote gov.MsgVote, err error) {
 	vote.Voter, err = sdk.AccAddressFromHex(p.FromAddress)
 	if err != nil {
 		return vote, err

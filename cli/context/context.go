@@ -27,8 +27,11 @@ func (c *Context) WithClient(v *lite.Client) *Context     { c.client = v; return
 func (c *Context) WithConfig(v *types.Config) *Context    { c.config = v; return c }
 func (c *Context) WithContext(v context.Context) *Context { c.ctx = v; return c }
 
+func (c *Context) AddressHex() string {
+	return common.HexBytes(c.client.FromAddress().Bytes()).String()
+}
+
 func (c *Context) Home() string             { return c.home }
-func (c *Context) AddressHex() string       { return common.HexBytes(c.client.FromAddress().Bytes()).String() }
 func (c *Context) Client() *lite.Client     { return c.client }
 func (c *Context) Config() *types.Config    { return c.config }
 func (c *Context) Context() context.Context { return c.ctx }

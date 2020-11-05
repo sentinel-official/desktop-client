@@ -18,6 +18,7 @@ import (
 	"github.com/sentinel-official/desktop-client/cli/rest/bank"
 	"github.com/sentinel-official/desktop-client/cli/rest/config"
 	"github.com/sentinel-official/desktop-client/cli/rest/distribution"
+	"github.com/sentinel-official/desktop-client/cli/rest/gov"
 	"github.com/sentinel-official/desktop-client/cli/rest/keys"
 	"github.com/sentinel-official/desktop-client/cli/rest/login"
 	"github.com/sentinel-official/desktop-client/cli/rest/staking"
@@ -86,6 +87,7 @@ func ServerCmd() *cobra.Command {
 			bank.RegisterRoutes(protectedRouter, ctx)
 			config.RegisterRoutes(protectedRouter, ctx)
 			distribution.RegisterRoutes(protectedRouter, ctx)
+			gov.RegisterRoutes(protectedRouter, ctx)
 			keys.RegisterRoutes(protectedRouter, ctx)
 			staking.RegisterRoutes(protectedRouter, ctx)
 
