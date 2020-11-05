@@ -76,3 +76,26 @@ func (c *Client) QueryValidators(page, limit int, status string) (staking.Valida
 
 	return items, nil
 }
+
+func (c *Client) QueryDelegations(address sdk.AccAddress) (staking.Delegations, error) {
+	bytes, err := c.ctx.Codec.MarshalJSON(staking.NewQueryDelegatorParams(address))
+	if err != nil {
+		return nil, err
+	}
+
+	path := fmt.Sprintf("custom/%s/%s", staking.QuerierRoute, staking.QueryDelegatorDelegations)
+	res, _, err := c.ctx.QueryWithData(path, bytes)
+	if err != nil {
+		return nil, err
+	}
+	if res == nil {
+		return nil, nil
+	}
+
+	var items staking.Delegations
+	if err := c.ctx.Codec.UnmarshalJSON(res, &items); err != nil {
+		return nil, err
+	}
+
+	return items, nil
+}

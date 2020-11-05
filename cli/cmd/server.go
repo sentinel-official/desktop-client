@@ -12,14 +12,15 @@ import (
 	"github.com/spf13/cobra"
 
 	"github.com/sentinel-official/desktop-client/cli/context"
-	"github.com/sentinel-official/desktop-client/cli/handlers/account"
-	"github.com/sentinel-official/desktop-client/cli/handlers/bank"
-	"github.com/sentinel-official/desktop-client/cli/handlers/config"
-	"github.com/sentinel-official/desktop-client/cli/handlers/keys"
-	"github.com/sentinel-official/desktop-client/cli/handlers/login"
-	"github.com/sentinel-official/desktop-client/cli/handlers/staking"
 	"github.com/sentinel-official/desktop-client/cli/lite"
 	"github.com/sentinel-official/desktop-client/cli/middlewares"
+	"github.com/sentinel-official/desktop-client/cli/rest/account"
+	"github.com/sentinel-official/desktop-client/cli/rest/bank"
+	"github.com/sentinel-official/desktop-client/cli/rest/config"
+	"github.com/sentinel-official/desktop-client/cli/rest/distribution"
+	"github.com/sentinel-official/desktop-client/cli/rest/keys"
+	"github.com/sentinel-official/desktop-client/cli/rest/login"
+	"github.com/sentinel-official/desktop-client/cli/rest/staking"
 	"github.com/sentinel-official/desktop-client/cli/types"
 )
 
@@ -81,10 +82,11 @@ func ServerCmd() *cobra.Command {
 
 			protectedRouter.Use(middlewares.AddHeaders)
 			protectedRouter.Use(middlewares.TokenVerify)
-			config.RegisterRoutes(protectedRouter, ctx)
-			keys.RegisterRoutes(protectedRouter, ctx)
 			account.RegisterRoutes(protectedRouter, ctx)
 			bank.RegisterRoutes(protectedRouter, ctx)
+			config.RegisterRoutes(protectedRouter, ctx)
+			distribution.RegisterRoutes(protectedRouter, ctx)
+			keys.RegisterRoutes(protectedRouter, ctx)
 			staking.RegisterRoutes(protectedRouter, ctx)
 
 			corsRouter := cors.New(cors.Options{

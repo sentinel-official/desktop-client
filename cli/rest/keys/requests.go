@@ -4,8 +4,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
-
-	"github.com/gorilla/mux"
 )
 
 type RequestAddKey struct {
@@ -36,7 +34,6 @@ func (r *RequestAddKey) Validate() error {
 }
 
 type RequestDeleteKey struct {
-	Name     string `json:"name"`
 	Password string `json:"password"`
 }
 
@@ -46,16 +43,10 @@ func NewRequestDeleteKey(r *http.Request) (*RequestDeleteKey, error) {
 		return nil, err
 	}
 
-	vars := mux.Vars(r)
-	body.Name = vars["name"]
-
 	return &body, nil
 }
 
 func (r *RequestDeleteKey) Validate() error {
-	if r.Name == "" {
-		return fmt.Errorf("invalid field name")
-	}
 	if r.Password == "" {
 		return fmt.Errorf("invalid field password")
 	}

@@ -26,14 +26,14 @@ func NewRequestSend(r *http.Request) (*RequestSend, error) {
 }
 
 func (r *RequestSend) Validate() error {
+	if r.Password == "" {
+		return fmt.Errorf("invalid field Password")
+	}
 	if r.ToAddress == "" {
 		return fmt.Errorf("invalid field ToAddress")
 	}
 	if len(r.Amount) == 0 {
 		return fmt.Errorf("invalid field Amount")
-	}
-	if r.Password == "" {
-		return fmt.Errorf("invalid field Password")
 	}
 
 	return nil

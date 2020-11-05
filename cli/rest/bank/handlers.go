@@ -16,7 +16,7 @@ func HandlerSend(ctx *context.Context) http.HandlerFunc {
 			return
 		}
 
-		if err = body.Validate(); err != nil {
+		if err := body.Validate(); err != nil {
 			utils.WriteErrorToResponse(w, 400, 2, err.Error())
 			return
 		}

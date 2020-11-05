@@ -5,9 +5,7 @@ import (
 )
 
 const (
-	FlagHome     = "home"
-	FlagForce    = "force"
-	FlagLogLevel = "log-level"
+	FlagHome = "home"
 )
 
 var (
