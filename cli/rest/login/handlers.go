@@ -7,8 +7,8 @@ import (
 	"github.com/sentinel-official/desktop-client/cli/utils"
 )
 
-func HandlerLogin(ctx *context.Context) http.HandlerFunc {
+func HandlerLogin(_ *context.Context) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		utils.WriteResultToResponse(w, 200, nil)
+		utils.WriteResultToResponse(w, http.StatusOK, nil)
 	}
 }

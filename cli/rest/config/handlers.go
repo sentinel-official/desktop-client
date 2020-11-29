@@ -1,6 +1,7 @@
 package config
 
 import (
+	"io/ioutil"
 	"net/http"
 	"path/filepath"
 
@@ -16,7 +17,7 @@ import (
 
 func HandlerGetConfig(ctx *context.Context) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		utils.WriteResultToResponse(w, 200, ctx.Config())
+		utils.WriteResultToResponse(w, http.StatusOK, ctx.Config())
 	}
 }
 
@@ -24,12 +25,12 @@ func HandlerUpdateConfig(ctx *context.Context) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		body, err := NewRequestUpdateConfig(r)
 		if err != nil {
-			utils.WriteErrorToResponse(w, 400, 1, err.Error())
+			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1, err.Error())
 			return
 		}
 
 		if err := body.Validate(); err != nil {
-			utils.WriteErrorToResponse(w, 400, 2, err.Error())
+			utils.WriteErrorToResponse(w, http.StatusBadRequest, 2, err.Error())
 			return
 		}
 
@@ -38,16 +39,18 @@ func HandlerUpdateConfig(ctx *context.Context) http.HandlerFunc {
 			client = ctx.Client().Copy()
 		)
 
-		info, err := client.Keybase().Get(body.From)
-		if err != nil {
-			utils.WriteErrorToResponse(w, 500, 3, err.Error())
-			return
-		}
+		if body.From != "" {
+			info, err := client.Keybase().Get(body.From)
+			if err != nil {
+				utils.WriteErrorToResponse(w, http.StatusInternalServerError, 3, err.Error())
+				return
+			}
 
-		if !info.GetAddress().Equals(client.FromAddress()) {
-			client.WithFrom(body.From).
-				WithFromName(body.From).
-				WithFromAddress(info.GetAddress())
+			if !info.GetAddress().Equals(client.FromAddress()) {
+				client.WithFrom(body.From).
+					WithFromName(body.From).
+					WithFromAddress(info.GetAddress())
+			}
 		}
 		if body.Chain.BroadcastMode != cfg.Chain.BroadcastMode {
 			cfg.Chain.BroadcastMode = body.Chain.BroadcastMode
@@ -70,9 +73,15 @@ func HandlerUpdateConfig(ctx *context.Context) http.HandlerFunc {
 			client.WithGas(body.Chain.Gas)
 		}
 		if body.Chain.ID != cfg.Chain.ID {
-			verifier, err := proxy.NewVerifier(body.Chain.ID, client.VerifierHome(), client.Node(), log.NewNopLogger(), 16)
+			verifierDir, err := ioutil.TempDir(client.VerifierHome(), "*-verifier")
 			if err != nil {
-				utils.WriteErrorToResponse(w, 500, 4, err.Error())
+				utils.WriteErrorToResponse(w, http.StatusInternalServerError, 4, err.Error())
+				return
+			}
+
+			verifier, err := proxy.NewVerifier(body.Chain.ID, verifierDir, client.Node(), log.NewNopLogger(), 16)
+			if err != nil {
+				utils.WriteErrorToResponse(w, http.StatusInternalServerError, 4, err.Error())
 				return
 			}
 
@@ -83,9 +92,15 @@ func HandlerUpdateConfig(ctx *context.Context) http.HandlerFunc {
 		if body.Chain.RPCAddress != cfg.Chain.RPCAddress {
 			node := rpcclient.NewHTTP(body.Chain.RPCAddress, "/websocket")
 
-			verifier, err := proxy.NewVerifier(client.ChainID(), client.VerifierHome(), node, log.NewNopLogger(), 16)
+			verifierDir, err := ioutil.TempDir(client.VerifierHome(), "*-verifier")
 			if err != nil {
-				utils.WriteErrorToResponse(w, 500, 5, err.Error())
+				utils.WriteErrorToResponse(w, http.StatusInternalServerError, 4, err.Error())
+				return
+			}
+
+			verifier, err := proxy.NewVerifier(client.ChainID(), verifierDir, node, log.NewNopLogger(), 16)
+			if err != nil {
+				utils.WriteErrorToResponse(w, http.StatusInternalServerError, 4, err.Error())
 				return
 			}
 
@@ -105,9 +120,15 @@ func HandlerUpdateConfig(ctx *context.Context) http.HandlerFunc {
 			if !body.Chain.TrustNode {
 				node := rpcclient.NewHTTP(body.Chain.RPCAddress, "/websocket")
 
-				verifier, err := proxy.NewVerifier(client.ChainID(), client.VerifierHome(), node, log.NewNopLogger(), 16)
+				verifierDir, err := ioutil.TempDir(client.VerifierHome(), "*-verifier")
 				if err != nil {
-					utils.WriteErrorToResponse(w, 500, 6, err.Error())
+					utils.WriteErrorToResponse(w, http.StatusInternalServerError, 4, err.Error())
+					return
+				}
+
+				verifier, err := proxy.NewVerifier(client.ChainID(), verifierDir, node, log.NewNopLogger(), 16)
+				if err != nil {
+					utils.WriteErrorToResponse(w, http.StatusInternalServerError, 4, err.Error())
 					return
 				}
 
@@ -119,13 +140,13 @@ func HandlerUpdateConfig(ctx *context.Context) http.HandlerFunc {
 
 		cfgFile := filepath.Join(viper.GetString(types.FlagHome), "config.toml")
 		if err := cfg.SaveToPath(cfgFile); err != nil {
-			utils.WriteErrorToResponse(w, 500, 7, err.Error())
+			utils.WriteErrorToResponse(w, http.StatusInternalServerError, 5, err.Error())
 			return
 		}
 
 		ctx.WithConfig(cfg).
 			WithClient(client)
 
-		utils.WriteResultToResponse(w, 200, cfg)
+		utils.WriteResultToResponse(w, http.StatusOK, cfg)
 	}
 }

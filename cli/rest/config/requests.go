@@ -31,9 +31,6 @@ func NewRequestUpdateConfig(r *http.Request) (*RequestUpdateConfig, error) {
 }
 
 func (r *RequestUpdateConfig) Validate() error {
-	if r.From == "" {
-		return fmt.Errorf("invalid field From")
-	}
 	if r.Chain.BroadcastMode == "" {
 		return fmt.Errorf("invalid field Chain.BroadcastMode")
 	}

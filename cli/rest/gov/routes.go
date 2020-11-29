@@ -13,7 +13,7 @@ func RegisterRoutes(r *mux.Router, ctx *context.Context) {
 		Methods(http.MethodGet).Path("/proposals").
 		HandlerFunc(HandlerGetProposals(ctx))
 	r.Name("Vote").
-		Methods(http.MethodPost).Path("/proposals/{id}/vote").
+		Methods(http.MethodPost).Path("/proposals/{id}/votes").
 		HandlerFunc(HandlerVote(ctx))
 	r.Name("GetDeposits").
 		Methods(http.MethodGet).Path("/proposals/{id}/deposits").
