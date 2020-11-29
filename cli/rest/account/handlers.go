@@ -17,17 +17,17 @@ func HandlerGetAccount(ctx *context.Context) http.HandlerFunc {
 
 		address, err := sdk.AccAddressFromHex(vars["address"])
 		if err != nil {
-			utils.WriteErrorToResponse(w, 400, 1, err.Error())
+			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1, err.Error())
 			return
 		}
 
 		account, err := ctx.Client().QueryAccount(address)
 		if err != nil {
-			utils.WriteErrorToResponse(w, 500, 2, err.Error())
+			utils.WriteErrorToResponse(w, http.StatusInternalServerError, 2, err.Error())
 			return
 		}
 
 		item := models.NewAccountFromRaw(account)
-		utils.WriteResultToResponse(w, 200, item)
+		utils.WriteResultToResponse(w, http.StatusOK, item)
 	}
 }
