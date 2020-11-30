@@ -17,7 +17,10 @@ import (
 
 func HandlerGetConfig(ctx *context.Context) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		utils.WriteResultToResponse(w, http.StatusOK, ctx.Config())
+		config := ctx.Config().Copy()
+		config.Password = ""
+
+		utils.WriteResultToResponse(w, http.StatusOK, config)
 	}
 }
 

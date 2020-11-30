@@ -2,6 +2,7 @@ package types
 
 import (
 	"net/http"
+	"time"
 )
 
 type Response struct {
@@ -41,4 +42,9 @@ func (r *ResponseWriter) Write(p []byte) (n int, err error) {
 func (r *ResponseWriter) WriteHeader(status int) {
 	r.ResponseWriter.WriteHeader(status)
 	r.Status = status
+}
+
+type AuthToken struct {
+	Value  string    `json:"value"`
+	Expiry time.Time `json:"expiry"`
 }
