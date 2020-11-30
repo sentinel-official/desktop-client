@@ -2,6 +2,7 @@ package auth
 
 import (
 	"crypto/rand"
+	"crypto/sha256"
 	"fmt"
 	"net/http"
 	"strings"
@@ -26,7 +27,8 @@ func HandlerLogin(ctx *context.Context) http.HandlerFunc {
 
 		auth := r.Header.Get("Authorization")
 		if auth == "" {
-			if body.Password != ctx.Config().Password {
+			password := fmt.Sprintf("%X", sha256.Sum256([]byte(body.Password)))
+			if password != ctx.Config().Password {
 				utils.WriteErrorToResponse(w, http.StatusUnauthorized, 3, "")
 				return
 			}
