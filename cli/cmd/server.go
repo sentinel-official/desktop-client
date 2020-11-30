@@ -20,7 +20,7 @@ import (
 	"github.com/sentinel-official/desktop-client/cli/rest/distribution"
 	"github.com/sentinel-official/desktop-client/cli/rest/gov"
 	"github.com/sentinel-official/desktop-client/cli/rest/keys"
-	"github.com/sentinel-official/desktop-client/cli/rest/login"
+	"github.com/sentinel-official/desktop-client/cli/rest/auth"
 	"github.com/sentinel-official/desktop-client/cli/rest/staking"
 	"github.com/sentinel-official/desktop-client/cli/types"
 )
@@ -79,10 +79,10 @@ func ServerCmd() *cobra.Command {
 				Handler(http.FileServer(http.Dir(buildFolder)))
 
 			unprotectedRouter.Use(middlewares.AddHeaders)
-			login.RegisterRoutes(unprotectedRouter, ctx)
+			auth.RegisterRoutes(unprotectedRouter, ctx)
 
 			protectedRouter.Use(middlewares.AddHeaders)
-			protectedRouter.Use(middlewares.TokenVerify)
+			protectedRouter.Use(middlewares.TokenVerify(ctx))
 			account.RegisterRoutes(protectedRouter, ctx)
 			bank.RegisterRoutes(protectedRouter, ctx)
 			config.RegisterRoutes(protectedRouter, ctx)

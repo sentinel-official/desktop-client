@@ -2,6 +2,7 @@ package types
 
 import (
 	"bytes"
+	"crypto/sha256"
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
@@ -14,6 +15,8 @@ import (
 
 var (
 	ct = strings.TrimSpace(`
+password = "{{ .Password }}"
+
 [chain]
 broadcast_mode = "{{ .Chain.BroadcastMode }}"
 fees = "{{ .Chain.Fees }}"
@@ -37,7 +40,8 @@ trust_node = {{ .Chain.TrustNode }}
 )
 
 type Config struct {
-	Chain struct {
+	Password string `json:"password,omitempty"`
+	Chain    struct {
 		BroadcastMode      string  `json:"broadcast_mode"`
 		Fees               string  `json:"fees"`
 		GasAdjustment      float64 `json:"gas_adjustment"`
@@ -56,11 +60,13 @@ func NewConfig() *Config {
 
 func (c *Config) Copy() *Config {
 	return &Config{
-		Chain: c.Chain,
+		Password: c.Password,
+		Chain:    c.Chain,
 	}
 }
 
 func (c *Config) WithDefaultValues() *Config {
+	c.Password = fmt.Sprintf("%X", sha256.Sum256([]byte("admin")))
 	c.Chain.BroadcastMode = "block"
 	c.Chain.Fees = ""
 	c.Chain.Gas = 1e5
@@ -124,6 +130,9 @@ func (c *Config) String() string {
 }
 
 func (c *Config) Validate() error {
+	if len(c.Password) != 64 {
+		return fmt.Errorf("invalid field Password")
+	}
 	if c.Chain.BroadcastMode == "" {
 		return fmt.Errorf("invalid field Chain.BroadcastMode")
 	}

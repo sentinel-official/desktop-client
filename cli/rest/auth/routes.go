@@ -1,4 +1,4 @@
-package login
+package auth
 
 import (
 	"net/http"
