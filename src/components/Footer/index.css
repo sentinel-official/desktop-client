@@ -1,9 +1,0 @@
-.Footer {
-    height: 70px;
-    background-color: white;
-    outline: 1px solid rgba(0, 0, 0, .1);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
