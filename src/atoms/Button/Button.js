@@ -1,0 +1,161 @@
+import React from "react";
+import styled from "styled-components";
+import {
+  layout,
+  color,
+  space,
+  variant,
+  typography,
+  fontSize,
+  border,
+} from "styled-system";
+
+import { Box, Text } from "atoms";
+import css from "@styled-system/css";
+
+const variants = {
+  primary: {
+    color: "white",
+    px: 7,
+    py: 4,
+    backgroundColor: "primary.500",
+    transition: "all 0.3s",
+    border: 0,
+    fontWeight: 500,
+    letterSpacing: 0.4,
+    borderRadius: "3rem",
+    fontFamily: "Roboto",
+    h3: {
+      textTransform: "uppercase",
+    },
+    "&:hover": {
+      transform: "scale(1.004)",
+    },
+    "&:focus": {
+      outline: 0,
+    },
+  },
+  secondary: {
+    px: 7,
+    py: 4,
+    color: "#142D51 !important",
+    fontWeight: "500",
+    backgroundColor: "transparent",
+    border: "1px solid",
+    borderColor: "border.500",
+    borderRadius: "3rem",
+    fontFamily: "Roboto",
+    outline: 0,
+    "&:hover": {
+      color: "white.0",
+      backgroundColor: "gray.100",
+    },
+  },
+  normal: {
+    px: 7,
+    py: 4,
+    color: "#8EA1C8 !important",
+    fontWeight: "500",
+    backgroundColor: "transparent",
+    border: "none",
+    fontFamily: "Roboto",
+    outline: 0,
+    "&:hover": {
+      transform: "scale(1.004)",
+      color: "white.0",
+      backgroundColor: "gray.100",
+    },
+  },
+
+  withoutBorder: {
+    px: 7,
+    py: "1rem",
+    width: "100%",
+    color: "#142D51 !important",
+    backgroundColor: "transparent",
+    border: "1px solid",
+    borderColor: "border.500",
+    outline: "none",
+    fontFamily: "Roboto",
+    "&:hover, :active, :focus": {
+      borderBottom: "2px solid",
+      borderBottomColor: "primary.500",
+    },
+  },
+};
+
+export const Container = styled(Box)`
+  cursor: pointer;
+  position: relative;
+  font-family: "SourceSansPro-Regular";
+  white-space: nowrap;
+  ${variant({
+    variants,
+  })}
+  ${({ disabled }) =>
+    disabled &&
+    css({
+      backgroundColor: "gray.500",
+      boxShadow: "none",
+      cursor: "not-allowed",
+    })}
+  ${({ whiteSpace }) =>
+    whiteSpace &&
+    css({
+      whiteSpace,
+    })}
+  ${layout}
+  ${color}
+  ${typography}
+  ${space}
+  ${fontSize}
+  ${border}
+`;
+
+export const Button = ({
+  disabled,
+  loading,
+  children,
+  textTransform,
+  variant: v = "primary",
+  ...rest
+}) => {
+  return (
+    <Container
+      variant={v}
+      as="button"
+      color="white"
+      {...rest}
+      disabled={disabled || loading}
+      overflow="hidden"
+    >
+      {/* {loading && (
+        <Flex
+          left={0}
+          right={0}
+          position="absolute"
+          justifyContent="center"
+          alignItems="center"
+          fontSize={2}
+          height="15px"
+          width="15px"
+          mx="auto"
+        >
+          <Loader loading={loading} />
+        </Flex>
+      )} */}
+      <Text
+        // color="inherit"
+        variant="button"
+        textTransform={textTransform}
+        opacity={loading ? 0 : 1}
+      >
+        {children}
+      </Text>
+    </Container>
+  );
+};
+
+Button.defaultProps = {
+  textTransform: "uppercase",
+};
