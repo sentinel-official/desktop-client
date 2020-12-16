@@ -1,12 +1,26 @@
 {
-  "name": "crypto-vpn",
-  "version": "0.1.0",
-  "private": true,
+  "name": "sentinel-desktop-client",
+  "version": "0.3.0-rc0",
+  "author": {
+    "name": "Sentinel",
+    "email": "desktop.support@sentinel.co",
+    "url": "https://sentinel.co"
+  },
+  "license": "MIT",
+  "private": false,
+  "repository": "https://github.com/sentinel-official/desktop-client.git",
   "dependencies": {
     "@ramonak/react-progress-bar": "^2.0.0",
-    "@testing-library/jest-dom": "^5.11.4",
-    "@testing-library/react": "^11.1.0",
-    "@testing-library/user-event": "^12.1.10",
+    "@testing-library/jest-dom": "^5.11.6",
+    "@testing-library/react": "^11.2.2",
+    "@testing-library/user-event": "^12.6.0",
+    "eslint": "^7.15.0",
+    "eslint-config-standard": "^16.0.2",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-react": "^7.21.5",
+    "eslint-plugin-standard": "^4.1.0",
     "formik": "^2.2.6",
     "hex-to-rgba": "^2.0.1",
     "react": "^17.0.1",
@@ -18,7 +32,7 @@
     "react-select": "^3.1.1",
     "styled-components": "^5.2.1",
     "styled-system": "^5.1.5",
-    "web-vitals": "^0.2.4",
+    "web-vitals": "^1.0.1",
     "yup": "^0.32.8"
   },
   "scripts": {
