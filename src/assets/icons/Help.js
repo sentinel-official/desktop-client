@@ -1,6 +1,6 @@
 import * as React from "react";
 
-function Help(props) {
+const Help = (props) => {
   return (
     <svg width="auto" height="auto" viewBox="0 0 17 17" fill="none" {...props}>
       <circle cx="8.5" cy="8.5" r="8" stroke="#55678B" />
@@ -10,7 +10,7 @@ function Help(props) {
       />
     </svg>
   );
-}
+};
 
 const MemoHelp = React.memo(Help);
 export default MemoHelp;

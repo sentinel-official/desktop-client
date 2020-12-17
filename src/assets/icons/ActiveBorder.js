@@ -1,6 +1,6 @@
 import * as React from "react";
 
-function ActiveBorder(props) {
+const ActiveBorder = (props) => {
   return (
     <svg width="auto" height="auto" viewBox="0 0 4 35" fill="none" {...props}>
       <path
@@ -9,7 +9,7 @@ function ActiveBorder(props) {
       />
     </svg>
   );
-}
+};
 
 const MemoActiveBorder = React.memo(ActiveBorder);
 export default MemoActiveBorder;

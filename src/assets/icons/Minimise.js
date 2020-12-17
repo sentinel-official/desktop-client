@@ -1,6 +1,6 @@
 import * as React from "react";
 
-function Minimise(props) {
+const Minimise = (props) => {
   return (
     <svg width="1em" height="1em" viewBox="0 0 12 11" fill="none" {...props}>
       <rect y="10" width="10" height="1" fill="#55678B" />
@@ -39,7 +39,7 @@ function Minimise(props) {
       />
     </svg>
   );
-}
+};
 
 const MemoMinimise = React.memo(Minimise);
 export default MemoMinimise;

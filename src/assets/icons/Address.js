@@ -1,6 +1,6 @@
 import * as React from "react";
 
-function Address(props) {
+const Address = (props) => {
   return (
     <svg width="1em" height="1em" viewBox="0 0 11 9" fill="none" {...props}>
       <path
@@ -9,7 +9,7 @@ function Address(props) {
       />
     </svg>
   );
-}
+};
 
 const MemoAddress = React.memo(Address);
 export default MemoAddress;

@@ -3,14 +3,12 @@ import { Box, Grid, Text, Button } from "atoms";
 import { SignupForm } from "templates/SignupForm";
 import { SentinelIntro } from "molecules/SentinelIntro";
 import { SocialSecion } from "molecules/SocialSecion";
-// import { MinimiseSection } from "molecules/MinimiseSection";
 
-export const SignUp = () => {
+export const CreateAccount = () => {
   return (
     <Grid gridTemplateColumns="40rem 2.5fr">
       <SentinelIntro />
       <Grid>
-        {/* <MinimiseSection /> */}
         <Box height="2rem" />
         <SignupForm />
         <Box

@@ -7,3 +7,4 @@ export * from "./InputField";
 export * from "./Image";
 export * from "./Button";
 export * from "./Image";
+export * from "./CustomNavLink";

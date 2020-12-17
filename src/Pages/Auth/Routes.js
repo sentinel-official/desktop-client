@@ -1,14 +1,13 @@
 import React, { Suspense } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
-import { LandingPage } from "../LandingPage";
-import { SignUp } from "./SignUp";
-import { Login } from "./Login";
-import { Test } from "../Test";
-import { AccountCreated } from "./AccountCreated/AccountCreated";
-import { ConfigureSetting } from "../ConfigureSetting/ConfigureSetting";
-import Dashboard from "../Dashboard";
+import { LandingPage } from "pages/LandingPage";
+import { CreateAccount } from "pages/CreateAccount";
+import { Login } from "pages/Login";
+import { Test } from "pages/Test";
+import { AccountCreated } from "pages/Auth/AccountCreated";
+import { ConfigureSetting } from "pages/ConfigureSetting";
+import Dashboard from "pages/Dashboard";
 // import { Loader } from "atoms";
-// import { AuthContainer } from "pages/Auth/AuthContainer/AuthContainer";
 
 export const UnauthenticatedRoutes = () => {
   return (
@@ -16,8 +15,7 @@ export const UnauthenticatedRoutes = () => {
       <Switch>
         <Route exact path="/" component={LandingPage} />
         <Route path="/login" component={Login} />
-        <Route path="/account-created" component={AccountCreated} />
-        <Route exact to="/sign-up" component={SignUp} />
+        <Route exact to="/create-account" component={CreateAccount} />
         <Route path="/test" component={Test} />
         <Redirect to="/" />
       </Switch>
@@ -30,8 +28,10 @@ export const AuthenticatedRoutes = () => {
     <Suspense>
       <Switch>
         <Route path="/configure-setting" exact component={ConfigureSetting} />
+        <Route exact path="/account-created" component={AccountCreated} />
         <Route path="/dashboard/wallet" exact component={Dashboard} />
-        {/* <Redirect to="/" /> */}
+        <Route path="/dashboard/dVPN" exact component={Dashboard} />
+        <Redirect to="/account-created" />
       </Switch>
     </Suspense>
   );

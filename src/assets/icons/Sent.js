@@ -1,6 +1,6 @@
 import * as React from "react";
 
-function Sent(props) {
+const Sent = (props) => {
   return (
     <svg width="1em" height="1em" viewBox="0 0 14 14" fill="none" {...props}>
       <path
@@ -13,7 +13,7 @@ function Sent(props) {
       />
     </svg>
   );
-}
+};
 
 const MemoSent = React.memo(Sent);
 export default MemoSent;

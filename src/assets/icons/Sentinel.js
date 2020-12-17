@@ -1,6 +1,6 @@
 import * as React from "react";
 
-function Sentinel(props) {
+const Sentinel = (props) => {
   return (
     <svg width="auto" height="auto" viewBox="0 0 205 35" fill="none" {...props}>
       <path
@@ -34,7 +34,7 @@ function Sentinel(props) {
       />
     </svg>
   );
-}
+};
 
 const MemoSentinel = React.memo(Sentinel);
 export default MemoSentinel;

@@ -6,7 +6,7 @@ import { Wallet } from "./Wallet";
 const Dashboard = () => {
   const [isWalletVisible, setIsWalletVisible] = useState(true);
   return (
-    <Grid gridTemplateColumns="1fr 5fr">
+    <Grid gridTemplateColumns="auto 1fr ">
       <Sidebar />
       {isWalletVisible && <Wallet />}
     </Grid>

@@ -1,6 +1,6 @@
 import * as React from "react";
 
-function Close(props) {
+const Close = (props) => {
   return (
     <svg width="1em" height="1em" viewBox="0 0 12 11" fill="none" {...props}>
       <path
@@ -9,7 +9,7 @@ function Close(props) {
       />
     </svg>
   );
-}
+};
 
 const MemoClose = React.memo(Close);
 export default MemoClose;

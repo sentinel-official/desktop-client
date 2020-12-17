@@ -1,6 +1,6 @@
 import * as React from "react";
 
-function Logo(props) {
+const Logo = (props) => {
   return (
     <svg width="5em" height="5em" viewBox="0 0 354 384" fill="none" {...props}>
       <path
@@ -15,7 +15,7 @@ function Logo(props) {
       />
     </svg>
   );
-}
+};
 
 const MemoLogo = React.memo(Logo);
 export default MemoLogo;

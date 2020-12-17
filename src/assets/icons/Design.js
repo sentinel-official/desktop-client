@@ -1,6 +1,6 @@
 import * as React from "react";
 
-function Design(props) {
+const Design = (props) => {
   return (
     <svg
       width="auto"
@@ -377,7 +377,7 @@ function Design(props) {
       />
     </svg>
   );
-}
+};
 
 const MemoDesign = React.memo(Design);
 export default MemoDesign;

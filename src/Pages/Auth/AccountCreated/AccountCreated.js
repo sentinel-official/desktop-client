@@ -38,7 +38,7 @@ export const AccountCreated = () => {
                   I have secured the seed safely
                 </Text>
               </Flex>
-              <Link to="/">
+              <Link to="/dashboard/wallet">
                 <Button px="3rem" justifySelf="center" type="submit">
                   Continue
                 </Button>

@@ -1,6 +1,6 @@
 import * as React from "react";
 
-function Profile(props) {
+const Profile = (props) => {
   return (
     <svg width="auto" height="auto" viewBox="0 0 20 20" fill="none" {...props}>
       <path
@@ -17,7 +17,7 @@ function Profile(props) {
       />
     </svg>
   );
-}
+};
 
 const MemoProfile = React.memo(Profile);
 export default MemoProfile;

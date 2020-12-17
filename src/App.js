@@ -3,7 +3,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 import { theme } from "./utils/styles/theme";
 import { ThemeProvider } from "styled-components";
 import { GlobalStyle } from "./utils/styles";
-import { AuthGate } from "./Pages/Auth/AuthGate";
+import { AuthGate } from "pages/Auth/AuthGate";
 
 function App() {
   return (

@@ -1,7 +1,6 @@
 import { Box, Grid, Button } from "atoms";
 import { LoginForm } from "templates/LoginForm";
 import { SentinelIntro } from "molecules/SentinelIntro";
-// import { MinimiseSection } from "molecules/MinimiseSection";
 import { SocialSecion } from "molecules/SocialSecion";
 import { Link } from "react-router-dom";
 
@@ -10,7 +9,6 @@ export const Login = () => {
     <Grid gridTemplateColumns="40rem 2.5fr">
       <SentinelIntro />
       <Grid>
-        {/* <MinimiseSection /> */}
         <Box height="2rem" />
         <LoginForm />
         <Box

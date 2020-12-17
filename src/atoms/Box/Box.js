@@ -91,4 +91,9 @@ export const Box = styled.div`
         text-transform: uppercase;
       }
     `}
+  ${({ transition }) =>
+    transition &&
+    css`
+      transition: ${transition};
+    `}
 `;

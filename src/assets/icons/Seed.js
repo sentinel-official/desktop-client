@@ -1,6 +1,6 @@
 import * as React from "react";
 
-function Seed(props) {
+const Seed = (props) => {
   return (
     <svg width="1em" height="1em" viewBox="0 0 12 11" fill="none" {...props}>
       <path
@@ -9,7 +9,7 @@ function Seed(props) {
       />
     </svg>
   );
-}
+};
 
 const MemoSeed = React.memo(Seed);
 export default MemoSeed;

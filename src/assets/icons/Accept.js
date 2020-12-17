@@ -1,6 +1,6 @@
 import * as React from "react";
 
-function Accept(props) {
+const Accept = (props) => {
   return (
     <svg width="1em" height="1em" viewBox="0 0 20 20" fill="none" {...props}>
       <circle cx="10" cy="10" r="9" stroke="#139EEE" stroke-width="2" />
@@ -22,7 +22,7 @@ function Accept(props) {
       />
     </svg>
   );
-}
+};
 
 const MemoAccept = React.memo(Accept);
 export default MemoAccept;

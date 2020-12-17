@@ -1,6 +1,6 @@
 import * as React from "react";
 
-function ArrowBottom(props) {
+const ArrowBottom = (props) => {
   return (
     <svg width="auto" height="auto" viewBox="0 0 12 7" fill="none" {...props}>
       <path
@@ -9,7 +9,7 @@ function ArrowBottom(props) {
       />
     </svg>
   );
-}
+};
 
 const MemoArrowBottom = React.memo(ArrowBottom);
 export default MemoArrowBottom;
