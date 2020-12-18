@@ -16,7 +16,7 @@ export {
     actionCreator,
 };
 
-export const POST_LOGIN_API = `${API_URL}/api/Authentication/Login`;
+export const POST_LOGIN_API = `${API_URL}/api/v1/login`;
 
 export const LoginActionTypes = {
     post_Login: createRequestActionTypes('POST_LOGIN'),
