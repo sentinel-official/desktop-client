@@ -1,140 +1,69 @@
-import MemoProfile from "assets/icons/Profile";
-import { Box, Grid, Text, Flex, Button } from "atoms";
 import { useState } from "react";
+import { Box, Grid, Text, Flex, Button } from "atoms";
 import SearchField from "react-search-field";
 
-const ValidatorsList = ({ index }) => {
+import { Proposals } from "./Proposals";
+import { Validators } from "./Validators";
+import MemoArrowBottom from "assets/icons/ArrowBottom";
+import { DropdownFilter } from "molecules/DropdownFilter";
+
+export const ShowPopup = ({ index }) => {
+  const [dropdown, setDropdown] = useState(false);
+
   return (
-    <Grid
-      py="1rem"
-      gridTemplateColumns="1fr 1.5fr 1fr 1fr 1fr 1fr"
-      alignItems="center"
-      borderBottom={index < 3 ? "1px solid" : "none"}
-      borderColor="border.500"
+    <DropdownFilter
+      render={
+        <Grid width="15rem" py="2rem">
+          <Flex px="2rem" cursor="pointer" alignItems="center">
+            <Text
+              width="100%"
+              fontSize="1.4rem"
+              fontWeight="medium"
+              pb="1rem"
+              mb={0}
+              color="gray.900"
+            >
+              RE-DELEGATE
+            </Text>
+          </Flex>
+
+          <Flex px="2rem" cursor="pointer" alignItems="center">
+            <Text
+              width="100%"
+              fontWeight="medium"
+              fontSize="1.4rem"
+              color="gray.900"
+              pt="1rem"
+            >
+              UNBOND
+            </Text>
+          </Flex>
+        </Grid>
+      }
+      onClose={() => setDropdown(false)}
+      open={dropdown}
+      onOpen={() => setDropdown(true)}
     >
-      <Flex alignItems="center">
-        <MemoProfile height="2.5rem" width="2.5rem" />
+      <Flex
+        alignItems="center"
+        border="1px solid "
+        borderColor="border.500"
+        p="1rem"
+        borderRadius="3rem"
+      >
         <Text
           color="primary.700"
-          fontSize="1.4rem"
+          fontSize="1.2rem"
           fontWeight="medium"
           textDecoration="none"
           lineHeight="100%"
-          ml="1rem"
+          mr="1rem"
         >
-          Forbole
+          DELEGATE
         </Text>
+        <MemoArrowBottom height=".8rem" width="1rem" />
       </Flex>
-
-      <Text
-        color="primary.700"
-        fontSize="1.4rem"
-        textDecoration="none"
-        lineHeight="100%"
-      >
-        1,190,255 (6.62%)
-      </Text>
-      <Text
-        color="primary.700"
-        fontSize="1.4rem"
-        textDecoration="none"
-        lineHeight="100%"
-      >
-        94.04%
-      </Text>
-      <Text
-        color="primary.700"
-        fontSize="1.4rem"
-        textDecoration="none"
-        lineHeight="100%"
-      >
-        10.00%
-      </Text>
-      <Text
-        color="primary.700"
-        fontSize="1.4rem"
-        textDecoration="none"
-        lineHeight="100%"
-      >
-        100.00%
-      </Text>
-      <Text
-        color="primary.500"
-        fontSize="1.4rem"
-        textDecoration="none"
-        lineHeight="100%"
-      >
-        DELEGATE
-      </Text>
-    </Grid>
-  );
-};
-
-const ValidatorTable = () => {
-  return (
-    <Box>
-      <Grid py="1.5rem" gridTemplateColumns="1fr 1.5fr 1fr 1fr 1fr 1fr">
-        <Box py={4}>
-          <Text
-            color="text.500"
-            fontWeight="medium"
-            fontSize="1.3rem"
-            textTransform="uppercase"
-          >
-            MONIKER
-          </Text>
-        </Box>
-        <Box py={4}>
-          <Text
-            color="text.500"
-            fontWeight="medium"
-            fontSize="1.3rem"
-            textTransform="uppercase"
-          >
-            VOTING POWER
-          </Text>
-        </Box>
-
-        <Box py={4}>
-          <Text
-            color="text.500"
-            fontWeight="medium"
-            fontSize="1.3rem"
-            textTransform="uppercase"
-          >
-            SELF
-          </Text>
-        </Box>
-
-        <Box py={4}>
-          <Text
-            color="text.500"
-            fontWeight="medium"
-            fontSize="1.3rem"
-            textTransform="uppercase"
-          >
-            COMMISSION
-          </Text>
-        </Box>
-        <Box py={4}>
-          <Text
-            color="text.500"
-            fontWeight="medium"
-            fontSize="1.3rem"
-            textTransform="uppercase"
-          >
-            UPTIME
-          </Text>
-        </Box>
-        <Box py={4} />
-      </Grid>
-
-      <Grid gridGap="1rem">
-        {[1, 2, 3].map((index) => (
-          <ValidatorsList key={index} index={index} />
-        ))}
-      </Grid>
-    </Box>
+    </DropdownFilter>
   );
 };
 
@@ -172,7 +101,7 @@ export const WalletDetails = () => {
           (+3.5%)
         </Text>
       </Text>
-      <Box mt="5rem">
+      <Box mt="5rem" mr="1rem">
         <Grid
           gridAutoFlow="column"
           justifyContent="space-between"
@@ -201,40 +130,49 @@ export const WalletDetails = () => {
               Proposals
             </Button>
           </Flex>
-          <Flex alignItems="center">
-            <Button
-              variant="active"
-              textVariant="label"
-              px="1rem"
-              justifySelf="center"
-              type="submit"
-              textTransform="capitalize"
-            >
-              Active
-            </Button>
-            <Button
-              variant="inActive"
-              textVariant="label"
-              px="1rem"
-              justifySelf="center"
-              type="submit"
-              textTransform="capitalize"
-            >
-              InActive
-            </Button>
+          <Grid
+            gridGap="1rem"
+            gridAutoFlow="column"
+            justifyContent="end"
+            alignItems="center"
+          >
+            <Box />
+            {visibleValidatorList && (
+              <>
+                <Flex>
+                  <Button
+                    variant="active"
+                    textVariant="label"
+                    px="1rem"
+                    justifySelf="center"
+                    type="submit"
+                    textTransform="capitalize"
+                  >
+                    Active
+                  </Button>
+                  <Button
+                    variant="inActive"
+                    textVariant="label"
+                    px="1rem"
+                    justifySelf="center"
+                    type="submit"
+                    textTransform="capitalize"
+                  >
+                    InActive
+                  </Button>
+                </Flex>
+                <ShowPopup />
+              </>
+            )}
             <SearchField
               placeholder="Search"
               onChange={onChangeHandler}
               classNames="search-container"
             />
-          </Flex>
+          </Grid>
         </Grid>
       </Box>
-      {visibleValidatorList ? (
-        <ValidatorTable />
-      ) : (
-        <Box mt="5rem"> No Data</Box>
-      )}
+      {visibleValidatorList ? <Validators /> : <Proposals />}
     </Box>
   );
 };

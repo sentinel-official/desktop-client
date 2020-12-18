@@ -94,12 +94,12 @@ const variants = {
     fontSize: "1.2rem",
     outline: 0,
     height: "3rem",
-    "&:hover, :active, :focus": {
-      color: "grey.900",
-      border: "1px solid",
-      borderColor: "grey.900",
-      backgroundColor: "transparent",
-    },
+    // "&:hover, :active, :focus": {
+    //   color: "grey.900",
+    //   border: "1px solid",
+    //   borderColor: "grey.900",
+    //   backgroundColor: "transparent",
+    // },
   },
   inActive: {
     px: 1,
@@ -113,12 +113,12 @@ const variants = {
     fontSize: "1.2rem",
     outline: 0,
     height: "3rem",
-    "&:hover, :active, :focus": {
-      color: "white !important",
-      border: "1px solid",
-      borderColor: "grey.900",
-      backgroundColor: "grey.900",
-    },
+    // "&:hover, :active, :focus": {
+    //   color: "white !important",
+    //   border: "1px solid",
+    //   borderColor: "grey.900",
+    //   backgroundColor: "grey.900",
+    // },
   },
 };
 

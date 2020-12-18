@@ -53,6 +53,13 @@ a {
     }
   }
 }
+.MuiPaper-root.MuiPopover-paper.MuiPaper-elevation8.MuiPaper-rounded {
+  border-radius: 0px !important;
+  border: 1px solid #DCE9F1;
+}
+.search-container input {
+  max-width: 12rem 
+}
 
 `;
 export default GlobalStyle;

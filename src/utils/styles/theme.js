@@ -80,40 +80,34 @@ export const fontSets = [
   {
     name: "body",
     fontSize: "1.4rem",
-    // lineHeight: "1.4rem",
     fontWeight: "normal",
   },
   {
     name: "small",
     alias: "displaySm",
     fontSize: "1.2rem",
-    // lineHeight: "1.2rem",
     fontWeight: "normal",
   },
 
   {
     name: "headingBold",
     fontSize: "2.8rem",
-    // lineHeight: "2.8rem",
     fontWeight: "bold",
   },
   {
     name: "titleBold",
     fontSize: "1.8rem",
-    // lineHeight: "1.8rem",
     fontWeight: "bold",
   },
 
   {
     name: "bigBody",
     fontSize: "1.6rem",
-    // lineHeight: "1.6rem",
     fontWeight: "normal",
   },
   {
     name: "bigBodyBold",
     fontSize: "1.6rem",
-    // lineHeight: "1.6rem",
     fontWeight: "bold",
   },
   {
@@ -125,7 +119,6 @@ export const fontSets = [
   {
     name: "smallBold",
     fontSize: "1.2rem",
-    // lineHeight: "1.2rem",
     fontWeight: "bold",
   },
   {
