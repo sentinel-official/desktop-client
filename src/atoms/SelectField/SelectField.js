@@ -80,13 +80,7 @@ export const SelectField = ({
               ...provided,
               overflow: "visible",
             }),
-            // placeholder: (provided, state) => ({
-            //   ...provided,
-            //   fontSize: "14px",
-            //   paddingLeft: 2,
-            //   paddingRight: 2,
-            //   whiteSpace: "nowrap",
-            // }),
+
             loadingIndicator: (provided) => ({
               ...provided,
               position: "relative",

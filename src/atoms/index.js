@@ -8,3 +8,5 @@ export * from "./Image";
 export * from "./Button";
 export * from "./Image";
 export * from "./CustomNavLink";
+export * from "./Modal";
+export * from "./ModalClose";
