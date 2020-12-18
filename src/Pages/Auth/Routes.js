@@ -1,11 +1,12 @@
-import React, { Suspense } from "react";
+import React, { Suspense }         from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
-import { LandingPage } from "pages/LandingPage";
-import { CreateAccount } from "pages/CreateAccount";
-import { Login } from "pages/Login";
-import { Test } from "pages/Test";
-import { AccountCreated } from "pages/Auth/AccountCreated";
-import { ConfigureSetting } from "pages/ConfigureSetting";
+
+import { LandingPage       } from "pages/LandingPage";
+import { CreateAccount     } from "pages/CreateAccount";
+import { Login             } from "pages/Login";
+import { AccountCreated    } from "pages/Auth/AccountCreated";
+import { ConfigureSetting  } from "pages/ConfigureSetting";
+
 import Dashboard from "pages/Dashboard";
 // import { Loader } from "atoms";
 
@@ -13,11 +14,10 @@ export const UnauthenticatedRoutes = () => {
   return (
     <Suspense>
       <Switch>
-        <Route exact path="/" component={LandingPage} />
-        <Route path="/login" component={Login} />
-        <Route exact to="/create-account" component={CreateAccount} />
-        <Route path="/test" component={Test} />
-        <Redirect to="/" />
+        <Route exact path="/landing" component={LandingPage} />
+        <Route exact path="/login" component={Login} />
+        <Route exact path="/create-account" component={CreateAccount} />
+        <Redirect to="/landing" />
       </Switch>
     </Suspense>
   );

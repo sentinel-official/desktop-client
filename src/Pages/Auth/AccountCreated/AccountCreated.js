@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom";
+
 import { SentinelIntro } from "molecules/SentinelIntro";
 import { Box, Grid, Text, Flex, Button } from "atoms";
 import { SocialSecion } from "molecules/SocialSecion";
 import { AccountDetails } from "templates/AccountDetails/AccountDetails";
+
 import MemoAccept from "assets/icons/Accept";
 // import { MinimiseSection } from "molecules/MinimiseSection";
 
