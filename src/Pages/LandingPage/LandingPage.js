@@ -1,7 +1,12 @@
+import { useState, useEffect } from 'react';
+import { useHistory } from "react-router-dom";
+
 import styled from "styled-components";
-import { Box, Grid, Text } from "atoms";
 import ProgressBar from "@ramonak/react-progress-bar";
+
+import { Box, Grid, Text } from "atoms";
 // import hexToRgba from "hex-to-rgba";
+
 import MemoLogo from "assets/icons/Logo";
 import MemoSentinel from "assets/icons/Sentinel";
 
@@ -16,6 +21,24 @@ const StyledProgress = styled(Box)`
 `;
 
 export const LandingPage = () => {
+  let history = useHistory();
+  const [progressCount, setProgressCount] = useState(0)
+
+  useEffect(() => {
+    setTimeout( () => { 
+      history.push("/login");
+    }, 1000);
+
+  },[])
+
+  useEffect(() => {
+    let value = progressCount;
+    for(let i = 1; i <= 4; i++) {
+      value = i * 25
+      setProgressCount(value)
+    }
+  })
+
   return (
     <BoxStyle width="100vw" height="100vh">
       <Grid justifyContent="center" alignItems="center" height="100vh">
@@ -55,7 +78,7 @@ export const LandingPage = () => {
           height="0.8rem"
           borderRadius="0px"
           baseBgColor="#143f6b"
-          completed={80}
+          completed={progressCount}
         />
       </StyledProgress>
     </BoxStyle>
