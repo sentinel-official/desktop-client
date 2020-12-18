@@ -126,15 +126,7 @@ const ValidatorTable = () => {
             UPTIME
           </Text>
         </Box>
-        <Box py={4}>
-          <Text
-            color="text.500"
-            fontWeight="medium"
-            fontSize="1.3rem"
-            textTransform="uppercase"
-            visiblity="hidden"
-          ></Text>
-        </Box>
+        <Box py={4} />
       </Grid>
 
       <Grid gridGap="1rem">
@@ -190,7 +182,7 @@ export const WalletDetails = () => {
           <Flex>
             <Button
               variant={visibleValidatorList ? "secondary" : "normal"}
-              px="3rem"
+              px="2rem"
               justifySelf="center"
               type="submit"
               textTransform="capitalize"
@@ -200,7 +192,7 @@ export const WalletDetails = () => {
             </Button>
             <Button
               variant={visibleProposal ? "secondary" : "normal"}
-              px="3rem"
+              px="2rem"
               justifySelf="center"
               type="submit"
               textTransform="capitalize"
@@ -209,11 +201,33 @@ export const WalletDetails = () => {
               Proposals
             </Button>
           </Flex>
-          <SearchField
-            placeholder="Search"
-            onChange={onChangeHandler}
-            classNames="search-container"
-          />
+          <Flex alignItems="center">
+            <Button
+              variant="active"
+              textVariant="label"
+              px="1rem"
+              justifySelf="center"
+              type="submit"
+              textTransform="capitalize"
+            >
+              Active
+            </Button>
+            <Button
+              variant="inActive"
+              textVariant="label"
+              px="1rem"
+              justifySelf="center"
+              type="submit"
+              textTransform="capitalize"
+            >
+              InActive
+            </Button>
+            <SearchField
+              placeholder="Search"
+              onChange={onChangeHandler}
+              classNames="search-container"
+            />
+          </Flex>
         </Grid>
       </Box>
       {visibleValidatorList ? (

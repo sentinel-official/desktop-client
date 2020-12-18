@@ -82,6 +82,44 @@ const variants = {
       borderBottomColor: "primary.500",
     },
   },
+  active: {
+    px: 1,
+    py: 1,
+    color: "white ",
+    fontWeight: "500",
+    backgroundColor: "grey.900",
+    border: "1px solid",
+    borderColor: "grey.900",
+    fontFamily: "Roboto",
+    fontSize: "1.2rem",
+    outline: 0,
+    height: "3rem",
+    "&:hover, :active, :focus": {
+      color: "grey.900",
+      border: "1px solid",
+      borderColor: "grey.900",
+      backgroundColor: "transparent",
+    },
+  },
+  inActive: {
+    px: 1,
+    py: 1,
+    color: "#252E40 !important",
+    border: "1px solid",
+    borderColor: "grey.900",
+    backgroundColor: "transparent",
+    fontWeight: "500",
+    fontFamily: "Roboto",
+    fontSize: "1.2rem",
+    outline: 0,
+    height: "3rem",
+    "&:hover, :active, :focus": {
+      color: "white !important",
+      border: "1px solid",
+      borderColor: "grey.900",
+      backgroundColor: "grey.900",
+    },
+  },
 };
 
 export const Container = styled(Box)`
@@ -117,6 +155,7 @@ export const Button = ({
   loading,
   children,
   textTransform,
+  textVariant,
   variant: v = "primary",
   ...rest
 }) => {
@@ -146,7 +185,7 @@ export const Button = ({
       )} */}
       <Text
         // color="inherit"
-        variant="button"
+        variant={textVariant}
         textTransform={textTransform}
         opacity={loading ? 0 : 1}
       >
@@ -158,4 +197,5 @@ export const Button = ({
 
 Button.defaultProps = {
   textTransform: "uppercase",
+  textVariant: "button",
 };
