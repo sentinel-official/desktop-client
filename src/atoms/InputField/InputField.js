@@ -2,7 +2,7 @@ import React, { useRef } from "react";
 import styled from "styled-components";
 
 import { Box } from "../Box";
-// import { Text } from "../Text";
+import { Text } from "../Text";
 // import { Error } from "../Error";
 // import { Warning } from "../Warning";
 import { Input } from "../Input";
@@ -22,6 +22,8 @@ export const InputField = ({
   warning,
   labelHide,
   showLength,
+
+  maxValue,
   ...props
 }) => {
   const ref = useRef(null);
@@ -49,6 +51,21 @@ export const InputField = ({
           {ref?.current?.value?.length || 0} / {props.maxLength}
         </Text>
       )} */}
+      {maxValue && (
+        <Text
+          fontSize="1.6rem"
+          position="absolute"
+          bg="grey.600"
+          fontWeight="medium"
+          color="grey.900"
+          right="0rem"
+          pr="2rem"
+          pl="1rem"
+          bottom="1rem"
+        >
+          {maxValue}
+        </Text>
+      )}
       {/* {error && <Error text={error} />}
       {warning && <Warning text={warning} />} */}
     </InputFieldBase>

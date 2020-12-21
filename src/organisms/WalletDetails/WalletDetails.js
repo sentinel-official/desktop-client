@@ -7,9 +7,8 @@ import { Validators } from "./Validators";
 import MemoArrowBottom from "assets/icons/ArrowBottom";
 import { DropdownFilter } from "molecules/DropdownFilter";
 
-export const ShowPopup = ({ index }) => {
+export const ShowPopup = () => {
   const [dropdown, setDropdown] = useState(false);
-
   return (
     <DropdownFilter
       render={
@@ -110,7 +109,7 @@ export const WalletDetails = () => {
         >
           <Flex>
             <Button
-              variant={visibleValidatorList ? "secondary" : "normal"}
+              variant={visibleValidatorList ? "greyBorder" : "normal"}
               px="2rem"
               justifySelf="center"
               type="submit"
@@ -120,7 +119,7 @@ export const WalletDetails = () => {
               Validators List
             </Button>
             <Button
-              variant={visibleProposal ? "secondary" : "normal"}
+              variant={visibleProposal ? "greyBorder" : "normal"}
               px="2rem"
               justifySelf="center"
               type="submit"

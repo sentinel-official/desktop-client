@@ -101,7 +101,7 @@ const ProposalDetails = () => {
         mt="2rem"
       >
         <Button
-          variant="secondary"
+          variant="greyBorder"
           textVariant="label"
           px="2rem"
           justifySelf="center"
@@ -112,7 +112,7 @@ const ProposalDetails = () => {
           Yes
         </Button>
         <Button
-          variant="secondary"
+          variant="greyBorder"
           textVariant="label"
           px="2rem"
           justifySelf="center"
@@ -122,7 +122,7 @@ const ProposalDetails = () => {
           No
         </Button>
         <Button
-          variant="secondary"
+          variant="greyBorder"
           textVariant="label"
           px="2rem"
           justifySelf="center"
@@ -132,7 +132,7 @@ const ProposalDetails = () => {
           Abstain
         </Button>
         <Button
-          variant="secondary"
+          variant="greyBorder"
           textVariant="label"
           px="2rem"
           justifySelf="center"
@@ -340,7 +340,7 @@ const ProposalsList = ({ index }) => {
         </Flex>
 
         <Button
-          variant="secondary"
+          variant="greyBorder"
           textVariant="label"
           px="2rem"
           justifySelf="center"

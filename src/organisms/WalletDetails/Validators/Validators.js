@@ -239,7 +239,7 @@ const ValidatorsList = ({ index }) => {
                           Go to Explorer
                         </Text>
                         <Button
-                          variant="primary1"
+                          variant="secondary"
                           px="3rem"
                           justifySelf="center"
                           onClick={hide}

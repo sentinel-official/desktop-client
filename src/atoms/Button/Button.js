@@ -33,7 +33,7 @@ const variants = {
       outline: 0,
     },
   },
-  primary1: {
+  secondary: {
     color: "#129EED !important",
     px: 7,
     py: 4,
@@ -54,7 +54,7 @@ const variants = {
     },
   },
 
-  secondary: {
+  greyBorder: {
     px: 7,
     py: 4,
     color: "#142D51 !important",

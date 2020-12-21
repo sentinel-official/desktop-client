@@ -10,7 +10,6 @@ export const Popover = styled(MPopover)(
   css({
     top: "1rem !important",
     ".MuiPaper-root.MuiPopover-paper.MuiPaper-elevation8.MuiPaper-rounded": {
-      borderRadius: "11px",
       boxShadow: "0px 0px 22px rgba(196, 196, 196, 0.3)",
     },
   })

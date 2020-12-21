@@ -54,7 +54,12 @@ export const SendTokenForm = () => {
                 >
                   Amount
                 </Text>
-                <FormInput type="text" name="amount" label="Total Amount" />
+                <FormInput
+                  type="text"
+                  name="amount"
+                  label="Total Amount"
+                  maxValue="Max"
+                />
                 <ErrorMessage name="name" component={Error} />
               </Box>
               <Flex justifySelf="center">
