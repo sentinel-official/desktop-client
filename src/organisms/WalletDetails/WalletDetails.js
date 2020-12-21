@@ -69,6 +69,8 @@ export const ShowPopup = () => {
 export const WalletDetails = () => {
   const [visibleValidatorList, setVisibleValidatorList] = useState(true);
   const [visibleProposal, setVisibleProposal] = useState(false);
+  const [visibleActive, setVisibleActive] = useState(true);
+  const [visibleInActive, setVisibleInActive] = useState(false);
 
   const ValidatorListHandler = () => {
     setVisibleValidatorList(true);
@@ -79,6 +81,16 @@ export const WalletDetails = () => {
     setVisibleProposal(true);
   };
   const onChangeHandler = () => {};
+
+  const activeValidatorsHandler = () => {
+    setVisibleActive(true);
+    setVisibleInActive(false);
+  };
+  const inActiveValidatorsHandler = () => {
+    setVisibleInActive(true);
+    setVisibleActive(false);
+  };
+
   return (
     <Box pt="5rem" px="3rem">
       <Text
@@ -140,22 +152,24 @@ export const WalletDetails = () => {
               <>
                 <Flex>
                   <Button
-                    variant="active"
+                    variant={visibleActive ? "active" : "inActive"}
                     textVariant="label"
                     px="1rem"
                     justifySelf="center"
                     type="submit"
                     textTransform="capitalize"
+                    onClick={activeValidatorsHandler}
                   >
                     Active
                   </Button>
                   <Button
-                    variant="inActive"
+                    variant={visibleActive ? "inActive" : "active"}
                     textVariant="label"
                     px="1rem"
                     justifySelf="center"
                     type="submit"
                     textTransform="capitalize"
+                    onClick={inActiveValidatorsHandler}
                   >
                     InActive
                   </Button>

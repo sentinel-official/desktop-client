@@ -55,10 +55,18 @@ a {
 }
 .MuiPaper-root.MuiPopover-paper.MuiPaper-elevation8.MuiPaper-rounded {
   border-radius: 0px !important;
-  /* border: 1px solid #DCE9F1; */
 }
 .search-container input {
   max-width: 12rem 
+}
+
+.react-select-custom  ::-webkit-scrollbar {
+  width: .5rem;
+}
+ 
+.react-select-custom ::-webkit-scrollbar-track {}
+.react-select-custom ::-webkit-scrollbar-thumb {
+  background-color: #129EED;
 }
 
 `;

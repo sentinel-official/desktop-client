@@ -27,6 +27,10 @@ const ValidatorsList = ({ index }) => {
   const delegatehandler = () => {
     setDelegate(true);
   };
+  const onCloseDelegate = () => {
+    hide();
+    setDelegate(false);
+  };
   return (
     <>
       <Grid
@@ -242,7 +246,7 @@ const ValidatorsList = ({ index }) => {
                           variant="secondary"
                           px="3rem"
                           justifySelf="center"
-                          onClick={hide}
+                          onClick={onCloseDelegate}
                         >
                           Close
                         </Button>

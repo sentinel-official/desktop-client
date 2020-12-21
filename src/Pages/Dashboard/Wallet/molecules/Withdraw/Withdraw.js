@@ -22,6 +22,80 @@ const onSubmit = (values, submitProps) => {
 const WithdrawForm = () => {
   const { visible, hide, toggle } = useVisibleState(false);
   const [formValues, setFormValues] = useState(null);
+
+  const options = [
+    {
+      value: "forbole",
+      label: "Forbole",
+      customAbbreviation: "cosmosvaloper14kn",
+    },
+    {
+      value: "cat",
+      label: "Big Cat",
+      customAbbreviation: "kk33szpwus9nh8n87fj",
+    },
+    {
+      value: "abc",
+      label: "ABC",
+      customAbbreviation: "osvaloper14kn0kk33szpwus9",
+    },
+    {
+      value: "sdfs",
+      label: "Danfvkfjs",
+      customAbbreviation: "cosmosvaloper14kn",
+    },
+    {
+      value: "bamm",
+      label: "Bamm",
+      customAbbreviation: "kk33szpwus9nh8n87fj",
+    },
+    {
+      value: "cutting",
+      label: "Cutting",
+      customAbbreviation: "osvaloper14kn0kk33szpwus9",
+    },
+    {
+      value: "sdfs",
+      label: "AHdfvkfjs",
+      customAbbreviation: "cosmosvaloper14kn",
+    },
+    {
+      value: "bamm",
+      label: "Bamm ",
+      customAbbreviation: "kk33szpwus9nh8n87fj",
+    },
+    {
+      value: "cutting",
+      label: "Cutting",
+      customAbbreviation: "osvaloper14kn0kk33szpwus9",
+    },
+    {
+      value: "sdfs",
+      label: "Hdfvkfjs",
+      customAbbreviation: "cosmosvaloper14kn",
+    },
+    {
+      value: "bamm",
+      label: "Bamm",
+      customAbbreviation: "kk33szpwus9nh8n87fj",
+    },
+    {
+      value: "cutting",
+      label: "Cutting",
+      customAbbreviation: "osvaloper14kn0kk33szpwus9",
+    },
+  ];
+
+  const formatOptionLabel = ({ value, label, customAbbreviation }) => (
+    <Grid gridAutoFlow="column" gridGap="4rem" justifyContent="space-between">
+      <Text variant="label" fontWeight="medium" color="text.500">
+        {label}
+      </Text>
+      <Text variant="small" fontWeight="medium" color="primary.700">
+        {customAbbreviation}
+      </Text>
+    </Grid>
+  );
   return (
     <>
       <Formik
@@ -44,7 +118,12 @@ const WithdrawForm = () => {
                   SELECT VALIDATOR TO WITHDRAW
                 </Text>
 
-                <FormSelect name="validator" option={[]} />
+                <FormSelect
+                  name="validator"
+                  formatOptionLabel={formatOptionLabel}
+                  options={options}
+                  searchable
+                />
                 <ErrorMessage name="name" component={Error} />
               </Box>
               <Flex justifySelf="center">
