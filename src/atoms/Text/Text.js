@@ -12,5 +12,5 @@ export const Text = forwardRef(({ as, children, ...rest }, ref) => {
 Text.defaultProps = {
   as: "div",
   children: "",
-  color: "gray.900",
+  // color: "gray.900",
 };

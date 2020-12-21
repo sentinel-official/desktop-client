@@ -8,9 +8,7 @@ export const Wallet = () => {
       <Box border="1px solid" borderColor="border.500">
         <Token />
       </Box>
-      <Box>
-        <WalletDetails />
-      </Box>
+      <WalletDetails />
     </Grid>
   );
 };

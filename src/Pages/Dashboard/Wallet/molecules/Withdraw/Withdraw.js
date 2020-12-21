@@ -82,7 +82,6 @@ const WithdrawForm = () => {
                       variant="body"
                       fontWeight="medium"
                       color="primary.500"
-                      textTransform="uppercase"
                       mr="1rem"
                     >
                       Forbole

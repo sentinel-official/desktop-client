@@ -28,13 +28,32 @@ const variants = {
     h3: {
       textTransform: "uppercase",
     },
-    "&:hover": {
-      transform: "scale(1.004)",
-    },
+    "&:hover": {},
     "&:focus": {
       outline: 0,
     },
   },
+  primary1: {
+    color: "#129EED !important",
+    px: 7,
+    py: 4,
+    backgroundColor: "transparent",
+    transition: "all 0.3s",
+    border: "1px solid",
+    borderColor: "primary.500",
+    fontWeight: 500,
+    letterSpacing: 0.4,
+    borderRadius: "3rem",
+    fontFamily: "Roboto",
+    h3: {
+      textTransform: "uppercase",
+    },
+    "&:hover": {},
+    "&:focus": {
+      outline: 0,
+    },
+  },
+
   secondary: {
     px: 7,
     py: 4,
@@ -184,7 +203,7 @@ export const Button = ({
         </Flex>
       )} */}
       <Text
-        // color="inherit"
+        color="inherit"
         variant={textVariant}
         textTransform={textTransform}
         opacity={loading ? 0 : 1}
