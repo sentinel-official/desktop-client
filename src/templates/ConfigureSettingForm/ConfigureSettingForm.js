@@ -1,10 +1,12 @@
-import { Text, Box, Grid, Flex, Error } from "atoms";
+import { Link } from "react-router-dom";
 import { Formik, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { useState } from "react";
+
+import { Text, Box, Grid, Flex, Error, Button, Chip } from "atoms";
 import { FormInput } from "molecules/FormInput/FormInput";
 import MemoHelp from "assets/icons/Help";
-import { Chip } from "../../atoms/Chip";
+import { SocialSecion } from "molecules/SocialSecion";
 
 const initialValues = {
   password: "",
@@ -21,13 +23,7 @@ const onSubmit = (values, submitProps) => {
 export const ConfigureSettingForm = () => {
   const [formValues, setFormValues] = useState(null);
   return (
-    <Grid
-      gridTemplateColumns="8rem 4fr 8rem"
-      gridGap="5rem"
-      alignItems="center"
-    >
-      <Box />
-
+    <Box>
       <Formik
         initialValues={formValues || initialValues}
         validationSchema={validationSchema}
@@ -37,128 +33,163 @@ export const ConfigureSettingForm = () => {
         {(formik) => {
           return (
             <Form>
-              <Text
-                as="h3"
-                variant="heading3"
-                color="primary.700"
-                textAlign="center"
-              >
-                Configure Settings
-              </Text>
-              <Grid gridTemplateColumns="1fr 1fr">
-                <Box mt="5rem">
-                  <Flex alignItems="center" mb="1rem">
+              <Grid gridTemplateRows="94vh 6vh">
+                <Grid
+                  gridTemplateColumns="8rem 4fr 8rem"
+                  gridGap="5rem"
+                  alignItems="center"
+                >
+                  <Box />
+                  <Box>
                     <Text
-                      variant="label"
-                      fontWeight="medium"
-                      color="grey.700"
-                      textTransform="uppercase"
-                      mr=".5rem"
+                      as="h3"
+                      variant="heading3"
+                      color="primary.700"
+                      textAlign="center"
                     >
-                      Broadcast mode
+                      Configure Settings
                     </Text>
-                    <MemoHelp height="1.3rem" width="1.3rem" />
-                  </Flex>
+                    <Grid gridTemplateColumns="1fr 1fr">
+                      <Box mt="5rem">
+                        <Flex alignItems="center" mb="1rem">
+                          <Text
+                            variant="label"
+                            fontWeight="medium"
+                            color="grey.700"
+                            textTransform="uppercase"
+                            mr=".5rem"
+                          >
+                            Broadcast mode
+                          </Text>
+                          <MemoHelp height="1.3rem" width="1.3rem" />
+                        </Flex>
+                        <Grid
+                          gridAutoFlow="column"
+                          justifyContent="start"
+                          gridGap="1rem"
+                          mb="2rem"
+                        >
+                          <Chip variant="selected" text="Block" />
+                          <Chip variant="primary" text="Sync" />
+                          <Chip variant="primary" text="Async" />
+                        </Grid>
+
+                        <Flex alignItems="center" mb="1rem">
+                          <Text
+                            variant="label"
+                            fontWeight="medium"
+                            color="grey.700"
+                            textTransform="uppercase"
+                            mr=".5rem"
+                          >
+                            Fee
+                          </Text>
+                          <MemoHelp height="1.3rem" width="1.3rem" />
+                        </Flex>
+                        <FormInput name="fee" label="Enter Fee" />
+                        <ErrorMessage name="name" component={Error} />
+
+                        <Flex alignItems="center" mb="1rem">
+                          <Text
+                            variant="label"
+                            fontWeight="medium"
+                            color="grey.700"
+                            textTransform="uppercase"
+                            mr=".5rem"
+                          >
+                            Gas
+                          </Text>
+                          <MemoHelp height="1.3rem" width="1.3rem" />
+                        </Flex>
+                        <FormInput name="gas" label="Enter Gas Amount" />
+                        <ErrorMessage name="name" component={Error} />
+                      </Box>
+                      <Box px="3rem" mt="5rem">
+                        <Flex alignItems="center" mb="1rem">
+                          <Text
+                            variant="label"
+                            fontWeight="medium"
+                            color="grey.700"
+                            textTransform="uppercase"
+                            mr=".5rem"
+                          >
+                            Chain ID
+                          </Text>
+                          <MemoHelp height="1.3rem" width="1.3rem" />
+                        </Flex>
+                        <FormInput name="chain_id" label="Chain Id" />
+                        <ErrorMessage name="name" component={Error} />
+
+                        <Flex alignItems="center" mb="1rem">
+                          <Text
+                            variant="label"
+                            fontWeight="medium"
+                            color="grey.700"
+                            textTransform="uppercase"
+                            mr=".5rem"
+                          >
+                            Trust RPC Server
+                          </Text>
+                          <MemoHelp height="1.3rem" width="1.3rem" />
+                        </Flex>
+                        <Grid
+                          gridAutoFlow="column"
+                          gridGap="1rem"
+                          mb="2rem"
+                          justifyContent="start"
+                        >
+                          <Chip variant="selected" text="Yes" />
+                          <Chip variant="primary" text="No" />
+                        </Grid>
+
+                        <Flex alignItems="center" mb="1rem">
+                          <Text
+                            variant="label"
+                            fontWeight="medium"
+                            color="grey.700"
+                            textTransform="uppercase"
+                            mr=".5rem"
+                          >
+                            RPC Server Address
+                          </Text>
+                          <MemoHelp height="1.3rem" width="1.3rem" />
+                        </Flex>
+                        <FormInput name="rpc_address" label="RPC Address" />
+                        <ErrorMessage name="name" component={Error} />
+                      </Box>
+                    </Grid>
+                  </Box>
+                </Grid>
+                <Box
+                  borderTop="1px solid "
+                  borderColor="border.0"
+                  alignSelf="end"
+                  p="1rem 2rem "
+                >
                   <Grid
                     gridAutoFlow="column"
-                    justifyContent="start"
-                    gridGap="1rem"
-                    mb="2rem"
+                    justifyContent="space-between"
+                    alignItems="center"
                   >
-                    <Chip variant="selected" text="Block" />
-                    <Chip variant="primary" text="Sync" />
-                    <Chip variant="primary" text="Async" />
+                    <SocialSecion />
+                    <Grid
+                      gridAutoFlow="column"
+                      gridGap="2rem"
+                      alignItems="center"
+                    >
+                      <Link to="/dashboard/wallet">
+                        <Button px="3rem" justifySelf="center" type="submit">
+                          Save
+                        </Button>
+                      </Link>
+                    </Grid>
                   </Grid>
-
-                  <Flex alignItems="center" mb="1rem">
-                    <Text
-                      variant="label"
-                      fontWeight="medium"
-                      color="grey.700"
-                      textTransform="uppercase"
-                      mr=".5rem"
-                    >
-                      Fee
-                    </Text>
-                    <MemoHelp height="1.3rem" width="1.3rem" />
-                  </Flex>
-                  <FormInput name="fee" label="Enter Fee" />
-                  <ErrorMessage name="name" component={Error} />
-
-                  <Flex alignItems="center" mb="1rem">
-                    <Text
-                      variant="label"
-                      fontWeight="medium"
-                      color="grey.700"
-                      textTransform="uppercase"
-                      mr=".5rem"
-                    >
-                      Gas
-                    </Text>
-                    <MemoHelp height="1.3rem" width="1.3rem" />
-                  </Flex>
-                  <FormInput name="gas" label="Enter Gas Amount" />
-                  <ErrorMessage name="name" component={Error} />
-                </Box>
-                <Box px="3rem" mt="5rem">
-                  <Flex alignItems="center" mb="1rem">
-                    <Text
-                      variant="label"
-                      fontWeight="medium"
-                      color="grey.700"
-                      textTransform="uppercase"
-                      mr=".5rem"
-                    >
-                      Chain ID
-                    </Text>
-                    <MemoHelp height="1.3rem" width="1.3rem" />
-                  </Flex>
-                  <FormInput name="chain_id" label="Chain Id" />
-                  <ErrorMessage name="name" component={Error} />
-
-                  <Flex alignItems="center" mb="1rem">
-                    <Text
-                      variant="label"
-                      fontWeight="medium"
-                      color="grey.700"
-                      textTransform="uppercase"
-                      mr=".5rem"
-                    >
-                      Trust RPC Server
-                    </Text>
-                    <MemoHelp height="1.3rem" width="1.3rem" />
-                  </Flex>
-                  <Grid
-                    gridAutoFlow="column"
-                    gridGap="1rem"
-                    mb="2rem"
-                    justifyContent="start"
-                  >
-                    <Chip variant="selected" text="Yes" />
-                    <Chip variant="primary" text="No" />
-                  </Grid>
-
-                  <Flex alignItems="center" mb="1rem">
-                    <Text
-                      variant="label"
-                      fontWeight="medium"
-                      color="grey.700"
-                      textTransform="uppercase"
-                      mr=".5rem"
-                    >
-                      RPC Server Address
-                    </Text>
-                    <MemoHelp height="1.3rem" width="1.3rem" />
-                  </Flex>
-                  <FormInput name="rpc_address" label="RPC Address" />
-                  <ErrorMessage name="name" component={Error} />
                 </Box>
               </Grid>
             </Form>
           );
         }}
       </Formik>
-      <Box />
-    </Grid>
+    </Box>
   );
 };
