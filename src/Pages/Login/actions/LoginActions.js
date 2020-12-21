@@ -10,6 +10,7 @@ import {
     LoginActionTypes,
     POST_LOGIN_API,
 } from '../constants/index';
+import axios from 'axios';
 import { handleLoginRedirect, TOKEN_EXPIRY_MESSAGE } from '../../../utils/utility';
 
 
@@ -21,13 +22,12 @@ export const LoginUserAction = (postData) => {
     return dispatch => {
         dispatch(actionCreator(LoginActionTypes.post_Login.REQUEST));
         // use axios here rather than fetch
-        fetch(`${POST_LOGIN_API}`, {
-            method: 'POST',
-            body: JSON.stringify(postData),
+        axios.post(`${POST_LOGIN_API}`, {
+            postData,
             headers: jsonApiHeader(),
         })
-            .then(checkHttpStatus)
-            .then(function (response) {
+            .then(response => {
+                console.log('response -----', response);
                 // do some stuff here
             })
             .catch(function (error) {

@@ -1,23 +1,43 @@
-import { Text, Box, Grid, Error } from "atoms";
+import { useState } from "react";
+import { useSelector, useDispatch } from 'react-redux';
+import { Link } from "react-router-dom";
 import { Formik, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import { useState } from "react";
+
+import { Text, Box, Grid, Error, Button } from "atoms";
 import { FormInput } from "molecules/FormInput/FormInput";
+import { SocialSecion } from "molecules/SocialSecion";
+
+import { LoginUserAction } from '../../pages/Login/actions/LoginActions';
+
+
 
 const initialValues = {
   password: "",
 };
-const validationSchema = Yup.object({});
 
-const onSubmit = (values, submitProps) => {
-  console.log("Form data", values);
-  console.log("submitProps", submitProps);
-  submitProps.setSubmitting(false);
-  submitProps.resetForm();
-};
+const validationSchema = Yup.object({
+
+});
+
 
 export const LoginForm = () => {
   const [formValues, setFormValues] = useState(null);
+
+  const dispatch = useDispatch();
+  const loggedInUserDetails = useSelector((state) =>  console.log('state ----', state));
+
+  const onSubmit = (values, submitProps) => {
+    console.log("Form data", values);
+    console.log("submitProps", submitProps);
+    // submitProps.setSubmitting(false);
+    // submitProps.resetForm();
+    let payload = {
+      "password": values.password
+    }
+    dispatch(LoginUserAction(payload));
+  };
+
   return (
     <Grid
       gridTemplateColumns="1fr 1.8fr 1fr"
@@ -59,6 +79,25 @@ export const LoginForm = () => {
                   label="Enter Password"
                 />
                 <ErrorMessage name="name" component={Error} />
+              </Box>
+              <Box
+                borderTop="1px solid "
+                borderColor="border.0"
+                alignSelf="end"
+                p="1rem 2rem "
+              >
+                <Grid
+                  gridAutoFlow="column"
+                  justifyContent="space-between"
+                  alignItems="center"
+                >
+                  <SocialSecion />
+                  <Grid gridAutoFlow="column" gridGap="2rem" alignItems="center">
+                    <Button px="3rem" justifySelf="center" type="submit">
+                      Login
+                    </Button>
+                  </Grid>
+                </Grid>
               </Box>
             </Form>
           );

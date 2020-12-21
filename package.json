@@ -42,6 +42,7 @@
     "web-vitals": "^1.0.1",
     "yup": "^0.32.8"
   },
+  "proxy": "http://127.0.0.1:8080",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",

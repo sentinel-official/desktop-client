@@ -17,7 +17,7 @@ export const UnauthenticatedRoutes = () => {
         <Route exact path="/landing" component={LandingPage} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/create-account" component={CreateAccount} />
-        <Redirect to="/landing" />
+        <Redirect to="/login" />
       </Switch>
     </Suspense>
   );

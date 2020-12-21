@@ -4,14 +4,16 @@ import { SentinelIntro } from "molecules/SentinelIntro";
 import { SocialSecion } from "molecules/SocialSecion";
 import { Link } from "react-router-dom";
 
+
 export const Login = () => {
+
   return (
     <Grid gridTemplateColumns="40rem 2.5fr">
       <SentinelIntro />
       <Grid>
         <Box height="2rem" />
         <LoginForm />
-        <Box
+        {/* <Box
           borderTop="1px solid "
           borderColor="border.0"
           alignSelf="end"
@@ -24,14 +26,12 @@ export const Login = () => {
           >
             <SocialSecion />
             <Grid gridAutoFlow="column" gridGap="2rem" alignItems="center">
-              <Link to="/configure-setting">
                 <Button px="3rem" justifySelf="center" type="submit">
                   Login
                 </Button>
-              </Link>
             </Grid>
           </Grid>
-        </Box>
+        </Box> */}
       </Grid>
     </Grid>
   );
