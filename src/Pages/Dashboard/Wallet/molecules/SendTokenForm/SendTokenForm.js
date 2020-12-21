@@ -22,16 +22,18 @@ const validationSchemaSendingTokenAddress = yup.object({
   password: yup.string().required("Required"),
 });
 
-const onSubmit = (values, submitProps) => {
-  console.log("Form data", values);
-  console.log("submitProps", submitProps);
-  submitProps.setSubmitting(false);
-  submitProps.resetForm();
-};
-
 export const SendTokenForm = () => {
   const { visible, hide, toggle } = useVisibleState(false);
   const [formValues, setFormValues] = useState(null);
+
+  const onSubmit = (values, submitProps) => {
+    console.log("Form data", values);
+    console.log("submitProps", submitProps);
+    submitProps.setSubmitting(false);
+    submitProps.resetForm();
+    toggle();
+  };
+
   return (
     <>
       <Formik
@@ -73,7 +75,7 @@ export const SendTokenForm = () => {
                 <ErrorMessage name="amount" component={Error} />
               </Box>
               <Flex justifySelf="center">
-                <Button px="3rem" m="auto" type="submit" onClick={toggle}>
+                <Button px="3rem" m="auto" type="submit">
                   Send
                 </Button>
               </Flex>
