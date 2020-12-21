@@ -2,22 +2,21 @@ import { Formik, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 
 import MemoProfile from "assets/icons/Profile";
-import { Box, Grid, Text, Flex, Modal, ModalClose, Button } from "atoms";
+import { Box, Grid, Text, Flex, Modal, Error, ModalClose, Button } from "atoms";
 import { useState } from "react";
 import useVisibleState from "hooks/useVisibleStates";
 import MemoHelp from "assets/icons/Help";
 import { FormInput } from "molecules/FormInput";
 import MemoCheck from "assets/icons/Check";
 
-const initialValues = {};
-const validationSchema = Yup.object({});
-
-const onSubmit = (values, submitProps) => {
-  console.log("Form data", values);
-  console.log("submitProps", submitProps);
-  submitProps.setSubmitting(false);
-  submitProps.resetForm();
+const initialValues = {
+  amount: "",
+  password: "",
 };
+const validationSchema = Yup.object({
+  amount: Yup.string().required("Required"),
+  password: Yup.string().required("Required"),
+});
 
 const ValidatorsList = ({ index }) => {
   const { visible, hide, toggle } = useVisibleState(false);
@@ -30,6 +29,14 @@ const ValidatorsList = ({ index }) => {
   const onCloseDelegate = () => {
     hide();
     setDelegate(false);
+  };
+
+  const onSubmit = (values, submitProps) => {
+    console.log("Form data", values);
+    console.log("submitProps", submitProps);
+    submitProps.setSubmitting(false);
+    submitProps.resetForm();
+    delegatehandler();
   };
   return (
     <>
@@ -167,39 +174,43 @@ const ValidatorsList = ({ index }) => {
 
                       <Form>
                         <Box my="2rem" mr="10rem">
-                          <Flex alignItems="center">
+                          <Box>
+                            <Flex alignItems="center">
+                              <Text
+                                variant="label"
+                                fontWeight="medium"
+                                color="grey.700"
+                                textTransform="uppercase"
+                                mr="1rem"
+                              >
+                                amount
+                              </Text>
+                              <MemoHelp height="1.5rem" width="1.5rem" />
+                            </Flex>
+                            <FormInput name="amount" label="Total Amount" />
+                            <ErrorMessage name="amount" component={Error} />
+                          </Box>
+                          <Box>
                             <Text
                               variant="label"
                               fontWeight="medium"
                               color="grey.700"
                               textTransform="uppercase"
-                              mr="1rem"
                             >
-                              amount
+                              PASSWORD
                             </Text>
-                            <MemoHelp height="1.5rem" width="1.5rem" />
-                          </Flex>
-                          <FormInput name="amount" label="Total Amount" />
-                          <ErrorMessage name="amount" component={Error} />
-                          <Text
-                            variant="label"
-                            fontWeight="medium"
-                            color="grey.700"
-                            textTransform="uppercase"
-                          >
-                            PASSWORD
-                          </Text>
-                          <FormInput
-                            type="password"
-                            name="password"
-                            label="Enter Password"
-                          />
-                          <ErrorMessage name="password" component={Error} />
+                            <FormInput
+                              type="password"
+                              name="password"
+                              label="Enter Password"
+                            />
+                            <ErrorMessage name="password" component={Error} />
+                          </Box>
                           <Button
                             px="8rem"
                             justifySelf="center"
                             type="submit"
-                            onClick={delegatehandler}
+                            // onClick={delegatehandler}
                           >
                             DELEGATE
                           </Button>

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { Formik, Form, ErrorMessage } from "formik";
-import * as Yup from "yup";
+import * as yup from "yup";
 
 import { Text, Box, Grid, Error, Button } from "atoms";
 import { FormInput } from "molecules/FormInput/FormInput";
@@ -14,7 +14,9 @@ const initialValues = {
   password: "",
 };
 
-const validationSchema = Yup.object({});
+const validationSchema = yup.object({
+  password: yup.string().required("Required"),
+});
 
 export const LoginForm = () => {
   const [formValues, setFormValues] = useState(null);
@@ -63,7 +65,7 @@ export const LoginForm = () => {
                       Authenticate Sentinel Client
                     </Text>
 
-                    <Box px="3rem" mt="5rem">
+                    <Box mx="3rem" mt="5rem">
                       <Text
                         variant="label"
                         fontWeight="medium"
@@ -77,7 +79,7 @@ export const LoginForm = () => {
                         name="password"
                         label="Enter Password"
                       />
-                      <ErrorMessage name="name" component={Error} />
+                      <ErrorMessage name="password" component={Error} />
                     </Box>
                   </Box>
                 </Grid>

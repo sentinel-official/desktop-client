@@ -2,8 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import ReactSelect, { components } from "react-select";
 
-import { Box } from "atoms/Box";
-import { Text } from "atoms/Text";
+import { Box, Text, Error } from "atoms";
+// import { Text } from "atoms/Text";
 // import { Error } from "atoms/Error";
 // import { Warning } from "atoms/Warning";
 
@@ -50,7 +50,7 @@ const CustomValueContainer = ({ children, ...props }) => {
 
 export const SelectField = ({
   label,
-  // error,
+  error,
   // warning,
   isSelected,
   searchable,
@@ -115,8 +115,8 @@ export const SelectField = ({
           </Box>
         )} */}
       </Text>
-      {/* {error && <Error text={error} />}
-      {warning && <Warning text={warning} />} */}
+      {/* {error && <Error text={error} />} */}
+      {/* {warning && <Warning text={warning} />} */}
     </InputFieldBase>
   );
 };

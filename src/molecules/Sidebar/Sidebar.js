@@ -11,6 +11,7 @@ import {
   CustomNavLink,
   Button,
   Modal,
+  Error,
   ModalClose,
 } from "atoms";
 import { FormInput } from "molecules/FormInput";
@@ -24,7 +25,6 @@ import MemoArrowRight from "assets/icons/ArrowRight";
 import useVisibleState from "hooks/useVisibleStates";
 import { DropdownFilter } from "molecules/DropdownFilter";
 import MemoSetting from "assets/icons/Setting";
-import MemoCheck from "assets/icons/Check";
 import MemoHelp from "assets/icons/Help";
 
 const sidebarLinks = [
@@ -45,8 +45,16 @@ const BoxStyle = styled(Box)`
   }
 `;
 
-const initialValues = {};
-const validationSchema = Yup.object({});
+const initialValues = {
+  chain_id: "",
+  rpc_server: "",
+  rpc_server_address: "",
+};
+const validationSchema = Yup.object({
+  chain_id: Yup.string().required("Required"),
+  rpc_server: Yup.string().required("Required"),
+  rpc_server_address: Yup.string().required("Required"),
+});
 
 const onSubmit = (values, submitProps) => {
   console.log("Form data", values);
@@ -162,61 +170,67 @@ export const MyAccountDropdown = ({ name }) => {
                     <Box ml="2rem">
                       <Form>
                         <Box my="2rem">
-                          <Flex alignItems="center">
-                            <Text
-                              variant="label"
-                              fontWeight="medium"
-                              color="grey.700"
-                              textTransform="uppercase"
-                              mr="1rem"
-                            >
-                              Chain ID
-                            </Text>
-                            <MemoHelp height="1.5rem" width="1.5rem" />
-                          </Flex>
-                          <FormInput
-                            name="amount"
-                            label="Enter Chain ID"
-                            width="100%"
-                          />
-                          <ErrorMessage name="amount" component={Error} />
-                          <Flex alignItems="center">
-                            <Text
-                              variant="label"
-                              fontWeight="medium"
-                              color="grey.700"
-                              textTransform="uppercase"
-                              mr="1rem"
-                            >
-                              Trust RPC Server
-                            </Text>
-                            <MemoHelp height="1.5rem" width="1.5rem" />
-                          </Flex>
-                          <FormInput
-                            name="rpc_server"
-                            label="Enter Trust RPC Server"
-                          />
-                          <ErrorMessage name="rpc_server" component={Error} />
-                          <Flex alignItems="center">
-                            <Text
-                              variant="label"
-                              fontWeight="medium"
-                              color="grey.700"
-                              textTransform="uppercase"
-                              mr="1rem"
-                            >
-                              RPC Server Address
-                            </Text>
-                            <MemoHelp height="1.5rem" width="1.5rem" />
-                          </Flex>
-                          <FormInput
-                            name="rpc_server"
-                            label="Enter RPC Server Address"
-                          />
-                          <ErrorMessage
-                            name="rpc_server_address"
-                            component={Error}
-                          />
+                          <Box>
+                            <Flex alignItems="center">
+                              <Text
+                                variant="label"
+                                fontWeight="medium"
+                                color="grey.700"
+                                textTransform="uppercase"
+                                mr="1rem"
+                              >
+                                Chain ID
+                              </Text>
+                              <MemoHelp height="1.5rem" width="1.5rem" />
+                            </Flex>
+                            <FormInput
+                              name="chain_id"
+                              label="Enter Chain ID"
+                              width="100%"
+                            />
+                            <ErrorMessage name="chain_id" component={Error} />
+                          </Box>
+                          <Box>
+                            <Flex alignItems="center">
+                              <Text
+                                variant="label"
+                                fontWeight="medium"
+                                color="grey.700"
+                                textTransform="uppercase"
+                                mr="1rem"
+                              >
+                                Trust RPC Server
+                              </Text>
+                              <MemoHelp height="1.5rem" width="1.5rem" />
+                            </Flex>
+                            <FormInput
+                              name="rpc_server"
+                              label="Enter Trust RPC Server"
+                            />
+                            <ErrorMessage name="rpc_server" component={Error} />
+                          </Box>
+                          <Box>
+                            <Flex alignItems="center">
+                              <Text
+                                variant="label"
+                                fontWeight="medium"
+                                color="grey.700"
+                                textTransform="uppercase"
+                                mr="1rem"
+                              >
+                                RPC Server Address
+                              </Text>
+                              <MemoHelp height="1.5rem" width="1.5rem" />
+                            </Flex>
+                            <FormInput
+                              name="rpc_server_address"
+                              label="Enter RPC Server Address"
+                            />
+                            <ErrorMessage
+                              name="rpc_server_address"
+                              component={Error}
+                            />
+                          </Box>
                           <Button px="8rem" justifySelf="center" type="submit">
                             SAVE
                           </Button>

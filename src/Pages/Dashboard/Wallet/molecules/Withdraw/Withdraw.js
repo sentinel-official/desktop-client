@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Formik, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 
-import { Box, Text, Flex, Grid, Button, Modal, ModalClose } from "atoms";
+import { Box, Text, Flex, Grid, Button, Modal, Error, ModalClose } from "atoms";
 import { FormSelect, FormInput } from "molecules/FormInput/FormInput";
 import useVisibleState from "hooks/useVisibleStates";
 import MemoHelp from "assets/icons/Help";
@@ -10,14 +10,17 @@ import MemoHelp from "assets/icons/Help";
 const initialValues = {
   validator: "",
 };
-const validationSchema = Yup.object({});
-
-const onSubmit = (values, submitProps) => {
-  console.log("Form data", values);
-  console.log("submitProps", submitProps);
-  submitProps.setSubmitting(false);
-  submitProps.resetForm();
+const initialValuesModal = {
+  fee: "",
+  password: "",
 };
+const validationSchema = Yup.object({
+  validator: Yup.string().required("Required"),
+});
+const validationSchemaWithdrawing = Yup.object({
+  fee: Yup.string().required("Required"),
+  password: Yup.string().required("Required"),
+});
 
 const WithdrawForm = () => {
   const { visible, hide, toggle } = useVisibleState(false);
@@ -86,6 +89,13 @@ const WithdrawForm = () => {
     },
   ];
 
+  const onSubmit = (values, submitProps) => {
+    console.log("Form data", values);
+    console.log("submitProps", submitProps);
+    submitProps.setSubmitting(false);
+    submitProps.resetForm();
+    toggle();
+  };
   const formatOptionLabel = ({ value, label, customAbbreviation }) => (
     <Grid gridAutoFlow="column" gridGap="4rem" justifyContent="space-between">
       <Text variant="label" fontWeight="medium" color="text.500">
@@ -107,7 +117,7 @@ const WithdrawForm = () => {
         {() => {
           return (
             <Form>
-              <Box px="3rem" mt="2rem">
+              <Box mx="3rem" mt="2rem">
                 <Text
                   variant="label"
                   fontWeight="medium"
@@ -124,10 +134,10 @@ const WithdrawForm = () => {
                   options={options}
                   searchable
                 />
-                <ErrorMessage name="name" component={Error} />
+                <ErrorMessage name="validator" component={Error} />
               </Box>
               <Flex justifySelf="center">
-                <Button px="3rem" m="auto" type="submit" onClick={toggle}>
+                <Button px="3rem" m="auto" type="submit">
                   Withdraw
                 </Button>
               </Flex>
@@ -139,8 +149,8 @@ const WithdrawForm = () => {
         <Modal isOpen={visible} onRequestClose={hide} ariaHideApp={false}>
           <ModalClose onClick={hide} />
           <Formik
-            initialValues={formValues || initialValues}
-            validationSchema={validationSchema}
+            initialValues={formValues || initialValuesModal}
+            validationSchema={validationSchemaWithdrawing}
             onSubmit={onSubmit}
             enableReinitialize
           >
@@ -207,34 +217,38 @@ const WithdrawForm = () => {
 
                   <Form>
                     <Box my="2rem" mr="10rem">
-                      <Flex alignItems="center">
+                      <Box>
+                        <Flex alignItems="center">
+                          <Text
+                            variant="label"
+                            fontWeight="medium"
+                            color="grey.700"
+                            textTransform="uppercase"
+                            mr="1rem"
+                          >
+                            FEE
+                          </Text>
+                          <MemoHelp height="1.5rem" width="1.5rem" />
+                        </Flex>
+                        <FormInput name="fee" label="Enter Fee" />
+                        <ErrorMessage name="fee" component={Error} />
+                      </Box>
+                      <Box>
                         <Text
                           variant="label"
                           fontWeight="medium"
                           color="grey.700"
                           textTransform="uppercase"
-                          mr="1rem"
                         >
-                          FEE
+                          PASSWORD
                         </Text>
-                        <MemoHelp height="1.5rem" width="1.5rem" />
-                      </Flex>
-                      <FormInput name="fee" label="Enter Fee" />
-                      <ErrorMessage name="fee" component={Error} />
-                      <Text
-                        variant="label"
-                        fontWeight="medium"
-                        color="grey.700"
-                        textTransform="uppercase"
-                      >
-                        PASSWORD
-                      </Text>
-                      <FormInput
-                        type="password"
-                        name="password"
-                        label="Enter Password"
-                      />
-                      <ErrorMessage name="password" component={Error} />
+                        <FormInput
+                          type="password"
+                          name="password"
+                          label="Enter Password"
+                        />
+                        <ErrorMessage name="password" component={Error} />
+                      </Box>
                       <Button px="8rem" justifySelf="center" type="submit">
                         WITHDRAW
                       </Button>

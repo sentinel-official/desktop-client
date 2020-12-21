@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Formik, Form, ErrorMessage } from "formik";
-import * as Yup from "yup";
+import * as yup from "yup";
 
 import { Text, Box, Flex, Error, Grid, Button, Modal, ModalClose } from "atoms";
 import useVisibleState from "hooks/useVisibleStates";
@@ -8,9 +8,19 @@ import { FormInput } from "molecules/FormInput/FormInput";
 import MemoHelp from "assets/icons/Help";
 
 const initialValues = {
+  address: "",
+  amount: "",
+  fee: "",
   password: "",
 };
-const validationSchema = Yup.object({});
+const validationSchemaSendToken = yup.object({
+  address: yup.string().required("Required"),
+  amount: yup.string().required("Required"),
+});
+const validationSchemaSendingTokenAddress = yup.object({
+  fee: yup.string().required("Required"),
+  password: yup.string().required("Required"),
+});
 
 const onSubmit = (values, submitProps) => {
   console.log("Form data", values);
@@ -26,14 +36,14 @@ export const SendTokenForm = () => {
     <>
       <Formik
         initialValues={formValues || initialValues}
-        validationSchema={validationSchema}
+        validationSchema={validationSchemaSendToken}
         onSubmit={onSubmit}
         enableReinitialize
       >
         {() => {
           return (
             <Form>
-              <Box px="3rem" mt="3rem">
+              <Box mx="3rem" mt="3rem">
                 <Text
                   variant="label"
                   fontWeight="medium"
@@ -43,9 +53,9 @@ export const SendTokenForm = () => {
                   Deposit Address
                 </Text>
                 <FormInput type="text" name="address" label="Address" />
-                <ErrorMessage name="name" component={Error} />
+                <ErrorMessage name="address" component={Error} />
               </Box>
-              <Box px="3rem">
+              <Box mx="3rem">
                 <Text
                   variant="label"
                   fontWeight="medium"
@@ -60,7 +70,7 @@ export const SendTokenForm = () => {
                   label="Total Amount"
                   maxValue="Max"
                 />
-                <ErrorMessage name="name" component={Error} />
+                <ErrorMessage name="amount" component={Error} />
               </Box>
               <Flex justifySelf="center">
                 <Button px="3rem" m="auto" type="submit" onClick={toggle}>
@@ -76,7 +86,7 @@ export const SendTokenForm = () => {
           <ModalClose onClick={hide} />
           <Formik
             initialValues={formValues || initialValues}
-            validationSchema={validationSchema}
+            validationSchema={validationSchemaSendingTokenAddress}
             onSubmit={onSubmit}
             enableReinitialize
           >
@@ -135,34 +145,38 @@ export const SendTokenForm = () => {
 
                   <Form>
                     <Box my="2rem" mr="10rem">
-                      <Flex alignItems="center">
+                      <Box>
+                        <Flex alignItems="center">
+                          <Text
+                            variant="label"
+                            fontWeight="medium"
+                            color="grey.700"
+                            textTransform="uppercase"
+                            mr="1rem"
+                          >
+                            FEE
+                          </Text>
+                          <MemoHelp height="1.5rem" width="1.5rem" />
+                        </Flex>
+                        <FormInput name="fee" label="Enter Fee" />
+                        <ErrorMessage name="fee" component={Error} />
+                      </Box>
+                      <Box>
                         <Text
                           variant="label"
                           fontWeight="medium"
                           color="grey.700"
                           textTransform="uppercase"
-                          mr="1rem"
                         >
-                          FEE
+                          PASSWORD
                         </Text>
-                        <MemoHelp height="1.5rem" width="1.5rem" />
-                      </Flex>
-                      <FormInput name="fee" label="Enter Fee" />
-                      <ErrorMessage name="fee" component={Error} />
-                      <Text
-                        variant="label"
-                        fontWeight="medium"
-                        color="grey.700"
-                        textTransform="uppercase"
-                      >
-                        PASSWORD
-                      </Text>
-                      <FormInput
-                        type="password"
-                        name="password"
-                        label="Enter Password"
-                      />
-                      <ErrorMessage name="password" component={Error} />
+                        <FormInput
+                          type="password"
+                          name="password"
+                          label="Enter Password"
+                        />
+                        <ErrorMessage name="password" component={Error} />
+                      </Box>
                       <Button px="8rem" justifySelf="center" type="submit">
                         SEND
                       </Button>

@@ -11,7 +11,11 @@ const initialValues = {
   password: "",
   seed: "",
 };
-const validationSchema = Yup.object({});
+const validationSchema = Yup.object({
+  username: Yup.string().required("Required"),
+  password: Yup.string().required("Required"),
+  seed: Yup.string().required("Required"),
+});
 
 const onSubmit = (values, submitProps) => {
   console.log("Form data", values);
@@ -58,8 +62,8 @@ export const SignupForm = () => {
                       >
                         ACCOUNT NAME
                       </Text>
-                      <FormInput name="name" label="Account Username" />
-                      <ErrorMessage name="name" component={Error} />
+                      <FormInput name="username" label="Account Username" />
+                      <ErrorMessage name="username" component={Error} />
                     </Box>
                     <Box>
                       <Text
@@ -76,7 +80,7 @@ export const SignupForm = () => {
                         label="Password"
                       />
 
-                      <ErrorMessage name="name" component={Error} />
+                      <ErrorMessage name="password" component={Error} />
                     </Box>
                     <Box bg="border.500" height="1px" width="100%" mb="2rem" />
                     <Box>
@@ -95,7 +99,7 @@ export const SignupForm = () => {
                         label="Enter Seed"
                         style={{ resize: "none" }}
                       />
-                      <ErrorMessage name="name" component={Error} />
+                      <ErrorMessage name="seed" component={Error} />
                     </Box>
                   </Box>
                 </Grid>

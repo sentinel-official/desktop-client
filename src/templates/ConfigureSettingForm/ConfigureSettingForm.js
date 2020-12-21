@@ -9,9 +9,17 @@ import MemoHelp from "assets/icons/Help";
 import { SocialSecion } from "molecules/SocialSecion";
 
 const initialValues = {
-  password: "",
+  fee: "",
+  gas_amount: "",
+  chain_id: "",
+  rpc_address: "",
 };
-const validationSchema = Yup.object({});
+const validationSchema = Yup.object({
+  fee: Yup.string().required("Required"),
+  gas_amount: Yup.string().required("Required"),
+  chain_id: Yup.string().required("Required"),
+  rpc_address: Yup.string().required("Required"),
+});
 
 const onSubmit = (values, submitProps) => {
   console.log("Form data", values);
@@ -73,52 +81,59 @@ export const ConfigureSettingForm = () => {
                           <Chip variant="primary" text="Sync" />
                           <Chip variant="primary" text="Async" />
                         </Grid>
-
-                        <Flex alignItems="center" mb="1rem">
-                          <Text
-                            variant="label"
-                            fontWeight="medium"
-                            color="grey.700"
-                            textTransform="uppercase"
-                            mr=".5rem"
-                          >
-                            Fee
-                          </Text>
-                          <MemoHelp height="1.3rem" width="1.3rem" />
-                        </Flex>
-                        <FormInput name="fee" label="Enter Fee" />
-                        <ErrorMessage name="name" component={Error} />
-
-                        <Flex alignItems="center" mb="1rem">
-                          <Text
-                            variant="label"
-                            fontWeight="medium"
-                            color="grey.700"
-                            textTransform="uppercase"
-                            mr=".5rem"
-                          >
-                            Gas
-                          </Text>
-                          <MemoHelp height="1.3rem" width="1.3rem" />
-                        </Flex>
-                        <FormInput name="gas" label="Enter Gas Amount" />
-                        <ErrorMessage name="name" component={Error} />
+                        <Box>
+                          <Flex alignItems="center" mb="1rem">
+                            <Text
+                              variant="label"
+                              fontWeight="medium"
+                              color="grey.700"
+                              textTransform="uppercase"
+                              mr=".5rem"
+                            >
+                              Fee
+                            </Text>
+                            <MemoHelp height="1.3rem" width="1.3rem" />
+                          </Flex>
+                          <FormInput name="fee" label="Enter Fee" />
+                          <ErrorMessage name="fee" component={Error} />
+                        </Box>
+                        <Box>
+                          <Flex alignItems="center" mb="1rem">
+                            <Text
+                              variant="label"
+                              fontWeight="medium"
+                              color="grey.700"
+                              textTransform="uppercase"
+                              mr=".5rem"
+                            >
+                              Gas
+                            </Text>
+                            <MemoHelp height="1.3rem" width="1.3rem" />
+                          </Flex>
+                          <FormInput
+                            name="gas_amount"
+                            label="Enter Gas Amount"
+                          />
+                          <ErrorMessage name="gas_amount" component={Error} />
+                        </Box>
                       </Box>
                       <Box px="3rem" mt="5rem">
-                        <Flex alignItems="center" mb="1rem">
-                          <Text
-                            variant="label"
-                            fontWeight="medium"
-                            color="grey.700"
-                            textTransform="uppercase"
-                            mr=".5rem"
-                          >
-                            Chain ID
-                          </Text>
-                          <MemoHelp height="1.3rem" width="1.3rem" />
-                        </Flex>
-                        <FormInput name="chain_id" label="Chain Id" />
-                        <ErrorMessage name="name" component={Error} />
+                        <Box>
+                          <Flex alignItems="center" mb="1rem">
+                            <Text
+                              variant="label"
+                              fontWeight="medium"
+                              color="grey.700"
+                              textTransform="uppercase"
+                              mr=".5rem"
+                            >
+                              Chain ID
+                            </Text>
+                            <MemoHelp height="1.3rem" width="1.3rem" />
+                          </Flex>
+                          <FormInput name="chain_id" label="Chain Id" />
+                          <ErrorMessage name="chain_id" component={Error} />
+                        </Box>
 
                         <Flex alignItems="center" mb="1rem">
                           <Text
@@ -141,21 +156,22 @@ export const ConfigureSettingForm = () => {
                           <Chip variant="selected" text="Yes" />
                           <Chip variant="primary" text="No" />
                         </Grid>
-
-                        <Flex alignItems="center" mb="1rem">
-                          <Text
-                            variant="label"
-                            fontWeight="medium"
-                            color="grey.700"
-                            textTransform="uppercase"
-                            mr=".5rem"
-                          >
-                            RPC Server Address
-                          </Text>
-                          <MemoHelp height="1.3rem" width="1.3rem" />
-                        </Flex>
-                        <FormInput name="rpc_address" label="RPC Address" />
-                        <ErrorMessage name="name" component={Error} />
+                        <Box>
+                          <Flex alignItems="center" mb="1rem">
+                            <Text
+                              variant="label"
+                              fontWeight="medium"
+                              color="grey.700"
+                              textTransform="uppercase"
+                              mr=".5rem"
+                            >
+                              RPC Server Address
+                            </Text>
+                            <MemoHelp height="1.3rem" width="1.3rem" />
+                          </Flex>
+                          <FormInput name="rpc_address" label="RPC Address" />
+                          <ErrorMessage name="rpc_address" component={Error} />
+                        </Box>
                       </Box>
                     </Grid>
                   </Box>
@@ -177,11 +193,11 @@ export const ConfigureSettingForm = () => {
                       gridGap="2rem"
                       alignItems="center"
                     >
-                      <Link to="/dashboard/wallet">
-                        <Button px="3rem" justifySelf="center" type="submit">
-                          Save
-                        </Button>
-                      </Link>
+                      {/* <Link to="/dashboard/wallet"> */}
+                      <Button px="3rem" justifySelf="center" type="submit">
+                        Save
+                      </Button>
+                      {/* </Link> */}
                     </Grid>
                   </Grid>
                 </Box>
