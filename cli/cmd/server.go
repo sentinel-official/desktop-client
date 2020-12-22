@@ -98,6 +98,9 @@ func ServerCmd() *cobra.Command {
 					http.MethodPost,
 					http.MethodPut,
 				},
+				AllowedOrigins: []string{
+					"*",
+				},
 			}).Handler(muxRouter)
 
 			log.Printf("Listening on %s\n", listenOn)
