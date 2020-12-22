@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Box, Grid, Text, Flex, Button, Modal, ModalClose } from "atoms";
+import { Box, Grid, Text, Flex, Button, Modal, Error, ModalClose } from "atoms";
 import { Formik, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 
@@ -10,7 +10,9 @@ import MemoHelp from "assets/icons/Help";
 const initialValues = {
   password: "",
 };
-const validationSchema = Yup.object({});
+const validationSchema = Yup.object({
+  password: Yup.string().required("Required"),
+});
 
 const onSubmit = (values, submitProps) => {
   console.log("Form data", values);
@@ -191,7 +193,7 @@ const ProposalDetails = () => {
                         name="password"
                         label="Enter Password"
                       />
-                      <ErrorMessage name="name" component={Error} />
+                      <ErrorMessage name="password" component={Error} />
                       <Button px="3rem" justifySelf="center" type="submit">
                         CONFIRM VOTE
                       </Button>

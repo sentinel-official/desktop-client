@@ -74,7 +74,6 @@ const DropdownItem = ({ name }) => {
 
 export const MyAccountDropdown = ({ name }) => {
   const [dropdown, setDropdown] = useState(false);
-  // const [isVisible, setIsVisible] = useState(false);
   const { visible, hide, toggle } = useVisibleState(false);
   const [formValues, setFormValues] = useState(null);
 

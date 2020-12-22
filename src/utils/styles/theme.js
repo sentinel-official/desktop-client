@@ -59,12 +59,16 @@ export const fontSets = [
   {
     name: "heading5",
     fontSize: "2.8rem",
-    fontWeight: "bold",
+    // fontWeight: "bold",
   },
   {
     name: "heading6",
     fontSize: "2.6rem",
-    fontWeight: "bold",
+    // fontWeight: "bold",
+  },
+  {
+    name: "heading7",
+    fontSize: "2.4rem",
   },
   {
     name: "title",
@@ -211,6 +215,10 @@ const colorSets = [
   {
     name: "green",
     colors: [{ name: 500, hex: " #31B24E" }],
+  },
+  {
+    name: "warning",
+    colors: [{ name: 500, hex: " #E3814A" }],
   },
 ];
 const colors = colorSets.reduce(

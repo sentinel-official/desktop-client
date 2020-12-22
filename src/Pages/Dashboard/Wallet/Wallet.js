@@ -1,5 +1,6 @@
 import { Box, Grid } from "atoms";
-import { WalletDetails } from "organisms/WalletDetails";
+import { WalletDetails } from "templates/WalletDetails";
+// import { WalletDetails } from "organisms/WalletDetails";
 import { Token } from "./molecules/Token";
 
 export const Wallet = () => {

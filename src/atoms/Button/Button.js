@@ -12,6 +12,7 @@ import {
 
 import { Box, Text } from "atoms";
 import css from "@styled-system/css";
+import { Flex } from "atoms/Flex";
 
 const variants = {
   primary: {
@@ -54,6 +55,24 @@ const variants = {
     },
   },
 
+  primaryShadow: {
+    color: "#55678B !important",
+    px: 7,
+    py: 4,
+    backgroundColor: "white",
+    boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.07)",
+    border: 0,
+    fontWeight: 500,
+    letterSpacing: 0.4,
+    borderRadius: "3rem",
+    fontFamily: "Roboto",
+
+    "&:hover": {},
+    "&:focus": {
+      outline: 0,
+    },
+  },
+
   greyBorder: {
     px: 7,
     py: 4,
@@ -80,7 +99,6 @@ const variants = {
     fontFamily: "Roboto",
     outline: 0,
     "&:hover": {
-      transform: "scale(1.004)",
       color: "white.0",
       backgroundColor: "gray.100",
     },
@@ -202,14 +220,16 @@ export const Button = ({
           <Loader loading={loading} />
         </Flex>
       )} */}
-      <Text
-        color="inherit"
-        variant={textVariant}
-        textTransform={textTransform}
-        opacity={loading ? 0 : 1}
-      >
-        {children}
-      </Text>
+      <Flex>
+        <Text
+          color="inherit"
+          variant={textVariant}
+          textTransform={textTransform}
+          opacity={loading ? 0 : 1}
+        >
+          {children}
+        </Text>
+      </Flex>
     </Container>
   );
 };

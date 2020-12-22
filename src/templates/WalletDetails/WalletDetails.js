@@ -2,8 +2,8 @@ import { useState } from "react";
 import { Box, Grid, Text, Flex, Button } from "atoms";
 import SearchField from "react-search-field";
 
-import { Proposals } from "./Proposals";
-import { Validators } from "./Validators";
+import { Proposals } from "organisms/Proposals/";
+import { Validators } from "organisms/Validators";
 import MemoArrowBottom from "assets/icons/ArrowBottom";
 import { DropdownFilter } from "molecules/DropdownFilter";
 
