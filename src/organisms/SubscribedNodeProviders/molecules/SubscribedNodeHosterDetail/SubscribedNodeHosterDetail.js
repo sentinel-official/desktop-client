@@ -38,6 +38,7 @@ export const SubscribedNodeHosterDetail = ({ setConnect }) => {
           py="1.5rem"
           borderBottom="1px solid"
           borderColor="border.500"
+          cursor="pointer"
           onClick={toggle}
         >
           <MemoCancelSubscription height="1.5rem" width="2rem" fill="#FF4B55" />
