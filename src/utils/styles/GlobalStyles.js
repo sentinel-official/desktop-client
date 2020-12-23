@@ -60,13 +60,30 @@ a {
   max-width: 12rem 
 }
 
-.react-select-custom  ::-webkit-scrollbar {
+.react-select-custom  ::-webkit-scrollbar, .scroll-bar::-webkit-scrollbar  {
   width: .5rem;
 }
  
 .react-select-custom ::-webkit-scrollbar-track {}
 .react-select-custom ::-webkit-scrollbar-thumb {
   background-color: #129EED;
+}
+.scroll-bar{
+overflow-y: scroll
+}
+
+.scroll-bar::-webkit-scrollbar-track {
+  background-color: transparent
+}
+.scroll-bar::-webkit-scrollbar-thumb {
+  background-color:  #DCE9F1 !important;
+}
+
+.truncate-text {
+  width: 150px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 `;

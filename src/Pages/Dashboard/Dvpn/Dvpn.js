@@ -7,13 +7,23 @@ import { SessionHistory } from "./molecules/SessionHistory";
 
 export const Dvpn = () => {
   const [connect, setConnect] = useState(false);
+  const [subscribe, setSubscribe] = useState(false);
+  const [subscribedIndividual, setSubscribedIndividual] = useState(false);
+
   return (
     <Grid gridTemplateColumns="1fr 2.2fr" bg="bg.500">
       <Box border="1px solid" borderColor="border.500">
         <QuickConnect connect={connect} setConnect={setConnect} />
         <SessionHistory />
       </Box>
-      <DvpnDetails connect={connect} setConnect={setConnect} />
+      <DvpnDetails
+        connect={connect}
+        setConnect={setConnect}
+        subscribe={subscribe}
+        setSubscribe={setSubscribe}
+        subscribedIndividual={subscribedIndividual}
+        setSubscribedIndividual={setSubscribedIndividual}
+      />
     </Grid>
   );
 };

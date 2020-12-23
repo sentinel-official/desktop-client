@@ -23,7 +23,6 @@ const variants = {
     transition: "all 0.3s",
     border: 0,
     fontWeight: 500,
-    letterSpacing: 0.4,
     borderRadius: "3rem",
     fontFamily: "Roboto",
     h3: {
@@ -34,16 +33,15 @@ const variants = {
       outline: 0,
     },
   },
+
   secondary: {
     color: "#129EED !important",
     px: 7,
     py: 4,
     backgroundColor: "transparent",
-    transition: "all 0.3s",
     border: "1px solid",
     borderColor: "primary.500",
     fontWeight: 500,
-    letterSpacing: 0.4,
     borderRadius: "3rem",
     fontFamily: "Roboto",
     h3: {
@@ -110,6 +108,7 @@ const variants = {
     width: "100%",
     color: "#142D51 !important",
     backgroundColor: "transparent",
+    textAlign: "center",
     border: "1px solid",
     borderColor: "border.500",
     outline: "none",

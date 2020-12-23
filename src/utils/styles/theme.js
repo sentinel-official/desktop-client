@@ -210,6 +210,7 @@ const colorSets = [
     colors: [
       { name: 500, hex: " #F6F8FB" },
       { name: 600, hex: " #e5f5fd" },
+      { name: 700, hex: " #EDF5FA" },
     ],
   },
   {
@@ -219,6 +220,10 @@ const colorSets = [
   {
     name: "warning",
     colors: [{ name: 500, hex: " #E3814A" }],
+  },
+  {
+    name: "error",
+    colors: [{ name: 500, hex: " #FF4B55" }],
   },
 ];
 const colors = colorSets.reduce(

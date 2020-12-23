@@ -10,7 +10,14 @@ import MemoListView from "assets/icons/ListView";
 import MemoMapView from "assets/icons/MapView";
 import MemoHeart from "assets/icons/Heart";
 
-export const DvpnDetails = ({ connect, setConnect }) => {
+export const DvpnDetails = ({
+  connect,
+  setConnect,
+  subscribe,
+  setSubscribe,
+  subscribedIndividual,
+  setSubscribedIndividual,
+}) => {
   const [visibleNodeProviderList, setVisibleNodeProviderList] = useState(true);
   const [visibleIndivisualHost, setVsibleIndivisualHost] = useState(false);
   const [visibleListView, setVisibleListView] = useState(true);
@@ -30,9 +37,16 @@ export const DvpnDetails = ({ connect, setConnect }) => {
   const mapViewHandler = () => {
     setVisibleListView(false);
   };
+
+  const subscribeHandler = () => {
+    setSubscribe(!subscribe);
+    setSubscribedIndividual(!subscribedIndividual);
+  };
+
+  console.log("subscribedIndividual", subscribedIndividual);
   return (
-    <Box pt="7rem" px="3rem">
-      <Box>
+    <Box pt="7rem">
+      <Box px="3rem">
         <Grid
           gridAutoFlow="column"
           justifyContent="space-between"
@@ -93,21 +107,27 @@ export const DvpnDetails = ({ connect, setConnect }) => {
               onClick={mapViewHandler}
             />
             <Button
-              variant="greyBorder"
+              variant={!subscribe ? "greyBorder" : "secondary"}
               px="1rem"
               justifySelf="center"
-              type="submit"
               textTransform="capitalize"
+              onClick={subscribeHandler}
             >
               <Grid
                 alignItems="center"
                 gridAutoFlow="column"
                 gridGap=".5rem"
                 fontSize="1.2rem"
-                color="grey.700"
+                color={
+                  !subscribe || !subscribedIndividual ? "grey.700" : "#129EED"
+                }
                 py=".2rem"
               >
-                <MemoHeart fill="#55678B" />
+                <MemoHeart
+                  fill={
+                    !subscribe || !subscribedIndividual ? "#95A7CB" : "#129EED"
+                  }
+                />
                 Subscribed
               </Grid>
             </Button>
@@ -119,9 +139,16 @@ export const DvpnDetails = ({ connect, setConnect }) => {
           connect={connect}
           setConnect={setConnect}
           visibleListView={visibleListView}
+          subscribe={subscribe}
+          setSubscribe={setSubscribe}
         />
       ) : (
-        <IndividualHost connect={connect} setConnect={setConnect} />
+        <IndividualHost
+          connect={connect}
+          setConnect={setConnect}
+          subscribedIndividual={subscribedIndividual}
+          setSubscribedIndividual={setSubscribedIndividual}
+        />
       )}
     </Box>
   );

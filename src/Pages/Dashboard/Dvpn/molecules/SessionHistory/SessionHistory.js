@@ -28,7 +28,8 @@ const SessionHistoryHeadings = ({ heading, title }) => {
 const SessionHistoryList = () => {
   return (
     <Grid
-      py=".8rem"
+      py="1.5rem"
+      px="2rem"
       gridTemplateColumns=".8fr  1fr 1fr 3rem"
       alignItems="center"
       justifyContent="space-between"
@@ -75,7 +76,6 @@ export const SessionHistory = () => {
         <SessionHistoryHeadings heading="33.3hrs" title="Duration" />
         <SessionHistoryHeadings heading="2.5GB" title="Received" />
       </Grid>
-
       <Grid
         mt="1rem"
         px="1.5rem"
@@ -117,8 +117,8 @@ export const SessionHistory = () => {
         <Box py={4} />
       </Grid>
 
-      <Grid gridGap="1rem" px="1.5rem">
-        {[1, 2, 3, 4].map((index) => (
+      <Grid maxHeight="20rem" className="scroll-bar">
+        {[1, 2, 3, 4, 5, 6, 7].map((index) => (
           <SessionHistoryList key={index} />
         ))}
       </Grid>
