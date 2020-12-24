@@ -1,6 +1,7 @@
 package staking
 
 import (
+	"encoding/hex"
 	"net/http"
 	"net/url"
 	"strconv"
@@ -17,7 +18,7 @@ func HandlerGetValidator(ctx *context.Context) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		vars := mux.Vars(r)
 
-		address, err := sdk.ValAddressFromHex(vars["address"])
+		address, err := hex.DecodeString(vars["address"])
 		if err != nil {
 			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1, err.Error())
 			return
@@ -82,7 +83,7 @@ func HandlerGetDelegations(ctx *context.Context) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		vars := mux.Vars(r)
 
-		address, err := sdk.AccAddressFromHex(vars["address"])
+		address, err := hex.DecodeString(vars["address"])
 		if err != nil {
 			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1, err.Error())
 			return
@@ -106,7 +107,6 @@ func HandlerDelegate(ctx *context.Context) http.HandlerFunc {
 			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1, err.Error())
 			return
 		}
-
 		if err := body.Validate(); err != nil {
 			utils.WriteErrorToResponse(w, http.StatusBadRequest, 2, err.Error())
 			return
@@ -140,7 +140,6 @@ func HandlerRedelegate(ctx *context.Context) http.HandlerFunc {
 			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1, err.Error())
 			return
 		}
-
 		if err := body.Validate(); err != nil {
 			utils.WriteErrorToResponse(w, http.StatusBadRequest, 2, err.Error())
 			return
@@ -174,7 +173,6 @@ func HandlerUndelegate(ctx *context.Context) http.HandlerFunc {
 			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1, err.Error())
 			return
 		}
-
 		if err := body.Validate(); err != nil {
 			utils.WriteErrorToResponse(w, http.StatusBadRequest, 2, err.Error())
 			return

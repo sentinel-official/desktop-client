@@ -1,10 +1,10 @@
 package gov
 
 import (
+	"encoding/hex"
 	"net/http"
 	"strconv"
 
-	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/gorilla/mux"
 
 	"github.com/sentinel-official/desktop-client/cli/context"
@@ -35,7 +35,7 @@ func HandlerGetVote(ctx *context.Context) http.HandlerFunc {
 			return
 		}
 
-		address, err := sdk.AccAddressFromHex(vars["address"])
+		address, err := hex.DecodeString(vars["address"])
 		if err != nil {
 			utils.WriteErrorToResponse(w, http.StatusBadRequest, 2, err.Error())
 			return
@@ -59,7 +59,6 @@ func HandlerVote(ctx *context.Context) http.HandlerFunc {
 			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1, err.Error())
 			return
 		}
-
 		if err := body.Validate(); err != nil {
 			utils.WriteErrorToResponse(w, http.StatusBadRequest, 2, err.Error())
 			return

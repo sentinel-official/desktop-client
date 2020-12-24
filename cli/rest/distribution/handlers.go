@@ -17,7 +17,6 @@ func HandlerWithdrawRewards(ctx *context.Context) http.HandlerFunc {
 			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1, err.Error())
 			return
 		}
-
 		if err := body.Validate(); err != nil {
 			utils.WriteErrorToResponse(w, http.StatusBadRequest, 2, err.Error())
 			return

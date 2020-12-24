@@ -10,7 +10,7 @@ import (
 func WriteErrorToResponse(w http.ResponseWriter, status, code int, message string) {
 	_ = write(w, status, types.Response{
 		Success: false,
-		Error:   types.NewError(code, message, ""),
+		Error:   types.NewError("", code, message),
 	})
 }
 
