@@ -2,3 +2,4 @@
 /bin
 /doc
 doc.go*
+.DS_Store*

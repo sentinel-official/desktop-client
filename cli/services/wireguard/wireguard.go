@@ -41,7 +41,7 @@ func (w WireGuard) Start() error {
 
 func (w WireGuard) Stop() error {
 	cmd := exec.Command("wg-quick", strings.Split(
-		fmt.Sprintf("down %s", w.cfg.Name), " ")...)
+		fmt.Sprintf("down %s", filepath.Join(w.cfgDir, fmt.Sprintf("%s.conf", w.cfg.Name))), " ")...)
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
 
@@ -49,8 +49,13 @@ func (w WireGuard) Stop() error {
 }
 
 func (w WireGuard) Transfer() (int64, int64, error) {
+	iFace, err := w.RealInterface()
+	if err != nil {
+		return 0, 0, err
+	}
+
 	output, err := exec.Command("wg", strings.Split(
-		fmt.Sprintf("show %s transfer", w.cfg.Name), " ")...).Output()
+		fmt.Sprintf("show %s transfer", iFace), " ")...).Output()
 	if err != nil {
 		return 0, 0, err
 	}
