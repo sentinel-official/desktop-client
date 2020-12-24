@@ -85,6 +85,29 @@ overflow-y: scroll
   overflow: hidden;
   text-overflow: ellipsis;
 }
+.__react_component_tooltip{
+      padding: 3px 5px !important;
+      border: 1px solid grey !important;
+      background-color: #EEF4FF !important;
+      border-radius: 0px !important;
+      p {
+        margin:0 !important
+      }
+}
+.__react_component_tooltip::before, .__react_component_tooltip::after{
+  display: none !important
+}
+.__react_component_tooltip.show{
+  margin-top: 2.4rem !important;
+  margin-left: 2rem !important 
+}
+
+.recharts-cartesian-axis-ticks, .recharts-line-dot {
+  display :none !important
+}
+.recharts-dot .recharts-line-dot {
+  display :none !important
+}
 
 `;
 export default GlobalStyle;

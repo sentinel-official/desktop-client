@@ -1,5 +1,6 @@
 import MemoTime from "assets/icons/Time";
 import { Box, Text, Grid, Flex } from "atoms";
+import ReactTooltip from "react-tooltip";
 
 const SessionHistoryHeadings = ({ heading, title }) => {
   return (
@@ -46,7 +47,27 @@ const SessionHistoryList = () => {
       <Text color="primary.700" fontSize="1.3rem" fontWeight="medium">
         5 min 34 secs
       </Text>
-      <MemoTime height="1.5rem" width="1.5rem" />
+      {/* <MemoTime height="1.5rem" width="1.5rem" /> */}
+
+      <div>
+        <a data-for="soclose" data-tip="3">
+          <MemoTime height="1.5rem" width="1.5rem" />
+        </a>
+      </div>
+      <ReactTooltip
+        id="soclose"
+        getContent={(dataTip) => (
+          <div>
+            <p>Tue, 08 Sep 2020 19:07:11 GMT +5:30</p>
+          </div>
+        )}
+        effect="solid"
+        // delayHide={500}
+        // delayShow={500}
+        place="left"
+        border={true}
+        type="light"
+      />
     </Grid>
   );
 };

@@ -26,6 +26,8 @@ import useVisibleState from "hooks/useVisibleStates";
 import { DropdownFilter } from "molecules/DropdownFilter";
 import MemoSetting from "assets/icons/Setting";
 import MemoHelp from "assets/icons/Help";
+import { ConnectionStatus } from "molecules/ConnectionStatus";
+import MemoLogo from "assets/icons/Logo";
 
 const sidebarLinks = [
   { Icon: MemoLock, name: "dVPN", url: "/dashboard/dVPN" },
@@ -248,15 +250,14 @@ export const MyAccountDropdown = ({ name }) => {
   );
 };
 
-export const Sidebar = () => {
+export const Sidebar = ({ connect }) => {
   const { visible, toggle } = useVisibleState(true);
-
   return (
     <Box
       bg="primary.600"
       height="100vh"
       textAlign="center"
-      width={visible ? "15vw" : "8rem"}
+      width={visible ? "17vw" : "8rem"}
       transition="all 0.3s"
     >
       <Flex
@@ -323,6 +324,13 @@ export const Sidebar = () => {
           </CustomNavLink>
         ))}
       </Box>
+      {connect && visible && window.location.pathname === "/dashboard/dVPN" ? (
+        <ConnectionStatus />
+      ) : (
+        <Box position="absolute" bottom="2rem" m="auto" left={0} right={0}>
+          <MemoLogo height="4rem" />
+        </Box>
+      )}
     </Box>
   );
 };

@@ -5,8 +5,7 @@ import { DvpnDetails } from "templates/DvpnDetails";
 import { QuickConnect } from "./molecules/QuickConnect";
 import { SessionHistory } from "./molecules/SessionHistory";
 
-export const Dvpn = () => {
-  const [connect, setConnect] = useState(false);
+export const Dvpn = ({ connect, setConnect }) => {
   const [subscribe, setSubscribe] = useState(false);
   const [subscribedIndividual, setSubscribedIndividual] = useState(false);
 

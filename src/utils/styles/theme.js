@@ -187,7 +187,10 @@ const colorSets = [
   },
   {
     name: "text",
-    colors: [{ name: 500, hex: "#55678B" }],
+    colors: [
+      { name: 500, hex: "#55678B" },
+      { name: 600, hex: "#BBCAE9" },
+    ],
   },
   {
     name: "grey",
@@ -203,7 +206,10 @@ const colorSets = [
   },
   {
     name: "border",
-    colors: [{ name: 500, hex: " #DCE9F1" }],
+    colors: [
+      { name: 500, hex: " #DCE9F1" },
+      { name: 600, hex: " #193254" },
+    ],
   },
   {
     name: "bg",
@@ -211,6 +217,7 @@ const colorSets = [
       { name: 500, hex: " #F6F8FB" },
       { name: 600, hex: " #e5f5fd" },
       { name: 700, hex: " #EDF5FA" },
+      { name: 800, hex: " #132236" },
     ],
   },
   {
