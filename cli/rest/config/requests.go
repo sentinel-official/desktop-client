@@ -7,6 +7,7 @@ import (
 )
 
 type RequestUpdateConfig struct {
+	Setup bool   `json:"setup"`
 	From  string `json:"from"`
 	Chain struct {
 		BroadcastMode      string  `json:"broadcast_mode"`

@@ -16,6 +16,7 @@ import (
 var (
 	ct = strings.TrimSpace(`
 password = "{{ .Password }}"
+setup = {{ .Setup }}
 
 [chain]
 broadcast_mode = "{{ .Chain.BroadcastMode }}"
@@ -41,6 +42,7 @@ trust_node = {{ .Chain.TrustNode }}
 
 type Config struct {
 	Password string `json:"password,omitempty"`
+	Setup    bool   `json:"setup"`
 	Chain    struct {
 		BroadcastMode      string  `json:"broadcast_mode"`
 		Fees               string  `json:"fees"`
@@ -61,12 +63,14 @@ func NewConfig() *Config {
 func (c *Config) Copy() *Config {
 	return &Config{
 		Password: c.Password,
+		Setup:    c.Setup,
 		Chain:    c.Chain,
 	}
 }
 
 func (c *Config) WithDefaultValues() *Config {
 	c.Password = fmt.Sprintf("%X", sha256.Sum256([]byte("admin")))
+	c.Setup = true
 	c.Chain.BroadcastMode = "block"
 	c.Chain.Fees = ""
 	c.Chain.Gas = 1e5

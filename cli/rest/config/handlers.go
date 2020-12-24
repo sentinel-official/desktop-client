@@ -31,7 +31,6 @@ func HandlerUpdateConfig(ctx *context.Context) http.HandlerFunc {
 			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1, err.Error())
 			return
 		}
-
 		if err := body.Validate(); err != nil {
 			utils.WriteErrorToResponse(w, http.StatusBadRequest, 2, err.Error())
 			return
@@ -42,6 +41,9 @@ func HandlerUpdateConfig(ctx *context.Context) http.HandlerFunc {
 			client = ctx.Client().Copy()
 		)
 
+		if body.Setup != cfg.Setup {
+			cfg.Setup = body.Setup
+		}
 		if body.From != "" {
 			info, err := client.Keybase().Get(body.From)
 			if err != nil {

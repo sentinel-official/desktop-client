@@ -2,7 +2,6 @@ package main
 
 import (
 	"os"
-	"path/filepath"
 
 	sent "github.com/sentinel-official/hub/types"
 	"github.com/spf13/cobra"
@@ -15,8 +14,18 @@ import (
 func main() {
 	sent.GetConfig().Seal()
 	root := &cobra.Command{
-		Use:          "sentinel-desktop-client",
+		Use:          "sentinel-desktop-client-cli",
 		SilenceUsage: true,
+		PersistentPreRunE: func(_ *cobra.Command, _ []string) error {
+			home := viper.GetString(types.FlagHome)
+			if _, err := os.Stat(home); err != nil {
+				if err = os.MkdirAll(home, 0700); err != nil {
+					return err
+				}
+			}
+
+			return nil
+		},
 	}
 
 	root.AddCommand(
@@ -25,22 +34,6 @@ func main() {
 
 	root.PersistentFlags().String(types.FlagHome, types.DefaultHomeDirectory, "home")
 	_ = viper.BindPFlag(types.FlagHome, root.PersistentFlags().Lookup(types.FlagHome))
-
-	var (
-		home    = viper.GetString(types.FlagHome)
-		cfgFile = filepath.Join(home, "config.toml")
-	)
-
-	if _, err := os.Stat(cfgFile); err != nil {
-		if err = os.MkdirAll(home, 0700); err != nil {
-			panic(err)
-		}
-
-		cfg := types.NewConfig()
-		if err := cfg.LoadFromPath(cfgFile); err != nil {
-			panic(err)
-		}
-	}
 
 	_ = root.Execute()
 }
