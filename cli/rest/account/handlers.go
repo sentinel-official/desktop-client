@@ -7,8 +7,8 @@ import (
 	"github.com/gorilla/mux"
 
 	"github.com/sentinel-official/desktop-client/cli/context"
-	"github.com/sentinel-official/desktop-client/cli/models"
 	"github.com/sentinel-official/desktop-client/cli/utils"
+	"github.com/sentinel-official/desktop-client/cli/x/auth"
 )
 
 func HandlerGetAccount(ctx *context.Context) http.HandlerFunc {
@@ -21,13 +21,13 @@ func HandlerGetAccount(ctx *context.Context) http.HandlerFunc {
 			return
 		}
 
-		account, err := ctx.Client().QueryAccount(address)
+		result, err := ctx.Client().QueryAccount(address)
 		if err != nil {
 			utils.WriteErrorToResponse(w, http.StatusInternalServerError, 2, err.Error())
 			return
 		}
 
-		item := models.NewAccountFromRaw(account)
+		item := auth.NewAccountFromRaw(result)
 		utils.WriteResultToResponse(w, http.StatusOK, item)
 	}
 }

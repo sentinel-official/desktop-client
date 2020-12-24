@@ -4,28 +4,28 @@ import (
 	"net/http"
 	"strconv"
 
+	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/gorilla/mux"
 
 	"github.com/sentinel-official/desktop-client/cli/context"
-	"github.com/sentinel-official/desktop-client/cli/messages"
-	"github.com/sentinel-official/desktop-client/cli/models"
 	"github.com/sentinel-official/desktop-client/cli/utils"
+	"github.com/sentinel-official/desktop-client/cli/x/gov"
 )
 
 func HandlerGetProposals(ctx *context.Context) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		proposals, err := ctx.Client().QueryProposals()
+		result, err := ctx.Client().QueryProposals()
 		if err != nil {
 			utils.WriteErrorToResponse(w, http.StatusInternalServerError, 1, err.Error())
 			return
 		}
 
-		items := models.NewProposalsFromRaw(proposals)
+		items := gov.NewProposalsFromRaw(result)
 		utils.WriteResultToResponse(w, http.StatusOK, items)
 	}
 }
 
-func HandlerGetDeposits(ctx *context.Context) http.HandlerFunc {
+func HandlerGetVote(ctx *context.Context) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		vars := mux.Vars(r)
 
@@ -35,35 +35,20 @@ func HandlerGetDeposits(ctx *context.Context) http.HandlerFunc {
 			return
 		}
 
-		deposits, err := ctx.Client().QueryDeposits(id)
+		address, err := sdk.AccAddressFromHex(vars["address"])
+		if err != nil {
+			utils.WriteErrorToResponse(w, http.StatusBadRequest, 2, err.Error())
+			return
+		}
+
+		result, err := ctx.Client().QueryProposalVote(id, address)
 		if err != nil {
 			utils.WriteErrorToResponse(w, http.StatusInternalServerError, 2, err.Error())
 			return
 		}
 
-		items := models.NewDepositsFromRaw(deposits)
-		utils.WriteResultToResponse(w, http.StatusOK, items)
-	}
-}
-
-func HandlerGetVotes(ctx *context.Context) http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {
-		vars := mux.Vars(r)
-
-		id, err := strconv.ParseUint(vars["id"], 10, 64)
-		if err != nil {
-			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1, err.Error())
-			return
-		}
-
-		votes, err := ctx.Client().QueryVotes(id)
-		if err != nil {
-			utils.WriteErrorToResponse(w, http.StatusInternalServerError, 2, err.Error())
-			return
-		}
-
-		items := models.NewVotesFromRaw(votes)
-		utils.WriteResultToResponse(w, http.StatusOK, items)
+		item := gov.NewVoteFromRaw(result)
+		utils.WriteResultToResponse(w, http.StatusOK, item)
 	}
 }
 
@@ -88,18 +73,18 @@ func HandlerVote(ctx *context.Context) http.HandlerFunc {
 			return
 		}
 
-		msg, err := messages.NewProposalVote(ctx.AddressHex(), id, body.Option).Raw()
+		message, err := gov.NewMsgVote(ctx.AddressHex(), id, body.Option).Raw()
 		if err != nil {
 			utils.WriteErrorToResponse(w, http.StatusInternalServerError, 4, err.Error())
 			return
 		}
 
-		if err := msg.ValidateBasic(); err != nil {
+		if err := message.ValidateBasic(); err != nil {
 			utils.WriteErrorToResponse(w, http.StatusBadRequest, 5, err.Error())
 			return
 		}
 
-		res, err := ctx.Client().Tx(body.Memo, body.Password, msg)
+		res, err := ctx.Client().Tx(body.Memo, body.Password, message)
 		if err != nil {
 			utils.WriteErrorToResponse(w, http.StatusInternalServerError, 6, err.Error())
 			return

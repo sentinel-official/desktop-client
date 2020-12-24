@@ -5,15 +5,15 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/sentinel-official/desktop-client/cli/models"
+	"github.com/sentinel-official/desktop-client/cli/x/other"
 )
 
 type RequestSend struct {
 	Memo     string `json:"memo"`
 	Password string `json:"password"`
 
-	ToAddress string       `json:"to_address"`
-	Amount    models.Coins `json:"amount"`
+	ToAddress string      `json:"to_address"`
+	Amount    other.Coins `json:"amount"`
 }
 
 func NewRequestSend(r *http.Request) (*RequestSend, error) {

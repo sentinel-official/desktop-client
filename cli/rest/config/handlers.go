@@ -17,10 +17,10 @@ import (
 
 func HandlerGetConfig(ctx *context.Context) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		config := ctx.Config().Copy()
-		config.Password = ""
+		cfg := ctx.Config().Copy()
+		cfg.Password = ""
 
-		utils.WriteResultToResponse(w, http.StatusOK, config)
+		utils.WriteResultToResponse(w, http.StatusOK, cfg)
 	}
 }
 
@@ -147,9 +147,10 @@ func HandlerUpdateConfig(ctx *context.Context) http.HandlerFunc {
 			return
 		}
 
-		ctx.WithConfig(cfg).
-			WithClient(client)
+		ctx.WithConfig(cfg.Copy()).
+			WithClient(client.Copy())
 
+		cfg.Password = ""
 		utils.WriteResultToResponse(w, http.StatusOK, cfg)
 	}
 }

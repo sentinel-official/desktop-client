@@ -6,8 +6,8 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
 	"github.com/sentinel-official/desktop-client/cli/context"
-	"github.com/sentinel-official/desktop-client/cli/messages"
 	"github.com/sentinel-official/desktop-client/cli/utils"
+	"github.com/sentinel-official/desktop-client/cli/x/distribution"
 )
 
 func HandlerWithdrawRewards(ctx *context.Context) http.HandlerFunc {
@@ -23,23 +23,23 @@ func HandlerWithdrawRewards(ctx *context.Context) http.HandlerFunc {
 			return
 		}
 
-		var msgs []sdk.Msg
+		messages := make([]sdk.Msg, 0, len(body.Validators))
 		for _, validator := range body.Validators {
-			msg, err := messages.NewWithdrawRewards(ctx.AddressHex(), validator).Raw()
+			message, err := distribution.NewMsgWithdrawDelegatorReward(ctx.AddressHex(), validator).Raw()
 			if err != nil {
 				utils.WriteErrorToResponse(w, http.StatusInternalServerError, 3, err.Error())
 				return
 			}
 
-			if err := msg.ValidateBasic(); err != nil {
+			if err := message.ValidateBasic(); err != nil {
 				utils.WriteErrorToResponse(w, http.StatusBadRequest, 4, err.Error())
 				return
 			}
 
-			msgs = append(msgs, msg)
+			messages = append(messages, message)
 		}
 
-		res, err := ctx.Client().Tx(body.Memo, body.Password, msgs...)
+		res, err := ctx.Client().Tx(body.Memo, body.Password, messages...)
 		if err != nil {
 			utils.WriteErrorToResponse(w, http.StatusInternalServerError, 5, err.Error())
 			return

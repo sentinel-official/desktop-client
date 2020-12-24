@@ -9,12 +9,12 @@ import (
 )
 
 func RegisterRoutes(r *mux.Router, ctx *context.Context) {
-	r.Name("GetKeys").
-		Methods(http.MethodGet).Path("/keys").
-		HandlerFunc(HandlerGetKeys(ctx))
 	r.Name("GetKey").
 		Methods(http.MethodGet).Path("/keys/{name}").
 		HandlerFunc(HandlerGetKey(ctx))
+	r.Name("GetKeys").
+		Methods(http.MethodGet).Path("/keys").
+		HandlerFunc(HandlerGetKeys(ctx))
 
 	r.Name("AddKey").
 		Methods(http.MethodPost).Path("/keys").

@@ -9,12 +9,12 @@ import (
 )
 
 func RegisterRoutes(r *mux.Router, ctx *context.Context) {
-	r.Name("GetValidators").
-		Methods(http.MethodGet).Path("/validators").
-		HandlerFunc(HandlerGetValidators(ctx))
 	r.Name("GetValidator").
 		Methods(http.MethodGet).Path("/validators/{address}").
 		HandlerFunc(HandlerGetValidator(ctx))
+	r.Name("GetValidators").
+		Methods(http.MethodGet).Path("/validators").
+		HandlerFunc(HandlerGetValidators(ctx))
 
 	r.Name("GetDelegations").
 		Methods(http.MethodGet).Path("/delegators/{address}/delegations").
@@ -25,7 +25,7 @@ func RegisterRoutes(r *mux.Router, ctx *context.Context) {
 	r.Name("Redelegate").
 		Methods(http.MethodPost).Path("/delegators/{address}/delegations/redelegate").
 		HandlerFunc(HandlerRedelegate(ctx))
-	r.Name("Unbond").
-		Methods(http.MethodPost).Path("/delegators/{address}/delegations/unbond").
-		HandlerFunc(HandlerUnbond(ctx))
+	r.Name("Undelegate").
+		Methods(http.MethodPost).Path("/delegators/{address}/delegations/undelegate").
+		HandlerFunc(HandlerUndelegate(ctx))
 }

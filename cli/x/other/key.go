@@ -1,4 +1,4 @@
-package models
+package other
 
 import (
 	"github.com/cosmos/cosmos-sdk/crypto/keys"
@@ -26,10 +26,10 @@ func NewKeyFromRaw(info keys.Info, mnemonic string) Key {
 type Keys []Key
 
 func NewKeysFromRaw(infos []keys.Info, mnemonics []string) Keys {
-	_keys := make(Keys, 0, len(infos))
+	items := make(Keys, 0, len(infos))
 	for i := 0; i < len(infos); i++ {
-		_keys = append(_keys, NewKeyFromRaw(infos[i], mnemonics[i]))
+		items = append(items, NewKeyFromRaw(infos[i], mnemonics[i]))
 	}
 
-	return _keys
+	return items
 }

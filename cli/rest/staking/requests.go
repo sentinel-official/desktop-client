@@ -5,15 +5,15 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/sentinel-official/desktop-client/cli/models"
+	"github.com/sentinel-official/desktop-client/cli/x/other"
 )
 
 type RequestDelegate struct {
 	Memo     string `json:"memo"`
 	Password string `json:"password"`
 
-	To     string      `json:"to"`
-	Amount models.Coin `json:"amount"`
+	To     string     `json:"to"`
+	Amount other.Coin `json:"amount"`
 }
 
 func NewRequestDelegate(r *http.Request) (*RequestDelegate, error) {
@@ -43,9 +43,9 @@ type RequestRedelegate struct {
 	Memo     string `json:"memo"`
 	Password string `json:"password"`
 
-	From   string      `json:"from"`
-	To     string      `json:"to"`
-	Amount models.Coin `json:"amount"`
+	From   string     `json:"from"`
+	To     string     `json:"to"`
+	Amount other.Coin `json:"amount"`
 }
 
 func NewRequestRedelegate(r *http.Request) (*RequestRedelegate, error) {
@@ -78,8 +78,8 @@ type RequestUnbond struct {
 	Memo     string `json:"memo"`
 	Password string `json:"password"`
 
-	From   string      `json:"from"`
-	Amount models.Coin `json:"amount"`
+	From   string     `json:"from"`
+	Amount other.Coin `json:"amount"`
 }
 
 func NewRequestUnbond(r *http.Request) (*RequestUnbond, error) {

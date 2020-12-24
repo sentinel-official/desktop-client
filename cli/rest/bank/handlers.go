@@ -4,8 +4,8 @@ import (
 	"net/http"
 
 	"github.com/sentinel-official/desktop-client/cli/context"
-	"github.com/sentinel-official/desktop-client/cli/messages"
 	"github.com/sentinel-official/desktop-client/cli/utils"
+	"github.com/sentinel-official/desktop-client/cli/x/bank"
 )
 
 func HandlerSend(ctx *context.Context) http.HandlerFunc {
@@ -21,18 +21,18 @@ func HandlerSend(ctx *context.Context) http.HandlerFunc {
 			return
 		}
 
-		msg, err := messages.NewSend(ctx.AddressHex(), body.ToAddress, body.Amount).Raw()
+		message, err := bank.NewMsgSend(ctx.AddressHex(), body.ToAddress, body.Amount).Raw()
 		if err != nil {
 			utils.WriteErrorToResponse(w, http.StatusInternalServerError, 3, err.Error())
 			return
 		}
 
-		if err := msg.ValidateBasic(); err != nil {
+		if err := message.ValidateBasic(); err != nil {
 			utils.WriteErrorToResponse(w, http.StatusBadRequest, 4, err.Error())
 			return
 		}
 
-		res, err := ctx.Client().Tx(body.Memo, body.Password, msg)
+		res, err := ctx.Client().Tx(body.Memo, body.Password, message)
 		if err != nil {
 			utils.WriteErrorToResponse(w, http.StatusInternalServerError, 5, err.Error())
 			return

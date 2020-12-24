@@ -7,22 +7,9 @@ import (
 	"github.com/gorilla/mux"
 
 	"github.com/sentinel-official/desktop-client/cli/context"
-	"github.com/sentinel-official/desktop-client/cli/models"
 	"github.com/sentinel-official/desktop-client/cli/utils"
+	"github.com/sentinel-official/desktop-client/cli/x/other"
 )
-
-func HandlerGetKeys(ctx *context.Context) http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {
-		infos, err := ctx.Client().Keybase().List()
-		if err != nil {
-			utils.WriteErrorToResponse(w, http.StatusInternalServerError, 1, err.Error())
-			return
-		}
-
-		items := models.NewKeysFromRaw(infos, make([]string, len(infos)))
-		utils.WriteResultToResponse(w, http.StatusOK, items)
-	}
-}
 
 func HandlerGetKey(ctx *context.Context) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
@@ -34,8 +21,21 @@ func HandlerGetKey(ctx *context.Context) http.HandlerFunc {
 			return
 		}
 
-		item := models.NewKeyFromRaw(info, "")
+		item := other.NewKeyFromRaw(info, "")
 		utils.WriteResultToResponse(w, http.StatusOK, item)
+	}
+}
+
+func HandlerGetKeys(ctx *context.Context) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		infos, err := ctx.Client().Keybase().List()
+		if err != nil {
+			utils.WriteErrorToResponse(w, http.StatusInternalServerError, 1, err.Error())
+			return
+		}
+
+		items := other.NewKeysFromRaw(infos, make([]string, len(infos)))
+		utils.WriteResultToResponse(w, http.StatusOK, items)
 	}
 }
 
@@ -78,7 +78,7 @@ func HandlerAddKey(ctx *context.Context) http.HandlerFunc {
 			return
 		}
 
-		item := models.NewKeyFromRaw(info, body.Mnemonic)
+		item := other.NewKeyFromRaw(info, body.Mnemonic)
 		utils.WriteResultToResponse(w, http.StatusCreated, item)
 	}
 }
