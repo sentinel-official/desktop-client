@@ -212,7 +212,7 @@ const ProposalsList = ({ index }) => {
   const { visible, toggle } = useVisibleState(true);
 
   return (
-    <Box p="2rem" border="1px solid" borderColor="border.500" mr="1rem">
+    <Box p="1.5rem 2rem" border="1px solid" borderColor="border.500" mr="1rem">
       <Flex alignItems="center">
         <Flex
           justifyContent="center"
@@ -361,9 +361,9 @@ const ProposalsList = ({ index }) => {
 
 export const Proposals = () => {
   return (
-    <Box mt="3rem" maxHeight="65vh" overflowY="auto">
+    <Box mt="3rem" maxHeight="63vh" className="scroll-bar">
       <Grid gridGap="1rem">
-        {[1, 2, 3].map((index) => (
+        {[1, 2, 3, 4].map((index) => (
           <ProposalsList key={index} index={index} />
         ))}
       </Grid>

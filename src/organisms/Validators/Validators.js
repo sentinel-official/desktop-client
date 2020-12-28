@@ -333,8 +333,8 @@ export const Validators = () => {
         <Box py={4} />
       </Grid>
 
-      <Grid gridGap="1rem">
-        {[1, 2, 3].map((index) => (
+      <Grid gridGap="1rem" maxHeight="58vh" className="scroll-bar">
+        {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((index) => (
           <ValidatorsList key={index} index={index} />
         ))}
       </Grid>

@@ -219,7 +219,7 @@ export const Button = ({
           <Loader loading={loading} />
         </Flex>
       )} */}
-      <Flex>
+      <Flex justifyContent="center">
         <Text
           color="inherit"
           variant={textVariant}
