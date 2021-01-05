@@ -107,9 +107,9 @@ export const WalletDetails = () => {
         color="primary.700"
         pt="2rem"
       >
-        $5414.28
-        <Text as="span" variant="small" color="green.500" pl="1rem">
-          (+3.5%)
+        5,414,000.28
+        <Text as="span" variant="title" color="text.500" pl="1rem">
+          (= $450,00.55 USD)
         </Text>
       </Text>
       <Box mt="5rem" mr="1rem">

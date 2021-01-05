@@ -110,7 +110,7 @@ overflow-y: scroll
 }
 
 .google-map {
-  height: 59.8vh;
+  height: 55.8vh;
   width: 100%
 }
 

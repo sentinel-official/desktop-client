@@ -96,11 +96,11 @@ export const NodeProviderDetail = ({
             mx="3rem"
             border="1px solid "
             borderColor="border.500"
-            height="60vh"
+            height="56vh"
           >
             <MapViewNodeProviders />
           </Box>
-          <Box mt="2rem" mx="3rem" maxHeight="18vh" className="scroll-bar">
+          <Box mt="2rem" mx="3rem" maxHeight="20vh" className="scroll-bar">
             {[1, 2, 3, 4, 5].map((index) => (
               <MapViewNodeProviderList
                 connect={connect}
