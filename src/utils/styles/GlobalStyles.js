@@ -109,5 +109,10 @@ overflow-y: scroll
   display :none !important
 }
 
+.google-map {
+  height: 59.8vh;
+  width: 100%
+}
+
 `;
 export default GlobalStyle;

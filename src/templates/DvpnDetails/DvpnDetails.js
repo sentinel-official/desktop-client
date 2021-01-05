@@ -35,6 +35,8 @@ export const DvpnDetails = ({
     setVisibleListView(true);
   };
   const mapViewHandler = () => {
+    setVisibleNodeProviderList(true);
+    setVsibleIndivisualHost(false);
     setVisibleListView(false);
   };
 
@@ -97,13 +99,25 @@ export const DvpnDetails = ({
               classNames="search-container"
             />
             <MemoListView
-              fill={visibleListView ? "#139EEE" : "#95A7CB"}
-              color={visibleListView ? "#139EEE" : "#95A7CB"}
+              fill={
+                visibleListView || visibleIndivisualHost ? "#139EEE" : "#95A7CB"
+              }
+              color={
+                visibleListView || visibleIndivisualHost ? "#139EEE" : "#95A7CB"
+              }
               onClick={listViewHandler}
             />
             <MemoMapView
-              fill={!visibleListView ? "#139EEE" : "#95A7CB"}
-              color={!visibleListView ? "#139EEE" : "#95A7CB"}
+              fill={
+                !visibleListView && !visibleIndivisualHost
+                  ? "#139EEE"
+                  : "#95A7CB"
+              }
+              color={
+                !visibleListView && !visibleIndivisualHost
+                  ? "#139EEE"
+                  : "#95A7CB"
+              }
               onClick={mapViewHandler}
             />
             <Button

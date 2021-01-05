@@ -2,6 +2,7 @@ import { Box, Grid, Text } from "atoms";
 import { NodeProvidersList } from "../NodeProvidersList/NodeProvidersList";
 // import { NodeProvidersSubscribedList } from "../NodeProvidersSubscribedList";
 import { MapViewNodeProviderList } from "../MapViewNodeProviderList/";
+import { MapViewNodeProviders } from "../MapViewNodeProviders";
 
 export const NodeProviderDetail = ({
   connect,
@@ -76,7 +77,6 @@ export const NodeProviderDetail = ({
           </Grid>
 
           <Grid>
-            {/* {!connect ? ( */}
             <Box maxHeight="72vh" className="scroll-bar">
               {[1, 2, 3, 4, 5, 6].map((index) => (
                 <NodeProvidersList
@@ -87,17 +87,6 @@ export const NodeProviderDetail = ({
                 />
               ))}
             </Box>
-            {/* ) : (
-              <Box>
-                {[1, 2, 3, 4, 5, 6].map((index) => (
-                  <NodeProvidersSubscribedList
-                    connect={connect}
-                    setConnect={setConnect}
-                    key={index}
-                  />
-                ))}
-              </Box>
-            )} */}
           </Grid>
         </Box>
       ) : (
@@ -107,11 +96,11 @@ export const NodeProviderDetail = ({
             mx="3rem"
             border="1px solid "
             borderColor="border.500"
-            height="50vh"
+            height="60vh"
           >
-            MAP
+            <MapViewNodeProviders />
           </Box>
-          <Box mt="2rem" mx="3rem" maxHeight="28vh" className="scroll-bar">
+          <Box mt="2rem" mx="3rem" maxHeight="18vh" className="scroll-bar">
             {[1, 2, 3, 4, 5].map((index) => (
               <MapViewNodeProviderList
                 connect={connect}
