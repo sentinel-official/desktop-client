@@ -2,6 +2,7 @@ package staking
 
 import (
 	"encoding/hex"
+	"math"
 	"net/http"
 	"net/url"
 	"strconv"
@@ -52,7 +53,6 @@ func parseQuery(query url.Values) (page, limit int, status string, err error) {
 		}
 	}
 
-	status = sdk.BondStatusBonded
 	if query.Get("status") != "" {
 		status = query.Get("status")
 	}
@@ -62,19 +62,50 @@ func parseQuery(query url.Values) (page, limit int, status string, err error) {
 
 func HandlerGetValidators(ctx *context.Context) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		page, limit, status, err := parseQuery(r.URL.Query())
+		_, _, status, err := parseQuery(r.URL.Query())
 		if err != nil {
 			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1, err.Error())
 			return
 		}
 
-		result, err := ctx.Client().QueryValidators(page, limit, status)
-		if err != nil {
-			utils.WriteErrorToResponse(w, http.StatusInternalServerError, 1, err.Error())
-			return
+		var (
+			page  = 1
+			limit = math.MaxInt64
+			items staking.Validators
+		)
+
+		if status == "" {
+			bonded, err := ctx.Client().QueryValidators(page, limit, sdk.BondStatusBonded)
+			if err != nil {
+				utils.WriteErrorToResponse(w, http.StatusInternalServerError, 1, err.Error())
+				return
+			}
+
+			unbonding, err := ctx.Client().QueryValidators(page, limit, sdk.BondStatusUnbonding)
+			if err != nil {
+				utils.WriteErrorToResponse(w, http.StatusInternalServerError, 1, err.Error())
+				return
+			}
+
+			unbonded, err := ctx.Client().QueryValidators(page, limit, sdk.BondStatusUnbonded)
+			if err != nil {
+				utils.WriteErrorToResponse(w, http.StatusInternalServerError, 1, err.Error())
+				return
+			}
+
+			items = append(items, staking.NewValidatorsFromRaw(bonded)...)
+			items = append(items, staking.NewValidatorsFromRaw(unbonding)...)
+			items = append(items, staking.NewValidatorsFromRaw(unbonded)...)
+		} else {
+			result, err := ctx.Client().QueryValidators(page, limit, status)
+			if err != nil {
+				utils.WriteErrorToResponse(w, http.StatusInternalServerError, 1, err.Error())
+				return
+			}
+
+			items = append(items, staking.NewValidatorsFromRaw(result)...)
 		}
 
-		items := staking.NewValidatorsFromRaw(result)
 		utils.WriteResultToResponse(w, http.StatusOK, items)
 	}
 }
