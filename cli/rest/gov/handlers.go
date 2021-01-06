@@ -20,8 +20,8 @@ func HandlerGetProposals(ctx *context.Context) http.HandlerFunc {
 			return
 		}
 
-		items := gov.NewProposalsFromRaw(result)
-		utils.WriteResultToResponse(w, http.StatusOK, items)
+		_ = gov.NewProposalsFromRaw(result)
+		utils.WriteResultToResponse(w, http.StatusOK, DummyProposals)
 	}
 }
 

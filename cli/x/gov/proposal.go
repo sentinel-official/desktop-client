@@ -22,6 +22,7 @@ type Proposal struct {
 	Title           string      `json:"title"`
 	Description     string      `json:"description"`
 	Status          string      `json:"status"`
+	Deposit         other.Coins `json:"deposit"`
 	TallyResult     TallyResult `json:"tally_result"`
 	SubmitTime      time.Time   `json:"submit_time"`
 	DepositEndTime  time.Time   `json:"deposit_end_time"`
@@ -36,6 +37,7 @@ func NewProposalFromRaw(item gov.Proposal) Proposal {
 		Title:       item.GetTitle(),
 		Description: item.GetDescription(),
 		Status:      item.Status.String(),
+		Deposit:     other.NewCoinsFromRaw(item.TotalDeposit),
 		TallyResult: TallyResult{
 			Yes:        item.FinalTallyResult.Yes.Int64(),
 			Abstain:    item.FinalTallyResult.Abstain.Int64(),
