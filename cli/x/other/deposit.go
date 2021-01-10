@@ -2,7 +2,7 @@ package other
 
 import (
 	"github.com/sentinel-official/hub/x/deposit"
-	"github.com/tendermint/tendermint/libs/common"
+	"github.com/tendermint/tendermint/libs/bytes"
 )
 
 type Deposit struct {
@@ -12,7 +12,7 @@ type Deposit struct {
 
 func NewDepositFromRaw(item deposit.Deposit) Deposit {
 	return Deposit{
-		Address: common.HexBytes(item.Address.Bytes()).String(),
+		Address: bytes.HexBytes(item.Address.Bytes()).String(),
 		Amount:  NewCoinsFromRaw(item.Coins),
 	}
 }

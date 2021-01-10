@@ -5,6 +5,7 @@ import (
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/x/auth"
+	"github.com/cosmos/cosmos-sdk/x/auth/exported"
 	"github.com/cosmos/cosmos-sdk/x/gov"
 	"github.com/cosmos/cosmos-sdk/x/staking"
 	hub "github.com/sentinel-official/hub/types"
@@ -34,9 +35,9 @@ func (c *Client) Query(path string, params, result interface{}) error {
 	return c.ctx.Codec.UnmarshalJSON(res, result)
 }
 
-func (c *Client) QueryAccount(address sdk.AccAddress) (auth.Account, error) {
+func (c *Client) QueryAccount(address sdk.AccAddress) (exported.Account, error) {
 	var (
-		result auth.Account
+		result exported.Account
 		path   = fmt.Sprintf("custom/%s/%s", auth.QuerierRoute, auth.QueryAccount)
 	)
 
@@ -92,7 +93,7 @@ func (c *Client) QueryProposals() (gov.Proposals, error) {
 		path   = fmt.Sprintf("custom/%s/%s", gov.QuerierRoute, gov.QueryProposals)
 	)
 
-	if err := c.Query(path, gov.NewQueryProposalsParams(0, 0, nil, nil), &result); err != nil {
+	if err := c.Query(path, gov.NewQueryProposalsParams(0, 0, gov.StatusNil, nil, nil), &result); err != nil {
 		return result, err
 	}
 
@@ -229,13 +230,13 @@ func (c *Client) QuerySubscription(id uint64) (subscription.Subscription, error)
 	return result, nil
 }
 
-func (c *Client) QuerySubscriptionsForAddress(address sdk.AccAddress, skip, limit int) (subscription.Subscriptions, error) {
+func (c *Client) QuerySubscriptionsForAddress(address sdk.AccAddress, status hub.Status, skip, limit int) (subscription.Subscriptions, error) {
 	var (
 		result subscription.Subscriptions
 		path   = fmt.Sprintf("custom/%s/%s/%s", vpn.StoreKey, subscription.QuerierRoute, subscription.QuerySubscriptionsForAddress)
 	)
 
-	if err := c.Query(path, subscription.NewQuerySubscriptionsForAddressParams(address, skip, limit), &result); err != nil {
+	if err := c.Query(path, subscription.NewQuerySubscriptionsForAddressParams(address, status, skip, limit), &result); err != nil {
 		return result, err
 	}
 

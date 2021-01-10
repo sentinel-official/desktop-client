@@ -3,7 +3,7 @@ package context
 import (
 	"context"
 
-	"github.com/tendermint/tendermint/libs/common"
+	"github.com/tendermint/tendermint/libs/bytes"
 
 	"github.com/sentinel-official/desktop-client/cli/lite"
 	"github.com/sentinel-official/desktop-client/cli/types"
@@ -30,7 +30,7 @@ func (c *Context) WithAuthToken(v *types.AuthToken) *Context { c.token = v; retu
 func (c *Context) WithContext(v context.Context) *Context    { c.ctx = v; return c }
 
 func (c *Context) AddressHex() string {
-	return common.HexBytes(c.client.FromAddress().Bytes()).String()
+	return bytes.HexBytes(c.client.FromAddress().Bytes()).String()
 }
 
 func (c *Context) Home() string                { return c.home }

@@ -4,7 +4,7 @@ import (
 	"time"
 
 	"github.com/sentinel-official/hub/x/subscription"
-	"github.com/tendermint/tendermint/libs/common"
+	"github.com/tendermint/tendermint/libs/bytes"
 
 	"github.com/sentinel-official/desktop-client/cli/x/other"
 )
@@ -25,10 +25,10 @@ type Subscription struct {
 func NewSubscriptionFromRaw(item subscription.Subscription) Subscription {
 	return Subscription{
 		ID:       item.ID,
-		Owner:    common.HexBytes(item.Owner.Bytes()).String(),
+		Owner:    bytes.HexBytes(item.Owner.Bytes()).String(),
 		Plan:     item.Plan,
 		Expiry:   item.Expiry,
-		Node:     common.HexBytes(item.Node.Bytes()).String(),
+		Node:     bytes.HexBytes(item.Node.Bytes()).String(),
 		Price:    other.NewCoinFromRaw(item.Price),
 		Deposit:  other.NewCoinFromRaw(item.Deposit),
 		Free:     item.Free.Int64(),

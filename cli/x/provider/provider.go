@@ -2,7 +2,7 @@ package provider
 
 import (
 	"github.com/sentinel-official/hub/x/provider"
-	"github.com/tendermint/tendermint/libs/common"
+	"github.com/tendermint/tendermint/libs/bytes"
 )
 
 type Provider struct {
@@ -15,7 +15,7 @@ type Provider struct {
 
 func NewProviderFromRaw(item provider.Provider) Provider {
 	return Provider{
-		Address:     common.HexBytes(item.Address.Bytes()).String(),
+		Address:     bytes.HexBytes(item.Address.Bytes()).String(),
 		Name:        item.Name,
 		Identity:    item.Identity,
 		Website:     item.Website,

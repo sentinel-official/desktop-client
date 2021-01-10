@@ -2,7 +2,7 @@ package gov
 
 import (
 	"github.com/cosmos/cosmos-sdk/x/gov"
-	"github.com/tendermint/tendermint/libs/common"
+	"github.com/tendermint/tendermint/libs/bytes"
 )
 
 type Vote struct {
@@ -14,7 +14,7 @@ type Vote struct {
 func NewVoteFromRaw(vote gov.Vote) Vote {
 	return Vote{
 		ProposalID: vote.ProposalID,
-		Voter:      common.HexBytes(vote.Voter.Bytes()).String(),
+		Voter:      bytes.HexBytes(vote.Voter.Bytes()).String(),
 		Option:     vote.Option.String(),
 	}
 }

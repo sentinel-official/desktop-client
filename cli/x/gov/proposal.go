@@ -4,7 +4,7 @@ import (
 	"time"
 
 	"github.com/cosmos/cosmos-sdk/x/gov"
-	"github.com/tendermint/tendermint/libs/common"
+	"github.com/tendermint/tendermint/libs/bytes"
 
 	"github.com/sentinel-official/desktop-client/cli/x/other"
 )
@@ -64,7 +64,7 @@ func NewProposalsFromRaw(items gov.Proposals) Proposals {
 
 func NewDepositFromRaw(deposit gov.Deposit) other.Deposit {
 	return other.Deposit{
-		Address: common.HexBytes(deposit.Depositor.Bytes()).String(),
+		Address: bytes.HexBytes(deposit.Depositor.Bytes()).String(),
 		Amount:  other.NewCoinsFromRaw(deposit.Amount),
 	}
 }

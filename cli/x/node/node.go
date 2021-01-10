@@ -4,7 +4,7 @@ import (
 	"time"
 
 	"github.com/sentinel-official/hub/x/node"
-	"github.com/tendermint/tendermint/libs/common"
+	"github.com/tendermint/tendermint/libs/bytes"
 
 	"github.com/sentinel-official/desktop-client/cli/x/other"
 )
@@ -20,8 +20,8 @@ type Node struct {
 
 func NewNodeFromRaw(item node.Node) Node {
 	return Node{
-		Address:   common.HexBytes(item.Address.Bytes()).String(),
-		Provider:  common.HexBytes(item.Address.Bytes()).String(),
+		Address:   bytes.HexBytes(item.Address.Bytes()).String(),
+		Provider:  bytes.HexBytes(item.Address.Bytes()).String(),
 		Price:     other.NewCoinsFromRaw(item.Price),
 		RemoteURL: item.RemoteURL,
 		Status:    item.Status.String(),

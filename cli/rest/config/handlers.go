@@ -3,12 +3,13 @@ package config
 import (
 	"io/ioutil"
 	"net/http"
+	"os"
 	"path/filepath"
 
 	"github.com/spf13/viper"
 	"github.com/tendermint/tendermint/libs/log"
 	"github.com/tendermint/tendermint/lite/proxy"
-	rpcclient "github.com/tendermint/tendermint/rpc/client"
+	rpchttp "github.com/tendermint/tendermint/rpc/client/http"
 
 	"github.com/sentinel-official/desktop-client/cli/context"
 	"github.com/sentinel-official/desktop-client/cli/types"
@@ -78,7 +79,7 @@ func HandlerUpdateConfig(ctx *context.Context) http.HandlerFunc {
 			client.WithGas(body.Chain.Gas)
 		}
 		if body.Chain.ID != cfg.Chain.ID {
-			verifierDir, err := ioutil.TempDir(client.VerifierHome(), "*-verifier")
+			verifierDir, err := ioutil.TempDir(os.TempDir(), "verifier-*")
 			if err != nil {
 				utils.WriteErrorToResponse(w, http.StatusInternalServerError, 4, err.Error())
 				return
@@ -95,9 +96,13 @@ func HandlerUpdateConfig(ctx *context.Context) http.HandlerFunc {
 				WithVerifier(verifier)
 		}
 		if body.Chain.RPCAddress != cfg.Chain.RPCAddress {
-			node := rpcclient.NewHTTP(body.Chain.RPCAddress, "/websocket")
+			node, err := rpchttp.New(body.Chain.RPCAddress, "/websocket")
+			if err != nil {
+				utils.WriteErrorToResponse(w, http.StatusInternalServerError, 4, err.Error())
+				return
+			}
 
-			verifierDir, err := ioutil.TempDir(client.VerifierHome(), "*-verifier")
+			verifierDir, err := ioutil.TempDir(os.TempDir(), "verifier-*")
 			if err != nil {
 				utils.WriteErrorToResponse(w, http.StatusInternalServerError, 4, err.Error())
 				return
@@ -123,9 +128,13 @@ func HandlerUpdateConfig(ctx *context.Context) http.HandlerFunc {
 			client.WithTrustNode(body.Chain.TrustNode)
 
 			if !body.Chain.TrustNode {
-				node := rpcclient.NewHTTP(body.Chain.RPCAddress, "/websocket")
+				node, err := rpchttp.New(body.Chain.RPCAddress, "/websocket")
+				if err != nil {
+					utils.WriteErrorToResponse(w, http.StatusInternalServerError, 4, err.Error())
+					return
+				}
 
-				verifierDir, err := ioutil.TempDir(client.VerifierHome(), "*-verifier")
+				verifierDir, err := ioutil.TempDir(os.TempDir(), "verifier-*")
 				if err != nil {
 					utils.WriteErrorToResponse(w, http.StatusInternalServerError, 4, err.Error())
 					return

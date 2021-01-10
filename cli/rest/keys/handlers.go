@@ -3,6 +3,7 @@ package keys
 import (
 	"net/http"
 
+	"github.com/cosmos/cosmos-sdk/crypto/keys"
 	"github.com/cosmos/go-bip39"
 	"github.com/gorilla/mux"
 
@@ -71,7 +72,8 @@ func HandlerAddKey(ctx *context.Context) http.HandlerFunc {
 			}
 		}
 
-		info, err = ctx.Client().Keybase().CreateAccount(body.Name, body.Mnemonic, body.BIP39Password, body.Password, 0, 0)
+		info, err = ctx.Client().Keybase().CreateAccount(body.Name, body.Mnemonic, body.BIP39Password, body.Password,
+			keys.CreateHDPath(0, 0).String(), keys.Secp256k1)
 		if err != nil {
 			utils.WriteErrorToResponse(w, http.StatusInternalServerError, 6, err.Error())
 			return

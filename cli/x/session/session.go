@@ -4,7 +4,7 @@ import (
 	"time"
 
 	"github.com/sentinel-official/hub/x/session"
-	"github.com/tendermint/tendermint/libs/common"
+	"github.com/tendermint/tendermint/libs/bytes"
 
 	"github.com/sentinel-official/desktop-client/cli/x/other"
 )
@@ -24,8 +24,8 @@ func NewSessionFromRaw(item session.Session) Session {
 	return Session{
 		ID:           item.ID,
 		Subscription: item.Subscription,
-		Node:         common.HexBytes(item.Node.Bytes()).String(),
-		Address:      common.HexBytes(item.Address.Bytes()).String(),
+		Node:         bytes.HexBytes(item.Node.Bytes()).String(),
+		Address:      bytes.HexBytes(item.Address.Bytes()).String(),
 		Duration:     item.Duration.Nanoseconds(),
 		Bandwidth:    other.NewBandwidthFromRaw(item.Bandwidth),
 		Status:       item.Status.String(),

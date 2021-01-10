@@ -15,6 +15,14 @@ func RegisterRoutes(r *mux.Router, ctx *context.Context) {
 	r.Name("GetSubscriptionsForAddress").
 		Methods(http.MethodGet).Path("/accounts/{address}/subscriptions").
 		HandlerFunc(HandlerGetSubscriptionsForAddress(ctx))
+
+	r.Name("AddSubscription").
+		Methods(http.MethodPost).Path("/accounts/{address}/subscriptions").
+		HandlerFunc(HandlerAddSubscription(ctx))
+	r.Name("CancelSubscription").
+		Methods(http.MethodPost).Path("/accounts/{address}/subscriptions/{id}/cancel").
+		HandlerFunc(HandlerCancelSubscription(ctx))
+
 	r.Name("GetQuota").
 		Methods(http.MethodGet).Path("/subscriptions/{id}/quotas/{address}").
 		HandlerFunc(HandlerGetQuota(ctx))

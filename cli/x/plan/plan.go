@@ -4,7 +4,7 @@ import (
 	"time"
 
 	"github.com/sentinel-official/hub/x/plan"
-	"github.com/tendermint/tendermint/libs/common"
+	"github.com/tendermint/tendermint/libs/bytes"
 
 	"github.com/sentinel-official/desktop-client/cli/x/other"
 )
@@ -22,7 +22,7 @@ type Plan struct {
 func NewPlanFromRaw(item plan.Plan) Plan {
 	return Plan{
 		ID:       item.ID,
-		Provider: common.HexBytes(item.Provider.Bytes()).String(),
+		Provider: bytes.HexBytes(item.Provider.Bytes()).String(),
 		Price:    other.NewCoinsFromRaw(item.Price),
 		Validity: item.Validity.Nanoseconds(),
 		Bytes:    item.Bytes.Int64(),
