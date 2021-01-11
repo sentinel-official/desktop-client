@@ -1,5 +1,8 @@
 package cmd
 
 const (
-	flagListenOn = "listen-on"
+	flagCORSAllowedOrigins = "cors.allowed-origins"
+	flagListenURL          = "listen-url"
+	flagTLSCrt             = "tls-crt"
+	flagTLSKey             = "tls-key"
 )

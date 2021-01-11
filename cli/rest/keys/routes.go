@@ -20,6 +20,6 @@ func RegisterRoutes(r *mux.Router, ctx *context.Context) {
 		Methods(http.MethodPost).Path("/keys").
 		HandlerFunc(HandlerAddKey(ctx))
 	r.Name("DeleteKey").
-		Methods(http.MethodPost).Path("/keys/{name}").
+		Methods(http.MethodPost).Path("/keys/{name}/delete").
 		HandlerFunc(HandlerDeleteKey(ctx))
 }

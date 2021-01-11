@@ -25,7 +25,6 @@ type Commission struct {
 
 type Validator struct {
 	Address          string `json:"address"`
-	PubKey           string `json:"pub_key"`
 	ConsensusAddress string `json:"consensus_address"`
 	ConsensusPubKey  string `json:"consensus_pub_key"`
 
@@ -46,7 +45,6 @@ type Validator struct {
 func NewValidatorFromRaw(v staking.Validator) Validator {
 	return Validator{
 		Address:          bytes.HexBytes(v.OperatorAddress.Bytes()).String(),
-		PubKey:           "",
 		ConsensusAddress: bytes.HexBytes(v.ConsPubKey.Address().Bytes()).String(),
 		ConsensusPubKey:  bytes.HexBytes(v.ConsPubKey.Bytes()).String(),
 		Description: Description{

@@ -3,6 +3,7 @@ package account
 import (
 	"encoding/hex"
 	"net/http"
+	"strings"
 
 	"github.com/gorilla/mux"
 
@@ -23,6 +24,11 @@ func HandlerGetAccount(ctx *context.Context) http.HandlerFunc {
 
 		result, err := ctx.Client().QueryAccount(address)
 		if err != nil {
+			if strings.Contains(err.Error(), "does not exist") {
+				utils.WriteResultToResponse(w, http.StatusOK, nil)
+				return
+			}
+
 			utils.WriteErrorToResponse(w, http.StatusInternalServerError, 2, err.Error())
 			return
 		}

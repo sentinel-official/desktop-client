@@ -141,7 +141,9 @@ func HandlerCancelSubscription(ctx *context.Context) http.HandlerFunc {
 			return
 		}
 
-		id, err := strconv.ParseUint(mux.Vars(r)["id"], 10, 64)
+		vars := mux.Vars(r)
+
+		id, err := strconv.ParseUint(vars["id"], 10, 64)
 		if err != nil {
 			utils.WriteErrorToResponse(w, http.StatusBadRequest, 3, err.Error())
 			return
