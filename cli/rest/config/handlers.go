@@ -42,7 +42,7 @@ func HandlerUpdateConfig(ctx *context.Context) http.HandlerFunc {
 			client = ctx.Client().Copy()
 		)
 
-		if body.Setup != cfg.Setup {
+		if body.Setup != ctx.Config().Setup {
 			cfg.Setup = body.Setup
 		}
 		if body.From != "" {
@@ -58,27 +58,53 @@ func HandlerUpdateConfig(ctx *context.Context) http.HandlerFunc {
 					WithFromAddress(info.GetAddress())
 			}
 		}
-		if body.Chain.BroadcastMode != cfg.Chain.BroadcastMode {
+		if body.Chain.BroadcastMode != ctx.Config().Chain.BroadcastMode {
 			cfg.Chain.BroadcastMode = body.Chain.BroadcastMode
 			client.WithBroadcastMode(body.Chain.BroadcastMode)
 		}
-		if body.Chain.Fees != cfg.Chain.Fees {
+		if body.Chain.Fees != ctx.Config().Chain.Fees {
 			cfg.Chain.Fees = body.Chain.Fees
 			client.WithFees(body.Chain.Fees)
 		}
-		if body.Chain.GasAdjustment != cfg.Chain.GasAdjustment {
+		if body.Chain.GasAdjustment != ctx.Config().Chain.GasAdjustment {
 			cfg.Chain.GasAdjustment = body.Chain.GasAdjustment
 			client.WithGasAdjustment(body.Chain.GasAdjustment)
 		}
-		if body.Chain.GasPrices != cfg.Chain.GasPrices {
+		if body.Chain.GasPrices != ctx.Config().Chain.GasPrices {
 			cfg.Chain.GasPrices = body.Chain.GasPrices
 			client.WithGasPrices(body.Chain.GasPrices)
 		}
-		if body.Chain.Gas != cfg.Chain.Gas {
+		if body.Chain.Gas != ctx.Config().Chain.Gas {
 			cfg.Chain.Gas = body.Chain.Gas
 			client.WithGas(body.Chain.Gas)
 		}
-		if body.Chain.ID != cfg.Chain.ID {
+		if body.Chain.ID != ctx.Config().Chain.ID && body.Chain.RPCAddress != ctx.Config().Chain.RPCAddress {
+			node, err := rpchttp.New(body.Chain.RPCAddress, "/websocket")
+			if err != nil {
+				utils.WriteErrorToResponse(w, http.StatusInternalServerError, 4, err.Error())
+				return
+			}
+
+			verifierDir, err := ioutil.TempDir(os.TempDir(), "verifier-*")
+			if err != nil {
+				utils.WriteErrorToResponse(w, http.StatusInternalServerError, 4, err.Error())
+				return
+			}
+
+			verifier, err := proxy.NewVerifier(body.Chain.ID, verifierDir, node, log.NewNopLogger(), 16)
+			if err != nil {
+				utils.WriteErrorToResponse(w, http.StatusInternalServerError, 4, err.Error())
+				return
+			}
+
+			cfg.Chain.ID = body.Chain.ID
+			cfg.Chain.RPCAddress = body.Chain.RPCAddress
+			client.WithNodeURI(body.Chain.RPCAddress).
+				WithNode(node).
+				WithVerifier(verifier).
+				WithChainID(body.Chain.ID)
+		}
+		if body.Chain.ID != ctx.Config().Chain.ID {
 			verifierDir, err := ioutil.TempDir(os.TempDir(), "verifier-*")
 			if err != nil {
 				utils.WriteErrorToResponse(w, http.StatusInternalServerError, 4, err.Error())
@@ -95,7 +121,7 @@ func HandlerUpdateConfig(ctx *context.Context) http.HandlerFunc {
 			client.WithChainID(body.Chain.ID).
 				WithVerifier(verifier)
 		}
-		if body.Chain.RPCAddress != cfg.Chain.RPCAddress {
+		if body.Chain.RPCAddress != ctx.Config().Chain.RPCAddress {
 			node, err := rpchttp.New(body.Chain.RPCAddress, "/websocket")
 			if err != nil {
 				utils.WriteErrorToResponse(w, http.StatusInternalServerError, 4, err.Error())
@@ -119,11 +145,11 @@ func HandlerUpdateConfig(ctx *context.Context) http.HandlerFunc {
 				WithNode(node).
 				WithVerifier(verifier)
 		}
-		if body.Chain.SimulateAndExecute != cfg.Chain.SimulateAndExecute {
+		if body.Chain.SimulateAndExecute != ctx.Config().Chain.SimulateAndExecute {
 			cfg.Chain.SimulateAndExecute = body.Chain.SimulateAndExecute
 			client.WithSimulateAndExecute(body.Chain.SimulateAndExecute)
 		}
-		if body.Chain.TrustNode != cfg.Chain.TrustNode {
+		if body.Chain.TrustNode != ctx.Config().Chain.TrustNode {
 			cfg.Chain.TrustNode = body.Chain.TrustNode
 			client.WithTrustNode(body.Chain.TrustNode)
 

@@ -45,15 +45,34 @@ func main() {
 					return err
 				}
 
-				cfg.Chain.BroadcastMode = viper.GetString(flagChainBroadcastMode)
-				cfg.Chain.Fees = viper.GetString(flagChainFees)
-				cfg.Chain.GasAdjustment = viper.GetFloat64(flagChainGasAdjustment)
-				cfg.Chain.GasPrices = viper.GetString(flagChainGasPrices)
-				cfg.Chain.Gas = viper.GetUint64(flagChainGas)
-				cfg.Chain.ID = viper.GetString(flagChainID)
-				cfg.Chain.RPCAddress = viper.GetString(flagChainRPCAddress)
-				cfg.Chain.SimulateAndExecute = viper.GetBool(flagChainSimulateAndExecute)
-				cfg.Chain.TrustNode = viper.GetBool(flagChainTrustNode)
+				defCfg := types.NewConfig().WithDefaultValues()
+				if viper.GetString(flagChainBroadcastMode) != defCfg.Chain.BroadcastMode {
+					cfg.Chain.BroadcastMode = viper.GetString(flagChainBroadcastMode)
+				}
+				if viper.GetString(flagChainFees) != defCfg.Chain.Fees {
+					cfg.Chain.Fees = viper.GetString(flagChainFees)
+				}
+				if viper.GetFloat64(flagChainGasAdjustment) != defCfg.Chain.GasAdjustment {
+					cfg.Chain.GasAdjustment = viper.GetFloat64(flagChainGasAdjustment)
+				}
+				if viper.GetString(flagChainGasPrices) != defCfg.Chain.GasPrices {
+					cfg.Chain.GasPrices = viper.GetString(flagChainGasPrices)
+				}
+				if viper.GetUint64(flagChainGas) != defCfg.Chain.Gas {
+					cfg.Chain.Gas = viper.GetUint64(flagChainGas)
+				}
+				if viper.GetString(flagChainID) != defCfg.Chain.ID {
+					cfg.Chain.ID = viper.GetString(flagChainID)
+				}
+				if viper.GetString(flagChainRPCAddress) != defCfg.Chain.RPCAddress {
+					cfg.Chain.RPCAddress = viper.GetString(flagChainRPCAddress)
+				}
+				if viper.GetBool(flagChainSimulateAndExecute) != defCfg.Chain.SimulateAndExecute {
+					cfg.Chain.SimulateAndExecute = viper.GetBool(flagChainSimulateAndExecute)
+				}
+				if viper.GetBool(flagChainTrustNode) != defCfg.Chain.TrustNode {
+					cfg.Chain.TrustNode = viper.GetBool(flagChainTrustNode)
+				}
 
 				return cfg.Validate()
 			},
