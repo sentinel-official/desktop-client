@@ -7,8 +7,6 @@ import (
 )
 
 type RequestAddSession struct {
-	Host      string `json:"host"`
-	Port      uint16 `json:"port"`
 	RemoteURL string `json:"remote_url"`
 }
 
@@ -22,12 +20,6 @@ func NewRequestAddSession(r *http.Request) (*RequestAddSession, error) {
 }
 
 func (r *RequestAddSession) Validate() error {
-	if r.Host == "" {
-		return fmt.Errorf("invalid field Host")
-	}
-	if r.Port == 0 {
-		return fmt.Errorf("invalid field Port")
-	}
 	if r.RemoteURL == "" {
 		return fmt.Errorf("invalid field RemoteURL")
 	}

@@ -2,7 +2,9 @@ package session
 
 import (
 	"bytes"
+	"crypto/tls"
 	"encoding/base64"
+	"encoding/binary"
 	"encoding/hex"
 	"encoding/json"
 	"fmt"
@@ -93,6 +95,11 @@ func HandlerGetSessionsForAddress(ctx *context.Context) http.HandlerFunc {
 func HandlerAddSession(ctx *context.Context) http.HandlerFunc {
 	var (
 		client = http.Client{
+			Transport: &http.Transport{
+				TLSClientConfig: &tls.Config{
+					InsecureSkipVerify: true,
+				},
+			},
 			Timeout: 5 * time.Second,
 		}
 	)
@@ -108,10 +115,7 @@ func HandlerAddSession(ctx *context.Context) http.HandlerFunc {
 			return
 		}
 
-		var (
-			vars     = mux.Vars(r)
-			endpoint = fmt.Sprintf("%s/sessions", body.RemoteURL)
-		)
+		vars := mux.Vars(r)
 
 		id, err := strconv.ParseUint(vars["id"], 10, 64)
 		if err != nil {
@@ -127,15 +131,15 @@ func HandlerAddSession(ctx *context.Context) http.HandlerFunc {
 
 		request, err := json.Marshal(
 			map[string]interface{}{
-				"id":      id,
-				"key":     privateKey.Public().String(),
-				"address": ctx.AddressHex(),
+				"key": privateKey.Public().String(),
 			},
 		)
 		if err != nil {
 			utils.WriteErrorToResponse(w, http.StatusInternalServerError, 5, err.Error())
 			return
 		}
+
+		endpoint := fmt.Sprintf("%s/accounts/%s/subscriptions/%d/sessions", body.RemoteURL, ctx.AddressHex(), id)
 
 		resp, err := client.Post(endpoint, "application/json", bytes.NewBuffer(request))
 		if err != nil {
@@ -148,8 +152,13 @@ func HandlerAddSession(ctx *context.Context) http.HandlerFunc {
 		}()
 
 		var response types.Response
-		if err := json.NewDecoder(resp.Body).Decode(&request); err != nil {
+		if err := json.NewDecoder(resp.Body).Decode(&response); err != nil {
 			utils.WriteErrorToResponse(w, http.StatusInternalServerError, 7, err.Error())
+			return
+		}
+
+		if !response.Success || response.Error != nil {
+			utils.WriteErrorToResponse(w, resp.StatusCode, 8, response.Error.Message)
 			return
 		}
 
@@ -160,10 +169,9 @@ func HandlerAddSession(ctx *context.Context) http.HandlerFunc {
 		}
 
 		var (
-			v4Addr    = net.IP(result[0:4])
-			v6Addr    = net.IP(result[4:20])
-			dnsAddr   = net.IP(result[20:24])
-			publicKey = wgt.NewKey(result[24:])
+			v4Addr, v6Addr = net.IP(result[0:4]), net.IP(result[4:20])
+			host, port     = net.IP(result[20:24]), binary.BigEndian.Uint16(result[24:26])
+			publicKey      = wgt.NewKey(result[26:58])
 		)
 
 		listenPort, err := utils.GetFreeUDPPort()
@@ -181,7 +189,9 @@ func HandlerAddSession(ctx *context.Context) http.HandlerFunc {
 				},
 				ListenPort: listenPort,
 				PrivateKey: *privateKey,
-				DNS:        []net.IP{dnsAddr},
+				DNS: []net.IP{
+					net.ParseIP("10.8.0.1"),
+				},
 			},
 			Peers: []wgt.Peer{
 				{
@@ -191,8 +201,8 @@ func HandlerAddSession(ctx *context.Context) http.HandlerFunc {
 						{net.ParseIP("::"), 0},
 					},
 					Endpoint: wgt.Endpoint{
-						Host: body.Host,
-						Port: body.Port,
+						Host: host.String(),
+						Port: port,
 					},
 				},
 			},
