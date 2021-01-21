@@ -39,12 +39,6 @@ func (r *RequestAddSubscription) Validate() error {
 type RequestCancelSubscription struct {
 	Memo     string `json:"memo"`
 	Password string `json:"password"`
-
-	To     string     `json:"to"`
-	Amount other.Coin `json:"amount"`
-
-	ID    uint64 `json:"id"`
-	Denom string `json:"denom"`
 }
 
 func NewRequestCancelSubscription(r *http.Request) (*RequestCancelSubscription, error) {

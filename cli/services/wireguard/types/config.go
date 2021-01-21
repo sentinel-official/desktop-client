@@ -109,7 +109,7 @@ func (c *Config) ToWgQuick() string {
 	return output.String()
 }
 
-func (c Config) WriteToFile(dir string) error {
+func (c *Config) WriteToFile(dir string) error {
 	return ioutil.WriteFile(
 		filepath.Join(dir, fmt.Sprintf("%s.conf", c.Name)),
 		[]byte(c.ToWgQuick()),

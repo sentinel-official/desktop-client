@@ -166,3 +166,4 @@ func (c *Client) Keybase() crypto.Keybase     { return c.ctx.Keybase }
 func (c *Client) Node() client.Client         { return c.ctx.Client }
 func (c *Client) FromAddress() sdk.AccAddress { return c.ctx.FromAddress }
 func (c *Client) FromAddressHex() string      { return bytes.HexBytes(c.ctx.FromAddress.Bytes()).String() }
+func (c *Client) FromName() string            { return c.ctx.FromName }

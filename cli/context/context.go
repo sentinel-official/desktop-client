@@ -10,11 +10,12 @@ import (
 )
 
 type Context struct {
-	home   string
-	ctx    context.Context
-	client *lite.Client
-	config *types.Config
-	token  *types.AuthToken
+	home    string
+	ctx     context.Context
+	service types.Service
+	client  *lite.Client
+	config  *types.Config
+	token   *types.AuthToken
 }
 
 func NewContext() *Context {
@@ -28,6 +29,7 @@ func (c *Context) WithClient(v *lite.Client) *Context        { c.client = v; ret
 func (c *Context) WithConfig(v *types.Config) *Context       { c.config = v; return c }
 func (c *Context) WithAuthToken(v *types.AuthToken) *Context { c.token = v; return c }
 func (c *Context) WithContext(v context.Context) *Context    { c.ctx = v; return c }
+func (c *Context) WithService(v types.Service) *Context      { c.service = v; return c }
 
 func (c *Context) AddressHex() string {
 	return bytes.HexBytes(c.client.FromAddress().Bytes()).String()
@@ -38,6 +40,7 @@ func (c *Context) Client() *lite.Client        { return c.client }
 func (c *Context) Config() *types.Config       { return c.config }
 func (c *Context) AuthToken() *types.AuthToken { return c.token }
 func (c *Context) Context() context.Context    { return c.ctx }
+func (c *Context) Service() types.Service      { return c.service }
 
 func (c *Context) WithValue(key, value interface{}) *Context {
 	c.WithContext(context.WithValue(c.ctx, key, value))

@@ -40,8 +40,7 @@ func main() {
 					}
 				}
 
-				cfgFile := filepath.Join(home, "config.toml")
-				if err := cfg.LoadFromPath(cfgFile); err != nil {
+				if err := cfg.LoadFromPath(filepath.Join(home, "config.toml")); err != nil {
 					return err
 				}
 

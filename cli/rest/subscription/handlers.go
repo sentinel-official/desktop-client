@@ -21,13 +21,13 @@ func HandlerGetSubscription(ctx *context.Context) http.HandlerFunc {
 
 		id, err := strconv.ParseUint(vars["id"], 10, 64)
 		if err != nil {
-			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1, err.Error())
+			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1001, err.Error())
 			return
 		}
 
 		result, err := ctx.Client().QuerySubscription(id)
 		if err != nil {
-			utils.WriteErrorToResponse(w, http.StatusInternalServerError, 2, err.Error())
+			utils.WriteErrorToResponse(w, http.StatusInternalServerError, 1002, err.Error())
 			return
 		}
 
@@ -64,21 +64,26 @@ func HandlerGetSubscriptionsForAddress(ctx *context.Context) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		status, skip, limit, err := parseQuery(r.URL.Query())
 		if err != nil {
-			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1, err.Error())
+			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1001, err.Error())
 			return
 		}
 
 		vars := mux.Vars(r)
 
+		if ctx.Client().FromAddressHex() != vars["address"] {
+			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1002, "")
+			return
+		}
+
 		address, err := hex.DecodeString(vars["address"])
 		if err != nil {
-			utils.WriteErrorToResponse(w, http.StatusBadRequest, 2, err.Error())
+			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1003, err.Error())
 			return
 		}
 
 		result, err := ctx.Client().QuerySubscriptionsForAddress(address, status, skip, limit)
 		if err != nil {
-			utils.WriteErrorToResponse(w, http.StatusInternalServerError, 3, err.Error())
+			utils.WriteErrorToResponse(w, http.StatusInternalServerError, 1004, err.Error())
 			return
 		}
 
@@ -89,13 +94,20 @@ func HandlerGetSubscriptionsForAddress(ctx *context.Context) http.HandlerFunc {
 
 func HandlerAddSubscription(ctx *context.Context) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
+		vars := mux.Vars(r)
+
+		if ctx.Client().FromAddressHex() != vars["address"] {
+			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1001, "")
+			return
+		}
+
 		body, err := NewRequestAddSubscription(r)
 		if err != nil {
-			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1, err.Error())
+			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1002, err.Error())
 			return
 		}
 		if err := body.Validate(); err != nil {
-			utils.WriteErrorToResponse(w, http.StatusBadRequest, 2, err.Error())
+			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1003, err.Error())
 			return
 		}
 
@@ -103,25 +115,25 @@ func HandlerAddSubscription(ctx *context.Context) http.HandlerFunc {
 		if body.ID == 0 {
 			message, err = subscription.NewMsgSubscribeToNode(ctx.AddressHex(), body.To, body.Amount).Raw()
 			if err != nil {
-				utils.WriteErrorToResponse(w, http.StatusInternalServerError, 3, err.Error())
+				utils.WriteErrorToResponse(w, http.StatusInternalServerError, 1004, err.Error())
 				return
 			}
 		} else {
 			message, err = subscription.NewMsgSubscribeToPlan(ctx.AddressHex(), body.ID, body.Denom).Raw()
 			if err != nil {
-				utils.WriteErrorToResponse(w, http.StatusInternalServerError, 3, err.Error())
+				utils.WriteErrorToResponse(w, http.StatusInternalServerError, 1004, err.Error())
 				return
 			}
 		}
 
 		if err := message.ValidateBasic(); err != nil {
-			utils.WriteErrorToResponse(w, http.StatusBadRequest, 4, err.Error())
+			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1005, err.Error())
 			return
 		}
 
 		res, err := ctx.Client().Tx(body.Memo, body.Password, message)
 		if err != nil {
-			utils.WriteErrorToResponse(w, http.StatusInternalServerError, 5, err.Error())
+			utils.WriteErrorToResponse(w, http.StatusInternalServerError, 1006, err.Error())
 			return
 		}
 
@@ -131,38 +143,43 @@ func HandlerAddSubscription(ctx *context.Context) http.HandlerFunc {
 
 func HandlerCancelSubscription(ctx *context.Context) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		body, err := NewRequestCancelSubscription(r)
-		if err != nil {
-			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1, err.Error())
-			return
-		}
-		if err := body.Validate(); err != nil {
-			utils.WriteErrorToResponse(w, http.StatusBadRequest, 2, err.Error())
-			return
-		}
-
 		vars := mux.Vars(r)
+
+		if ctx.Client().FromAddressHex() != vars["address"] {
+			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1001, "")
+			return
+		}
 
 		id, err := strconv.ParseUint(vars["id"], 10, 64)
 		if err != nil {
-			utils.WriteErrorToResponse(w, http.StatusBadRequest, 3, err.Error())
+			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1002, err.Error())
+			return
+		}
+
+		body, err := NewRequestCancelSubscription(r)
+		if err != nil {
+			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1003, err.Error())
+			return
+		}
+		if err := body.Validate(); err != nil {
+			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1004, err.Error())
 			return
 		}
 
 		message, err := subscription.NewMsgCancel(ctx.AddressHex(), id).Raw()
 		if err != nil {
-			utils.WriteErrorToResponse(w, http.StatusInternalServerError, 4, err.Error())
+			utils.WriteErrorToResponse(w, http.StatusInternalServerError, 1005, err.Error())
 			return
 		}
 
 		if err := message.ValidateBasic(); err != nil {
-			utils.WriteErrorToResponse(w, http.StatusBadRequest, 5, err.Error())
+			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1006, err.Error())
 			return
 		}
 
 		res, err := ctx.Client().Tx(body.Memo, body.Password, message)
 		if err != nil {
-			utils.WriteErrorToResponse(w, http.StatusInternalServerError, 6, err.Error())
+			utils.WriteErrorToResponse(w, http.StatusInternalServerError, 1007, err.Error())
 			return
 		}
 
@@ -176,19 +193,19 @@ func HandlerGetQuota(ctx *context.Context) http.HandlerFunc {
 
 		id, err := strconv.ParseUint(vars["id"], 10, 64)
 		if err != nil {
-			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1, err.Error())
+			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1001, err.Error())
 			return
 		}
 
 		address, err := hex.DecodeString(vars["address"])
 		if err != nil {
-			utils.WriteErrorToResponse(w, http.StatusBadRequest, 2, err.Error())
+			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1002, err.Error())
 			return
 		}
 
 		result, err := ctx.Client().QueryQuota(id, address)
 		if err != nil {
-			utils.WriteErrorToResponse(w, http.StatusInternalServerError, 3, err.Error())
+			utils.WriteErrorToResponse(w, http.StatusInternalServerError, 1003, err.Error())
 			return
 		}
 
@@ -203,19 +220,19 @@ func HandlerGetQuotas(ctx *context.Context) http.HandlerFunc {
 
 		id, err := strconv.ParseUint(vars["id"], 10, 64)
 		if err != nil {
-			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1, err.Error())
+			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1001, err.Error())
 			return
 		}
 
 		_, skip, limit, err := parseQuery(r.URL.Query())
 		if err != nil {
-			utils.WriteErrorToResponse(w, http.StatusBadRequest, 2, err.Error())
+			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1002, err.Error())
 			return
 		}
 
 		result, err := ctx.Client().QueryQuotas(id, skip, limit)
 		if err != nil {
-			utils.WriteErrorToResponse(w, http.StatusInternalServerError, 3, err.Error())
+			utils.WriteErrorToResponse(w, http.StatusInternalServerError, 1003, err.Error())
 			return
 		}
 

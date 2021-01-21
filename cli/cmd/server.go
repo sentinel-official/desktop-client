@@ -29,6 +29,7 @@ import (
 	"github.com/sentinel-official/desktop-client/cli/rest/node"
 	"github.com/sentinel-official/desktop-client/cli/rest/plan"
 	"github.com/sentinel-official/desktop-client/cli/rest/provider"
+	"github.com/sentinel-official/desktop-client/cli/rest/service"
 	"github.com/sentinel-official/desktop-client/cli/rest/session"
 	"github.com/sentinel-official/desktop-client/cli/rest/staking"
 	"github.com/sentinel-official/desktop-client/cli/rest/subscription"
@@ -91,7 +92,7 @@ func ServerCmd(cfg *types.Config) *cobra.Command {
 			auth.RegisterRoutes(unprotectedRouter, ctx)
 
 			protectedRouter.Use(middlewares.AddHeaders)
-			// protectedRouter.Use(middlewares.TokenVerify(ctx))
+			protectedRouter.Use(middlewares.TokenVerify(ctx))
 			account.RegisterRoutes(protectedRouter, ctx)
 			bank.RegisterRoutes(protectedRouter, ctx)
 			config.RegisterRoutes(protectedRouter, ctx)
@@ -102,6 +103,7 @@ func ServerCmd(cfg *types.Config) *cobra.Command {
 			node.RegisterRoutes(protectedRouter, ctx)
 			plan.RegisterRoutes(protectedRouter, ctx)
 			provider.RegisterRoutes(protectedRouter, ctx)
+			service.RegisterRoutes(protectedRouter, ctx)
 			session.RegisterRoutes(protectedRouter, ctx)
 			staking.RegisterRoutes(protectedRouter, ctx)
 			subscription.RegisterRoutes(protectedRouter, ctx)

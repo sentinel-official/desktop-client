@@ -16,9 +16,14 @@ func HandlerGetAccount(ctx *context.Context) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		vars := mux.Vars(r)
 
+		if ctx.Client().FromAddressHex() != vars["address"] {
+			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1001, "")
+			return
+		}
+
 		address, err := hex.DecodeString(vars["address"])
 		if err != nil {
-			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1, err.Error())
+			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1002, err.Error())
 			return
 		}
 
@@ -29,7 +34,7 @@ func HandlerGetAccount(ctx *context.Context) http.HandlerFunc {
 				return
 			}
 
-			utils.WriteErrorToResponse(w, http.StatusInternalServerError, 2, err.Error())
+			utils.WriteErrorToResponse(w, http.StatusInternalServerError, 1003, err.Error())
 			return
 		}
 

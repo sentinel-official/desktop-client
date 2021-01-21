@@ -20,13 +20,13 @@ func HandlerGetNode(ctx *context.Context) http.HandlerFunc {
 
 		address, err := hex.DecodeString(vars["address"])
 		if err != nil {
-			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1, err.Error())
+			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1001, err.Error())
 			return
 		}
 
 		result, err := ctx.Client().QueryNode(address)
 		if err != nil {
-			utils.WriteErrorToResponse(w, http.StatusInternalServerError, 2, err.Error())
+			utils.WriteErrorToResponse(w, http.StatusInternalServerError, 1002, err.Error())
 			return
 		}
 
@@ -64,13 +64,13 @@ func HandlerGetNodes(ctx *context.Context) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		skip, limit, status, err := parseQuery(r.URL.Query())
 		if err != nil {
-			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1, err.Error())
+			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1001, err.Error())
 			return
 		}
 
 		result, err := ctx.Client().QueryNodes(status, skip, limit)
 		if err != nil {
-			utils.WriteErrorToResponse(w, http.StatusInternalServerError, 2, err.Error())
+			utils.WriteErrorToResponse(w, http.StatusInternalServerError, 1002, err.Error())
 			return
 		}
 
@@ -83,7 +83,7 @@ func HandlerGetNodesForPlan(ctx *context.Context) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		skip, limit, _, err := parseQuery(r.URL.Query())
 		if err != nil {
-			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1, err.Error())
+			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1001, err.Error())
 			return
 		}
 
@@ -91,13 +91,13 @@ func HandlerGetNodesForPlan(ctx *context.Context) http.HandlerFunc {
 
 		plan, err := strconv.ParseUint(vars["id"], 10, 64)
 		if err != nil {
-			utils.WriteErrorToResponse(w, http.StatusBadRequest, 2, err.Error())
+			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1002, err.Error())
 			return
 		}
 
 		result, err := ctx.Client().QueryNodesForPlan(plan, skip, limit)
 		if err != nil {
-			utils.WriteErrorToResponse(w, http.StatusInternalServerError, 3, err.Error())
+			utils.WriteErrorToResponse(w, http.StatusInternalServerError, 1003, err.Error())
 			return
 		}
 
