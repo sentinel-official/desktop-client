@@ -1,15 +1,19 @@
 package cmd
 
 import (
+	"fmt"
 	"log"
 	"net/http"
+	neturl "net/url"
 	"path/filepath"
+	"strings"
 
 	clientutils "github.com/cosmos/cosmos-sdk/x/auth/client/utils"
 	"github.com/gorilla/mux"
 	"github.com/rs/cors"
 	"github.com/sentinel-official/hub"
 	"github.com/spf13/cobra"
+	"github.com/spf13/viper"
 
 	"github.com/sentinel-official/desktop-client/cli/context"
 	"github.com/sentinel-official/desktop-client/cli/lite"
@@ -25,41 +29,41 @@ import (
 	"github.com/sentinel-official/desktop-client/cli/rest/node"
 	"github.com/sentinel-official/desktop-client/cli/rest/plan"
 	"github.com/sentinel-official/desktop-client/cli/rest/provider"
+	"github.com/sentinel-official/desktop-client/cli/rest/service"
 	"github.com/sentinel-official/desktop-client/cli/rest/session"
 	"github.com/sentinel-official/desktop-client/cli/rest/staking"
 	"github.com/sentinel-official/desktop-client/cli/rest/subscription"
 	"github.com/sentinel-official/desktop-client/cli/types"
 )
 
-func ServerCmd() *cobra.Command {
+func ServerCmd(cfg *types.Config) *cobra.Command {
+	var (
+		listenURL string
+		keyFile   string
+		certFile  string
+	)
+
 	cmd := &cobra.Command{
 		Use:   "server",
 		Short: "Start REST API server",
+		PreRunE: func(cmd *cobra.Command, args []string) error {
+			defCfg := types.NewConfig().WithDefaultValues()
+			if viper.GetString(flagCORSAllowedOrigins) != defCfg.CORS.AllowedOrigins {
+				cfg.CORS.AllowedOrigins = viper.GetString(flagCORSAllowedOrigins)
+			}
+
+			return nil
+		},
 		RunE: func(cmd *cobra.Command, args []string) error {
 			home, err := cmd.Flags().GetString(types.FlagHome)
 			if err != nil {
 				return err
 			}
 
-			listenOn, err := cmd.Flags().GetString(flagListenOn)
-			if err != nil {
-				return err
-			}
-
 			var (
-				cfgFile     = filepath.Join(home, "config.toml")
+				cdc         = hub.MakeCodec()
 				buildFolder = filepath.Join(home, "build")
 			)
-
-			cfg := types.NewConfig()
-			if err := cfg.LoadFromPath(cfgFile); err != nil {
-				return err
-			}
-			if err := cfg.Validate(); err != nil {
-				return err
-			}
-
-			cdc := hub.MakeCodec()
 
 			client, err := lite.NewClientFromConfig(cfg)
 			if err != nil {
@@ -99,17 +103,42 @@ func ServerCmd() *cobra.Command {
 			node.RegisterRoutes(protectedRouter, ctx)
 			plan.RegisterRoutes(protectedRouter, ctx)
 			provider.RegisterRoutes(protectedRouter, ctx)
+			service.RegisterRoutes(protectedRouter, ctx)
 			session.RegisterRoutes(protectedRouter, ctx)
 			staking.RegisterRoutes(protectedRouter, ctx)
 			subscription.RegisterRoutes(protectedRouter, ctx)
 
-			corsRouter := cors.AllowAll().Handler(muxRouter)
+			router := cors.New(
+				cors.Options{
+					AllowedOrigins: strings.Split(cfg.CORS.AllowedOrigins, ","),
+					AllowedMethods: []string{http.MethodGet, http.MethodPost, http.MethodPut},
+					AllowedHeaders: []string{"Authorization", "Content-Type"},
+				},
+			).Handler(muxRouter)
 
-			log.Printf("Listening on %s\n", listenOn)
-			return http.ListenAndServe(listenOn, corsRouter)
+			url, err := neturl.Parse(listenURL)
+			if err != nil {
+				return err
+			}
+
+			log.Printf("Listening on URL %s\n", listenURL)
+			switch url.Scheme {
+			case "http":
+				return http.ListenAndServe(url.Host, router)
+			case "https":
+				return http.ListenAndServeTLS(url.Host, certFile, keyFile, router)
+			default:
+				return fmt.Errorf("invalid listen URL schema")
+			}
 		},
 	}
 
-	cmd.Flags().String(flagListenOn, "127.0.0.1:8080", "address to listen on")
+	cmd.Flags().StringVar(&listenURL, flagListenURL, types.DefaultListenURL, "")
+	cmd.Flags().StringVar(&keyFile, flagTLSKey, filepath.Join(types.DefaultHomeDirectory, "tls.key"), "")
+	cmd.Flags().StringVar(&certFile, flagTLSCrt, filepath.Join(types.DefaultHomeDirectory, "tls.crt"), "")
+	cmd.Flags().String(flagCORSAllowedOrigins, cfg.CORS.AllowedOrigins, "")
+
+	_ = viper.BindPFlag(flagCORSAllowedOrigins, cmd.Flags().Lookup(flagCORSAllowedOrigins))
+
 	return cmd
 }

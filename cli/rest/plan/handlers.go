@@ -20,13 +20,13 @@ func HandlerGetPlan(ctx *context.Context) http.HandlerFunc {
 
 		id, err := strconv.ParseUint(vars["id"], 10, 64)
 		if err != nil {
-			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1, err.Error())
+			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1001, err.Error())
 			return
 		}
 
 		result, err := ctx.Client().QueryPlan(id)
 		if err != nil {
-			utils.WriteErrorToResponse(w, http.StatusInternalServerError, 2, err.Error())
+			utils.WriteErrorToResponse(w, http.StatusInternalServerError, 1002, err.Error())
 			return
 		}
 
@@ -64,7 +64,7 @@ func HandlerGetPlansForProvider(ctx *context.Context) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		skip, limit, status, err := parseQuery(r.URL.Query())
 		if err != nil {
-			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1, err.Error())
+			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1001, err.Error())
 			return
 		}
 
@@ -72,13 +72,13 @@ func HandlerGetPlansForProvider(ctx *context.Context) http.HandlerFunc {
 
 		address, err := hex.DecodeString(vars["address"])
 		if err != nil {
-			utils.WriteErrorToResponse(w, http.StatusBadRequest, 2, err.Error())
+			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1002, err.Error())
 			return
 		}
 
 		result, err := ctx.Client().QueryPlansForProvider(address, status, skip, limit)
 		if err != nil {
-			utils.WriteErrorToResponse(w, http.StatusInternalServerError, 3, err.Error())
+			utils.WriteErrorToResponse(w, http.StatusInternalServerError, 1003, err.Error())
 			return
 		}
 

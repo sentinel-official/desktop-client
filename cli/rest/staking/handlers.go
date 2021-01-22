@@ -21,13 +21,13 @@ func HandlerGetValidator(ctx *context.Context) http.HandlerFunc {
 
 		address, err := hex.DecodeString(vars["address"])
 		if err != nil {
-			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1, err.Error())
+			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1001, err.Error())
 			return
 		}
 
 		validator, err := ctx.Client().QueryValidator(address)
 		if err != nil {
-			utils.WriteErrorToResponse(w, http.StatusInternalServerError, 2, err.Error())
+			utils.WriteErrorToResponse(w, http.StatusInternalServerError, 1002, err.Error())
 			return
 		}
 
@@ -64,7 +64,7 @@ func HandlerGetValidators(ctx *context.Context) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		_, _, status, err := parseQuery(r.URL.Query())
 		if err != nil {
-			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1, err.Error())
+			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1001, err.Error())
 			return
 		}
 
@@ -77,19 +77,19 @@ func HandlerGetValidators(ctx *context.Context) http.HandlerFunc {
 		if status == "" {
 			bonded, err := ctx.Client().QueryValidators(page, limit, sdk.BondStatusBonded)
 			if err != nil {
-				utils.WriteErrorToResponse(w, http.StatusInternalServerError, 1, err.Error())
+				utils.WriteErrorToResponse(w, http.StatusInternalServerError, 1002, err.Error())
 				return
 			}
 
 			unbonding, err := ctx.Client().QueryValidators(page, limit, sdk.BondStatusUnbonding)
 			if err != nil {
-				utils.WriteErrorToResponse(w, http.StatusInternalServerError, 1, err.Error())
+				utils.WriteErrorToResponse(w, http.StatusInternalServerError, 1002, err.Error())
 				return
 			}
 
 			unbonded, err := ctx.Client().QueryValidators(page, limit, sdk.BondStatusUnbonded)
 			if err != nil {
-				utils.WriteErrorToResponse(w, http.StatusInternalServerError, 1, err.Error())
+				utils.WriteErrorToResponse(w, http.StatusInternalServerError, 1002, err.Error())
 				return
 			}
 
@@ -99,7 +99,7 @@ func HandlerGetValidators(ctx *context.Context) http.HandlerFunc {
 		} else {
 			result, err := ctx.Client().QueryValidators(page, limit, status)
 			if err != nil {
-				utils.WriteErrorToResponse(w, http.StatusInternalServerError, 1, err.Error())
+				utils.WriteErrorToResponse(w, http.StatusInternalServerError, 1002, err.Error())
 				return
 			}
 
@@ -114,15 +114,20 @@ func HandlerGetDelegations(ctx *context.Context) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		vars := mux.Vars(r)
 
+		if ctx.Client().FromAddressHex() != vars["address"] {
+			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1001, "")
+			return
+		}
+
 		address, err := hex.DecodeString(vars["address"])
 		if err != nil {
-			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1, err.Error())
+			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1002, err.Error())
 			return
 		}
 
 		result, err := ctx.Client().QueryDelegations(address)
 		if err != nil {
-			utils.WriteErrorToResponse(w, http.StatusInternalServerError, 2, err.Error())
+			utils.WriteErrorToResponse(w, http.StatusInternalServerError, 1003, err.Error())
 			return
 		}
 
@@ -133,30 +138,37 @@ func HandlerGetDelegations(ctx *context.Context) http.HandlerFunc {
 
 func HandlerDelegate(ctx *context.Context) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
+		vars := mux.Vars(r)
+
+		if ctx.Client().FromAddressHex() != vars["address"] {
+			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1001, "")
+			return
+		}
+
 		body, err := NewRequestDelegate(r)
 		if err != nil {
-			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1, err.Error())
+			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1002, err.Error())
 			return
 		}
 		if err := body.Validate(); err != nil {
-			utils.WriteErrorToResponse(w, http.StatusBadRequest, 2, err.Error())
+			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1003, err.Error())
 			return
 		}
 
 		message, err := staking.NewMsgDelegate(ctx.AddressHex(), body.To, body.Amount).Raw()
 		if err != nil {
-			utils.WriteErrorToResponse(w, http.StatusInternalServerError, 3, err.Error())
+			utils.WriteErrorToResponse(w, http.StatusInternalServerError, 1004, err.Error())
 			return
 		}
 
 		if err := message.ValidateBasic(); err != nil {
-			utils.WriteErrorToResponse(w, http.StatusBadRequest, 4, err.Error())
+			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1005, err.Error())
 			return
 		}
 
 		res, err := ctx.Client().Tx(body.Memo, body.Password, message)
 		if err != nil {
-			utils.WriteErrorToResponse(w, http.StatusInternalServerError, 5, err.Error())
+			utils.WriteErrorToResponse(w, http.StatusInternalServerError, 1006, err.Error())
 			return
 		}
 
@@ -166,30 +178,37 @@ func HandlerDelegate(ctx *context.Context) http.HandlerFunc {
 
 func HandlerRedelegate(ctx *context.Context) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
+		vars := mux.Vars(r)
+
+		if ctx.Client().FromAddressHex() != vars["address"] {
+			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1001, "")
+			return
+		}
+
 		body, err := NewRequestRedelegate(r)
 		if err != nil {
-			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1, err.Error())
+			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1002, err.Error())
 			return
 		}
 		if err := body.Validate(); err != nil {
-			utils.WriteErrorToResponse(w, http.StatusBadRequest, 2, err.Error())
+			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1003, err.Error())
 			return
 		}
 
 		message, err := staking.NewMsgBeginRedelegate(ctx.AddressHex(), body.From, body.To, body.Amount).Raw()
 		if err != nil {
-			utils.WriteErrorToResponse(w, http.StatusInternalServerError, 3, err.Error())
+			utils.WriteErrorToResponse(w, http.StatusInternalServerError, 1004, err.Error())
 			return
 		}
 
 		if err := message.ValidateBasic(); err != nil {
-			utils.WriteErrorToResponse(w, http.StatusBadRequest, 4, err.Error())
+			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1005, err.Error())
 			return
 		}
 
 		res, err := ctx.Client().Tx(body.Memo, body.Password, message)
 		if err != nil {
-			utils.WriteErrorToResponse(w, http.StatusInternalServerError, 5, err.Error())
+			utils.WriteErrorToResponse(w, http.StatusInternalServerError, 1006, err.Error())
 			return
 		}
 
@@ -199,30 +218,37 @@ func HandlerRedelegate(ctx *context.Context) http.HandlerFunc {
 
 func HandlerUndelegate(ctx *context.Context) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
+		vars := mux.Vars(r)
+
+		if ctx.Client().FromAddressHex() != vars["address"] {
+			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1001, "")
+			return
+		}
+
 		body, err := NewRequestUnbond(r)
 		if err != nil {
-			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1, err.Error())
+			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1002, err.Error())
 			return
 		}
 		if err := body.Validate(); err != nil {
-			utils.WriteErrorToResponse(w, http.StatusBadRequest, 2, err.Error())
+			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1003, err.Error())
 			return
 		}
 
 		message, err := staking.NewMsgUndelegate(ctx.AddressHex(), body.From, body.Amount).Raw()
 		if err != nil {
-			utils.WriteErrorToResponse(w, http.StatusInternalServerError, 3, err.Error())
+			utils.WriteErrorToResponse(w, http.StatusInternalServerError, 1004, err.Error())
 			return
 		}
 
 		if err := message.ValidateBasic(); err != nil {
-			utils.WriteErrorToResponse(w, http.StatusBadRequest, 4, err.Error())
+			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1005, err.Error())
 			return
 		}
 
 		res, err := ctx.Client().Tx(body.Memo, body.Password, message)
 		if err != nil {
-			utils.WriteErrorToResponse(w, http.StatusInternalServerError, 5, err.Error())
+			utils.WriteErrorToResponse(w, http.StatusInternalServerError, 1006, err.Error())
 			return
 		}
 

@@ -2,7 +2,7 @@ package subscription
 
 import (
 	"github.com/sentinel-official/hub/x/subscription"
-	"github.com/tendermint/tendermint/libs/common"
+	"github.com/tendermint/tendermint/libs/bytes"
 )
 
 type Quota struct {
@@ -13,7 +13,7 @@ type Quota struct {
 
 func NewQuotaFromRaw(item subscription.Quota) Quota {
 	return Quota{
-		Address:   common.HexBytes(item.Address.Bytes()).String(),
+		Address:   bytes.HexBytes(item.Address.Bytes()).String(),
 		Consumed:  item.Consumed.Int64(),
 		Allocated: item.Allocated.Int64(),
 	}

@@ -15,7 +15,7 @@ func RegisterRoutes(r *mux.Router, ctx *context.Context) {
 	r.Name("GetSessionsForAddress").
 		Methods(http.MethodGet).Path("/accounts/{address}/sessions").
 		HandlerFunc(HandlerGetSessionsForAddress(ctx))
-	r.Name("AddSession").
+	r.Name("StartSession").
 		Methods(http.MethodPost).Path("/accounts/{address}/subscriptions/{id}/sessions").
-		HandlerFunc(HandlerAddSession(ctx))
+		HandlerFunc(HandlerStartSession(ctx))
 }

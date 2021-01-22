@@ -2,23 +2,21 @@ package other
 
 import (
 	"github.com/cosmos/cosmos-sdk/crypto/keys"
-	"github.com/tendermint/tendermint/libs/common"
+	"github.com/tendermint/tendermint/libs/bytes"
 )
 
 type Key struct {
 	Name     string `json:"name"`
-	Type     string `json:"type"`
 	PubKey   string `json:"pub_key"`
 	Address  string `json:"address"`
-	Mnemonic string `json:"mnemonic"`
+	Mnemonic string `json:"mnemonic,omitempty"`
 }
 
 func NewKeyFromRaw(info keys.Info, mnemonic string) Key {
 	return Key{
 		Name:     info.GetName(),
-		Type:     info.GetType().String(),
-		PubKey:   common.HexBytes(info.GetPubKey().Bytes()).String(),
-		Address:  common.HexBytes(info.GetAddress().Bytes()).String(),
+		PubKey:   bytes.HexBytes(info.GetPubKey().Bytes()).String(),
+		Address:  bytes.HexBytes(info.GetAddress().Bytes()).String(),
 		Mnemonic: mnemonic,
 	}
 }

@@ -2,7 +2,7 @@ package staking
 
 import (
 	"github.com/cosmos/cosmos-sdk/x/staking"
-	"github.com/tendermint/tendermint/libs/common"
+	"github.com/tendermint/tendermint/libs/bytes"
 )
 
 type Delegation struct {
@@ -13,8 +13,8 @@ type Delegation struct {
 
 func NewDelegationFromRaw(delegation staking.Delegation) Delegation {
 	return Delegation{
-		DelegatorAddress: common.HexBytes(delegation.DelegatorAddress.Bytes()).String(),
-		ValidatorAddress: common.HexBytes(delegation.ValidatorAddress.Bytes()).String(),
+		DelegatorAddress: bytes.HexBytes(delegation.DelegatorAddress.Bytes()).String(),
+		ValidatorAddress: bytes.HexBytes(delegation.ValidatorAddress.Bytes()).String(),
 		Shares:           delegation.Shares.String(),
 	}
 }

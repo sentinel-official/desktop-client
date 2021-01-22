@@ -2,8 +2,8 @@ package lite
 
 import (
 	"io"
+	"io/ioutil"
 	"os"
-	"path/filepath"
 	"sync"
 
 	"github.com/cosmos/cosmos-sdk/client/context"
@@ -13,11 +13,12 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/x/auth"
 	"github.com/spf13/viper"
-	"github.com/tendermint/tendermint/libs/common"
+	"github.com/tendermint/tendermint/libs/bytes"
 	"github.com/tendermint/tendermint/libs/log"
 	"github.com/tendermint/tendermint/lite"
 	"github.com/tendermint/tendermint/lite/proxy"
 	"github.com/tendermint/tendermint/rpc/client"
+	"github.com/tendermint/tendermint/rpc/client/http"
 
 	"github.com/sentinel-official/desktop-client/cli/types"
 )
@@ -56,8 +57,12 @@ func NewClientFromConfig(cfg *types.Config) (*Client, error) {
 	var (
 		verifier lite.Verifier
 		home     = viper.GetString(types.FlagHome)
-		node     = client.NewHTTP(cfg.Chain.RPCAddress, "/websocket")
 	)
+
+	node, err := http.New(cfg.Chain.RPCAddress, "/websocket")
+	if err != nil {
+		return nil, err
+	}
 
 	kb, err := keys.NewKeyBaseFromDir(home)
 	if err != nil {
@@ -65,7 +70,12 @@ func NewClientFromConfig(cfg *types.Config) (*Client, error) {
 	}
 
 	if !cfg.Chain.TrustNode {
-		verifier, err = proxy.NewVerifier(cfg.Chain.ID, filepath.Join(home, "lite"), node, log.NewNopLogger(), 16)
+		verifierDir, err := ioutil.TempDir(os.TempDir(), "verifier-*")
+		if err != nil {
+			return nil, err
+		}
+
+		verifier, err = proxy.NewVerifier(cfg.Chain.ID, verifierDir, node, log.NewNopLogger(), 16)
 		if err != nil {
 			return nil, err
 		}
@@ -80,7 +90,6 @@ func NewClientFromConfig(cfg *types.Config) (*Client, error) {
 		WithNode(node).
 		WithTrustNode(cfg.Chain.TrustNode).
 		WithVerifier(verifier).
-		WithVerifierHome(filepath.Join(home, "lite")).
 		WithGas(cfg.Chain.Gas).
 		WithChainID(cfg.Chain.ID).
 		WithFees(cfg.Chain.Fees).
@@ -98,7 +107,6 @@ func (c *Client) WithTrustNode(t bool) *Client             { c.ctx.TrustNode = t
 func (c *Client) WithUseLedger(t bool) *Client             { c.ctx.UseLedger = t; return c }
 func (c *Client) WithBroadcastMode(s string) *Client       { c.ctx.BroadcastMode = s; return c }
 func (c *Client) WithVerifier(v lite.Verifier) *Client     { c.ctx.Verifier = v; return c }
-func (c *Client) WithVerifierHome(s string) *Client        { c.ctx.VerifierHome = s; return c }
 func (c *Client) WithSimulate(t bool) *Client              { c.ctx.Simulate = t; return c }
 func (c *Client) WithGenerateOnly(t bool) *Client          { c.ctx.GenerateOnly = t; return c }
 func (c *Client) WithFromName(s string) *Client            { c.ctx.FromName = s; return c }
@@ -155,7 +163,7 @@ func (c *Client) WithSimulateAndExecute(t bool) *Client {
 
 func (c *Client) ChainID() string             { return c.txb.ChainID() }
 func (c *Client) Keybase() crypto.Keybase     { return c.ctx.Keybase }
-func (c *Client) VerifierHome() string        { return c.ctx.VerifierHome }
 func (c *Client) Node() client.Client         { return c.ctx.Client }
 func (c *Client) FromAddress() sdk.AccAddress { return c.ctx.FromAddress }
-func (c *Client) FromAddressHex() string      { return common.HexBytes(c.ctx.FromAddress.Bytes()).String() }
+func (c *Client) FromAddressHex() string      { return bytes.HexBytes(c.ctx.FromAddress.Bytes()).String() }
+func (c *Client) FromName() string            { return c.ctx.FromName }

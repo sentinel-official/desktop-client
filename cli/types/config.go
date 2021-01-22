@@ -28,6 +28,9 @@ id = "{{ .Chain.ID }}"
 rpc_address = "{{ .Chain.RPCAddress }}"
 simulate_and_execute = {{ .Chain.SimulateAndExecute }}
 trust_node = {{ .Chain.TrustNode }}
+
+[cors]
+allowed_origins = "{{ .CORS.AllowedOrigins }}"
 	`)
 
 	t = func() *template.Template {
@@ -54,6 +57,9 @@ type Config struct {
 		SimulateAndExecute bool    `json:"simulate_and_execute"`
 		TrustNode          bool    `json:"trust_node"`
 	} `json:"chain"`
+	CORS struct {
+		AllowedOrigins string `json:"allowed_origins"`
+	} `json:"cors"`
 }
 
 func NewConfig() *Config {
@@ -65,12 +71,14 @@ func (c *Config) Copy() *Config {
 		Password: c.Password,
 		Setup:    c.Setup,
 		Chain:    c.Chain,
+		CORS:     c.CORS,
 	}
 }
 
 func (c *Config) WithDefaultValues() *Config {
 	c.Password = fmt.Sprintf("%X", sha256.Sum256([]byte("admin")))
 	c.Setup = true
+
 	c.Chain.BroadcastMode = "block"
 	c.Chain.Fees = ""
 	c.Chain.Gas = 1e5
@@ -80,6 +88,8 @@ func (c *Config) WithDefaultValues() *Config {
 	c.Chain.RPCAddress = "https://rpc.turing.sentinel.co:443"
 	c.Chain.SimulateAndExecute = true
 	c.Chain.TrustNode = false
+
+	c.CORS.AllowedOrigins = ""
 
 	return c
 }

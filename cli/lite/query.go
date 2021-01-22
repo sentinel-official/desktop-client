@@ -5,6 +5,7 @@ import (
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/x/auth"
+	"github.com/cosmos/cosmos-sdk/x/auth/exported"
 	"github.com/cosmos/cosmos-sdk/x/gov"
 	"github.com/cosmos/cosmos-sdk/x/staking"
 	hub "github.com/sentinel-official/hub/types"
@@ -34,9 +35,9 @@ func (c *Client) Query(path string, params, result interface{}) error {
 	return c.ctx.Codec.UnmarshalJSON(res, result)
 }
 
-func (c *Client) QueryAccount(address sdk.AccAddress) (auth.Account, error) {
+func (c *Client) QueryAccount(address sdk.AccAddress) (exported.Account, error) {
 	var (
-		result auth.Account
+		result exported.Account
 		path   = fmt.Sprintf("custom/%s/%s", auth.QuerierRoute, auth.QueryAccount)
 	)
 
@@ -92,7 +93,7 @@ func (c *Client) QueryProposals() (gov.Proposals, error) {
 		path   = fmt.Sprintf("custom/%s/%s", gov.QuerierRoute, gov.QueryProposals)
 	)
 
-	if err := c.Query(path, gov.NewQueryProposalsParams(0, 0, nil, nil), &result); err != nil {
+	if err := c.Query(path, gov.NewQueryProposalsParams(0, 0, gov.StatusNil, nil, nil), &result); err != nil {
 		return result, err
 	}
 
@@ -115,7 +116,7 @@ func (c *Client) QueryProposalVote(id uint64, address sdk.AccAddress) (gov.Vote,
 func (c *Client) QueryDeposit(address sdk.AccAddress) (deposit.Deposit, error) {
 	var (
 		result deposit.Deposit
-		path   = fmt.Sprintf("custom/%s/%s/%s", vpn.StoreKey, deposit.QuerierRoute, deposit.QueryDeposit)
+		path   = fmt.Sprintf("custom/%s/%s/%s", vpn.QuerierRoute, deposit.QuerierRoute, deposit.QueryDeposit)
 	)
 
 	if err := c.Query(path, deposit.NewQueryDepositParams(address), &result); err != nil {
@@ -128,7 +129,7 @@ func (c *Client) QueryDeposit(address sdk.AccAddress) (deposit.Deposit, error) {
 func (c *Client) QueryProvider(address hub.ProvAddress) (provider.Provider, error) {
 	var (
 		result provider.Provider
-		path   = fmt.Sprintf("custom/%s/%s/%s", vpn.StoreKey, provider.QuerierRoute, provider.QueryProvider)
+		path   = fmt.Sprintf("custom/%s/%s/%s", vpn.QuerierRoute, provider.QuerierRoute, provider.QueryProvider)
 	)
 
 	if err := c.Query(path, provider.NewQueryProviderParams(address), &result); err != nil {
@@ -141,7 +142,7 @@ func (c *Client) QueryProvider(address hub.ProvAddress) (provider.Provider, erro
 func (c *Client) QueryProviders(skip, limit int) (provider.Providers, error) {
 	var (
 		result provider.Providers
-		path   = fmt.Sprintf("custom/%s/%s/%s", vpn.StoreKey, provider.QuerierRoute, provider.QueryProviders)
+		path   = fmt.Sprintf("custom/%s/%s/%s", vpn.QuerierRoute, provider.QuerierRoute, provider.QueryProviders)
 	)
 
 	if err := c.Query(path, provider.NewQueryProvidersParams(skip, limit), &result); err != nil {
@@ -154,7 +155,7 @@ func (c *Client) QueryProviders(skip, limit int) (provider.Providers, error) {
 func (c *Client) QueryNode(address hub.NodeAddress) (node.Node, error) {
 	var (
 		result node.Node
-		path   = fmt.Sprintf("custom/%s/%s/%s", vpn.StoreKey, node.QuerierRoute, node.QueryNode)
+		path   = fmt.Sprintf("custom/%s/%s/%s", vpn.QuerierRoute, node.QuerierRoute, node.QueryNode)
 	)
 
 	if err := c.Query(path, node.NewQueryNodeParams(address), &result); err != nil {
@@ -167,7 +168,7 @@ func (c *Client) QueryNode(address hub.NodeAddress) (node.Node, error) {
 func (c *Client) QueryNodes(status hub.Status, skip, limit int) (node.Nodes, error) {
 	var (
 		result node.Nodes
-		path   = fmt.Sprintf("custom/%s/%s/%s", vpn.StoreKey, node.QuerierRoute, node.QueryNodes)
+		path   = fmt.Sprintf("custom/%s/%s/%s", vpn.QuerierRoute, node.QuerierRoute, node.QueryNodes)
 	)
 
 	if err := c.Query(path, node.NewQueryNodesParams(status, skip, limit), &result); err != nil {
@@ -180,7 +181,7 @@ func (c *Client) QueryNodes(status hub.Status, skip, limit int) (node.Nodes, err
 func (c *Client) QueryNodesForPlan(id uint64, skip, limit int) (node.Nodes, error) {
 	var (
 		result node.Nodes
-		path   = fmt.Sprintf("custom/%s/%s/%s", vpn.StoreKey, plan.QuerierRoute, plan.QueryNodesForPlan)
+		path   = fmt.Sprintf("custom/%s/%s/%s", vpn.QuerierRoute, plan.QuerierRoute, plan.QueryNodesForPlan)
 	)
 
 	if err := c.Query(path, plan.NewQueryNodesForPlanParams(id, skip, limit), &result); err != nil {
@@ -193,7 +194,7 @@ func (c *Client) QueryNodesForPlan(id uint64, skip, limit int) (node.Nodes, erro
 func (c *Client) QueryPlan(id uint64) (plan.Plan, error) {
 	var (
 		result plan.Plan
-		path   = fmt.Sprintf("custom/%s/%s/%s", vpn.StoreKey, plan.QuerierRoute, plan.QueryPlan)
+		path   = fmt.Sprintf("custom/%s/%s/%s", vpn.QuerierRoute, plan.QuerierRoute, plan.QueryPlan)
 	)
 
 	if err := c.Query(path, plan.NewQueryPlanParams(id), &result); err != nil {
@@ -206,7 +207,7 @@ func (c *Client) QueryPlan(id uint64) (plan.Plan, error) {
 func (c *Client) QueryPlansForProvider(address hub.ProvAddress, status hub.Status, skip, limit int) (plan.Plans, error) {
 	var (
 		result plan.Plans
-		path   = fmt.Sprintf("custom/%s/%s/%s", vpn.StoreKey, plan.QuerierRoute, plan.QueryPlansForProvider)
+		path   = fmt.Sprintf("custom/%s/%s/%s", vpn.QuerierRoute, plan.QuerierRoute, plan.QueryPlansForProvider)
 	)
 
 	if err := c.Query(path, plan.NewQueryPlansForProviderParams(address, status, skip, limit), &result); err != nil {
@@ -219,7 +220,7 @@ func (c *Client) QueryPlansForProvider(address hub.ProvAddress, status hub.Statu
 func (c *Client) QuerySubscription(id uint64) (subscription.Subscription, error) {
 	var (
 		result subscription.Subscription
-		path   = fmt.Sprintf("custom/%s/%s/%s", vpn.StoreKey, subscription.QuerierRoute, subscription.QuerySubscription)
+		path   = fmt.Sprintf("custom/%s/%s/%s", vpn.QuerierRoute, subscription.QuerierRoute, subscription.QuerySubscription)
 	)
 
 	if err := c.Query(path, subscription.NewQuerySubscriptionParams(id), &result); err != nil {
@@ -229,13 +230,13 @@ func (c *Client) QuerySubscription(id uint64) (subscription.Subscription, error)
 	return result, nil
 }
 
-func (c *Client) QuerySubscriptionsForAddress(address sdk.AccAddress, skip, limit int) (subscription.Subscriptions, error) {
+func (c *Client) QuerySubscriptionsForAddress(address sdk.AccAddress, status hub.Status, skip, limit int) (subscription.Subscriptions, error) {
 	var (
 		result subscription.Subscriptions
-		path   = fmt.Sprintf("custom/%s/%s/%s", vpn.StoreKey, subscription.QuerierRoute, subscription.QuerySubscriptionsForAddress)
+		path   = fmt.Sprintf("custom/%s/%s/%s", vpn.QuerierRoute, subscription.QuerierRoute, subscription.QuerySubscriptionsForAddress)
 	)
 
-	if err := c.Query(path, subscription.NewQuerySubscriptionsForAddressParams(address, skip, limit), &result); err != nil {
+	if err := c.Query(path, subscription.NewQuerySubscriptionsForAddressParams(address, status, skip, limit), &result); err != nil {
 		return result, err
 	}
 
@@ -245,7 +246,7 @@ func (c *Client) QuerySubscriptionsForAddress(address sdk.AccAddress, skip, limi
 func (c *Client) QueryQuota(id uint64, address sdk.AccAddress) (subscription.Quota, error) {
 	var (
 		result subscription.Quota
-		path   = fmt.Sprintf("custom/%s/%s/%s", vpn.StoreKey, subscription.QuerierRoute, subscription.QueryQuota)
+		path   = fmt.Sprintf("custom/%s/%s/%s", vpn.QuerierRoute, subscription.QuerierRoute, subscription.QueryQuota)
 	)
 
 	if err := c.Query(path, subscription.NewQueryQuotaParams(id, address), &result); err != nil {
@@ -258,7 +259,7 @@ func (c *Client) QueryQuota(id uint64, address sdk.AccAddress) (subscription.Quo
 func (c *Client) QueryQuotas(id uint64, skip, limit int) (subscription.Quotas, error) {
 	var (
 		result subscription.Quotas
-		path   = fmt.Sprintf("custom/%s/%s/%s", vpn.StoreKey, subscription.QuerierRoute, subscription.QueryQuotas)
+		path   = fmt.Sprintf("custom/%s/%s/%s", vpn.QuerierRoute, subscription.QuerierRoute, subscription.QueryQuotas)
 	)
 
 	if err := c.Query(path, subscription.NewQueryQuotasParams(id, skip, limit), &result); err != nil {
@@ -271,7 +272,7 @@ func (c *Client) QueryQuotas(id uint64, skip, limit int) (subscription.Quotas, e
 func (c *Client) QuerySession(id uint64) (session.Session, error) {
 	var (
 		result session.Session
-		path   = fmt.Sprintf("custom/%s/%s/%s", vpn.StoreKey, session.QuerierRoute, session.QuerySession)
+		path   = fmt.Sprintf("custom/%s/%s/%s", vpn.QuerierRoute, session.QuerierRoute, session.QuerySession)
 	)
 
 	if err := c.Query(path, session.NewQuerySessionParams(id), &result); err != nil {
@@ -284,7 +285,7 @@ func (c *Client) QuerySession(id uint64) (session.Session, error) {
 func (c *Client) QuerySessionsForAddress(address sdk.AccAddress, skip, limit int) (session.Sessions, error) {
 	var (
 		result session.Sessions
-		path   = fmt.Sprintf("custom/%s/%s/%s", vpn.StoreKey, session.QuerierRoute, session.QuerySessionsForAddress)
+		path   = fmt.Sprintf("custom/%s/%s/%s", vpn.QuerierRoute, session.QuerierRoute, session.QuerySessionsForAddress)
 	)
 
 	if err := c.Query(path, session.NewQuerySessionsForAddressParams(address, skip, limit), &result); err != nil {

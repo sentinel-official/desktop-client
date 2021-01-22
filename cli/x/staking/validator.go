@@ -4,7 +4,7 @@ import (
 	"time"
 
 	"github.com/cosmos/cosmos-sdk/x/staking"
-	"github.com/tendermint/tendermint/libs/common"
+	"github.com/tendermint/tendermint/libs/bytes"
 
 	"github.com/sentinel-official/desktop-client/cli/x/other"
 )
@@ -25,7 +25,6 @@ type Commission struct {
 
 type Validator struct {
 	Address          string `json:"address"`
-	PubKey           string `json:"pub_key"`
 	ConsensusAddress string `json:"consensus_address"`
 	ConsensusPubKey  string `json:"consensus_pub_key"`
 
@@ -45,10 +44,9 @@ type Validator struct {
 
 func NewValidatorFromRaw(v staking.Validator) Validator {
 	return Validator{
-		Address:          common.HexBytes(v.OperatorAddress.Bytes()).String(),
-		PubKey:           "",
-		ConsensusAddress: common.HexBytes(v.ConsPubKey.Address().Bytes()).String(),
-		ConsensusPubKey:  common.HexBytes(v.ConsPubKey.Bytes()).String(),
+		Address:          bytes.HexBytes(v.OperatorAddress.Bytes()).String(),
+		ConsensusAddress: bytes.HexBytes(v.ConsPubKey.Address().Bytes()).String(),
+		ConsensusPubKey:  bytes.HexBytes(v.ConsPubKey.Bytes()).String(),
 		Description: Description{
 			Moniker:  v.Description.Moniker,
 			Identity: v.Description.Identity,
