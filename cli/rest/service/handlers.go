@@ -68,9 +68,12 @@ func HandlerDisconnect(ctx *context.Context) http.HandlerFunc {
 			}
 		}
 
-		if err := os.Remove(filepath.Join(ctx.Home(), "status.json")); err != nil {
-			utils.WriteErrorToResponse(w, http.StatusInternalServerError, 1004, err.Error())
-			return
+		path := filepath.Join(ctx.Home(), "status.json")
+		if _, err := os.Stat(path); err == nil {
+			if err = os.Remove(path); err != nil {
+				utils.WriteErrorToResponse(w, http.StatusInternalServerError, 1004, err.Error())
+				return
+			}
 		}
 
 		ctx = ctx.WithService(nil)

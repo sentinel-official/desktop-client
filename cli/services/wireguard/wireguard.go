@@ -21,24 +21,11 @@ func NewWireGuard() *WireGuard {
 	return &WireGuard{}
 }
 
-func (w *WireGuard) WithConfig(v *types.Config) *WireGuard {
-	w.cfg = v
-	return w
-}
+func (w *WireGuard) WithConfig(v *types.Config) *WireGuard { w.cfg = v; return w }
+func (w *WireGuard) WithConfigDir(v string) *WireGuard     { w.cfgDir = v; return w }
+func (w *WireGuard) WithInfo(v []byte) *WireGuard          { w.info = v; return w }
 
-func (w *WireGuard) WithConfigDir(v string) *WireGuard {
-	w.cfgDir = v
-	return w
-}
-
-func (w *WireGuard) WithInfo(v []byte) *WireGuard {
-	w.info = v
-	return w
-}
-
-func (w *WireGuard) Info() []byte {
-	return w.info
-}
+func (w *WireGuard) Info() []byte { return w.info }
 
 func (w *WireGuard) Up() error {
 	cmd := exec.Command("wg-quick", strings.Split(
@@ -49,13 +36,8 @@ func (w *WireGuard) Up() error {
 	return cmd.Run()
 }
 
-func (w *WireGuard) PostUp() error {
-	return nil
-}
-
-func (w *WireGuard) PreDown() error {
-	return nil
-}
+func (w *WireGuard) PostUp() error  { return nil }
+func (w *WireGuard) PreDown() error { return nil }
 
 func (w *WireGuard) Down() error {
 	cmd := exec.Command("wg-quick", strings.Split(
@@ -67,7 +49,12 @@ func (w *WireGuard) Down() error {
 }
 
 func (w *WireGuard) PostDown() error {
-	return os.Remove(filepath.Join(w.cfgDir, fmt.Sprintf("%s.conf", w.cfg.Name)))
+	path := filepath.Join(w.cfgDir, fmt.Sprintf("%s.conf", w.cfg.Name))
+	if _, err := os.Stat(path); err == nil {
+		return os.Remove(path)
+	}
+
+	return nil
 }
 
 func (w *WireGuard) Transfer() (int64, int64, error) {
