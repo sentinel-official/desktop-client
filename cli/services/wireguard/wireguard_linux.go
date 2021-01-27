@@ -1,5 +1,13 @@
 package wireguard
 
+import (
+	"fmt"
+	"net"
+	"strings"
+
+	"golang.org/x/net/nettest"
+)
+
 func (w *WireGuard) PreUp() error {
 	iFace, err := nettest.RoutedInterface("ip", net.FlagUp|net.FlagBroadcast)
 	if err != nil {
