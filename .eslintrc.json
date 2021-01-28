@@ -79,6 +79,12 @@
         ],
         "allowSeparatedGroups": false
       }
+    ],
+    "dot-notation": [
+      "error",
+      {
+        "allowPattern": "^[a-z]+(_[a-z]+)+$"
+      }
     ]
   },
   "settings": {
