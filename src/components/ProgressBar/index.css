@@ -1,0 +1,16 @@
+.bar-container {
+    position: absolute;
+    bottom: 5px;
+    width: 100%;
+}
+
+.bar-container span {
+    display: none !important;
+}
+
+.bar-container > div > div > div {
+    background: #129EED;
+    border: 3px solid #153F6A;
+    box-sizing: border-box;
+    box-shadow: 0 -2px 14px rgba(18, 158, 237, 0.3);
+}

@@ -1,0 +1,15 @@
+/build
+/coverage
+.DS_Store
+.env.development.local
+.env.local
+.env.production.local
+.env.test.local
+.eslintcache
+/.idea
+/node_modules
+npm-debug.log*
+/.pnp
+.pnp.js
+yarn-debug.log*
+yarn-error.log*
