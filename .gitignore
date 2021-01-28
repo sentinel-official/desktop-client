@@ -1,5 +1,7 @@
+/bin
 /build
 /coverage
+/dist
 .DS_Store
 .env.development.local
 .env.local
