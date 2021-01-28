@@ -1,0 +1,35 @@
+.auth-container{
+    display: flex;
+    height: 100vh;
+    flex-wrap: wrap;
+}
+.auth-container .col-md-4, .auth-container .col-md-8{
+    padding: 0;
+}
+
+.login-section{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-body{
+
+}
+
+.login-footer{
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border-top: 1px solid #DCE9F1;;
+}
+
+.social-icons .icon{
+    width: 20px;
+    margin: 0 15px;
+}

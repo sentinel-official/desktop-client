@@ -1,0 +1,11 @@
+.side-bar {
+    background-image: url('../../assets/BackgroundImage.svg');
+    background-color:rgba(20, 45, 81, 1);
+    height: 100%;
+    background-size: cover;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 150px 20px 50px 20px;
+}
