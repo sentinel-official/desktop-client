@@ -4,7 +4,6 @@ import './index.css';
 
 const InputField = ({
     className,
-    label,
     name,
     placeholder,
     required,
@@ -13,26 +12,20 @@ const InputField = ({
     onChange,
 }) => {
     return (
-        <div className="form-group">
-            <label>
-                {label}
-            </label>
-            <input
-                className={className}
-                name={name}
-                placeholder={placeholder}
-                required={required}
-                type={type}
-                value={value}
-                onChange={onChange}
-            />
-        </div>
+        <input
+            className={className}
+            name={name}
+            placeholder={placeholder}
+            required={required}
+            type={type}
+            value={value}
+            onChange={onChange}
+        />
     );
 };
 
 InputField.propTypes = {
     className: PropTypes.string.isRequired,
-    label: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     placeholder: PropTypes.string.isRequired,
     required: PropTypes.bool.isRequired,

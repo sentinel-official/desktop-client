@@ -4,6 +4,7 @@ import Sidebar from '../../components/Sidebar';
 import SocialIcons from '../../components/SocialIcons';
 import TextBox from '../../components/TextBox';
 import PasswordTextField from '../../containers/Authentication/PasswordTextField';
+import Label from '../../components/Label';
 import SubmitButton from '../../containers/Authentication/SubmitButton';
 import './index.css';
 
@@ -19,7 +20,13 @@ const Authentication = ({ history }) => {
                         className="login-title"
                         value="Authenticate Sentinel Client"
                     />
-                    <PasswordTextField/>
+                    <div className="form-group">
+                        <Label
+                            className="label"
+                            label="PASSWORD"
+                        />
+                        <PasswordTextField/>
+                    </div>
                 </div>
                 <div className="login-footer">
                     <SocialIcons/>
