@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import ButtonChip from '../../components/ButtonChip';
-import TextBox from '../../components/TextBox';
 
-const BroadCastMode = () => {
+const BroadCastChips = () => {
     const [broadcastMode, setVariant] = useState(
         {
             Block: 'primary',
@@ -18,8 +17,8 @@ const BroadCastMode = () => {
         });
     };
 
-    const broadcastModeHandler = (type) => {
-        console.log(type, 'type');
+    const handleBroadCastMode = (type) => {
+        console.log(type, 'broadcast mode');
         if (type === 'Block') {
             const variantType = broadcastMode.Block;
             if (variantType === 'primary') {
@@ -51,15 +50,12 @@ const BroadCastMode = () => {
         });
     };
     return (
-        <div className="form-group">
-            <TextBox className="label" value="BROADCAST MODE" />
-            <div className="button-group">
-                <ButtonChip className={broadcastMode.Block} type="button" value="Block" onClick={broadcastModeHandler}/>
-                <ButtonChip className={broadcastMode.Sync} type="button" value="Sync" onClick={broadcastModeHandler}/>
-                <ButtonChip className={broadcastMode.Async} type="button" value="Async" onClick={broadcastModeHandler}/>
-            </div>
+        <div className="button-group">
+            <ButtonChip className={broadcastMode.Block} type="button" value="Block" onClick={handleBroadCastMode}/>
+            <ButtonChip className={broadcastMode.Sync} type="button" value="Sync" onClick={handleBroadCastMode}/>
+            <ButtonChip className={broadcastMode.Async} type="button" value="Async" onClick={handleBroadCastMode}/>
         </div>
     );
 };
 
-export default BroadCastMode;
+export default BroadCastChips;

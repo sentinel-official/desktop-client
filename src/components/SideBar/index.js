@@ -4,7 +4,7 @@ import Image from '../Image';
 import Logo from '../../assets/Logo.svg';
 import TextBox from '../TextBox';
 
-const AuthenticationSideBar = () => {
+const SideBar = () => {
     return (
         <div className="side-bar">
             <Image alt="Logo" className="side-bar-logo" src={Logo}/>
@@ -24,4 +24,4 @@ const AuthenticationSideBar = () => {
     );
 };
 
-export default AuthenticationSideBar;
+export default SideBar;
