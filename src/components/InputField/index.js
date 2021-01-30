@@ -6,9 +6,6 @@ const InputField = (props) => {
     const onChange = (e) => props.onChange(e.target.value);
     return (
         <div className="form-group">
-            <label>
-                {props.labelText}
-            </label>
             <input
                 className={props.className}
                 name={props.name}
@@ -23,7 +20,6 @@ const InputField = (props) => {
 
 InputField.propTypes = {
     className: PropTypes.string.isRequired,
-    labelText: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     placeholder: PropTypes.string.isRequired,
     required: PropTypes.bool.isRequired,

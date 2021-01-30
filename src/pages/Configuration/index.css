@@ -26,8 +26,12 @@
 }
 
 @media (max-width: 767px) {
+    .config-section .section-body {
+        padding-top: 20px;
+    }
+
     .config-row {
         display: block;
-        margin-bottom: 60px;
+        margin-bottom: 70px;
     }
 }
