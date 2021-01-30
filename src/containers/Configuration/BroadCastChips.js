@@ -9,66 +9,52 @@ const BroadCastChips = () => {
             Async: 'primary',
         },
     );
-    const setVariantType = (type) => {
-        setVariant({
-            Block: type === 'Block' ? 'selected' : 'primary',
-            Sync: type === 'Sync' ? 'selected' : 'primary',
-            Async: type === 'Async' ? 'selected' : 'primary',
-        });
-    };
 
     const handleBroadCastMode = (type) => {
         console.log(type, 'broadcast mode');
         if (type === 'Block') {
-            const variantType = broadcastMode.Block;
-            if (variantType === 'primary') {
-                setVariantType('Block');
-            } else {
-                resetVariant();
-            }
+            setVariant({
+                Block: 'selected',
+                Sync: 'primary',
+                Async: 'primary',
+            });
         } else if (type === 'Sync') {
-            const variantType = broadcastMode.Sync;
-            if (variantType === 'primary') {
-                setVariantType('Sync');
-            } else {
-                resetVariant();
-            }
+            setVariant({
+                Sync: 'selected',
+                Block: 'primary',
+                Async: 'primary',
+            });
         } else if (type === 'Async') {
-            const variantType = broadcastMode.Async;
-            if (variantType === 'primary') {
-                setVariantType('Async');
-            } else {
-                resetVariant();
-            }
+            setVariant({
+                Async: 'selected',
+                Block: 'primary',
+                Sync: 'primary',
+            });
         }
     };
-    const resetVariant = () => {
-        setVariant({
-            Block: 'primary',
-            Sync: 'primary',
-            Async: 'primary',
-        });
-    };
+    const ChipConfig = [{
+        className: broadcastMode.Block,
+        value: 'Block',
+    }, {
+        className: broadcastMode.Sync,
+        value: 'Sync',
+    }, {
+        className: broadcastMode.Async,
+        value: 'Async',
+    }];
     return (
         <div className="button-group">
-            <ButtonChip
-                className={broadcastMode.Block}
-                type="button"
-                value="Block"
-                onClick={handleBroadCastMode}
-            />
-            <ButtonChip
-                className={broadcastMode.Sync}
-                type="button"
-                value="Sync"
-                onClick={handleBroadCastMode}
-            />
-            <ButtonChip
-                className={broadcastMode.Async}
-                type="button"
-                value="Async"
-                onClick={handleBroadCastMode}
-            />
+            {
+                ChipConfig.map((item) =>
+                    <ButtonChip
+                        key={item.value}
+                        className={item.className}
+                        type="button"
+                        value={item.value}
+                        onClick={handleBroadCastMode}
+                    />,
+                )
+            }
         </div>
     );
 };
