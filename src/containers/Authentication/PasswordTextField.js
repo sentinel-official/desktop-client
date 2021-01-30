@@ -5,6 +5,7 @@ const PasswordTextField = () => {
     const handleChange = (value) => {
         console.log(value);
     };
+
     return (
         <InputField
             className="form-control"

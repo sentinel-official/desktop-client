@@ -1,15 +1,16 @@
-import './index.css';
 import React from 'react';
 import SideBar from '../../components/SideBar';
 import SocialIcons from '../../components/SocialIcons';
 import TextBox from '../../components/TextBox';
-import { PasswordTextField, SubmitButton } from '../../containers/Authentication';
+import PasswordTextField from '../../containers/Authentication/PasswordTextField';
+import SubmitButton from '../../containers/Authentication/SubmitButton';
+import './index.css';
 
 const Authentication = () => {
     return (
         <div className="auth-container">
             <div className="col-md-4">
-                <SideBar />
+                <SideBar/>
             </div>
             <div className="col-md-8 login-section">
                 <div className="login-body">
@@ -17,7 +18,7 @@ const Authentication = () => {
                         className="login-title"
                         value="Authenticate Sentinel Client"
                     />
-                    <PasswordTextField />
+                    <PasswordTextField/>
                 </div>
                 <div className="login-footer">
                     <SocialIcons/>

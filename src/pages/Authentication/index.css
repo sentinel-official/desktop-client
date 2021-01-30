@@ -1,23 +1,24 @@
-.auth-container{
+.auth-container {
     display: flex;
     height: 100vh;
     flex-wrap: wrap;
 }
-.auth-container .col-md-4, .auth-container .col-md-8{
+
+.auth-container .col-md-4, .auth-container .col-md-8 {
     padding: 0;
 }
 
-.login-section{
+.login-section {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.login-body{
+.login-body {
 
 }
 
-.login-footer{
+.login-footer {
     padding: 10px 20px;
     display: flex;
     align-items: center;
@@ -29,7 +30,7 @@
     border-top: 1px solid #DCE9F1;;
 }
 
-.social-icons .icon{
+.social-icons .icon {
     width: 20px;
     margin: 0 15px;
 }
