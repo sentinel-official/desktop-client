@@ -14,13 +14,14 @@ const Button = ({
             className={className}
             disabled={disabled}
             onClick={onClick}>
-            { loading
-                ? <span
-                    aria-hidden="true"
-                    className="spinner-border spinner-border-sm"
-                    role="status">
-                </span>
-                : value
+            {
+                loading
+                    ? <span
+                        aria-hidden="true"
+                        className="spinner-border spinner-border-sm"
+                        role="status">
+                    </span>
+                    : value
             }
         </button>
     );

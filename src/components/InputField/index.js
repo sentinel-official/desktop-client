@@ -10,12 +10,10 @@ const InputField = ({
     type,
     value,
     onChange,
-    minimum,
 }) => {
     return (
         <input
             className={className}
-            min={minimum}
             name={name}
             placeholder={placeholder}
             required={required}
@@ -28,7 +26,6 @@ const InputField = ({
 
 InputField.propTypes = {
     className: PropTypes.string.isRequired,
-    min: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
     placeholder: PropTypes.string.isRequired,
     required: PropTypes.bool.isRequired,

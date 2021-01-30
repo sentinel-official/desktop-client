@@ -1,16 +1,16 @@
 import React from 'react';
-import './index.css';
-import SideBar from '../../components/SideBar';
-import TextBox from '../../components/TextBox';
-import AddressTextField from '../../containers/Configuration/AddressTextField';
-import BroadCastChips from '../../containers/Configuration/BroadCastChips';
-import ChainIDTextField from '../../containers/Configuration/ChainIDTextField';
-import FeeTextField from '../../containers/Configuration/FeeTextField';
-import GasTextField from '../../containers/Configuration/GasTextField';
-import TrustServerChips from '../../containers/Configuration/TrustServerChips';
-import SubmitButton from '../../containers/Configuration/SubmitButton';
-import SocialIcons from '../../components/SocialIcons';
 import Label from '../../components/Label';
+import SideBar from '../../components/SideBar';
+import SocialIcons from '../../components/SocialIcons';
+import TextBox from '../../components/TextBox';
+import BroadcastMode from '../../containers/Configuration/BroadcastMode';
+import ChainID from '../../containers/Configuration/ChainID';
+import Fee from '../../containers/Configuration/Fee';
+import Gas from '../../containers/Configuration/Gas';
+import RPCAddress from '../../containers/Configuration/RPCAddress';
+import Submit from '../../containers/Configuration/Submit';
+import TrustNode from '../../containers/Configuration/TrustNode';
+import './index.css';
 
 const Configuration = () => {
     return (
@@ -26,23 +26,23 @@ const Configuration = () => {
                             <div className="form-group">
                                 <Label
                                     className="label"
-                                    label="BroadCast Mode"
+                                    label="Broadcast Mode"
                                 />
-                                <BroadCastChips/>
+                                <BroadcastMode/>
                             </div>
                             <div className="form-group">
                                 <Label
                                     className="label"
-                                    label="Enter Fee"
+                                    label="Fee"
                                 />
-                                <FeeTextField/>
+                                <Fee/>
                             </div>
                             <div className="form-group">
                                 <Label
                                     className="label"
                                     label="Gas"
                                 />
-                                <GasTextField/>
+                                <Gas/>
                             </div>
                         </div>
                         <div className="col-md-6">
@@ -51,26 +51,26 @@ const Configuration = () => {
                                     className="label"
                                     label="Chain ID"
                                 />
-                                <ChainIDTextField/>
+                                <ChainID/>
                             </div>
                             <div className="form-group">
                                 <Label
                                     className="label"
-                                    label="Trust RPC Server"
+                                    label="Trust Node"
                                 />
-                                <TrustServerChips/>
+                                <TrustNode/>
                             </div>
                             <div className="form-group">
                                 <Label
                                     className="label"
-                                    label="RPC Server Address"
+                                    label="RPC Address"
                                 />
-                                <AddressTextField/>
+                                <RPCAddress/>
                             </div>
                         </div>
                         <div className="login-footer">
                             <div className="login-button">
-                                <SubmitButton/>
+                                <Submit/>
                             </div>
                             <SocialIcons/>
                         </div>

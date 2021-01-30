@@ -2,28 +2,27 @@ import * as PropTypes from 'prop-types';
 import React from 'react';
 import './index.css';
 
-const ButtonChip = ({
+const ChipButton = ({
     className,
     type,
     value,
     onClick,
 }) => {
-    const handleOnClick = () => onClick(value);
     return (
         <button
             className={className}
             type={type}
-            onClick={handleOnClick}>
+            onClick={onClick}>
             {value}
         </button>
     );
 };
 
-ButtonChip.propTypes = {
+ChipButton.propTypes = {
     className: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
     value: PropTypes.string.isRequired,
     onClick: PropTypes.func.isRequired,
 };
 
-export default ButtonChip;
+export default ChipButton;
