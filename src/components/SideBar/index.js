@@ -1,8 +1,8 @@
-import './index.css';
 import React from 'react';
-import Image from '../Image';
 import Logo from '../../assets/Logo.svg';
+import Image from '../Image';
 import TextBox from '../TextBox';
+import './index.css';
 
 const SideBar = () => {
     return (

@@ -51,9 +51,24 @@ const BroadCastChips = () => {
     };
     return (
         <div className="button-group">
-            <ButtonChip className={broadcastMode.Block} type="button" value="Block" onClick={handleBroadCastMode}/>
-            <ButtonChip className={broadcastMode.Sync} type="button" value="Sync" onClick={handleBroadCastMode}/>
-            <ButtonChip className={broadcastMode.Async} type="button" value="Async" onClick={handleBroadCastMode}/>
+            <ButtonChip
+                className={broadcastMode.Block}
+                type="button"
+                value="Block"
+                onClick={handleBroadCastMode}
+            />
+            <ButtonChip
+                className={broadcastMode.Sync}
+                type="button"
+                value="Sync"
+                onClick={handleBroadCastMode}
+            />
+            <ButtonChip
+                className={broadcastMode.Async}
+                type="button"
+                value="Async"
+                onClick={handleBroadCastMode}
+            />
         </div>
     );
 };

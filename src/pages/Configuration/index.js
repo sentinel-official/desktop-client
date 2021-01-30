@@ -2,12 +2,13 @@ import React from 'react';
 import './index.css';
 import SideBar from '../../components/SideBar';
 import TextBox from '../../components/TextBox';
-import {
-    AddressTextField, BroadCastChips,
-    ChainIDTextField, FeeTextField,
-    GasTextField, RpcServerChips,
-    SubmitButton,
-} from '../../containers/ConfigurationForm';
+import AddressTextField from '../../containers/Configuration/AddressTextField';
+import BroadCastChips from '../../containers/Configuration/BroadCastChips';
+import ChainIDTextField from '../../containers/Configuration/ChainIDTextField';
+import FeeTextField from '../../containers/Configuration/FeeTextField';
+import GasTextField from '../../containers/Configuration/GasTextField';
+import RpcServerChips from '../../containers/Configuration/RpcServerChips';
+import SubmitButton from '../../containers/Configuration/SubmitButton';
 import SocialIcons from '../../components/SocialIcons';
 
 const Configuration = () => {
@@ -22,7 +23,7 @@ const Configuration = () => {
                     <div className="config-row">
                         <div className="col-md-6">
                             <div className="form-group">
-                                <TextBox className="label" value="BROADCAST MODE" />
+                                <TextBox className="label" value="BROADCAST MODE"/>
                                 <BroadCastChips/>
                             </div>
                             <FeeTextField/>
@@ -31,7 +32,7 @@ const Configuration = () => {
                         <div className="col-md-6">
                             <ChainIDTextField/>
                             <div className="form-group">
-                                <TextBox className="label" value="Trust RPC Server" />
+                                <TextBox className="label" value="Trust RPC Server"/>
                                 <RpcServerChips/>
                             </div>
                             <AddressTextField/>
@@ -39,7 +40,7 @@ const Configuration = () => {
                         <div className="login-footer">
                             <SocialIcons/>
                             <div className="login-button">
-                                <SubmitButton />
+                                <SubmitButton/>
                             </div>
                         </div>
                     </div>

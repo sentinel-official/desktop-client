@@ -3,7 +3,10 @@ import Button from '../../components/Button';
 
 const SubmitButton = () => {
     return (
-        <Button className="btn button-primary" loading={false} value="LOGIN"/>
+        <Button
+            className="btn button-primary"
+            value="LOGIN"
+        />
     );
 };
 

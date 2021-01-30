@@ -5,7 +5,10 @@ import './index.css';
 const ButtonChip = (props) => {
     const onClick = () => props.onClick(props.value);
     return (
-        <button className={props.className} type={props.type} onClick={onClick}>
+        <button
+            className={props.className}
+            type={props.type}
+            onClick={onClick}>
             {props.value}
         </button>
     );

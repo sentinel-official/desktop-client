@@ -1,31 +1,32 @@
-.config-section{
+.config-section {
     display: flex;
     justify-content: center;
 }
-.config-row{
+
+.config-row {
     width: 70%;
     margin: auto;
     display: flex;
     align-items: center;
 }
 
-.config-section .section-body{
+.config-section .section-body {
     width: 100%;
     margin: auto;
     display: flex;
     flex-direction: column;
 }
 
-.login-title{
+.login-title {
     text-align: center;
 }
 
-.form-group{
+.form-group {
     margin: 15px 0;
 }
 
-@media (max-width: 767px){
-    .config-row{
+@media (max-width: 767px) {
+    .config-row {
         display: block;
         margin-bottom: 60px;
     }
