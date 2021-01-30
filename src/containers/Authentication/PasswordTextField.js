@@ -19,7 +19,6 @@ const PasswordTextField = (props) => {
     return (
         <InputField
             className="form-control"
-            label="PASSWORD"
             name="Password"
             placeholder="Enter Password"
             required={true}
