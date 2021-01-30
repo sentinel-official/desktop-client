@@ -4,18 +4,24 @@ import Icon from '../Icon';
 const SocialIcons = () => {
     return (
         <div className="social-icons">
-            <Icon
-                className="icon"
-                icon="twitter"
-            />
-            <Icon
-                className="icon"
-                icon="telegram"
-            />
-            <Icon
-                className="icon"
-                icon="github"
-            />
+            <a href="https://twitter.com/sentinel_co?lang=en" rel="noreferrer" target="_blank">
+                <Icon
+                    className="icon"
+                    icon="twitter"
+                />
+            </a>
+            <a href="http://t.me/sentinel_co" rel="noreferrer" target="_blank">
+                <Icon
+                    className="icon"
+                    icon="telegram"
+                />
+            </a>
+            <a href="https://github.com/sentinel-official" rel="noreferrer" target="_blank">
+                <Icon
+                    className="icon"
+                    icon="github"
+                />
+            </a>
         </div>
     );
 };
