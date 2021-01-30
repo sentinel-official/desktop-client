@@ -1,0 +1,10 @@
+.button-primary {
+    background: #109FEC;
+    border-radius: 39px;
+    font-weight: 500;
+    font-size: 18px;
+    text-align: center;
+    letter-spacing: 0.05em;
+    color: #FFFFFF;
+    padding: 5px 25px;
+}
