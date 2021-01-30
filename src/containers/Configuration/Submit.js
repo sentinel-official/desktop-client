@@ -1,7 +1,11 @@
 import React from 'react';
 import Button from '../../components/Button';
 
-const SubmitButton = () => {
+const Submit = () => {
+    const onClick = () => {
+
+    };
+
     return (
         <Button
             className="btn button-primary"
@@ -9,8 +13,9 @@ const SubmitButton = () => {
             loading={false}
             type="button"
             value="SAVE"
+            onClick={onClick}
         />
     );
 };
 
-export default SubmitButton;
+export default Submit;

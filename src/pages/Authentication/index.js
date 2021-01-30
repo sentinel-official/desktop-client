@@ -1,10 +1,10 @@
 import * as PropTypes from 'prop-types';
 import React from 'react';
+import Label from '../../components/Label';
 import SideBar from '../../components/SideBar';
 import SocialIcons from '../../components/SocialIcons';
 import TextBox from '../../components/TextBox';
 import PasswordTextField from '../../containers/Authentication/PasswordTextField';
-import Label from '../../components/Label';
 import SubmitButton from '../../containers/Authentication/SubmitButton';
 import './index.css';
 

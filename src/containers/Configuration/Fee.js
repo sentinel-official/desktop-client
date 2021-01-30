@@ -1,10 +1,10 @@
 import React from 'react';
 import InputField from '../../components/InputField';
 
-const FeeTextField = () => {
-    const handleChange = (value) => {
-        console.log(value);
+const Fee = () => {
+    const onChange = (event) => {
     };
+
     return (
         <InputField
             className="form-control"
@@ -12,9 +12,10 @@ const FeeTextField = () => {
             placeholder="Enter Fee"
             required={true}
             type="text"
-            onChange={handleChange}
+            value={''}
+            onChange={onChange}
         />
     );
 };
 
-export default FeeTextField;
+export default Fee;

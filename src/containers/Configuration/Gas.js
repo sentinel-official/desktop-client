@@ -1,20 +1,21 @@
 import React from 'react';
 import InputField from '../../components/InputField';
 
-const ChainIDTextField = () => {
-    const handleChange = (value) => {
-        console.log(value);
+const Gas = () => {
+    const onChange = (event) => {
     };
+
     return (
         <InputField
             className="form-control"
-            name="ChainID"
-            placeholder="ChainID"
+            name="gas"
+            placeholder="Enter Gas"
             required={true}
             type="text"
-            onChange={handleChange}
+            value={''}
+            onChange={onChange}
         />
     );
 };
 
-export default ChainIDTextField;
+export default Gas;

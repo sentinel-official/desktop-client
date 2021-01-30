@@ -1,20 +1,21 @@
 import React from 'react';
 import InputField from '../../components/InputField';
 
-const AddressTextField = () => {
-    const onChange = (value) => {
-        console.log(value, 'in test');
+const ChainID = () => {
+    const onChange = (event) => {
     };
+
     return (
         <InputField
             className="form-control"
-            name="Address"
-            placeholder="RPC Address"
+            name="ChainID"
+            placeholder="Enter Chain ID"
             required={true}
             type="text"
+            value={''}
             onChange={onChange}
         />
     );
 };
 
-export default AddressTextField;
+export default ChainID;

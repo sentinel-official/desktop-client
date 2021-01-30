@@ -9,7 +9,7 @@
     padding: 5px 25px;
 }
 
-.btn.disabled, .btn:disabled{
+.btn.disabled, .btn:disabled {
     background: #109FEC;
     color: #FFFFFF;
 }
