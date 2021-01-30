@@ -15,7 +15,11 @@ const Button = ({
             disabled={disabled}
             onClick={onClick}>
             { loading
-                ? <span aria-hidden="true" className="spinner-border spinner-border-sm" role="status"></span>
+                ? <span
+                    aria-hidden="true"
+                    className="spinner-border spinner-border-sm"
+                    role="status">
+                </span>
                 : value
             }
         </button>
