@@ -1,12 +1,16 @@
 import * as PropTypes from 'prop-types';
 import React from 'react';
 
-const Image = (props) => {
+const Image = ({
+    alt,
+    className,
+    src,
+}) => {
     return (
         <img
-            alt={props.alt}
-            className={props.className}
-            src={props.src}
+            alt={alt}
+            className={className}
+            src={src}
         />
     );
 };

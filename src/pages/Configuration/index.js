@@ -10,6 +10,7 @@ import GasTextField from '../../containers/Configuration/GasTextField';
 import RpcServerChips from '../../containers/Configuration/RpcServerChips';
 import SubmitButton from '../../containers/Configuration/SubmitButton';
 import SocialIcons from '../../components/SocialIcons';
+import Label from '../../components/Label';
 
 const Configuration = () => {
     return (
@@ -23,25 +24,55 @@ const Configuration = () => {
                     <div className="config-row">
                         <div className="col-md-6">
                             <div className="form-group">
-                                <TextBox className="label" value="BROADCAST MODE"/>
+                                <Label
+                                    className="label"
+                                    label="BroadCast Mode"
+                                />
                                 <BroadCastChips/>
                             </div>
-                            <FeeTextField/>
-                            <GasTextField/>
+                            <div className="form-group">
+                                <Label
+                                    className="label"
+                                    label="Enter Fee"
+                                />
+                                <FeeTextField/>
+                            </div>
+                            <div className="form-group">
+                                <Label
+                                    className="label"
+                                    label="Gas"
+                                />
+                                <GasTextField/>
+                            </div>
                         </div>
                         <div className="col-md-6">
-                            <ChainIDTextField/>
                             <div className="form-group">
-                                <TextBox className="label" value="Trust RPC Server"/>
+                                <Label
+                                    className="label"
+                                    label="Chain ID"
+                                />
+                                <ChainIDTextField/>
+                            </div>
+                            <div className="form-group">
+                                <Label
+                                    className="label"
+                                    label="Trust RPC Server"
+                                />
                                 <RpcServerChips/>
                             </div>
-                            <AddressTextField/>
+                            <div className="form-group">
+                                <Label
+                                    className="label"
+                                    label="RPC Server Address"
+                                />
+                                <AddressTextField/>
+                            </div>
                         </div>
                         <div className="login-footer">
-                            <SocialIcons/>
                             <div className="login-button">
                                 <SubmitButton/>
                             </div>
+                            <SocialIcons/>
                         </div>
                     </div>
                 </div>

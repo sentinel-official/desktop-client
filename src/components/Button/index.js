@@ -2,12 +2,21 @@ import * as PropTypes from 'prop-types';
 import React from 'react';
 import './index.css';
 
-const Button = (props) => {
+const Button = ({
+    className,
+    disabled,
+    value,
+    onClick,
+    loading,
+}) => {
     return (
-        <button className={props.className}>
-            { props.loading
+        <button
+            className={className}
+            disabled={disabled}
+            onClick={onClick}>
+            { loading
                 ? <span aria-hidden="true" className="spinner-border spinner-border-sm" role="status"></span>
-                : props.value
+                : value
             }
         </button>
     );
@@ -15,8 +24,10 @@ const Button = (props) => {
 
 Button.propTypes = {
     className: PropTypes.string.isRequired,
+    disabled: PropTypes.bool.isRequired,
     loading: PropTypes.bool.isRequired,
     value: PropTypes.string.isRequired,
+    onClick: PropTypes.func.isRequired,
 };
 
 export default Button;

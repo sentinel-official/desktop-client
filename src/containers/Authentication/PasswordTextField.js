@@ -1,22 +1,47 @@
+import * as PropTypes from 'prop-types';
 import React from 'react';
+import { connect } from 'react-redux';
+import { setAuthenticationPassword } from '../../actions/authentication';
 import InputField from '../../components/InputField';
+import { ValidatePassword } from './_validation';
 
-const PasswordTextField = () => {
-    const handleChange = (value) => {
-        console.log(value);
+const PasswordTextField = (props) => {
+    const onChange = (event) => {
+        const value = event.target.value.toString().trim();
+        props.onChange({
+            value,
+            error: {
+                message: ValidatePassword(value).message,
+            },
+        });
     };
 
     return (
         <InputField
             className="form-control"
-            labelText="PASSWORD"
             name="Password"
             placeholder="Enter Password"
             required={true}
             type="password"
-            onChange={handleChange}
+            value={props.value}
+            onChange={onChange}
         />
     );
 };
 
-export default PasswordTextField;
+PasswordTextField.propTypes = {
+    value: PropTypes.string.isRequired,
+    onChange: PropTypes.func.isRequired,
+};
+
+const stateToProps = (state) => {
+    return {
+        value: state.authentication.password.value,
+    };
+};
+
+const actionsToProps = {
+    onChange: setAuthenticationPassword,
+};
+
+export default connect(stateToProps, actionsToProps)(PasswordTextField);

@@ -2,14 +2,19 @@ import * as PropTypes from 'prop-types';
 import React from 'react';
 import './index.css';
 
-const ButtonChip = (props) => {
-    const onClick = () => props.onClick(props.value);
+const ButtonChip = ({
+    className,
+    type,
+    value,
+    onClick,
+}) => {
+    const handleOnClick = () => onClick(value);
     return (
         <button
-            className={props.className}
-            type={props.type}
-            onClick={onClick}>
-            {props.value}
+            className={className}
+            type={type}
+            onClick={handleOnClick}>
+            {value}
         </button>
     );
 };

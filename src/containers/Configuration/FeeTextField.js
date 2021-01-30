@@ -8,7 +8,6 @@ const FeeTextField = () => {
     return (
         <InputField
             className="form-control"
-            labelText="Enter Fee"
             name="Fee"
             placeholder="Enter Fee"
             required={true}

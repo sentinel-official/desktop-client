@@ -4,7 +4,6 @@ import { Route, Switch, withRouter } from 'react-router-dom';
 import './App.css';
 import Authentication from './pages/Authentication';
 import Splash from './pages/Splash';
-import Configuration from './pages/Configuration';
 
 const routes = [{
     path: '/',
@@ -12,9 +11,6 @@ const routes = [{
 }, {
     path: '/authentication',
     component: Authentication,
-}, {
-    path: '/configuration',
-    component: Configuration,
 }];
 
 const App = () => {

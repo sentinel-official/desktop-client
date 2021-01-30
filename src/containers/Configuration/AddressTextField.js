@@ -8,7 +8,6 @@ const AddressTextField = () => {
     return (
         <InputField
             className="form-control"
-            labelText="RPC Server Address"
             name="Address"
             placeholder="RPC Address"
             required={true}

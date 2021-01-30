@@ -1,12 +1,14 @@
+import * as PropTypes from 'prop-types';
 import React from 'react';
 import SideBar from '../../components/SideBar';
 import SocialIcons from '../../components/SocialIcons';
 import TextBox from '../../components/TextBox';
 import PasswordTextField from '../../containers/Authentication/PasswordTextField';
+import Label from '../../components/Label';
 import SubmitButton from '../../containers/Authentication/SubmitButton';
 import './index.css';
 
-const Authentication = () => {
+const Authentication = ({ history }) => {
     return (
         <div className="auth-container">
             <div className="col-md-4">
@@ -18,17 +20,29 @@ const Authentication = () => {
                         className="login-title"
                         value="Authenticate Sentinel Client"
                     />
-                    <PasswordTextField/>
+                    <div className="form-group">
+                        <Label
+                            className="label"
+                            label="PASSWORD"
+                        />
+                        <PasswordTextField/>
+                    </div>
                 </div>
                 <div className="login-footer">
-                    <SocialIcons/>
                     <div className="login-button">
-                        <SubmitButton/>
+                        <SubmitButton history={history}/>
                     </div>
+                    <SocialIcons/>
                 </div>
             </div>
         </div>
     );
+};
+
+Authentication.propTypes = {
+    history: PropTypes.shape({
+        push: PropTypes.func.isRequired,
+    }).isRequired,
 };
 
 export default Authentication;

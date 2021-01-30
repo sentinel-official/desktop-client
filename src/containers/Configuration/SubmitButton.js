@@ -5,6 +5,7 @@ const SubmitButton = () => {
     return (
         <Button
             className="btn button-primary"
+            disabled={false}
             loading={false}
             type="button"
             value="SAVE"

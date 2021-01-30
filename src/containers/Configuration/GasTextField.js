@@ -8,7 +8,6 @@ const GasTextField = () => {
     return (
         <InputField
             className="form-control"
-            labelText="Gas"
             name="gas"
             placeholder="Enter Gas Amount"
             required={true}

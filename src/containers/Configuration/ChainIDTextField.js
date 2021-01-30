@@ -8,7 +8,6 @@ const ChainIDTextField = () => {
     return (
         <InputField
             className="form-control"
-            labelText="Chain ID"
             name="ChainID"
             placeholder="ChainID"
             required={true}

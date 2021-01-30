@@ -36,7 +36,7 @@ export const postAuthenticationError = (data) => {
     };
 };
 
-export const postAuthentication = (body, history, cb) => (dispatch) => {
+export const postAuthentication = (body, history, cb) => (dispatch, getState) => {
     Async.waterfall([
         (next) => {
             dispatch(postAuthenticationInProgress());
