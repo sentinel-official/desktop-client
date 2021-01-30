@@ -2,8 +2,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import React from 'react';
 import { Route, Switch, withRouter } from 'react-router-dom';
 import './App.css';
-// import Authentication from './pages/Authentication';
-import Configuration from './pages/Configuration';
+import Authentication from './pages/Authentication';
 import Splash from './pages/Splash';
 
 const routes = [{
@@ -11,7 +10,7 @@ const routes = [{
     component: Splash,
 }, {
     path: '/authentication',
-    component: Configuration,
+    component: Authentication,
 }];
 
 const App = () => {
