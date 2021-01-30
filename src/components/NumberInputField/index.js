@@ -2,7 +2,7 @@ import * as PropTypes from 'prop-types';
 import React from 'react';
 import './index.css';
 
-const InputField = ({
+const NumberInputField = ({
     className,
     name,
     placeholder,
@@ -10,12 +10,12 @@ const InputField = ({
     type,
     value,
     onChange,
-    minimum,
+    min,
 }) => {
     return (
         <input
             className={className}
-            min={minimum}
+            min={min}
             name={name}
             placeholder={placeholder}
             required={required}
@@ -26,7 +26,7 @@ const InputField = ({
     );
 };
 
-InputField.propTypes = {
+NumberInputField.propTypes = {
     className: PropTypes.string.isRequired,
     min: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
@@ -37,4 +37,4 @@ InputField.propTypes = {
     onChange: PropTypes.func.isRequired,
 };
 
-export default InputField;
+export default NumberInputField;

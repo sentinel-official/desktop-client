@@ -1,17 +1,18 @@
 import React from 'react';
-import InputField from '../../components/InputField';
+import NumberInputField from '../../components/NumberInputField';
 
 const GasTextField = () => {
     const handleChange = (value) => {
         console.log(value);
     };
     return (
-        <InputField
+        <NumberInputField
             className="form-control"
+            minimum={1}
             name="gas"
             placeholder="Enter Gas Amount"
             required={true}
-            type="text"
+            type="number"
             onChange={handleChange}
         />
     );

@@ -7,7 +7,7 @@ import BroadCastChips from '../../containers/Configuration/BroadCastChips';
 import ChainIDTextField from '../../containers/Configuration/ChainIDTextField';
 import FeeTextField from '../../containers/Configuration/FeeTextField';
 import GasTextField from '../../containers/Configuration/GasTextField';
-import RpcServerChips from '../../containers/Configuration/RpcServerChips';
+import TrustServerChips from '../../containers/Configuration/TrustServerChips';
 import SubmitButton from '../../containers/Configuration/SubmitButton';
 import SocialIcons from '../../components/SocialIcons';
 import Label from '../../components/Label';
@@ -58,7 +58,7 @@ const Configuration = () => {
                                     className="label"
                                     label="Trust RPC Server"
                                 />
-                                <RpcServerChips/>
+                                <TrustServerChips/>
                             </div>
                             <div className="form-group">
                                 <Label

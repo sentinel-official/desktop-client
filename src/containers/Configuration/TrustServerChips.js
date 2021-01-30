@@ -1,21 +1,20 @@
-import React, { useState } from 'react';
+import React from 'react';
 import ButtonChip from '../../components/ButtonChip';
 
-const RpcServerChips = () => {
-    const [rpcServer, setRpcServer] = useState(true);
-
-    const rpcServerHandler = () => {
-        setRpcServer(!rpcServer);
+const TrustServerChips = () => {
+    const trustServer = true;
+    const rpcServerHandler = (value) => {
+        console.log(value, 'broadcast mode');
     };
     return (
         <div className="button-group">
             <ButtonChip
-                className={rpcServer === true ? 'selected' : 'primary'}
+                className={trustServer === true ? 'selected' : 'primary'}
                 type="button" value="Yes"
                 onClick={rpcServerHandler}
             />
             <ButtonChip
-                className={rpcServer === false ? 'selected' : 'primary'}
+                className={trustServer === false ? 'selected' : 'primary'}
                 type="button"
                 value="No"
                 onClick={rpcServerHandler}
@@ -24,4 +23,4 @@ const RpcServerChips = () => {
     );
 };
 
-export default RpcServerChips;
+export default TrustServerChips;
