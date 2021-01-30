@@ -15,16 +15,17 @@ body {
     width: 200px;
 }
 
-.auth-container{
+.auth-container {
     display: flex;
     height: 100vh;
     flex-wrap: wrap;
 }
-.auth-container .col-md-4, .auth-container .col-md-8{
+
+.auth-container .col-md-4, .auth-container .col-md-8 {
     padding: 0;
 }
 
-.login-footer{
+.login-footer {
     padding: 10px 20px;
     display: flex;
     align-items: center;
@@ -36,23 +37,23 @@ body {
     border-top: 1px solid #DCE9F1;;
 }
 
-.social-icons .icon{
+.social-icons .icon {
     width: 20px;
     margin: 0 15px;
 }
 
-.button-group button{
+.button-group button {
     margin: 0px 10px 5px 0;
 }
 
-.login-button button{
+.login-button button {
     padding-left: 3rem;
     padding-right: 3rem;
     display: flex;
     align-items: center;
 }
 
-label, .label{
+label, .label {
     font-weight: 500;
     font-size: 16px;
     text-transform: uppercase;
