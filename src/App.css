@@ -61,3 +61,30 @@ label, .label {
     color: #8EA1C8;
     margin-bottom: 8px;
 }
+
+.account-section {
+    display: flex;
+    justify-content: center;
+}
+
+.account-section .section-body {
+    width: 100%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.section-body .title {
+    text-align: center;
+}
+
+.section-body .form-group {
+    margin: 15px 0;
+}
+
+@media (max-width: 767px) {
+    .account-section .section-body {
+        padding-top: 20px;
+    }
+}

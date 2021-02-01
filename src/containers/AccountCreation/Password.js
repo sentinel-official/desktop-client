@@ -12,6 +12,7 @@ const Password = () => {
             placeholder="Password"
             required={true}
             type="password"
+            value={''}
             onChange={onChange}
         />
     );

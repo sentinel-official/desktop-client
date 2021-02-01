@@ -12,6 +12,7 @@ const Seed = () => {
             placeholder="Enter Seed"
             required={true}
             rows={3}
+            value={''}
             onChange={onChange}
         />
     );

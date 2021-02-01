@@ -1,27 +1,27 @@
 import React from 'react';
-import './index.css';
 import SideBar from '../../components/SideBar';
 import TextBox from '../../components/TextBox';
 import Label from '../../components/Label';
-import BroadcastMode from '../../containers/Configuration/BroadcastMode';
-import Fee from '../../containers/Configuration/Fee';
-import Gas from '../../containers/Configuration/Gas';
-import Submit from '../../containers/CreateAccount/submit';
+import Submit from '../../containers/AccountCreation/Submit';
 import SocialIcons from '../../components/SocialIcons';
-import Name from '../../containers/CreateAccount/Name';
-import Password from '../../containers/CreateAccount/Password';
-import Seed from '../../containers/CreateAccount/Seed';
+import Name from '../../containers/AccountCreation/Name';
+import Password from '../../containers/AccountCreation/Password';
+import Seed from '../../containers/AccountCreation/Seed';
+import './index.css';
 
-const CreatAccount = () => {
+const AccountCreation = () => {
     return (
         <div className="auth-container">
             <div className="col-md-4">
                 <SideBar/>
             </div>
-            <div className="col-md-8 config-section">
+            <div className="col-md-8 account-section">
                 <div className="section-body">
-                    <TextBox className="login-title" value="Configure Settings"/>
-                    <div className="config-row">
+                    <TextBox
+                        className="title"
+                        value="Creating Account"
+                    />
+                    <div className="account-create-row">
                         <div className="form-group">
                             <Label
                                 className="label"
@@ -36,6 +36,7 @@ const CreatAccount = () => {
                             />
                             <Password/>
                         </div>
+                        <hr/>
                         <div className="form-group">
                             <Label
                                 className="label"
@@ -56,4 +57,4 @@ const CreatAccount = () => {
     );
 };
 
-export default CreatAccount;
+export default AccountCreation;

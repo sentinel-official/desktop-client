@@ -1,7 +1,3 @@
-.config-section {
-    display: flex;
-    justify-content: center;
-}
 
 .config-row {
     width: 70%;
@@ -10,26 +6,9 @@
     align-items: center;
 }
 
-.config-section .section-body {
-    width: 100%;
-    margin: auto;
-    display: flex;
-    flex-direction: column;
-}
 
-.login-title {
-    text-align: center;
-}
-
-.form-group {
-    margin: 15px 0;
-}
 
 @media (max-width: 767px) {
-    .config-section .section-body {
-        padding-top: 20px;
-    }
-
     .config-row {
         display: block;
         margin-bottom: 70px;

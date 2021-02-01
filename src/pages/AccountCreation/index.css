@@ -1,17 +1,8 @@
-.account-create-section{
-    display: flex;
-    justify-content: center;
-}
-
-.account-create-row{
+.account-create-row {
     width: 50%;
     margin: auto;
 }
 
-.account-create-section form{
-    width: 100%;
-    margin: auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.account-create-row hr {
+    margin: 20px 0;
 }

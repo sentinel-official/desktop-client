@@ -18,9 +18,12 @@ const Configuration = () => {
             <div className="col-md-4">
                 <SideBar/>
             </div>
-            <div className="col-md-8 config-section">
+            <div className="col-md-8 account-section">
                 <div className="section-body">
-                    <TextBox className="login-title" value="Configure Settings"/>
+                    <TextBox
+                        className="title"
+                        value="Configure Settings"
+                    />
                     <div className="config-row">
                         <div className="col-md-6">
                             <div className="form-group">
