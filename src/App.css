@@ -38,18 +38,13 @@ body {
     flex-direction: row-reverse;
 }
 
-.social-icons .icon {
-    width: 20px;
-    margin: 0 15px;
-}
-
 .button-group button {
     margin: 0px 10px 5px 0;
 }
 
 .login-button button {
-    padding-left: 3rem;
-    padding-right: 3rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
     display: flex;
     align-items: center;
 }
