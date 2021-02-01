@@ -1,0 +1,16 @@
+.wallet-section{
+    display: flex;
+    width: 100%;
+    align-items: stretch;
+    height: 100%;
+}
+.dashboard-side-bar-container{
+    min-width: 250px;
+    max-width: 250px;
+    color: #6b6b6b;
+    transition: all .3s;
+    position: relative;
+    overflow-y: auto;
+    height: 100%;
+    background: #193254;
+}

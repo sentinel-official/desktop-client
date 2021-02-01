@@ -1,0 +1,22 @@
+.list-group a{
+    padding: 20px;
+}
+.side-bar-footer{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 30px 0;
+    font-size: .875rem;
+    text-align: center;
+}
+a .icon{
+    width: 20px;
+    fill:#55678B;
+}
+a.active{
+    color: #FFFFFF;
+    border-left: 2px solid red;
+}
+a.active .icon{
+    fill:#fff;
+}
