@@ -30,7 +30,7 @@ TextArea.propTypes = {
     placeholder: PropTypes.string.isRequired,
     required: PropTypes.bool.isRequired,
     rows: PropTypes.number.isRequired,
-    value: PropTypes.number.isRequired,
+    value: PropTypes.string.isRequired,
     onChange: PropTypes.func.isRequired,
 };
 
