@@ -1,14 +1,15 @@
+import * as PropTypes from 'prop-types';
 import React from 'react';
-import './index.css';
-import TextBox from '../../components/TextBox';
-import SocialIcons from '../../components/SocialIcons';
 import SideBar from '../../components/SideBar';
+import SocialIcons from '../../components/SocialIcons';
+import TextBox from '../../components/TextBox';
 import Address from '../../containers/AccountDetails/Address';
+import Continue from '../../containers/AccountDetails/Continue';
+import Seed from '../../containers/AccountDetails/Mnemonic';
 import PublicKey from '../../containers/AccountDetails/PublicKey';
-import Seed from '../../containers/AccountDetails/Seed';
-import ButtonContinue from '../../containers/AccountDetails/ButtonContinue';
+import './index.css';
 
-const AccountDetails = () => {
+const AccountDetails = ({ history }) => {
     return (
         <div className="auth-container">
             <div className="col-md-4">
@@ -18,7 +19,7 @@ const AccountDetails = () => {
                 <div className="account-create-row">
                     <TextBox
                         className="title"
-                        value="Account Created Succefully!"
+                        value="Account Created Successfully!"
                     />
                     <TextBox
                         className="label"
@@ -32,7 +33,7 @@ const AccountDetails = () => {
                     <PublicKey/>
                     <TextBox
                         className="label"
-                        value="BROADCAST MODE"
+                        value="MNEMONIC"
                     />
                     <Seed/>
                     <TextBox
@@ -41,7 +42,7 @@ const AccountDetails = () => {
                     />
                     <div className="login-footer">
                         <div className="login-button">
-                            <ButtonContinue/>
+                            <Continue history={history}/>
                         </div>
                         <SocialIcons/>
                     </div>
@@ -49,6 +50,12 @@ const AccountDetails = () => {
             </div>
         </div>
     );
+};
+
+AccountDetails.propTypes = {
+    history: PropTypes.shape({
+        push: PropTypes.func.isRequired,
+    }).isRequired,
 };
 
 export default AccountDetails;

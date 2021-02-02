@@ -1,48 +1,47 @@
 import * as PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
-import { setConfigurationChainFees } from '../../actions/configuration';
-import InputField from '../../components/InputField';
-import { ValidateFee } from './_validation';
+import { setKeyMnemonic } from '../../actions/keys';
+import TextArea from '../../components/TextArea';
+import { ValidateMnemonic } from './_validation';
 
-const Fee = (props) => {
+const Mnemonic = (props) => {
     const onChange = (event) => {
         const value = event.target.value.toString();
-
         props.onChange({
             value,
             error: {
-                message: ValidateFee(value).message,
+                message: ValidateMnemonic(value).message,
             },
         });
     };
 
     return (
-        <InputField
-            className="form-control"
-            name="Fee"
-            placeholder="Enter Fee"
+        <TextArea
+            className="form-control seed-text-field"
+            name="mnemonic"
+            placeholder="Enter Mnemonic"
             required={true}
-            type="text"
+            rows={3}
             value={props.value}
             onChange={onChange}
         />
     );
 };
 
-Fee.propTypes = {
+Mnemonic.propTypes = {
     value: PropTypes.string.isRequired,
     onChange: PropTypes.func.isRequired,
 };
 
 const stateToProps = (state) => {
     return {
-        value: state.configuration.chain.fees.value,
+        value: state.keys.post.mnemonic.value,
     };
 };
 
 const actionsToProps = {
-    onChange: setConfigurationChainFees,
+    onChange: setKeyMnemonic,
 };
 
-export default connect(stateToProps, actionsToProps)(Fee);
+export default connect(stateToProps, actionsToProps)(Mnemonic);

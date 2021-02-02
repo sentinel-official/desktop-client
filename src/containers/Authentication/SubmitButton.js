@@ -7,9 +7,8 @@ import Button from '../../components/Button';
 const SubmitButton = (props) => {
     const onClick = () => {
         props.onClick({
-            password: props.password,
-        }, history, () => {
-
+            password: props.password.trim(),
+        }, props.history, () => {
         });
     };
 
@@ -19,6 +18,7 @@ const SubmitButton = (props) => {
         <Button
             className="btn button-primary"
             disabled={disabled}
+            loading={false}
             value="Login"
             onClick={onClick}
         />

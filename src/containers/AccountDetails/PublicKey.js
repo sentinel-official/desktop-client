@@ -1,14 +1,28 @@
+import * as PropTypes from 'prop-types';
 import React from 'react';
+import { connect } from 'react-redux';
 import TextBox from '../../components/TextBox';
+import { encodeToBech32 } from '../../utils/bech32';
 
-const PublicKey = () => {
-    const publicKey = 'cosmosaccpub1addwnpepqvw3ea6crfamul8a9v3vlle6p2c99cx02ykex9u09r3p72g83w7vxu09k6z';
+const PublicKey = (props) => {
+    const value = encodeToBech32(props.value, 'sentpub');
+
     return (
         <TextBox
             className="value"
-            value={publicKey}
+            value={value}
         />
     );
 };
 
-export default PublicKey;
+PublicKey.propTypes = {
+    value: PropTypes.string.isRequired,
+};
+
+const stateToProps = (state) => {
+    return {
+        value: state.keys.post.info['pub_key'],
+    };
+};
+
+export default connect(stateToProps)(PublicKey);

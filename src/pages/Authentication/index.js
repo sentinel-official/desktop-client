@@ -27,12 +27,12 @@ const Authentication = ({ history }) => {
                         />
                         <PasswordTextField/>
                     </div>
-                    <div className="login-footer">
-                        <div className="login-button">
-                            <SubmitButton history={history}/>
-                        </div>
-                        <SocialIcons/>
+                </div>
+                <div className="login-footer">
+                    <div className="login-button">
+                        <SubmitButton history={history}/>
                     </div>
+                    <SocialIcons/>
                 </div>
             </div>
         </div>

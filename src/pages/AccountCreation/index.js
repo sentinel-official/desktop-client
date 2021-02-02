@@ -1,15 +1,16 @@
+import * as PropTypes from 'prop-types';
 import React from 'react';
-import SideBar from '../../components/SideBar';
-import TextBox from '../../components/TextBox';
 import Label from '../../components/Label';
-import Submit from '../../containers/AccountCreation/Submit';
+import SideBar from '../../components/SideBar';
 import SocialIcons from '../../components/SocialIcons';
+import TextBox from '../../components/TextBox';
+import Mnemonic from '../../containers/AccountCreation/Mnemonic';
 import Name from '../../containers/AccountCreation/Name';
 import Password from '../../containers/AccountCreation/Password';
-import Seed from '../../containers/AccountCreation/Seed';
+import Submit from '../../containers/AccountCreation/Submit';
 import './index.css';
 
-const AccountCreation = () => {
+const AccountCreation = ({ history }) => {
     return (
         <div className="auth-container">
             <div className="col-md-4">
@@ -19,20 +20,20 @@ const AccountCreation = () => {
                 <div className="section-body">
                     <TextBox
                         className="title"
-                        value="Creating Account"
+                        value="Create Account"
                     />
                     <div className="account-create-row">
                         <div className="form-group">
                             <Label
                                 className="label"
-                                label="Account Name"
+                                label="Name"
                             />
                             <Name/>
                         </div>
                         <div className="form-group">
                             <Label
                                 className="label"
-                                label="Account Password"
+                                label="Password"
                             />
                             <Password/>
                         </div>
@@ -40,13 +41,13 @@ const AccountCreation = () => {
                         <div className="form-group">
                             <Label
                                 className="label"
-                                label="Enter Seed"
+                                label="Mnemonic"
                             />
-                            <Seed/>
+                            <Mnemonic/>
                         </div>
                         <div className="login-footer">
                             <div className="login-button">
-                                <Submit/>
+                                <Submit history={history}/>
                             </div>
                             <SocialIcons/>
                         </div>
@@ -55,6 +56,12 @@ const AccountCreation = () => {
             </div>
         </div>
     );
+};
+
+AccountCreation.propTypes = {
+    history: PropTypes.shape({
+        push: PropTypes.func.isRequired,
+    }).isRequired,
 };
 
 export default AccountCreation;

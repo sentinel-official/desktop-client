@@ -7,7 +7,7 @@ import { ValidatePassword } from './_validation';
 
 const PasswordTextField = (props) => {
     const onChange = (event) => {
-        const value = event.target.value.toString().trim();
+        const value = event.target.value.toString();
         props.onChange({
             value,
             error: {

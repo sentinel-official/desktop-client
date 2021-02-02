@@ -1,3 +1,4 @@
+import * as PropTypes from 'prop-types';
 import React from 'react';
 import Label from '../../components/Label';
 import SideBar from '../../components/SideBar';
@@ -12,18 +13,15 @@ import Submit from '../../containers/Configuration/Submit';
 import TrustNode from '../../containers/Configuration/TrustNode';
 import './index.css';
 
-const Configuration = () => {
+const Configuration = ({ history }) => {
     return (
         <div className="auth-container">
             <div className="col-md-4">
                 <SideBar/>
             </div>
-            <div className="col-md-8 account-section">
+            <div className="col-md-8 config-section">
                 <div className="section-body">
-                    <TextBox
-                        className="title"
-                        value="Configure Settings"
-                    />
+                    <TextBox className="login-title" value="Configure Settings"/>
                     <div className="config-row">
                         <div className="col-md-6">
                             <div className="form-group">
@@ -73,7 +71,7 @@ const Configuration = () => {
                         </div>
                         <div className="login-footer">
                             <div className="login-button">
-                                <Submit/>
+                                <Submit history={history}/>
                             </div>
                             <SocialIcons/>
                         </div>
@@ -82,6 +80,12 @@ const Configuration = () => {
             </div>
         </div>
     );
+};
+
+Configuration.propTypes = {
+    history: PropTypes.shape({
+        push: PropTypes.func.isRequired,
+    }).isRequired,
 };
 
 export default Configuration;
