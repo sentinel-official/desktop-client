@@ -1,11 +1,11 @@
 import { combineReducers } from 'redux';
 import {
-    KEYS_MNEMONIC_SET,
-    KEYS_NAME_SET,
-    KEYS_PASSWORD_SET,
     KEYS_POST_ERROR,
     KEYS_POST_IN_PROGRESS,
     KEYS_POST_SUCCESS,
+    KEY_MNEMONIC_SET,
+    KEY_NAME_SET,
+    KEY_PASSWORD_SET,
 } from '../../constants/keys';
 
 const name = (state = {
@@ -18,7 +18,7 @@ const name = (state = {
     data,
 }) => {
     switch (type) {
-    case KEYS_NAME_SET:
+    case KEY_NAME_SET:
         return {
             ...state,
             value: data.value,
@@ -51,7 +51,7 @@ const password = (state = {
     data,
 }) => {
     switch (type) {
-    case KEYS_PASSWORD_SET:
+    case KEY_PASSWORD_SET:
         return {
             ...state,
             value: data.value,
@@ -84,7 +84,7 @@ const mnemonic = (state = {
     data,
 }) => {
     switch (type) {
-    case KEYS_MNEMONIC_SET:
+    case KEY_MNEMONIC_SET:
         return {
             ...state,
             value: data.value,
