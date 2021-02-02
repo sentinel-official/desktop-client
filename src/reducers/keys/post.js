@@ -121,7 +121,7 @@ const info = (state = {
         return {
             ...state,
             address: data.address,
-            pub_key: data.pub_key,
+            pub_key: data['pub_key'],
             mnemonic: data.mnemonic,
             name: data.name,
         };

@@ -36,3 +36,21 @@
     font-size: 36px;
     color: #142D51;
 }
+
+.value {
+    color: #252E40;
+    font-weight: normal;
+    font-size: 18px;
+}
+
+.seed {
+    border: 1px dashed #8EA1C8;
+    padding: 20px;
+    line-height: 2;
+    word-spacing: 20px;
+}
+
+.seed-note {
+    font-size: 14px;
+    color: #8EA1C8;
+}
