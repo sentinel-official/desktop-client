@@ -2,7 +2,7 @@ import * as PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 import { setKeyPassword } from '../../actions/keys';
-import InputField from '../../components/InputField';
+import TextInputField from '../../components/TextInputField';
 import { ValidatePassword } from '../Authentication/_validation';
 
 const Password = (props) => {
@@ -17,7 +17,7 @@ const Password = (props) => {
     };
 
     return (
-        <InputField
+        <TextInputField
             className="form-control"
             name="password"
             placeholder="Enter Password"

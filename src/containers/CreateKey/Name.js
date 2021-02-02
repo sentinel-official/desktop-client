@@ -2,7 +2,7 @@ import * as PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 import { setKeyName } from '../../actions/keys';
-import InputField from '../../components/InputField';
+import TextInputField from '../../components/TextInputField';
 import { ValidateName } from './_validation';
 
 const Name = (props) => {
@@ -17,7 +17,7 @@ const Name = (props) => {
     };
 
     return (
-        <InputField
+        <TextInputField
             className="form-control"
             name="name"
             placeholder="Enter Name"

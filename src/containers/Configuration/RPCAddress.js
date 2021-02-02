@@ -2,7 +2,7 @@ import * as PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 import { setConfigurationChainRPCAddress } from '../../actions/configuration';
-import InputField from '../../components/InputField';
+import TextInputField from '../../components/TextInputField';
 import { ValidateRPCAddress } from './_validation';
 
 const RPCAddress = (props) => {
@@ -18,7 +18,7 @@ const RPCAddress = (props) => {
     };
 
     return (
-        <InputField
+        <TextInputField
             className="form-control"
             name="RPCAddress"
             placeholder="Enter RPC Address"

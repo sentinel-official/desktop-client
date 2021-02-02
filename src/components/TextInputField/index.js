@@ -2,7 +2,7 @@ import * as PropTypes from 'prop-types';
 import React from 'react';
 import './index.css';
 
-const InputField = ({
+const TextInputField = ({
     className,
     name,
     placeholder,
@@ -24,7 +24,7 @@ const InputField = ({
     );
 };
 
-InputField.propTypes = {
+TextInputField.propTypes = {
     className: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     placeholder: PropTypes.string.isRequired,
@@ -34,4 +34,4 @@ InputField.propTypes = {
     onChange: PropTypes.func.isRequired,
 };
 
-export default InputField;
+export default TextInputField;

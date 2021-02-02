@@ -1,20 +1,20 @@
 import * as PropTypes from 'prop-types';
 import React from 'react';
 import Label from '../../components/Label';
-import SideBar from '../../components/SideBar';
+import Sidebar from '../../components/Sidebar';
 import SocialIcons from '../../components/SocialIcons';
 import TextBox from '../../components/TextBox';
-import Mnemonic from '../../containers/AccountCreation/Mnemonic';
-import Name from '../../containers/AccountCreation/Name';
-import Password from '../../containers/AccountCreation/Password';
-import Submit from '../../containers/AccountCreation/Submit';
+import Mnemonic from '../../containers/CreateKey/Mnemonic';
+import Name from '../../containers/CreateKey/Name';
+import Password from '../../containers/CreateKey/Password';
+import Submit from '../../containers/CreateKey/Submit';
 import './index.css';
 
-const AccountCreation = ({ history }) => {
+const CreateKey = ({ history }) => {
     return (
         <div className="auth-container">
             <div className="col-md-4">
-                <SideBar/>
+                <Sidebar/>
             </div>
             <div className="col-md-8 account-section">
                 <div className="section-body">
@@ -58,10 +58,10 @@ const AccountCreation = ({ history }) => {
     );
 };
 
-AccountCreation.propTypes = {
+CreateKey.propTypes = {
     history: PropTypes.shape({
         push: PropTypes.func.isRequired,
     }).isRequired,
 };
 
-export default AccountCreation;
+export default CreateKey;

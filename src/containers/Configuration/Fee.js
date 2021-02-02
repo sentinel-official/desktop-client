@@ -2,7 +2,7 @@ import * as PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 import { setConfigurationChainFees } from '../../actions/configuration';
-import InputField from '../../components/InputField';
+import TextInputField from '../../components/TextInputField';
 import { ValidateFee } from './_validation';
 
 const Fee = (props) => {
@@ -18,7 +18,7 @@ const Fee = (props) => {
     };
 
     return (
-        <InputField
+        <TextInputField
             className="form-control"
             name="Fee"
             placeholder="Enter Fee"

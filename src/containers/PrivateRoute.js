@@ -14,7 +14,7 @@ const PrivateRoute = ({
             render={
                 (props) => {
                     if (info.value === '' || info.expiry === '') {
-                        return <Redirect to={'/'}/>;
+                        return <Redirect to={'/authentication'}/>;
                     }
 
                     return <Component {...props}/>;
@@ -29,7 +29,7 @@ PrivateRoute.propTypes = {
     info: PropTypes.shape({
         value: PropTypes.string.isRequired,
         expiry: PropTypes.string.isRequired,
-    }),
+    }).isRequired,
 };
 
 const stateToProps = (state) => {

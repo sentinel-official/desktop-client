@@ -1,7 +1,7 @@
 import * as PropTypes from 'prop-types';
 import React from 'react';
 import Label from '../../components/Label';
-import SideBar from '../../components/SideBar';
+import Sidebar from '../../components/Sidebar';
 import SocialIcons from '../../components/SocialIcons';
 import TextBox from '../../components/TextBox';
 import BroadcastMode from '../../containers/Configuration/BroadcastMode';
@@ -17,11 +17,11 @@ const Configuration = ({ history }) => {
     return (
         <div className="auth-container">
             <div className="col-md-4">
-                <SideBar/>
+                <Sidebar/>
             </div>
             <div className="col-md-8 config-section">
                 <div className="section-body">
-                    <TextBox className="login-title" value="Configure Settings"/>
+                    <TextBox className="login-title" value="Configuration"/>
                     <div className="config-row">
                         <div className="col-md-6">
                             <div className="form-group">

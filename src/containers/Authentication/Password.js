@@ -2,10 +2,10 @@ import * as PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 import { setAuthenticationPassword } from '../../actions/authentication';
-import InputField from '../../components/InputField';
+import TextInputField from '../../components/TextInputField';
 import { ValidatePassword } from './_validation';
 
-const PasswordTextField = (props) => {
+const Password = (props) => {
     const onChange = (event) => {
         const value = event.target.value.toString();
         props.onChange({
@@ -17,7 +17,7 @@ const PasswordTextField = (props) => {
     };
 
     return (
-        <InputField
+        <TextInputField
             className="form-control"
             name="Password"
             placeholder="Enter Password"
@@ -29,7 +29,7 @@ const PasswordTextField = (props) => {
     );
 };
 
-PasswordTextField.propTypes = {
+Password.propTypes = {
     value: PropTypes.string.isRequired,
     onChange: PropTypes.func.isRequired,
 };
@@ -44,4 +44,4 @@ const actionsToProps = {
     onChange: setAuthenticationPassword,
 };
 
-export default connect(stateToProps, actionsToProps)(PasswordTextField);
+export default connect(stateToProps, actionsToProps)(Password);

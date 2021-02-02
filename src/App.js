@@ -1,39 +1,44 @@
 import 'bootstrap/dist/css/bootstrap.css';
 import React from 'react';
-import { Route, Switch } from 'react-router';
+import { Redirect, Route, Switch } from 'react-router';
 import { withRouter } from 'react-router-dom';
 import './App.css';
 import PrivateRoute from './containers/PrivateRoute';
-import { authenticated, unauthenticated } from './routes';
+import Snackbar from './containers/Snackbar';
+import routes from './routes';
 
 const App = () => {
     return (
-        <Switch>
-            {
-                unauthenticated.map((route) => {
-                    return (
-                        <Route
-                            key={route.path}
-                            exact
-                            component={withRouter(route.component)}
-                            path={route.path}
-                        />
-                    );
-                })
-            }
-            {
-                authenticated.map((route) => {
-                    return (
-                        <PrivateRoute
-                            key={route.path}
-                            exact
-                            component={withRouter(route.component)}
-                            path={route.path}
-                        />
-                    );
-                })
-            }
-        </Switch>
+        <>
+            <Switch>
+                {
+                    routes.map((route) => {
+                        console.log(route);
+                        if (route.private) {
+                            return (
+                                <PrivateRoute
+                                    key={route.path}
+                                    exact
+                                    component={withRouter(route.component)}
+                                    path={route.path}
+                                />
+                            );
+                        }
+
+                        return (
+                            <Route
+                                key={route.path}
+                                exact
+                                component={withRouter(route.component)}
+                                path={route.path}
+                            />
+                        );
+                    })
+                }
+                <Redirect to={'/'}/>
+            </Switch>
+            <Snackbar/>
+        </>
     );
 };
 

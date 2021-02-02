@@ -18,7 +18,7 @@ const Submit = (props) => {
         <Button
             className="btn button-primary"
             disabled={false}
-            loading={false}
+            inProgress={props.inProgress}
             type="button"
             value="Create"
             onClick={onClick}
@@ -30,6 +30,7 @@ Submit.propTypes = {
     history: PropTypes.shape({
         push: PropTypes.func.isRequired,
     }).isRequired,
+    inProgress: PropTypes.bool.isRequired,
     mnemonic: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     password: PropTypes.string.isRequired,
@@ -41,6 +42,7 @@ const stateToProps = (state) => {
         mnemonic: state.keys.post.mnemonic.value,
         name: state.keys.post.name.value,
         password: state.keys.post.password.value,
+        inProgress: state.keys.post.inProgress,
     };
 };
 

@@ -1,19 +1,19 @@
 import * as PropTypes from 'prop-types';
 import React from 'react';
-import SideBar from '../../components/SideBar';
+import Sidebar from '../../components/Sidebar';
 import SocialIcons from '../../components/SocialIcons';
 import TextBox from '../../components/TextBox';
-import Address from '../../containers/AccountDetails/Address';
-import Continue from '../../containers/AccountDetails/Continue';
-import Seed from '../../containers/AccountDetails/Mnemonic';
-import PublicKey from '../../containers/AccountDetails/PublicKey';
+import Address from '../../containers/KeyInfo/Address';
+import Continue from '../../containers/KeyInfo/Continue';
+import Seed from '../../containers/KeyInfo/Mnemonic';
+import PublicKey from '../../containers/KeyInfo/PublicKey';
 import './index.css';
 
-const AccountDetails = ({ history }) => {
+const KeyInfo = ({ history }) => {
     return (
         <div className="auth-container">
             <div className="col-md-4">
-                <SideBar/>
+                <Sidebar/>
             </div>
             <div className="col-md-8 account-section">
                 <div className="account-create-row">
@@ -52,10 +52,10 @@ const AccountDetails = ({ history }) => {
     );
 };
 
-AccountDetails.propTypes = {
+KeyInfo.propTypes = {
     history: PropTypes.shape({
         push: PropTypes.func.isRequired,
     }).isRequired,
 };
 
-export default AccountDetails;
+export default KeyInfo;

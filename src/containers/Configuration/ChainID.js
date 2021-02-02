@@ -2,7 +2,7 @@ import * as PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 import { setConfigurationChainID } from '../../actions/configuration';
-import InputField from '../../components/InputField';
+import TextInputField from '../../components/TextInputField';
 import { ValidateChainID } from './_validation';
 
 const ChainID = (props) => {
@@ -18,7 +18,7 @@ const ChainID = (props) => {
     };
 
     return (
-        <InputField
+        <TextInputField
             className="form-control"
             name="ChainID"
             placeholder="Enter Chain ID"

@@ -27,7 +27,7 @@ const Submit = (props) => {
         <Button
             className="btn button-primary"
             disabled={false}
-            loading={false}
+            inProgress={props.inProgress}
             type="button"
             value="Save"
             onClick={onClick}
@@ -50,6 +50,7 @@ Submit.propTypes = {
     history: PropTypes.shape({
         push: PropTypes.func.isRequired,
     }).isRequired,
+    inProgress: PropTypes.bool.isRequired,
     onClick: PropTypes.func.isRequired,
 };
 
@@ -66,6 +67,7 @@ const stateToProps = (state) => {
             simulateAndExecute: state.configuration.chain.simulateAndExecute.value,
             trustNode: state.configuration.chain.trustNode.value,
         },
+        inProgress: state.configuration.put.inProgress,
     };
 };
 
