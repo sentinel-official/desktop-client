@@ -1,0 +1,147 @@
+import { combineReducers } from 'redux';
+import {
+    TX_VOTE_ERROR,
+    TX_VOTE_ID_SET,
+    TX_VOTE_IN_PROGRESS,
+    TX_VOTE_MEMO_SET,
+    TX_VOTE_OPTION_SET,
+    TX_VOTE_SUCCESS,
+} from '../../constants/transactions';
+
+const id = (state = {
+    value: 0,
+    error: {
+        message: '',
+    },
+}, {
+    type,
+    data,
+}) => {
+    switch (type) {
+    case TX_VOTE_ID_SET:
+        return {
+            ...state,
+            value: data.value,
+            error: {
+                ...state.error,
+                message: data.error.message,
+            },
+        };
+    case TX_VOTE_SUCCESS:
+        return {
+            ...state,
+            value: 0,
+            error: {
+                ...state.error,
+                message: '',
+            },
+        };
+    default:
+        return state;
+    }
+};
+
+const option = (state = {
+    value: '',
+    error: {
+        message: '',
+    },
+}, {
+    type,
+    data,
+}) => {
+    switch (type) {
+    case TX_VOTE_OPTION_SET:
+        return {
+            ...state,
+            value: data.value,
+            error: {
+                ...state.error,
+                message: data.error.message,
+            },
+        };
+    case TX_VOTE_SUCCESS:
+        return {
+            ...state,
+            value: '',
+            error: {
+                ...state.error,
+                message: '',
+            },
+        };
+    default:
+        return state;
+    }
+};
+
+const memo = (state = {
+    value: '',
+    error: {
+        message: '',
+    },
+}, {
+    type,
+    data,
+}) => {
+    switch (type) {
+    case TX_VOTE_MEMO_SET:
+        return {
+            ...state,
+            value: data.value,
+            error: {
+                ...state.error,
+                message: data.error.message,
+            },
+        };
+    case TX_VOTE_SUCCESS:
+        return {
+            ...state,
+            value: '',
+            error: {
+                ...state.error,
+                message: '',
+            },
+        };
+    default:
+        return state;
+    }
+};
+
+const inProgress = (state = false, {
+    type,
+}) => {
+    switch (type) {
+    case TX_VOTE_IN_PROGRESS:
+        return true;
+    case TX_VOTE_ERROR:
+    case TX_VOTE_SUCCESS:
+        return false;
+    default:
+        return state;
+    }
+};
+
+const info = (state = {
+    tx_hash: '',
+}, {
+    type,
+    data,
+}) => {
+    switch (type) {
+    case TX_VOTE_SUCCESS:
+        return {
+            ...state,
+            tx_hash: data['tx_hash'],
+        };
+    default:
+        return state;
+    }
+};
+
+export default combineReducers({
+    id,
+    option,
+    memo,
+    inProgress,
+    info,
+});
