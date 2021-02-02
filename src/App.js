@@ -3,6 +3,7 @@ import React from 'react';
 import { Route, Switch, withRouter } from 'react-router-dom';
 import './App.css';
 import Authentication from './pages/Authentication';
+import Configuration from './pages/Configuration';
 import Splash from './pages/Splash';
 
 const routes = [{
@@ -11,6 +12,9 @@ const routes = [{
 }, {
     path: '/authentication',
     component: Authentication,
+}, {
+    path: '/configuration',
+    component: Configuration,
 }];
 
 const App = () => {

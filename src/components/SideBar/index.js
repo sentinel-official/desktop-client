@@ -4,7 +4,7 @@ import Image from '../Image';
 import TextBox from '../TextBox';
 import './index.css';
 
-const Sidebar = () => {
+const SideBar = () => {
     return (
         <div className="side-bar">
             <Image
@@ -31,4 +31,4 @@ const Sidebar = () => {
     );
 };
 
-export default Sidebar;
+export default SideBar;

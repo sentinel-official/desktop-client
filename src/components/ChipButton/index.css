@@ -1,0 +1,18 @@
+button {
+    border-radius: 39px;
+    border: 0px solid;
+    font-size: 16px;
+    text-align: center;
+    letter-spacing: 0.05em;
+    padding: 5px 25px;
+}
+
+button.primary {
+    background: #E9F0F4;
+    color: #139EEE;
+}
+
+button.selected {
+    background: #139EEE;
+    color: #FFFFFF;
+}

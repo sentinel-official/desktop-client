@@ -7,13 +7,22 @@ const Button = ({
     disabled,
     value,
     onClick,
+    loading,
 }) => {
     return (
         <button
             className={className}
             disabled={disabled}
             onClick={onClick}>
-            {value}
+            {
+                loading
+                    ? <span
+                        aria-hidden="true"
+                        className="spinner-border spinner-border-sm"
+                        role="status">
+                    </span>
+                    : value
+            }
         </button>
     );
 };
@@ -21,6 +30,7 @@ const Button = ({
 Button.propTypes = {
     className: PropTypes.string.isRequired,
     disabled: PropTypes.bool.isRequired,
+    loading: PropTypes.bool.isRequired,
     value: PropTypes.string.isRequired,
     onClick: PropTypes.func.isRequired,
 };

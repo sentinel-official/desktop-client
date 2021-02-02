@@ -14,3 +14,50 @@ body {
 .w-200 {
     width: 200px;
 }
+
+.auth-container {
+    display: flex;
+    height: 100vh;
+    flex-wrap: wrap;
+}
+
+.auth-container .col-md-4, .auth-container .col-md-8 {
+    padding: 0;
+}
+
+.login-footer {
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border-top: 1px solid #DCE9F1;
+    flex-direction: row-reverse;
+}
+
+.social-icons .icon {
+    width: 20px;
+    margin: 0 15px;
+}
+
+.button-group button {
+    margin: 0px 10px 5px 0;
+}
+
+.login-button button {
+    padding-left: 3rem;
+    padding-right: 3rem;
+    display: flex;
+    align-items: center;
+}
+
+label, .label {
+    font-weight: 500;
+    font-size: 16px;
+    text-transform: uppercase;
+    color: #8EA1C8;
+    margin-bottom: 8px;
+}

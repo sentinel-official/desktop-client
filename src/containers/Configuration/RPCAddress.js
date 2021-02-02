@@ -1,17 +1,18 @@
 import * as PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
-import { setAuthenticationPassword } from '../../actions/authentication';
+import { setConfigurationChainRPCAddress } from '../../actions/configuration';
 import InputField from '../../components/InputField';
-import { ValidatePassword } from './_validation';
+import { ValidateRPCAddress } from './_validation';
 
-const PasswordTextField = (props) => {
+const RPCAddress = (props) => {
     const onChange = (event) => {
         const value = event.target.value.toString();
+
         props.onChange({
             value,
             error: {
-                message: ValidatePassword(value).message,
+                message: ValidateRPCAddress(value).message,
             },
         });
     };
@@ -19,29 +20,29 @@ const PasswordTextField = (props) => {
     return (
         <InputField
             className="form-control"
-            name="Password"
-            placeholder="Enter Password"
+            name="RPCAddress"
+            placeholder="Enter RPC Address"
             required={true}
-            type="password"
+            type="text"
             value={props.value}
             onChange={onChange}
         />
     );
 };
 
-PasswordTextField.propTypes = {
+RPCAddress.propTypes = {
     value: PropTypes.string.isRequired,
     onChange: PropTypes.func.isRequired,
 };
 
 const stateToProps = (state) => {
     return {
-        value: state.authentication.password.value,
+        value: state.configuration.chain.RPCAddress.value,
     };
 };
 
 const actionsToProps = {
-    onChange: setAuthenticationPassword,
+    onChange: setConfigurationChainRPCAddress,
 };
 
-export default connect(stateToProps, actionsToProps)(PasswordTextField);
+export default connect(stateToProps, actionsToProps)(RPCAddress);
