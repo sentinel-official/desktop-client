@@ -1,6 +1,6 @@
 import React from 'react';
-import Image from '../../../components/Image';
 import Logo from '../../../assets/Logo.svg';
+import Image from '../../../components/Image';
 
 const Row = (item, index) => {
     return (

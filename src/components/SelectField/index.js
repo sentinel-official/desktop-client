@@ -8,10 +8,14 @@ const SelectField = ({
     onChange,
 }) => {
     return (
-        <select className={className} onChange={onChange}>
+        <select
+            className={className}
+            onChange={onChange}>
             {
                 list.map((item, index) => (
-                    <option key={index}>{item}</option>
+                    <option key={index}>
+                        {item}
+                    </option>
                 ))
             }
         </select>

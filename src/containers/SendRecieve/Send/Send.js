@@ -10,6 +10,7 @@ const Send = () => {
         <Button
             className="btn button-primary"
             disabled={false}
+            inProgress={false}
             loading={false}
             type="button"
             value="Send"

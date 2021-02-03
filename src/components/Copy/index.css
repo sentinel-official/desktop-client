@@ -1,4 +1,4 @@
-.copy-section{
+.copy-section {
     padding: 4px;
     cursor: pointer;
     background: #DEE9EF;
@@ -13,6 +13,7 @@
     width: 26px;
     height: 26px;
 }
-.copy-section .icon{
+
+.copy-section .icon {
     width: 14px;
 }

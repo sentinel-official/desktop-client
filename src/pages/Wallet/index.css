@@ -142,19 +142,22 @@
     border-top: 1px solid #DCE9F1;
     border-bottom: 1px solid #DCE9F1;
 }
+
 .withdraw-section-content {
     padding: 35px 30px;
     text-align: center;
 }
 
-.withdraw-section-content .form-group{
+.withdraw-section-content .form-group {
     text-align: left;
 }
-.top-section{
+
+.top-section {
     padding: 20px 20px 20px 30px;
 }
-.logo-box{
-    padding:10px;
+
+.logo-box {
+    padding: 10px;
     display: flex;
     align-items: center;
     background: #F6F8FB;
@@ -162,27 +165,31 @@
     box-shadow: 0px 4px 17px rgba(0, 0, 0, 0.08);
     justify-content: space-between;
 }
-.logo-box .sentinel-text{
+
+.logo-box .sentinel-text {
     font-weight: 500;
     font-size: 16px;
     color: #142D51;
     padding-right: 10px;
 }
-.logo-box .sub-text{
+
+.logo-box .sub-text {
     font-weight: 500;
     font-size: 12px;
     color: #142D51;
     text-transform: uppercase;
 }
 
-.logo-box p{
+.logo-box p {
     margin: 0;
 }
-.logo-box .left{
+
+.logo-box .left {
     display: flex;
     align-items: center;
 }
-.logo-box .logo{
+
+.logo-box .logo {
     display: flex;
     border-radius: 50%;
     background-color: #e5f5fd;
@@ -191,10 +198,11 @@
     align-items: center;
     justify-content: center;
 }
-.logo-box .logo img{
+
+.logo-box .logo img {
     width: 14px;
 }
 
-.logo-box .icon{
+.logo-box .icon {
     width: 14px;
 }

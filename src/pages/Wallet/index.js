@@ -1,35 +1,35 @@
 import React from 'react';
-import DahboardSideBar from '../../components/DashboardSideBar';
-import SettingsDropdown from '../../containers/Wallet/SettingsDropdown';
 import { Tab, Tabs } from 'react-bootstrap';
-import Validators from '../../containers/Wallet/Validators/Validators';
-import TokenDetails from '../../containers/Wallet/TokenDetails';
-import ValidatorState from '../../containers/Wallet/Validators/ValidatorState';
-import Dropdown from '../../containers/Wallet/Validators/Dropdown';
-import Amount from '../../containers/SendRecieve/Send/Amount';
-import DepositeAddress from '../../containers/SendRecieve/Send/DepositeAddress';
-import Send from '../../containers/SendRecieve/Send/Send';
-import QRCode from '../../containers/SendRecieve/Receive/QRCode';
-import Address from '../../containers/SendRecieve/Receive/Address';
-import CopyAddress from '../../containers/SendRecieve/Receive/CopyAddress';
-import SelectValidator from '../../containers/SendRecieve/WithDraw/SelectValidator';
-import WithDraw from '../../containers/SendRecieve/WithDraw/WithDraw';
-import './index.css';
+import Logo from '../../assets/Logo.svg';
+import DashboardSidebar from '../../components/DashboardSidebar';
+import Icon from '../../components/Icon';
+import Image from '../../components/Image';
 import Label from '../../components/Label';
 import TextBox from '../../components/TextBox';
-import Logo from '../../assets/Logo.svg';
-import Image from '../../components/Image';
-import Icon from '../../components/Icon';
+import Address from '../../containers/SendRecieve/Receive/Address';
+import CopyAddress from '../../containers/SendRecieve/Receive/CopyAddress';
+import QRCode from '../../containers/SendRecieve/Receive/QRCode';
+import Amount from '../../containers/SendRecieve/Send/Amount';
+import Send from '../../containers/SendRecieve/Send/Send';
+import DepositAddress from '../../containers/SendRecieve/Send/To';
+import WithDrawValidators from '../../containers/SendRecieve/WithDraw/Validators';
+import WithDraw from '../../containers/SendRecieve/WithDraw/WithDraw';
+import Accounts from '../../containers/Wallet/Accounts';
+import Tokens from '../../containers/Wallet/Tokens';
+import Actions from '../../containers/Wallet/Validators/Actions';
+import Validators from '../../containers/Wallet/Validators/Validators';
+import ValidatorState from '../../containers/Wallet/Validators/ValidatorState';
+import './index.css';
 
 const Wallet = () => {
     return (
         <div className="wallet-section">
             <div className="dashboard-side-bar-container">
                 <div className="settings-dropdown">
-                    <SettingsDropdown/>
+                    <Accounts/>
                 </div>
                 <div className="side-bar-list">
-                    <DahboardSideBar/>
+                    <DashboardSidebar/>
                 </div>
             </div>
             <div className="wallet-details">
@@ -57,7 +57,7 @@ const Wallet = () => {
                                     className="label"
                                     label="Deposit Address"
                                 />
-                                <DepositeAddress/>
+                                <DepositAddress/>
                             </div>
                             <div className="form-group">
                                 <Label
@@ -86,7 +86,7 @@ const Wallet = () => {
                                     className="label"
                                     label="Select Validator to Withdraw"
                                 />
-                                <SelectValidator/>
+                                <WithDrawValidators/>
                             </div>
                             <WithDraw/>
                         </div>
@@ -94,10 +94,10 @@ const Wallet = () => {
 
                 </div>
                 <div className="wallet-tab col-md-8">
-                    <TokenDetails/>
+                    <Tokens/>
                     <div className="filter-section">
                         <ValidatorState/>
-                        <Dropdown/>
+                        <Actions/>
                     </div>
                     <Tabs defaultActiveKey="Validators" id="uncontrolled-tab-example">
                         <Tab eventKey="Validators" title="Validators List">

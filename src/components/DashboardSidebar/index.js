@@ -2,18 +2,23 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import Icon from '../Icon';
 import './index.css';
-const DahboardSideBar = () => {
+
+const DashboardSidebar = () => {
     return (
         <div>
             <ul className="list-group">
-                <NavLink className={window.location.pathname === '/dvpn' ? 'active' : '' } to="/vpnDetails">
+                <NavLink
+                    className={window.location.pathname === '/dvpn' ? 'active' : ''}
+                    to="/vpnDetails">
                     <Icon
                         className="icon"
                         icon="dvpn"
                     />
-                    dvpn
+                    dVPN
                 </NavLink>
-                <NavLink className={window.location.pathname === '/wallet' ? 'active' : '' } to="/walletDetails">
+                <NavLink
+                    className={window.location.pathname === '/wallet' ? 'active' : ''}
+                    to="/walletDetails">
                     <Icon
                         className="icon"
                         icon="wallet"
@@ -25,4 +30,4 @@ const DahboardSideBar = () => {
     );
 };
 
-export default DahboardSideBar;
+export default DashboardSidebar;

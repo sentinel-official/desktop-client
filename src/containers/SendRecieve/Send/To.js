@@ -1,7 +1,7 @@
 import React from 'react';
 import TextInputField from '../../../components/TextInputField';
 
-const DepositeAddress = () => {
+const To = () => {
     const onChange = (value) => {
         console.log(value, 'in test');
     };
@@ -9,7 +9,7 @@ const DepositeAddress = () => {
     return (
         <TextInputField
             className="form-control"
-            name="DepositeAddress"
+            name="DepositAddress"
             placeholder="Address"
             required={true}
             type="text"
@@ -19,4 +19,4 @@ const DepositeAddress = () => {
     );
 };
 
-export default DepositeAddress;
+export default To;
