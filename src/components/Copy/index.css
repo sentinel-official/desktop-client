@@ -1,0 +1,18 @@
+.copy-section{
+    padding: 4px;
+    cursor: pointer;
+    background: #DEE9EF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    width: 26px;
+    height: 26px;
+}
+.copy-section .icon{
+    width: 14px;
+}
