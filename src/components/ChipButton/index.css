@@ -16,3 +16,26 @@ button.selected {
     background: #139EEE;
     color: #FFFFFF;
 }
+
+.buttons-state button {
+    margin: 0;
+    border-radius: 0;
+    background: none;
+    font-weight: 500;
+    font-size: 14px;
+    color: #55678B;
+    border: 1px solid #DCE9F1;
+}
+
+.buttons-state button.active {
+    background: #252E40;
+    color: #FFFFFF;
+}
+
+.buttons-state button:first-child {
+    border-right: 0px solid;
+}
+
+.buttons-state button:last-child {
+    border-left: 0px solid;
+}

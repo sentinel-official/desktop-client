@@ -1,7 +1,12 @@
-.list-group a{
-    padding: 20px;
+.list-group a {
+    padding: 20px 20px 20px 40px;
+    font-weight: 500;
+    font-size: 16px;
+    color: #BBCAE9;
+    text-decoration: none;
 }
-.side-bar-footer{
+
+.side-bar-footer {
     position: absolute;
     bottom: 0;
     width: 100%;
@@ -9,14 +14,53 @@
     font-size: .875rem;
     text-align: center;
 }
-a .icon{
+
+.list-group a .icon {
     width: 20px;
-    fill:#55678B;
+    fill: #55678B;
+    margin-right: 10px;
 }
-a.active{
+
+.list-group a.active {
+    position: relative;
     color: #FFFFFF;
-    border-left: 2px solid red;
 }
-a.active .icon{
-    fill:#fff;
+
+.list-group a.active:before {
+    content: "\A";
+    border-style: solid;
+    border-width: 10px 15px 10px 0;
+    border-color: transparent #dd4397 transparent transparent;
+    position: absolute;
+    left: -15px;
+}
+
+.list-group a.active:before {
+    content: ' ';
+    position: absolute;
+    width: 0;
+    height: 0;
+    left: 0px;
+    right: auto;
+    top: 10px;
+    bottom: 0;
+    border: 24px solid;
+    border-color: transparent transparent transparent #139EEE;
+}
+
+.list-group a.active:after {
+    content: ' ';
+    position: absolute;
+    width: 0;
+    height: 0;
+    left: 7px;
+    right: auto;
+    top: 16px;
+    bottom: 0;
+    border: 19px solid;
+    border-color: transparent transparent transparent #193254;
+}
+
+.list-group a.active .icon {
+    fill: #fff;
 }

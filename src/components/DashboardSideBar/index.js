@@ -1,7 +1,5 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import Image from '../Image';
-import logo from '../../assets/Logo.svg';
 import Icon from '../Icon';
 import './index.css';
 const DahboardSideBar = () => {
@@ -23,13 +21,6 @@ const DahboardSideBar = () => {
                     Wallet
                 </NavLink>
             </ul>
-            <div className="side-bar-footer">
-                <Image
-                    alt="logo"
-                    className="side-bar-logo"
-                    src={logo}
-                />
-            </div>
         </div>
     );
 };

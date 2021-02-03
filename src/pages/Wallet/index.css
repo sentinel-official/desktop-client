@@ -1,10 +1,16 @@
-.wallet-section{
+.settings-dropdown {
+    padding: 20px 20px 20px 40px;
+    background: #F6F8FB;
+}
+
+.wallet-section {
     display: flex;
     width: 100%;
     align-items: stretch;
     height: 100%;
 }
-.dashboard-side-bar-container{
+
+.dashboard-side-bar-container {
     min-width: 250px;
     max-width: 250px;
     color: #6b6b6b;
@@ -13,4 +19,75 @@
     overflow-y: auto;
     height: 100%;
     background: #193254;
+    border-right: 1px solid #DCE9F1;
 }
+
+.wallet-details {
+    display: flex;
+    flex: 1;
+}
+
+.wallet-tab .nav-tabs {
+    border: 0px solid;
+}
+
+.middle-section {
+    border-right: 1px solid #DCE9F1;
+}
+
+.token-info .sent-title {
+    font-weight: 500;
+    font-size: 16px;
+    color: #AEB1B6;
+    text-transform: uppercase;
+}
+
+.token-info {
+    padding-top: 20px;
+}
+
+.token-info .sent-list {
+    display: flex;
+    align-items: center;
+}
+
+.token-info .sent-list .heading {
+    font-weight: 600;
+    font-size: 28px;
+    color: #252E40;
+    padding-right: 15px;
+}
+
+.token-info .sent-list .value {
+    font-size: 18px;
+    color: #55678B;
+}
+
+.wallet-tab .nav-tabs .nav-link.active, .wallet-tab .nav-tabs .nav-item.show .nav-link {
+    border: 1px solid #DCE9F1;
+    color: #142D51;
+    border-radius: 30px;
+}
+
+.wallet-tab .nav-tabs .nav-link {
+    margin: 0;
+    border: 0px solid;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+    color: #8EA1C8;
+    padding: 0.7rem 2rem;
+    border: 1px solid transparent;
+}
+
+.filter-section {
+    position: absolute;
+    right: 15px;
+    display: flex;
+    align-items: center;
+}
+
+.filter-section .dropdown button {
+    margin-left: 10px;
+}
+
