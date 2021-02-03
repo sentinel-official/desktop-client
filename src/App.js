@@ -13,7 +13,6 @@ const App = () => {
             <Switch>
                 {
                     routes.map((route) => {
-                        console.log(route);
                         if (route.private) {
                             return (
                                 <PrivateRoute

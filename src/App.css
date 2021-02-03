@@ -79,6 +79,10 @@ label, .label {
 }
 
 @media (max-width: 767px) {
+    .account-section {
+        display: block;
+    }
+
     .account-section .section-body {
         padding-top: 20px;
     }

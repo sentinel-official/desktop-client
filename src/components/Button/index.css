@@ -1,12 +1,25 @@
-.button-primary {
+.button-primary, .login-button button:hover {
     background: #109FEC;
     border-radius: 39px;
     font-weight: 500;
-    font-size: 18px;
+    font-size: 16px;
     text-align: center;
     letter-spacing: 0.05em;
     color: #FFFFFF;
     padding: 5px 25px;
+    height: 30px;
+}
+
+.login-button button {
+    width: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-button button:hover {
+    padding-left: 2rem;
+    padding-right: 2rem;
 }
 
 .btn.disabled, .btn:disabled {

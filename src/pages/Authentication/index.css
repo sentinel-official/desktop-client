@@ -16,10 +16,12 @@
 
 .login-body {
     margin-bottom: 50px;
+    width: 500px;
+    min-width: 300px;
 }
 
 @media (max-width: 767px) {
-    .auth-container {
+    .login.auth-container {
         flex-direction: column;
     }
 
