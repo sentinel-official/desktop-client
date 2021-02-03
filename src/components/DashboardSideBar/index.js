@@ -4,7 +4,7 @@ import Icon from '../Icon';
 import './index.css';
 const DahboardSideBar = () => {
     return (
-        <div className="side-bar">
+        <div>
             <ul className="list-group">
                 <NavLink className={window.location.pathname === '/dvpn' ? 'active' : '' } to="/vpnDetails">
                     <Icon

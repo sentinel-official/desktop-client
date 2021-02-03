@@ -7,10 +7,10 @@
     letter-spacing: 0.05em;
     color: #FFFFFF;
     padding: 5px 25px;
-    height: 30px;
 }
 
-.login-button button {
+.login-button button, .login-button button:hover {
+    height: 30px;
     width: 100px;
     display: flex;
     align-items: center;
