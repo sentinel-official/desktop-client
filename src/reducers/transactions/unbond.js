@@ -5,6 +5,8 @@ import {
     TX_UNBOND_FROM_SET,
     TX_UNBOND_IN_PROGRESS,
     TX_UNBOND_MEMO_SET,
+    TX_UNBOND_MODAL_HIDE,
+    TX_UNBOND_MODAL_SHOW,
     TX_UNBOND_SUCCESS,
 } from '../../constants/transactions';
 
@@ -121,18 +123,14 @@ const inProgress = (state = false, {
     }
 };
 
-const info = (state = {
-    tx_hash: '',
-}, {
+const modal = (state = false, {
     type,
-    data,
 }) => {
     switch (type) {
-    case TX_UNBOND_SUCCESS:
-        return {
-            ...state,
-            tx_hash: data['tx_hash'],
-        };
+    case TX_UNBOND_MODAL_SHOW:
+        return true;
+    case TX_UNBOND_MODAL_HIDE:
+        return false;
     default:
         return state;
     }
@@ -143,5 +141,5 @@ export default combineReducers({
     amount,
     memo,
     inProgress,
-    info,
+    modal,
 });

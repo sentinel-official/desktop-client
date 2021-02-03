@@ -134,7 +134,9 @@ export const getConfiguration = (history, cb) => (dispatch, getState) => {
                     }
                 })
                 .catch((error) => {
-                    dispatch(getConfigurationError(error?.response?.data?.error));
+                    console.error(error);
+
+                    dispatch(getConfigurationError(error?.response?.data?.error || error));
                     next(error);
                 });
         }, (result, next) => {
@@ -195,7 +197,9 @@ export const putConfiguration = (body, history, cb) => (dispatch, getState) => {
                     }
                 })
                 .catch((error) => {
-                    dispatch(putConfigurationError(error?.response?.data?.error));
+                    console.error(error);
+
+                    dispatch(putConfigurationError(error?.response?.data?.error || error));
                     next(error);
                 });
         }, (result, next) => {

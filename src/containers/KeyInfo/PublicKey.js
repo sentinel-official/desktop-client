@@ -21,7 +21,7 @@ PublicKey.propTypes = {
 
 const stateToProps = (state) => {
     return {
-        value: state.keys.post.info['pub_key'],
+        value: state.keys.post.info.publicKey,
     };
 };
 

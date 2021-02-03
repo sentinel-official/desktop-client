@@ -5,6 +5,8 @@ import {
     TX_WITHDRAW_FROM_SET,
     TX_WITHDRAW_IN_PROGRESS,
     TX_WITHDRAW_MEMO_SET,
+    TX_WITHDRAW_MODAL_HIDE,
+    TX_WITHDRAW_MODAL_SHOW,
     TX_WITHDRAW_SUCCESS,
 } from '../../constants/transactions';
 
@@ -88,18 +90,14 @@ const inProgress = (state = false, {
     }
 };
 
-const info = (state = {
-    tx_hash: '',
-}, {
+const modal = (state = false, {
     type,
-    data,
 }) => {
     switch (type) {
-    case TX_WITHDRAW_SUCCESS:
-        return {
-            ...state,
-            tx_hash: data['tx_hash'],
-        };
+    case TX_WITHDRAW_MODAL_SHOW:
+        return true;
+    case TX_WITHDRAW_MODAL_HIDE:
+        return false;
     default:
         return state;
     }
@@ -109,5 +107,5 @@ export default combineReducers({
     from,
     memo,
     inProgress,
-    info,
+    modal,
 });

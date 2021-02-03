@@ -56,7 +56,9 @@ export const getKeys = (history, cb) => (dispatch, getState) => {
                     }
                 })
                 .catch((error) => {
-                    dispatch(getKeysError(error?.response?.data?.error));
+                    console.error(error);
+
+                    dispatch(getKeysError(error?.response?.data?.error || error));
                     next(error);
                 });
         }, (result, next) => {
@@ -137,7 +139,8 @@ export const postKeys = (body, history, cb) => (dispatch, getState) => {
                     console.error(e);
                 }
             }).catch((error) => {
-                dispatch(postKeysError(error?.response?.data?.error));
+                console.error(error);
+                dispatch(postKeysError(error?.response?.data?.error || error));
                 next(error);
             });
         }, (result, next) => {

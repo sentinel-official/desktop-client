@@ -4,6 +4,8 @@ import {
     TX_DELEGATE_ERROR,
     TX_DELEGATE_IN_PROGRESS,
     TX_DELEGATE_MEMO_SET,
+    TX_DELEGATE_MODAL_HIDE,
+    TX_DELEGATE_MODAL_SHOW,
     TX_DELEGATE_SUCCESS,
     TX_DELEGATE_TO_SET,
 } from '../../constants/transactions';
@@ -121,18 +123,14 @@ const inProgress = (state = false, {
     }
 };
 
-const info = (state = {
-    tx_hash: '',
-}, {
+const modal = (state = false, {
     type,
-    data,
 }) => {
     switch (type) {
-    case TX_DELEGATE_SUCCESS:
-        return {
-            ...state,
-            tx_hash: data['tx_hash'],
-        };
+    case TX_DELEGATE_MODAL_SHOW:
+        return true;
+    case TX_DELEGATE_MODAL_HIDE:
+        return false;
     default:
         return state;
     }
@@ -143,5 +141,5 @@ export default combineReducers({
     amount,
     memo,
     inProgress,
-    info,
+    modal,
 });

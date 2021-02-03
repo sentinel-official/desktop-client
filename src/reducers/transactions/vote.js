@@ -4,6 +4,8 @@ import {
     TX_VOTE_ID_SET,
     TX_VOTE_IN_PROGRESS,
     TX_VOTE_MEMO_SET,
+    TX_VOTE_MODAL_HIDE,
+    TX_VOTE_MODAL_SHOW,
     TX_VOTE_OPTION_SET,
     TX_VOTE_SUCCESS,
 } from '../../constants/transactions';
@@ -121,18 +123,14 @@ const inProgress = (state = false, {
     }
 };
 
-const info = (state = {
-    tx_hash: '',
-}, {
+const modal = (state = false, {
     type,
-    data,
 }) => {
     switch (type) {
-    case TX_VOTE_SUCCESS:
-        return {
-            ...state,
-            tx_hash: data['tx_hash'],
-        };
+    case TX_VOTE_MODAL_SHOW:
+        return true;
+    case TX_VOTE_MODAL_HIDE:
+        return false;
     default:
         return state;
     }
@@ -143,5 +141,5 @@ export default combineReducers({
     option,
     memo,
     inProgress,
-    info,
+    modal,
 });

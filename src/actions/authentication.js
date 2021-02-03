@@ -53,7 +53,9 @@ export const postAuthentication = (body, history, cb) => (dispatch, getState) =>
                     }
                 })
                 .catch((error) => {
-                    dispatch(postAuthenticationError(error?.response?.data?.error));
+                    console.error(error);
+
+                    dispatch(postAuthenticationError(error?.response?.data?.error || error));
                     next(error);
                 });
         }, (result, next) => {
