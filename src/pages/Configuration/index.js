@@ -8,7 +8,10 @@ import BroadcastMode from '../../containers/Configuration/BroadcastMode';
 import ChainID from '../../containers/Configuration/ChainID';
 import Fee from '../../containers/Configuration/Fee';
 import Gas from '../../containers/Configuration/Gas';
+import GasAdjustment from '../../containers/Configuration/GasAdjustment';
+import GasPrices from '../../containers/Configuration/GasPrices';
 import RPCAddress from '../../containers/Configuration/RPCAddress';
+import SimulateAndExecute from '../../containers/Configuration/SimulateAndExecute';
 import Submit from '../../containers/Configuration/Submit';
 import TrustNode from '../../containers/Configuration/TrustNode';
 import './index.css';
@@ -19,7 +22,7 @@ const Configuration = ({ history }) => {
             <div className="col-md-4">
                 <Sidebar/>
             </div>
-            <div className="col-md-8 config-section">
+            <div className="col-md-8 account-section">
                 <div className="section-body">
                     <TextBox className="login-title" value="Configuration"/>
                     <div className="config-row">
@@ -45,6 +48,20 @@ const Configuration = ({ history }) => {
                                 />
                                 <Gas/>
                             </div>
+                            <div className="form-group">
+                                <Label
+                                    className="label"
+                                    label="Gas Adjustment"
+                                />
+                                <GasAdjustment/>
+                            </div>
+                            <div className="form-group">
+                                <Label
+                                    className="label"
+                                    label="Gas Price"
+                                />
+                                <GasPrices/>
+                            </div>
                         </div>
                         <div className="col-md-6">
                             <div className="form-group">
@@ -53,6 +70,13 @@ const Configuration = ({ history }) => {
                                     label="Chain ID"
                                 />
                                 <ChainID/>
+                            </div>
+                            <div className="form-group">
+                                <Label
+                                    className="label"
+                                    label="Simulate And Execute"
+                                />
+                                <SimulateAndExecute/>
                             </div>
                             <div className="form-group">
                                 <Label

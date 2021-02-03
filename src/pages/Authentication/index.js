@@ -10,7 +10,7 @@ import './index.css';
 
 const Authentication = ({ history }) => {
     return (
-        <div className="auth-container">
+        <div className="login auth-container">
             <div className="col-md-4">
                 <Sidebar/>
             </div>
