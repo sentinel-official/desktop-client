@@ -2,36 +2,36 @@ import * as PropTypes from 'prop-types';
 import React from 'react';
 import './index.css';
 
-const InputField = ({
+const TextArea = ({
     className,
     name,
     placeholder,
     required,
-    type,
+    rows,
     value,
     onChange,
 }) => {
     return (
-        <input
+        <textarea
             className={className}
             name={name}
             placeholder={placeholder}
             required={required}
-            type={type}
+            rows={rows}
             value={value}
             onChange={onChange}
         />
     );
 };
 
-InputField.propTypes = {
+TextArea.propTypes = {
     className: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     placeholder: PropTypes.string.isRequired,
     required: PropTypes.bool.isRequired,
-    type: PropTypes.string.isRequired,
+    rows: PropTypes.number.isRequired,
     value: PropTypes.string.isRequired,
     onChange: PropTypes.func.isRequired,
 };
 
-export default InputField;
+export default TextArea;

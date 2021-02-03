@@ -6,7 +6,7 @@ import TextBox from '../../components/TextBox';
 import ProgressBar from '../../containers/Splash/ProgressBar';
 import './index.css';
 
-const Splash = (props) => {
+const Splash = ({ history }) => {
     return (
         <div className="splash-container">
             <Image
@@ -18,7 +18,7 @@ const Splash = (props) => {
                 className="splash-text f-14 fw-600"
                 value="PREPARING THE SENTINEL CLIENT"
             />
-            <ProgressBar history={props.history}/>
+            <ProgressBar history={history}/>
         </div>
     );
 };

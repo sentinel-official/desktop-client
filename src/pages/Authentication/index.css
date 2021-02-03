@@ -14,20 +14,22 @@
     align-items: center;
 }
 
-
-.login-footer {
-    padding: 10px 20px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    border-top: 1px solid #DCE9F1;;
+.login-body {
+    margin-bottom: 50px;
+    width: 500px;
+    min-width: 300px;
 }
 
-.social-icons .icon {
-    width: 20px;
-    margin: 0 15px;
+@media (max-width: 767px) {
+    .login.auth-container {
+        flex-direction: column;
+    }
+
+    .login-section {
+        flex: 1;
+    }
+
+    .auth-container .col-md-8 {
+        padding: 0 25px;
+    }
 }

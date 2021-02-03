@@ -7,6 +7,8 @@ import {
     AUTHENTICATION_POST_SUCCESS,
     AUTHENTICATION_POST_URL,
 } from '../constants/authentication';
+import { getConfiguration } from './configuration';
+import { getKeys } from './keys';
 
 export const setAuthenticationPassword = (data) => {
     return {
@@ -57,6 +59,10 @@ export const postAuthentication = (body, history, cb) => (dispatch, getState) =>
         }, (result, next) => {
             dispatch(postAuthenticationSuccess(result));
             next(null);
+        }, (next) => {
+            getConfiguration(history, next)(dispatch, getState);
+        }, (next) => {
+            getKeys(history, next)(dispatch, getState);
         },
     ], cb);
 };

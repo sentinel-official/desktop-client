@@ -1,5 +1,5 @@
 import React from 'react';
-import InputField from '../../../components/InputField';
+import TextInputField from '../../../components/TextInputField';
 
 const Amount = () => {
     const onChange = (value) => {
@@ -7,7 +7,7 @@ const Amount = () => {
     };
 
     return (
-        <InputField
+        <TextInputField
             className="form-control"
             name="Amount"
             placeholder="Total Amount"

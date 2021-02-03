@@ -41,18 +41,13 @@ body {
     flex-direction: row-reverse;
 }
 
-.social-icons .icon {
-    width: 20px;
-    margin: 0 15px;
-}
-
 .button-group button {
     margin: 0px 10px 5px 0;
 }
 
 .login-button button {
-    padding-left: 3rem;
-    padding-right: 3rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
     display: flex;
     align-items: center;
 }
@@ -63,4 +58,35 @@ label, .label {
     text-transform: uppercase;
     color: #8EA1C8;
     margin-bottom: 8px;
+}
+
+.account-section {
+    display: flex;
+    justify-content: center;
+}
+
+.account-section .section-body {
+    width: 100%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.section-body .title {
+    text-align: center;
+}
+
+.section-body .form-group {
+    margin: 15px 0;
+}
+
+@media (max-width: 767px) {
+    .account-section {
+        display: block;
+    }
+
+    .account-section .section-body {
+        padding-top: 20px;
+    }
 }

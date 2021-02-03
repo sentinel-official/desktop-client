@@ -15,3 +15,19 @@
     width: 110px;
     height: 120px;
 }
+
+@media (max-width: 767px) {
+    .side-bar {
+        height: auto;
+        padding: 40px 20px;
+    }
+
+    .side-bar .side-bar-bottom {
+        padding-top: 40px;
+    }
+
+    .side-bar img {
+        width: 70px;
+        height: 80px;
+    }
+}

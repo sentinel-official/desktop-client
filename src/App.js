@@ -1,31 +1,43 @@
 import 'bootstrap/dist/css/bootstrap.css';
 import React from 'react';
-import { Route, Switch, withRouter } from 'react-router-dom';
+import { Redirect, Route, Switch } from 'react-router';
+import { withRouter } from 'react-router-dom';
 import './App.css';
-import Authentication from './pages/Authentication';
-import Splash from './pages/Splash';
-
-const routes = [{
-    path: '/',
-    component: Splash,
-}, {
-    path: '/Authentication',
-    component: Authentication,
-}];
+import PrivateRoute from './containers/PrivateRoute';
+import Snackbar from './containers/Snackbar';
+import routes from './routes';
 
 const App = () => {
     return (
-        <Switch>
-            {
-                routes.map((route) =>
-                    <Route
-                        key={route.path}
-                        exact
-                        component={withRouter(route.component)}
-                        path={route.path}/>,
-                )
-            }
-        </Switch>
+        <>
+            <Switch>
+                {
+                    routes.map((route) => {
+                        if (route.private) {
+                            return (
+                                <PrivateRoute
+                                    key={route.path}
+                                    exact
+                                    component={withRouter(route.component)}
+                                    path={route.path}
+                                />
+                            );
+                        }
+
+                        return (
+                            <Route
+                                key={route.path}
+                                exact
+                                component={withRouter(route.component)}
+                                path={route.path}
+                            />
+                        );
+                    })
+                }
+                <Redirect to={'/'}/>
+            </Switch>
+            <Snackbar/>
+        </>
     );
 };
 

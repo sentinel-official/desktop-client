@@ -31,8 +31,33 @@
     margin: 0;
 }
 
-.login-title {
+.login-title, .title {
     font-weight: 500;
     font-size: 36px;
     color: #142D51;
+}
+
+.value {
+    color: #252E40;
+    font-weight: normal;
+    font-size: 18px;
+    word-break: break-word;
+}
+
+.seed {
+    border: 1px dashed #8EA1C8;
+    padding: 15px;
+    line-height: 2;
+    word-spacing: 20px;
+}
+
+.seed-note {
+    font-size: 14px;
+    color: #8EA1C8;
+}
+
+@media (max-width: 767px) {
+    .login-title, .title {
+        font-size: 26px;
+    }
 }

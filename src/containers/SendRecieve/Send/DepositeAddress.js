@@ -1,5 +1,5 @@
 import React from 'react';
-import InputField from '../../../components/InputField';
+import TextInputField from '../../../components/TextInputField';
 
 const DepositeAddress = () => {
     const onChange = (value) => {
@@ -7,7 +7,7 @@ const DepositeAddress = () => {
     };
 
     return (
-        <InputField
+        <TextInputField
             className="form-control"
             name="DepositeAddress"
             placeholder="Address"

@@ -1,0 +1,24 @@
+.account-create-row {
+    width: 50%;
+    margin: auto;
+}
+
+.account-create-section .create-section-body {
+    width: 100%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.login-title {
+    text-align: center;
+}
+
+@media (max-width: 767px) {
+    .account-create-row {
+        width: 70%;
+        margin-bottom: 70px;
+        padding-top: 20px;
+    }
+}

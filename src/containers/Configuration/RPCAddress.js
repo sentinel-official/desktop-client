@@ -1,22 +1,48 @@
+import * as PropTypes from 'prop-types';
 import React from 'react';
-import InputField from '../../components/InputField';
+import { connect } from 'react-redux';
+import { setConfigurationChainRPCAddress } from '../../actions/configuration';
+import TextInputField from '../../components/TextInputField';
+import { ValidateRPCAddress } from './_validation';
 
-const RPCAddress = () => {
-    const onChange = (value) => {
-        console.log(value, 'in test');
+const RPCAddress = (props) => {
+    const onChange = (event) => {
+        const value = event.target.value.toString();
+
+        props.onChange({
+            value,
+            error: {
+                message: ValidateRPCAddress(value).message,
+            },
+        });
     };
 
     return (
-        <InputField
+        <TextInputField
             className="form-control"
             name="RPCAddress"
             placeholder="Enter RPC Address"
             required={true}
             type="text"
-            value={''}
+            value={props.value}
             onChange={onChange}
         />
     );
 };
 
-export default RPCAddress;
+RPCAddress.propTypes = {
+    value: PropTypes.string.isRequired,
+    onChange: PropTypes.func.isRequired,
+};
+
+const stateToProps = (state) => {
+    return {
+        value: state.configuration.chain.RPCAddress.value,
+    };
+};
+
+const actionsToProps = {
+    onChange: setConfigurationChainRPCAddress,
+};
+
+export default connect(stateToProps, actionsToProps)(RPCAddress);

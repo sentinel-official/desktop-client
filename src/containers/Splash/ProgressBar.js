@@ -8,7 +8,7 @@ const timeout = 1000;
 
 const ProgressBar = (props) => {
     useEffect(() => {
-        if (props.completed === 100) {
+        if (props.completed >= 100) {
             setTimeout(() => {
                 props.history.push('/authentication');
             }, timeout);
@@ -16,7 +16,7 @@ const ProgressBar = (props) => {
         }
 
         setTimeout(() => {
-            props.setCompleted(props.completed + 25);
+            props.setCompleted(props.completed + 50);
         }, timeout);
     });
 

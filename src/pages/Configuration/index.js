@@ -1,26 +1,30 @@
+import * as PropTypes from 'prop-types';
 import React from 'react';
 import Label from '../../components/Label';
-import SideBar from '../../components/SideBar';
+import Sidebar from '../../components/Sidebar';
 import SocialIcons from '../../components/SocialIcons';
 import TextBox from '../../components/TextBox';
 import BroadcastMode from '../../containers/Configuration/BroadcastMode';
 import ChainID from '../../containers/Configuration/ChainID';
 import Fee from '../../containers/Configuration/Fee';
 import Gas from '../../containers/Configuration/Gas';
+import GasAdjustment from '../../containers/Configuration/GasAdjustment';
+import GasPrices from '../../containers/Configuration/GasPrices';
 import RPCAddress from '../../containers/Configuration/RPCAddress';
+import SimulateAndExecute from '../../containers/Configuration/SimulateAndExecute';
 import Submit from '../../containers/Configuration/Submit';
 import TrustNode from '../../containers/Configuration/TrustNode';
 import './index.css';
 
-const Configuration = () => {
+const Configuration = ({ history }) => {
     return (
         <div className="auth-container">
             <div className="col-md-4">
-                <SideBar/>
+                <Sidebar/>
             </div>
-            <div className="col-md-8 config-section">
+            <div className="col-md-8 account-section">
                 <div className="section-body">
-                    <TextBox className="login-title" value="Configure Settings"/>
+                    <TextBox className="login-title" value="Configuration"/>
                     <div className="config-row">
                         <div className="col-md-6">
                             <div className="form-group">
@@ -44,6 +48,20 @@ const Configuration = () => {
                                 />
                                 <Gas/>
                             </div>
+                            <div className="form-group">
+                                <Label
+                                    className="label"
+                                    label="Gas Adjustment"
+                                />
+                                <GasAdjustment/>
+                            </div>
+                            <div className="form-group">
+                                <Label
+                                    className="label"
+                                    label="Gas Price"
+                                />
+                                <GasPrices/>
+                            </div>
                         </div>
                         <div className="col-md-6">
                             <div className="form-group">
@@ -52,6 +70,13 @@ const Configuration = () => {
                                     label="Chain ID"
                                 />
                                 <ChainID/>
+                            </div>
+                            <div className="form-group">
+                                <Label
+                                    className="label"
+                                    label="Simulate And Execute"
+                                />
+                                <SimulateAndExecute/>
                             </div>
                             <div className="form-group">
                                 <Label
@@ -70,7 +95,7 @@ const Configuration = () => {
                         </div>
                         <div className="login-footer">
                             <div className="login-button">
-                                <Submit/>
+                                <Submit history={history}/>
                             </div>
                             <SocialIcons/>
                         </div>
@@ -79,6 +104,12 @@ const Configuration = () => {
             </div>
         </div>
     );
+};
+
+Configuration.propTypes = {
+    history: PropTypes.shape({
+        push: PropTypes.func.isRequired,
+    }).isRequired,
 };
 
 export default Configuration;
