@@ -206,3 +206,41 @@
 .logo-box .icon {
     width: 14px;
 }
+
+.proposal-accordion {
+    border: 1px solid #DCE9F1;
+    padding: 15px;
+}
+
+.proposal-accordion .flex-item label, .horizontal-list label, .horizontal-list .horizontal-list-label {
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 14px;
+    color: #55678B;
+    text-transform: none;
+}
+
+.serial-number {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: rgba(19, 158, 238, 0.1);;
+    position: relative;
+    margin-right: 10px;
+}
+
+.serial-number .number {
+    margin: 0;
+    position: absolute;
+    color: #142D51;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    font-size: 14px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+

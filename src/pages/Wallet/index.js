@@ -19,6 +19,7 @@ import Tokens from '../../containers/Wallet/Tokens';
 import Actions from '../../containers/Wallet/Validators/Actions';
 import Validators from '../../containers/Wallet/Validators/Validators';
 import ValidatorState from '../../containers/Wallet/Validators/ValidatorState';
+import Proposals from '../../containers/Wallet/Proposals';
 import './index.css';
 
 const Wallet = () => {
@@ -104,7 +105,7 @@ const Wallet = () => {
                             <Validators/>
                         </Tab>
                         <Tab eventKey="Proposals" title="Proposals">
-                            <p>empty</p>
+                            <Proposals/>
                         </Tab>
                     </Tabs>
                 </div>

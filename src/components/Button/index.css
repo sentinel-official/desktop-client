@@ -31,3 +31,12 @@
     background: #109FEC;
     color: #FFFFFF;
 }
+
+.buttons-list button {
+    margin-right: 10px;
+    background: none !important;
+    border: 1.13577px solid #DCE9F1 !important;
+    font-weight: bold;
+    font-size: 12px;
+    color: #55678B;
+}

@@ -96,6 +96,18 @@ label, .label {
     color: #252E40;
 }
 
+.flex-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .flex-item {
     display: flex;
     align-items: center;
