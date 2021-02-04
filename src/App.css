@@ -82,6 +82,45 @@ label, .label {
     margin: 15px 0;
 }
 
+.modal-header {
+    padding: 1rem 2rem;
+}
+
+.modal-body {
+    padding: 2rem;
+}
+
+.modal-title {
+    font-weight: 500;
+    font-size: 18px;
+    color: #252E40;
+}
+
+.flex-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.flex-item label {
+    margin: 0 10px 0 0;
+    width: 150px;
+    font-size: 14px;
+}
+
+.flex-item p {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 500;
+    color: #142D51;
+}
+
+@media (min-width: 576px) {
+    .modal-dialog {
+        max-width: 600px;
+    }
+}
+
 @media (max-width: 767px) {
     .account-section {
         display: block;

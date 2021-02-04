@@ -1,0 +1,9 @@
+.withdraw-modal .modal-header {
+    align-items: center;
+}
+
+.withdraw-modal .modal-header .account-name {
+    margin: 0 0 0 10px;
+    font-size: 18px;
+    color: #139EEE;
+}
