@@ -29,14 +29,6 @@ const RedelegateModal = () => {
                     <Label className="" label="Operator Address"/>
                     <Address/>
                 </div>
-                <div className="flex-item">
-                    <Label className="" label="CommissionRate Rate"/>
-                    <Commission/>
-                </div>
-                <div className="form-group">
-                    <Label className="" label="Address Validator"/>
-                    <To/>
-                </div>
                 <div className="form-group">
                     <Label className="" label="Amount"/>
                     <Amount/>

@@ -6,8 +6,6 @@ import Amount from '../../../containers/Wallet/Validators/ModalDelegate/Amount';
 import Delegate from '../../../containers/Wallet/Validators/ModalDelegate/Delegate';
 import Password from '../../../containers/Wallet/Validators/ModalDelegate/Password';
 import ToAddress from '../../../containers/Wallet/Validators/ModalDelegate/ToAddress';
-import ToCommissionRate from '../../../containers/Wallet/Validators/ModalDelegate/ToCommissionRate';
-import Amount from '../../../containers/Wallet/Validators/ModalDelegate/Tokens';
 import ToName from '../../../containers/Wallet/Validators/ModalDelegate/ToName';
 import './index.css';
 
@@ -29,14 +27,6 @@ const DelegateModal = () => {
                 <div className="flex-item">
                     <Label className="" label="Operator Address"/>
                     <ToAddress/>
-                </div>
-                <div className="flex-item">
-                    <Label className="" label="CommissionRate Rate"/>
-                    <ToCommissionRate/>
-                </div>
-                <div className="flex-item">
-                    <Label className="" label="Amount"/>
-                    <Tokens/>
                 </div>
                 <div className="form-group">
                     <Label className="" label="Amount"/>
