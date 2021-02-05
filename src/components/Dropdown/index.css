@@ -1,0 +1,41 @@
+.btn-primary:not(:disabled):not(.disabled):active,
+.btn-primary:not(:disabled):not(.disabled).active,
+.show > .btn-primary.dropdown-toggle,
+.dropdown-toggle, .dropdown-toggle:hover, .dropdown-toggle:focus,
+.show > .btn-primary.dropdown-toggle:focus,
+.btn-primary:not(:disabled):not(.disabled):active:focus {
+    background: transparent;
+    border: 0;
+    outline: 0;
+    box-shadow: none;
+    font-weight: 500;
+    font-size: 16px;
+    text-align: center;
+    color: #142D51;
+    padding: 0;
+}
+
+.filter-section .btn-primary:not(:disabled):not(.disabled):active,
+.filter-section .btn-primary:not(:disabled):not(.disabled).active,
+.filter-section .show > .btn-primary.dropdown-toggle,
+.filter-section .dropdown-toggle,
+.filter-section .dropdown-toggle:hover,
+.filter-section .dropdown-toggle:focus,
+.filter-section .show > .btn-primary.dropdown-toggle:focus,
+.filter-section .btn-primary:not(:disabled):not(.disabled):active:focus {
+    border: 1px solid #DCE9F1;
+    padding: 4px 20px;
+    border-radius: 20px;
+    font-weight: 500;
+    font-size: 12px;
+    color: #55678B;
+}
+
+.dropdown-toggle .icon, .dropdown-item .icon {
+    width: 22px;
+    margin-right: 10px;
+}
+
+.dropdown-toggle::after {
+    margin-left: 0.4em;
+}

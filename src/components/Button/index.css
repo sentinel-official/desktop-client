@@ -7,10 +7,10 @@
     letter-spacing: 0.05em;
     color: #FFFFFF;
     padding: 5px 25px;
-    height: 30px;
 }
 
-.login-button button {
+.login-button button, .login-button button:hover {
+    height: 30px;
     width: 100px;
     display: flex;
     align-items: center;
@@ -25,4 +25,18 @@
 .btn.disabled, .btn:disabled {
     background: #109FEC;
     color: #FFFFFF;
+}
+
+.btn.disabled, .btn:disabled {
+    background: #109FEC;
+    color: #FFFFFF;
+}
+
+.buttons-list button {
+    margin-right: 10px;
+    background: none !important;
+    border: 1.13577px solid #DCE9F1 !important;
+    font-weight: bold;
+    font-size: 12px;
+    color: #55678B;
 }

@@ -1,0 +1,246 @@
+.settings-dropdown {
+    padding: 20px 20px 20px 40px;
+    background: #F6F8FB;
+}
+
+.wallet-section {
+    display: flex;
+    width: 100%;
+    align-items: stretch;
+    height: 100%;
+}
+
+.dashboard-side-bar-container {
+    min-width: 250px;
+    max-width: 250px;
+    color: #6b6b6b;
+    transition: all .3s;
+    position: relative;
+    overflow-y: auto;
+    height: 100%;
+    background: #193254;
+    border-right: 1px solid #DCE9F1;
+}
+
+.wallet-details {
+    display: flex;
+    flex: 1;
+}
+
+.wallet-tab .nav-tabs {
+    border: 0px solid;
+}
+
+.middle-section {
+    padding: 0px;
+    border-right: 1px solid #DCE9F1;
+}
+
+.token-info .sent-title {
+    font-weight: 500;
+    font-size: 16px;
+    color: #AEB1B6;
+    text-transform: uppercase;
+}
+
+.token-info {
+    padding-top: 20px;
+}
+
+.token-info .sent-list {
+    display: flex;
+    align-items: center;
+}
+
+.token-info .sent-list .heading {
+    font-weight: 600;
+    font-size: 28px;
+    color: #252E40;
+    padding-right: 15px;
+}
+
+.token-info .sent-list .value {
+    font-size: 18px;
+    color: #55678B;
+}
+
+.wallet-tab .nav-tabs .nav-link.active, .wallet-tab .nav-tabs .nav-item.show .nav-link {
+    border: 1px solid #DCE9F1;
+    color: #142D51;
+    border-radius: 30px;
+}
+
+.wallet-tab .nav-tabs .nav-link {
+    margin: 0;
+    border: 0px solid;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+    color: #8EA1C8;
+    padding: 0.7rem 2rem;
+    border: 1px solid transparent;
+}
+
+.filter-section {
+    position: absolute;
+    right: 15px;
+    display: flex;
+    align-items: center;
+}
+
+.filter-section .dropdown button {
+    margin-left: 10px;
+}
+
+.receive-address p {
+    word-break: break-all;
+}
+
+.copy-address {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.copy-address p {
+    margin: 0;
+}
+
+.middle-section .nav-tabs .nav-link {
+    flex: 1;
+    text-align: center;
+    margin-bottom: 0;
+    border: 1px solid #DCE9F1;
+    font-weight: 500;
+    font-size: 16px;
+    color: #142D51;
+
+}
+
+.middle-section .nav-tabs .nav-link.active,
+.middle-section .nav-tabs .nav-item.show .nav-link {
+    border-bottom: 2px solid #109FEC;
+}
+
+.middle-section .tab-content {
+    text-align: center;
+    padding: 35px 30px;
+}
+
+.middle-section .tab-content .form-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.withdraw-section .title {
+    font-weight: 500;
+    font-size: 16px;
+    color: #142D51;
+    margin: 0;
+    padding: 10px 0;
+    text-align: center;
+    border-top: 1px solid #DCE9F1;
+    border-bottom: 1px solid #DCE9F1;
+}
+
+.withdraw-section-content {
+    padding: 35px 30px;
+    text-align: center;
+}
+
+.withdraw-section-content .form-group {
+    text-align: left;
+}
+
+.top-section {
+    padding: 20px 20px 20px 30px;
+}
+
+.logo-box {
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    background: #F6F8FB;
+    border: 1px solid #DCE9F1;
+    box-shadow: 0px 4px 17px rgba(0, 0, 0, 0.08);
+    justify-content: space-between;
+}
+
+.logo-box .sentinel-text {
+    font-weight: 500;
+    font-size: 16px;
+    color: #142D51;
+    padding-right: 10px;
+}
+
+.logo-box .sub-text {
+    font-weight: 500;
+    font-size: 12px;
+    color: #142D51;
+    text-transform: uppercase;
+}
+
+.logo-box p {
+    margin: 0;
+}
+
+.logo-box .left {
+    display: flex;
+    align-items: center;
+}
+
+.logo-box .logo {
+    display: flex;
+    border-radius: 50%;
+    background-color: #e5f5fd;
+    height: 2rem;
+    width: 2rem;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo-box .logo img {
+    width: 14px;
+}
+
+.logo-box .icon {
+    width: 14px;
+}
+
+.proposal-accordion {
+    border: 1px solid #DCE9F1;
+    padding: 15px;
+}
+
+.proposal-accordion .flex-item label, .horizontal-list label, .horizontal-list .horizontal-list-label {
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 14px;
+    color: #55678B;
+    text-transform: none;
+}
+
+.serial-number {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: rgba(19, 158, 238, 0.1);;
+    position: relative;
+    margin-right: 10px;
+}
+
+.serial-number .number {
+    margin: 0;
+    position: absolute;
+    color: #142D51;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    font-size: 14px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+

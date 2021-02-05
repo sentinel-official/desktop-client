@@ -38,7 +38,7 @@ const KeyInfo = ({ history }) => {
                     <Seed/>
                     <TextBox
                         className="seed-note"
-                        value="Note: Copy your keys to a secure location. Remember, we don't store any of your keys in our databases."
+                        value="Note: CopyAddress your keys to a secure location. Remember, we don't store any of your keys in our databases."
                     />
                     <div className="login-footer">
                         <div className="login-button">

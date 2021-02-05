@@ -1,0 +1,13 @@
+thead th {
+    font-weight: 500;
+    font-size: 13px;
+    letter-spacing: 0.05em;
+    color: #55678B;
+}
+
+tbody tr {
+    font-weight: 500;
+    font-size: 14px;
+    color: #142D51;
+    border-bottom: 1px solid #dee2e6;
+}
