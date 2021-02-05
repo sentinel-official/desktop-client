@@ -1,7 +1,7 @@
 import React from 'react';
 import { Tab, Tabs } from 'react-bootstrap';
 import Logo from '../../assets/Logo.svg';
-import DashboardSidebar from '../../components/DashboardSidebar';
+import Sidebar from '../../containers/Sidebar';
 import Icon from '../../components/Icon';
 import Image from '../../components/Image';
 import Label from '../../components/Label';
@@ -30,7 +30,7 @@ const Wallet = () => {
                     <Accounts/>
                 </div>
                 <div className="side-bar-list">
-                    <DashboardSidebar/>
+                    <Sidebar/>
                 </div>
             </div>
             <div className="wallet-details">

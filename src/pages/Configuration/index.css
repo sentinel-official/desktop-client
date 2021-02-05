@@ -8,6 +8,7 @@
     margin: auto;
     display: flex;
     align-items: center;
+    place-items: flex-start;
 }
 
 .config-section .section-body {

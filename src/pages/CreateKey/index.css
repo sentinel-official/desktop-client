@@ -13,3 +13,11 @@
         margin-bottom: 70px;
     }
 }
+
+.terms {
+    margin: 0 10px 0 0;
+}
+
+.terms p {
+    margin: 0;
+}

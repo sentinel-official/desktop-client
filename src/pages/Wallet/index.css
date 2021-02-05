@@ -244,3 +244,13 @@
     justify-content: center;
 }
 
+.accordion-section {
+    position: relative;
+    margin-top: 3rem;
+    max-height: 61vh;
+    overflow-y: auto;
+}
+
+.accordion-section .accordion {
+    margin-bottom: 10px;
+}

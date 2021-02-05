@@ -13,6 +13,14 @@ const Dropdown = ({
         <ReactDropdown>
             <ReactDropdown.Toggle>
                 {
+                    config.options[0].icon
+                        ? <Icon
+                            className="icon"
+                            icon={config.options[0].icon}
+                        />
+                        : null
+                }
+                {
                     value || config.options[0].label
                 }
             </ReactDropdown.Toggle>

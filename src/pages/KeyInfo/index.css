@@ -22,3 +22,44 @@
         padding-top: 20px;
     }
 }
+
+.section-body .key-info {
+    width: 60%;
+}
+
+.label-icon {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.label-icon .label {
+    margin: 0 10px 0 0;
+}
+
+.label-icon a {
+    margin: 0 0 5px 0 !important;
+    width: 24px;
+    height: 24px;
+    background: #DEE9EF;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.label-icon a .icon {
+    width: 14px;
+}
+
+.checkbox-section {
+    margin-right: 10px;
+}
+
+.checkbox-section .custom-checkbox .custom-control-label {
+    text-transform: none;
+}
+
+.checkbox-section .custom-checkbox .custom-control-label::before {
+    border-radius: 50%;
+}
