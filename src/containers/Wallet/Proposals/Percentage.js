@@ -3,7 +3,7 @@ import TextBox from '../../../components/TextBox';
 
 const Percentage = () => {
     return (
-        <div className="receive-address">
+        <div className="percentage-success">
             <TextBox
                 className=""
                 value="Yes 68.76%"

@@ -3,7 +3,7 @@ import TextBox from '../../../components/TextBox';
 
 const TotalDeposit = () => {
     return (
-        <div className="receive-address">
+        <div className="vertical-list-value">
             <TextBox
                 className=""
                 value="512.000000ATOM"

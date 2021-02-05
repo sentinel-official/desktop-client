@@ -22,11 +22,13 @@ const Validators = () => {
     ];
 
     return (
-        <Table
-            className="validators-table"
-            columns={columns}
-            rowComponent={Row}
-        />
+        <div className="validators-section">
+            <Table
+                className="validators-table"
+                columns={columns}
+                rowComponent={Row}
+            />
+        </div>
     );
 };
 

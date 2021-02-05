@@ -1,5 +1,5 @@
 .settings-dropdown {
-    padding: 20px 20px 20px 40px;
+    padding: 25px 20px 25px 40px;
     background: #F6F8FB;
 }
 
@@ -11,8 +11,8 @@
 }
 
 .dashboard-side-bar-container {
-    min-width: 250px;
-    max-width: 250px;
+    min-width: 260px;
+    max-width: 260px;
     color: #6b6b6b;
     transition: all .3s;
     position: relative;
@@ -28,10 +28,12 @@
 }
 
 .wallet-tab .nav-tabs {
+    padding-bottom: 20px;
     border: 0px solid;
 }
 
 .middle-section {
+    width: 400px;
     padding: 0px;
     border-right: 1px solid #DCE9F1;
 }
@@ -44,7 +46,7 @@
 }
 
 .token-info {
-    padding-top: 20px;
+    padding: 45px 0 30px 0;
 }
 
 .token-info .sent-list {
@@ -62,6 +64,12 @@
 .token-info .sent-list .value {
     font-size: 18px;
     color: #55678B;
+}
+
+.wallet-tab{
+    padding:0 30px;
+    max-width:none;
+    flex: 1 1;
 }
 
 .wallet-tab .nav-tabs .nav-link.active, .wallet-tab .nav-tabs .nav-item.show .nav-link {
@@ -92,18 +100,26 @@
     margin-left: 10px;
 }
 
-.receive-address p {
+.tab-content .receive-address p {
     word-break: break-all;
+    font-weight: 500;
+    font-size: 14px;
+    color: #142D51;
 }
 
-.copy-address {
+.tab-content .copy-address {
+    margin: 10px 0;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.copy-address p {
-    margin: 0;
+.tab-content .copy-address p {
+    margin: 0 5px 0 0;
+    font-weight: 500;
+    font-size: 14px;
+    text-transform: uppercase;
+    color: #55678B;
 }
 
 .middle-section .nav-tabs .nav-link {
@@ -114,7 +130,7 @@
     font-weight: 500;
     font-size: 16px;
     color: #142D51;
-
+    border-radius: 0px;
 }
 
 .middle-section .nav-tabs .nav-link.active,
@@ -124,11 +140,12 @@
 
 .middle-section .tab-content {
     text-align: center;
-    padding: 35px 30px;
+    height: 300px;
+    padding: 25px 30px;
 }
 
 .middle-section .tab-content .form-group {
-    margin-bottom: 15px;
+    margin-bottom: 16px;
     text-align: left;
 }
 
@@ -153,11 +170,19 @@
 }
 
 .top-section {
-    padding: 20px 20px 20px 30px;
+    padding: 25px 20px 35px 30px;
+}
+
+.top-section .sentinel-text {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+    color: #142D51;
+    margin-bottom: 30px;
 }
 
 .logo-box {
-    padding: 10px;
+    padding: 12px 10px;
     display: flex;
     align-items: center;
     background: #F6F8FB;
@@ -170,6 +195,7 @@
     font-weight: 500;
     font-size: 16px;
     color: #142D51;
+    margin: 0;
     padding-right: 10px;
 }
 
@@ -193,14 +219,15 @@
     display: flex;
     border-radius: 50%;
     background-color: #e5f5fd;
-    height: 2rem;
-    width: 2rem;
+    height: 2.4rem;
+    width: 2.4rem;
     align-items: center;
     justify-content: center;
+    margin-right: 10px;
 }
 
 .logo-box .logo img {
-    width: 14px;
+    width: 18px;
 }
 
 .logo-box .icon {
@@ -209,7 +236,7 @@
 
 .proposal-accordion {
     border: 1px solid #DCE9F1;
-    padding: 15px;
+    padding: 20px 15px;
 }
 
 .proposal-accordion .flex-item label, .horizontal-list label, .horizontal-list .horizontal-list-label {
@@ -219,16 +246,45 @@
     color: #55678B;
     text-transform: none;
 }
+.proposal-accordion .accordion-header .flex-item{
+    margin-bottom: 20px;;
+}
 
+.proposal-accordion .collapse-content{
+    padding-top: 15px;
+}
+.horizontal-list-value p, .vertical-list-value p{
+    font-size: 14px;
+    margin: 0;
+    font-weight: normal;
+    color: #142D51;
+}
+.percentage-success p{
+    font-size: 14px;
+    margin: 0;
+    color: #1AB132;
+}
+.button-accordion{
+    border: 1.13577px solid #DCE9F1;
+    box-sizing: border-box;
+    border-radius: 56px;
+    background: transparent;
+}
 .serial-number {
-    width: 28px;
-    height: 28px;
+    width: 36px;
+    height: 36px;
     border-radius: 50%;
     background: rgba(19, 158, 238, 0.1);;
     position: relative;
     margin-right: 10px;
 }
 
+.proposal-title {
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 146.19%;
+    color: #142D51;
+}
 .serial-number .number {
     margin: 0;
     position: absolute;
@@ -244,13 +300,53 @@
     justify-content: center;
 }
 
-.accordion-section {
+.accordion-scroll-bar, .validators-section{
     position: relative;
-    margin-top: 3rem;
     max-height: 61vh;
-    overflow-y: auto;
+    overflow-y: scroll;
+}
+::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+::-webkit-scrollbar-thumb {
+    background-color: #DCE9F1 !important;
+}
+::-webkit-scrollbar {
+    width: .5rem;
 }
 
 .accordion-section .accordion {
     margin-bottom: 10px;
+}
+
+@media (min-width: 768px) {
+    .middle-section {
+        flex: none;
+        max-width: none;
+    }
+}
+
+.tab-content .qr-title {
+    font-weight: 500;
+    font-size: 14px;
+    color: #55678B;
+}
+
+.tab-content .qr-box {
+    display: flex;
+    width: 114px;
+    height: 114px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 3px;
+    background: #BBCAE9;
+    margin: auto;
+}
+
+.tab-content .qr-box canvas {
+    width: 104px !important;
+    padding: 5px;
+    background: #FFFFFF;
+    height: 104px !important;
 }

@@ -3,7 +3,7 @@ import TextBox from '../../../components/TextBox';
 
 const Type = () => {
     return (
-        <div className="receive-address">
+        <div className="vertical-list-value">
             <TextBox
                 className=""
                 value="cosmos-sdk/TextProposal"

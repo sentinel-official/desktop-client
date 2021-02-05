@@ -3,9 +3,7 @@ import React from 'react';
 
 const QRCode = () => {
     return (
-        <>
-            <ReactQRCode value="http://facebook.github.io/react/"/>
-        </>
+        <ReactQRCode value="http://facebook.github.io/react/"/>
     );
 };
 

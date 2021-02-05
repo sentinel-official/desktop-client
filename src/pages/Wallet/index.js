@@ -69,9 +69,11 @@ const Wallet = () => {
                             </div>
                             <Send/>
                         </Tab>
-                        <Tab eventKey="Receive" title="Receive">
+                        <Tab eventKey="Receive" tabClassName="receive-tab" title="Receive">
                             <TextBox className="qr-title" value="Show QR code to Receive Tokens"/>
-                            <QRCode/>
+                            <div className="qr-box">
+                                <QRCode/>
+                            </div>
                             <div className="copy-address">
                                 <TextBox className="" value="Address"/>
                                 <CopyAddress/>

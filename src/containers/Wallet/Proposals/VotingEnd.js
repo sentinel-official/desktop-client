@@ -3,7 +3,7 @@ import TextBox from '../../../components/TextBox';
 
 const VotingEnd = () => {
     return (
-        <div className="receive-address">
+        <div className="horizontal-list-value">
             <TextBox
                 className=""
                 value="2020-09-23 12:17:46"
