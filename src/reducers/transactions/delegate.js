@@ -1,14 +1,16 @@
 import { combineReducers } from 'redux';
 import {
-    KEYS_POST_ERROR,
-    KEYS_POST_IN_PROGRESS,
-    KEYS_POST_SUCCESS,
-    KEY_MNEMONIC_SET,
-    KEY_NAME_SET,
-    KEY_PASSWORD_SET,
-} from '../../constants/keys';
+    TX_DELEGATE_AMOUNT_SET,
+    TX_DELEGATE_ERROR,
+    TX_DELEGATE_IN_PROGRESS,
+    TX_DELEGATE_MEMO_SET,
+    TX_DELEGATE_MODAL_HIDE,
+    TX_DELEGATE_MODAL_SHOW,
+    TX_DELEGATE_SUCCESS,
+    TX_DELEGATE_TO_SET,
+} from '../../constants/transactions';
 
-const name = (state = {
+const to = (state = {
     value: '',
     error: {
         message: '',
@@ -18,7 +20,7 @@ const name = (state = {
     data,
 }) => {
     switch (type) {
-    case KEY_NAME_SET:
+    case TX_DELEGATE_TO_SET:
         return {
             ...state,
             value: data.value,
@@ -27,7 +29,7 @@ const name = (state = {
                 message: data.error.message,
             },
         };
-    case KEYS_POST_SUCCESS:
+    case TX_DELEGATE_SUCCESS:
         return {
             ...state,
             value: '',
@@ -41,7 +43,40 @@ const name = (state = {
     }
 };
 
-const password = (state = {
+const amount = (state = {
+    value: [],
+    error: {
+        message: '',
+    },
+}, {
+    type,
+    data,
+}) => {
+    switch (type) {
+    case TX_DELEGATE_AMOUNT_SET:
+        return {
+            ...state,
+            value: data.value,
+            error: {
+                ...state.error,
+                message: data.error.message,
+            },
+        };
+    case TX_DELEGATE_SUCCESS:
+        return {
+            ...state,
+            value: [],
+            error: {
+                ...state.error,
+                message: '',
+            },
+        };
+    default:
+        return state;
+    }
+};
+
+const memo = (state = {
     value: '',
     error: {
         message: '',
@@ -51,7 +86,7 @@ const password = (state = {
     data,
 }) => {
     switch (type) {
-    case KEY_PASSWORD_SET:
+    case TX_DELEGATE_MEMO_SET:
         return {
             ...state,
             value: data.value,
@@ -60,7 +95,7 @@ const password = (state = {
                 message: data.error.message,
             },
         };
-    case KEYS_POST_SUCCESS:
+    case TX_DELEGATE_SUCCESS:
         return {
             ...state,
             value: '',
@@ -74,68 +109,27 @@ const password = (state = {
     }
 };
 
-const mnemonic = (state = {
-    value: '',
-    error: {
-        message: '',
-    },
-}, {
+const inProgress = (state = false, {
     type,
-    data,
 }) => {
     switch (type) {
-    case KEY_MNEMONIC_SET:
-        return {
-            ...state,
-            value: data.value,
-            error: {
-                ...state.error,
-                message: data.error.message,
-            },
-        };
-    case KEYS_POST_SUCCESS:
-        return {
-            ...state,
-            value: '',
-            error: {
-                ...state.error,
-                message: '',
-            },
-        };
-    default:
-        return state;
-    }
-};
-
-const info = (state = {
-    address: '',
-    publicKey: '',
-    mnemonic: '',
-    name: '',
-}, {
-    type,
-    data,
-}) => {
-    switch (type) {
-    case KEYS_POST_SUCCESS:
-        return {
-            ...state,
-            address: data.address,
-            publicKey: data['pub_key'],
-            mnemonic: data.mnemonic,
-            name: data.name,
-        };
-    default:
-        return state;
-    }
-};
-
-const inProgress = (state = false, { type }) => {
-    switch (type) {
-    case KEYS_POST_IN_PROGRESS:
+    case TX_DELEGATE_IN_PROGRESS:
         return true;
-    case KEYS_POST_ERROR:
-    case KEYS_POST_SUCCESS:
+    case TX_DELEGATE_ERROR:
+    case TX_DELEGATE_SUCCESS:
+        return false;
+    default:
+        return state;
+    }
+};
+
+const modal = (state = false, {
+    type,
+}) => {
+    switch (type) {
+    case TX_DELEGATE_MODAL_SHOW:
+        return true;
+    case TX_DELEGATE_MODAL_HIDE:
         return false;
     default:
         return state;
@@ -143,9 +137,9 @@ const inProgress = (state = false, { type }) => {
 };
 
 export default combineReducers({
-    name,
-    password,
-    mnemonic,
+    to,
+    amount,
+    memo,
     inProgress,
-    info,
+    modal,
 });
