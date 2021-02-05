@@ -5,28 +5,28 @@ import Icon from '../Icon';
 import './index.css';
 
 const Dropdown = ({
-    config,
-    value,
+    index,
+    options,
     onClick,
 }) => {
     return (
         <ReactDropdown>
             <ReactDropdown.Toggle>
                 {
-                    config.options[0].icon
+                    options[index].icon
                         ? <Icon
                             className="icon"
-                            icon={config.options[0].icon}
+                            icon={options[index].icon}
                         />
                         : null
                 }
                 {
-                    value || config.options[0].label
+                    options[index].label
                 }
             </ReactDropdown.Toggle>
             <ReactDropdown.Menu>
                 {
-                    config.options.map((item, index) => (
+                    options.map((item, index) => (
                         <ReactDropdown.Item
                             key={index}
                             onClick={onClick}>
@@ -48,14 +48,15 @@ const Dropdown = ({
 };
 
 Dropdown.propTypes = {
-    config: PropTypes.shape({
-        label: PropTypes.string.isRequired,
-        name: PropTypes.string.isRequired,
-        options: PropTypes.array.isRequired,
-        icon: PropTypes.string.isRequired,
-    }).isRequired,
-    value: PropTypes.string.isRequired,
+    index: PropTypes.number.isRequired,
     onClick: PropTypes.func.isRequired,
+    options: PropTypes.arrayOf(
+        PropTypes.shape({
+            label: PropTypes.string.isRequired,
+            value: PropTypes.string.isRequired,
+            icon: PropTypes.string.isRequired,
+        }),
+    ),
 };
 
 export default Dropdown;

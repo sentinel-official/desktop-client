@@ -5,13 +5,13 @@ import SocialIcons from '../../components/SocialIcons';
 import TextBox from '../../components/TextBox';
 import Address from '../../containers/KeyInfo/Address';
 import Continue from '../../containers/KeyInfo/Continue';
-import Seed from '../../containers/KeyInfo/Mnemonic';
 import CopyAddress from '../../containers/KeyInfo/CopyAddress';
 import CopyPublicKey from '../../containers/KeyInfo/CopyPublicKey';
-import PublicKey from '../../containers/KeyInfo/PublicKey';
 import DownloadSeed from '../../containers/KeyInfo/DownloadSeed';
-import './index.css';
+import Seed from '../../containers/KeyInfo/Mnemonic';
 import NoteCheckbox from '../../containers/KeyInfo/NoteCheckbox';
+import PublicKey from '../../containers/KeyInfo/PublicKey';
+import './index.css';
 
 const KeyInfo = ({ history }) => {
     return (

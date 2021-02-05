@@ -1,25 +1,25 @@
 import React from 'react';
 import { Tab, Tabs } from 'react-bootstrap';
 import Logo from '../../assets/Logo.svg';
-import Sidebar from '../../containers/Sidebar';
 import Icon from '../../components/Icon';
 import Image from '../../components/Image';
 import Label from '../../components/Label';
 import TextBox from '../../components/TextBox';
+import CopyAddress from '../../containers/KeyInfo/CopyAddress';
+import Sidebar from '../../containers/Sidebar';
+import Keys from '../../containers/Wallet/Keys';
+import Proposals from '../../containers/Wallet/Proposals';
 import Address from '../../containers/Wallet/Receive/Address';
-import CopyAddress from '../../containers/Wallet/Receive/CopyAddress';
 import QRCode from '../../containers/Wallet/Receive/QRCode';
 import Amount from '../../containers/Wallet/Send/Amount';
 import Send from '../../containers/Wallet/Send/Send';
 import DepositAddress from '../../containers/Wallet/Send/To';
-import WithDrawValidators from '../../containers/Wallet/WithDraw/Validators';
-import WithDraw from '../../containers/Wallet/WithDraw/WithDraw';
-import Accounts from '../../containers/Wallet/Accounts';
 import Tokens from '../../containers/Wallet/Tokens';
 import Actions from '../../containers/Wallet/Validators/Actions';
 import Validators from '../../containers/Wallet/Validators/Validators';
 import ValidatorState from '../../containers/Wallet/Validators/ValidatorState';
-import Proposals from '../../containers/Wallet/Proposals';
+import WithDrawValidators from '../../containers/Wallet/Withdraw/Validators';
+import WithDraw from '../../containers/Wallet/Withdraw/WithDraw';
 import './index.css';
 
 const Wallet = () => {
@@ -27,7 +27,7 @@ const Wallet = () => {
         <div className="wallet-section">
             <div className="dashboard-side-bar-container">
                 <div className="settings-dropdown">
-                    <Accounts/>
+                    <Keys/>
                 </div>
                 <div className="side-bar-list">
                     <Sidebar/>
@@ -36,7 +36,7 @@ const Wallet = () => {
             <div className="wallet-details">
                 <div className="middle-section col-md-4">
                     <div className="top-section">
-                        <TextBox className="sentinel-text" value="Tokens"/>
+                        <TextBox className="sentinel-text" value="Amount"/>
                         <div className="logo-box">
                             <div className="left">
                                 <div className="logo">
@@ -70,7 +70,7 @@ const Wallet = () => {
                             <Send/>
                         </Tab>
                         <Tab eventKey="Receive" title="Receive">
-                            <TextBox className="qr-title" value="Show QR code to Receive Tokens"/>
+                            <TextBox className="qr-title" value="Show QR code to Receive Amount"/>
                             <QRCode/>
                             <div className="copy-address">
                                 <TextBox className="" value="Address"/>

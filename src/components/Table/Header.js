@@ -5,15 +5,15 @@ import './index.css';
 const Header = ({ columns }) => {
     return (
         <thead>
-            <tr>
-                {
-                    columns.map((item, index) => (
-                        <th key={index}>
-                            {item.label}
-                        </th>
-                    ))
-                }
-            </tr>
+        <tr>
+            {
+                columns.map((item, index) => (
+                    <th key={index}>
+                        {item.label}
+                    </th>
+                ))
+            }
+        </tr>
         </thead>
     );
 };

@@ -15,3 +15,5 @@ export const KEYS_POST_SUCCESS = 'KEYS_POST_SUCCESS';
 export const KEYS_POST_ERROR = 'KEYS_POST_ERROR';
 
 export const KEYS_POST_URL = `${API_BASE_URL}/keys`;
+
+export const KEYS_INDEX_SET = 'KEYS_INDEX_SET';

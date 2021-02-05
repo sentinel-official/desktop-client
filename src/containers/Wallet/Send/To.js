@@ -9,8 +9,8 @@ const To = () => {
     return (
         <TextInputField
             className="form-control"
-            name="DepositAddress"
-            placeholder="Address"
+            name="To Address"
+            placeholder="Enter Address Address"
             required={true}
             type="text"
             value={''}

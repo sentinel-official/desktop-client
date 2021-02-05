@@ -1,10 +1,10 @@
 import React from 'react';
 import { Modal } from 'react-bootstrap';
-import Memo from '../../../containers/Wallet/Proposals/NowithVeto/Popup/Memo';
-import Password from '../../../containers/Wallet/Proposals/NowithVeto/Popup/Password';
-import ButtonWithVeto from '../../../containers/Wallet/Proposals/NowithVeto/ButtonWithVeto';
-import TextBox from '../../../components/TextBox';
 import Label from '../../../components/Label';
+import TextBox from '../../../components/TextBox';
+import ButtonWithVeto from '../../../containers/Wallet/Proposals/ButtonWithVeto';
+import Memo from '../../../containers/Wallet/Proposals/NoWithVeto/Modal/Memo';
+import Password from '../../../containers/Wallet/Proposals/NoWithVeto/Modal/Password';
 
 const WithVetoModal = () => {
     return (
