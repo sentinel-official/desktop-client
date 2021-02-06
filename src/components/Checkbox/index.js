@@ -5,7 +5,11 @@ const Checkbox = ({
     className,
 }) => {
     return (
-        <input className={className} id="customCheck1" type="checkbox"/>
+        <input
+            className={className}
+            id="checkbox"
+            type="checkbox"
+        />
     );
 };
 

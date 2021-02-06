@@ -10,7 +10,7 @@ const Amount = () => {
         <TextInputField
             className="form-control"
             name="Amount"
-            placeholder="Total Amount"
+            placeholder="Enter Amount"
             required={true}
             type="text"
             value={''}

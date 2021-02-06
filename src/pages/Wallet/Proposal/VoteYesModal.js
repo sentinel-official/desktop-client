@@ -1,10 +1,10 @@
 import React from 'react';
 import { Modal } from 'react-bootstrap';
-import Memo from '../../../containers/Wallet/Proposals/VotingYes/Popup/Memo';
-import Password from '../../../containers/Wallet/Proposals/VotingYes/Popup/Password';
-import ButtonYes from '../../../containers/Wallet/Proposals/VotingYes/ButtonYes';
-import TextBox from '../../../components/TextBox';
 import Label from '../../../components/Label';
+import TextBox from '../../../components/TextBox';
+import ButtonYes from '../../../containers/Wallet/Proposals/ButtonYes';
+import Memo from '../../../containers/Wallet/Proposals/Yes/Popup/Memo';
+import Password from '../../../containers/Wallet/Proposals/Yes/Popup/Password';
 
 const VoteYesModal = () => {
     return (

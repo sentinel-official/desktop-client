@@ -2,20 +2,20 @@ import * as PropTypes from 'prop-types';
 import React from 'react';
 import Dropdown from '../../../components/Dropdown';
 
-const config = {
-    name: 'Delegate',
-    options: [
-        {
-            label: 'Delegate',
-        },
-        {
-            label: 'Redelegate',
-        },
-        {
-            label: 'Unbond',
-        },
-    ],
-};
+const options = [
+    {
+        label: 'Delegate',
+        value: 'delegate',
+    },
+    {
+        label: 'Redelegate',
+        value: 'redelegate',
+    },
+    {
+        label: 'Unbond',
+        value: 'unbond',
+    },
+];
 
 const Actions = (props) => {
     const onClick = (event) => {
@@ -24,8 +24,8 @@ const Actions = (props) => {
 
     return (
         <Dropdown
-            config={config}
-            value={props.value}
+            index={0}
+            options={options}
             onClick={onClick}
         />
     );

@@ -1,10 +1,10 @@
 import React from 'react';
 import { Modal } from 'react-bootstrap';
-import Memo from '../../../containers/Wallet/Proposals/Abstain/Popup/Memo';
-import Password from '../../../containers/Wallet/Proposals/Abstain/Popup/Password';
-import ButtonAbstain from '../../../containers/Wallet/Proposals/Abstain/ButtonAbstain';
-import TextBox from '../../../components/TextBox';
 import Label from '../../../components/Label';
+import TextBox from '../../../components/TextBox';
+import ButtonAbstain from '../../../containers/Wallet/Proposals/ButtonAbstain';
+import Memo from '../../../containers/Wallet/Proposals/Modal/Memo';
+import Password from '../../../containers/Wallet/Proposals/Modal/Password';
 
 const AbstainModal = () => {
     return (

@@ -4,6 +4,7 @@ import Label from '../../components/Label';
 import Sidebar from '../../components/Sidebar';
 import SocialIcons from '../../components/SocialIcons';
 import TextBox from '../../components/TextBox';
+import Tooltip from '../../components/Tooltip/Tooltip';
 import BroadcastMode from '../../containers/Configuration/BroadcastMode';
 import ChainID from '../../containers/Configuration/ChainID';
 import Fee from '../../containers/Configuration/Fee';
@@ -14,7 +15,6 @@ import RPCAddress from '../../containers/Configuration/RPCAddress';
 import SimulateAndExecute from '../../containers/Configuration/SimulateAndExecute';
 import Submit from '../../containers/Configuration/Submit';
 import TrustNode from '../../containers/Configuration/TrustNode';
-import Tooltip from '../../components/Tooltip/Tooltip';
 import './index.css';
 
 const Configuration = ({ history }) => {
