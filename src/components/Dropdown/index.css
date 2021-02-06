@@ -31,6 +31,10 @@
     color: #55678B;
 }
 
+.dropdown-menu {
+    background-color: #F6F8FB !important;
+}
+
 .dropdown-toggle .icon, .dropdown-item .icon {
     width: 22px;
     margin-right: 10px;

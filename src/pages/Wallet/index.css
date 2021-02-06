@@ -41,6 +41,11 @@
     z-index: 2;
 }
 
+.dashboard-side-bar-container .toggle-section img {
+    width: 14px;
+    height: 16px;
+}
+
 .top-info-section {
     display: flex;
     flex: 1;
@@ -107,6 +112,7 @@
     border: 1px solid #DCE9F1;
     color: #142D51;
     border-radius: 30px;
+    background: #F6F8FB;;
 }
 
 .wallet-tab .nav-tabs .nav-link {
@@ -122,7 +128,7 @@
 
 .filter-section {
     position: absolute;
-    right: 15px;
+    right: 30px;
     display: flex;
     align-items: center;
 }
@@ -167,6 +173,7 @@
 .middle-section .nav-tabs .nav-link.active,
 .middle-section .nav-tabs .nav-item.show .nav-link {
     border-bottom: 2px solid #109FEC;
+    background: #F6F8FB;;
 }
 
 .middle-section .tab-content {
@@ -266,6 +273,7 @@
 }
 
 .proposal-accordion {
+    background: #F6F8FB;
     border: 1px solid #DCE9F1;
     padding: 20px 15px;
 }
@@ -276,6 +284,14 @@
     line-height: 14px;
     color: #55678B;
     text-transform: none;
+}
+
+.proposal-accordion .accordion-header .flex-box button {
+    background: none !important;
+    border: 1.13577px solid #DCE9F1 !important;
+    font-weight: bold;
+    font-size: 12px;
+    color: #55678B !important;
 }
 
 .proposal-accordion .accordion-header .flex-item {
@@ -352,7 +368,12 @@
 }
 
 ::-webkit-scrollbar {
-    width: .5rem;
+    width: .4rem;
+    height: 5px;
+}
+
+.accordion-section {
+    padding-right: 10px;
 }
 
 .accordion-section .accordion {
@@ -439,6 +460,10 @@
         transform: rotate(180deg);
     }
 
+    .dashboard-side-bar-container.active .settings-dropdown .dropdown-toggle::after {
+        display: none;
+    }
+
     .dashboard-side-bar-container.active .list-group a, .dashboard-side-bar-container.active .settings-dropdown {
         padding: 25px 10px 25px 25px;
     }
@@ -512,6 +537,10 @@
     .dashboard-side-bar-container .list-group a, .dashboard-side-bar-container .settings-dropdown {
         padding: 25px 10px 20px 25px;
     }
+
+    .dashboard-side-bar-container .settings-dropdown .dropdown-toggle::after {
+        display: none;
+    }
 }
 
 @media (min-width: 1370px) {
@@ -529,6 +558,10 @@
     }
 
     .dashboard-side-bar-container .toggle-section {
+        display: none;
+    }
+
+    .dashboard-side-bar-container .settings-dropdown .dropdown-toggle::after {
         display: none;
     }
 }
