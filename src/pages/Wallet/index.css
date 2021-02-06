@@ -487,6 +487,14 @@
     color: #139EEE;
 }
 
+.success-modal .image-section {
+    text-align: center;
+}
+
+.success-modal .image-section img {
+    width: 100px;
+}
+
 @media (max-width: 767.98px) {
     .dashboard-side-bar-container {
         min-width: 80px;
