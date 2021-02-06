@@ -5,6 +5,7 @@ import {
     ACCOUNT_GET_IN_PROGRESS,
     ACCOUNT_GET_SUCCESS,
     ACCOUNT_GET_URL,
+    ACCOUNT_PASSWORD_SET,
 } from '../constants/account';
 
 export const getAccountInProgress = (data) => {
@@ -59,4 +60,11 @@ export const getAccount = (cb) => (dispatch, getState) => {
             next(null);
         },
     ], cb);
+};
+
+export const setAccountPassword = (data) => {
+    return {
+        type: ACCOUNT_PASSWORD_SET,
+        data,
+    };
 };

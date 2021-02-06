@@ -7,7 +7,7 @@ import TextBox from '../../components/TextBox';
 import Tooltip from '../../components/Tooltip/Tooltip';
 import BroadcastMode from '../../containers/Configuration/BroadcastMode';
 import ChainID from '../../containers/Configuration/ChainID';
-import Fee from '../../containers/Configuration/Fee';
+import Fee from '../../containers/Configuration/Fees';
 import Gas from '../../containers/Configuration/Gas';
 import GasAdjustment from '../../containers/Configuration/GasAdjustment';
 import GasPrices from '../../containers/Configuration/GasPrices';
@@ -34,7 +34,10 @@ const Configuration = ({ history }) => {
                                         className="label"
                                         label="Broadcast Mode"
                                     />
-                                    <Tooltip icon="tooltip" value="Help"/>
+                                    <Tooltip
+                                        icon="tooltip"
+                                        value="Help"
+                                    />
                                 </div>
                                 <BroadcastMode/>
                             </div>
@@ -44,7 +47,10 @@ const Configuration = ({ history }) => {
                                         className="label"
                                         label="Fee"
                                     />
-                                    <Tooltip icon="tooltip" value="Help"/>
+                                    <Tooltip
+                                        icon="tooltip"
+                                        value="Help"
+                                    />
                                 </div>
                                 <Fee/>
                             </div>
@@ -54,7 +60,10 @@ const Configuration = ({ history }) => {
                                         className="label"
                                         label="Gas"
                                     />
-                                    <Tooltip icon="tooltip" value="Help"/>
+                                    <Tooltip
+                                        icon="tooltip"
+                                        value="Help"
+                                    />
                                 </div>
                                 <Gas/>
                             </div>
@@ -64,7 +73,10 @@ const Configuration = ({ history }) => {
                                         className="label"
                                         label="Gas Adjustment"
                                     />
-                                    <Tooltip icon="tooltip" value="Help"/>
+                                    <Tooltip
+                                        icon="tooltip"
+                                        value="Help"
+                                    />
                                 </div>
                                 <GasAdjustment/>
                             </div>
@@ -72,9 +84,12 @@ const Configuration = ({ history }) => {
                                 <div className="label-icon">
                                     <Label
                                         className="label"
-                                        label="Gas Price"
+                                        label="Gas Prices"
                                     />
-                                    <Tooltip icon="tooltip" value="Help"/>
+                                    <Tooltip
+                                        icon="tooltip"
+                                        value="Help"
+                                    />
                                 </div>
                                 <GasPrices/>
                             </div>
@@ -86,7 +101,10 @@ const Configuration = ({ history }) => {
                                         className="label"
                                         label="Chain ID"
                                     />
-                                    <Tooltip icon="tooltip" value="Help"/>
+                                    <Tooltip
+                                        icon="tooltip"
+                                        value="Help"
+                                    />
                                 </div>
                                 <ChainID/>
                             </div>
@@ -96,7 +114,10 @@ const Configuration = ({ history }) => {
                                         className="label"
                                         label="Simulate And Execute"
                                     />
-                                    <Tooltip icon="tooltip" value="Help"/>
+                                    <Tooltip
+                                        icon="tooltip"
+                                        value="Help"
+                                    />
                                 </div>
                                 <SimulateAndExecute/>
                             </div>
@@ -106,7 +127,10 @@ const Configuration = ({ history }) => {
                                         className="label"
                                         label="Trust Node"
                                     />
-                                    <Tooltip icon="tooltip" value="Help"/>
+                                    <Tooltip
+                                        icon="tooltip"
+                                        value="Help"
+                                    />
                                 </div>
                                 <TrustNode/>
                             </div>
@@ -116,7 +140,10 @@ const Configuration = ({ history }) => {
                                         className="label"
                                         label="RPC Address"
                                     />
-                                    <Tooltip icon="tooltip" value="Help"/>
+                                    <Tooltip
+                                        icon="tooltip"
+                                        value="Help"
+                                    />
                                 </div>
                                 <RPCAddress/>
                             </div>

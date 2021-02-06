@@ -1,7 +1,7 @@
 import * as PropTypes from 'prop-types';
 import React from 'react';
-import { Dropdown } from 'react-bootstrap';
 import { connect } from 'react-redux';
+import Dropdown from '../../../components/Dropdown';
 import Icon from '../../../components/Icon';
 import Settings from './Settings';
 

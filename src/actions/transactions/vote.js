@@ -5,6 +5,8 @@ import {
     TX_VOTE_ID_SET,
     TX_VOTE_IN_PROGRESS,
     TX_VOTE_MEMO_SET,
+    TX_VOTE_MODAL_HIDE,
+    TX_VOTE_MODAL_SHOW,
     TX_VOTE_OPTION_SET,
     TX_VOTE_SUCCESS,
     TX_VOTE_URL,
@@ -77,4 +79,18 @@ export const txVote = (body, cb) => (dispatch, getState) => {
             next(null);
         },
     ], cb);
+};
+
+export const showTxVoteModal = (data) => {
+    return {
+        type: TX_VOTE_MODAL_SHOW,
+        data,
+    };
+};
+
+export const hideTxVoteModal = (data) => {
+    return {
+        type: TX_VOTE_MODAL_HIDE,
+        data,
+    };
 };

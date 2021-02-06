@@ -1,5 +1,5 @@
 import React from 'react';
-import TextBox from '../../../components/TextBox';
+import TextBox from '../../../../components/TextBox';
 
 const Description = () => {
     const Description = 'The purpose of this proposal is to restore access to geneis ATOMs for a subset of donors who have been active participants in our community through the last year.\n' +

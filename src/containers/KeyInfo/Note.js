@@ -1,7 +1,7 @@
 import React from 'react';
 import Checkbox from '../../components/Checkbox';
 
-const NoteCheckbox = () => {
+const Note = () => {
     return (
         <Checkbox
             className="custom-control-input"
@@ -9,4 +9,4 @@ const NoteCheckbox = () => {
     );
 };
 
-export default NoteCheckbox;
+export default Note;

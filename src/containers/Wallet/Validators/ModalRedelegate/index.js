@@ -1,5 +1,8 @@
+import * as PropTypes from 'prop-types';
 import React from 'react';
 import { Modal as ReactModal } from 'react-bootstrap';
+import { connect } from 'react-redux';
+import { hideTxRedelegateModal } from '../../../../actions/transactions/redelegate';
 import Label from '../../../../components/Label';
 import TextBox from '../../../../components/TextBox';
 import Amount from './Amount';
@@ -10,15 +13,16 @@ import Password from './Password';
 import Redelegate from './Redelegate';
 import ToAddress from './ToAddress';
 
-const RedelegateModal = () => {
+const ModalRedelegate = (props) => {
     return (
         <ReactModal
+            animation={false}
             backdrop="static"
             centered={true}
             className="Redelegate-modal"
             keyboard={false}
-            show={true}
-            onHide={false}>
+            show={props.show}
+            onHide={props.onHide}>
             <ReactModal.Header closeButton={true}>
                 <TextBox
                     className="modal-title"
@@ -66,4 +70,19 @@ const RedelegateModal = () => {
     );
 };
 
-export default RedelegateModal;
+ModalRedelegate.propTypes = {
+    show: PropTypes.bool.isRequired,
+    onHide: PropTypes.func.isRequired,
+};
+
+const stateToProps = (state) => {
+    return {
+        show: state.transactions.redelegate.modal,
+    };
+};
+
+const actionsToProps = {
+    onHide: hideTxRedelegateModal,
+};
+
+export default connect(stateToProps, actionsToProps)(ModalRedelegate);

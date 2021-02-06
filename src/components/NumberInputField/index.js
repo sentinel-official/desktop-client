@@ -6,6 +6,7 @@ import './index.css';
 
 const NumberInputField = ({
     className,
+    error,
     name,
     placeholder,
     required,
@@ -14,11 +15,12 @@ const NumberInputField = ({
     onChange,
     min,
 }) => {
-    const error = '';
+    const isError = error.message.length > 0;
+
     return (
         <>
             <input
-                className={error ? `error ${className}` : className}
+                className={isError ? `error ${className}` : className}
                 min={min}
                 name={name}
                 placeholder={placeholder}
@@ -28,20 +30,22 @@ const NumberInputField = ({
                 onChange={onChange}
             />
             <Icon
-                className={error ? 'error show' : 'error'}
+                className={isError ? 'error show' : 'error'}
                 icon="errorInfo"
             />
             <TextBox
                 className="error-message"
-                value="error"
+                value={error.message}
             />
         </>
-
     );
 };
 
 NumberInputField.propTypes = {
     className: PropTypes.string.isRequired,
+    error: PropTypes.shape({
+        message: PropTypes.string.isRequired,
+    }).isRequired,
     min: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
     placeholder: PropTypes.string.isRequired,

@@ -26,6 +26,7 @@ const Validators = () => {
             <Table
                 className="validators-table"
                 columns={columns}
+                items={columns}
                 rowComponent={Row}
             />
         </div>

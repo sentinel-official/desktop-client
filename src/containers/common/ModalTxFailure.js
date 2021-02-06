@@ -26,7 +26,7 @@ const ModalTxFailure = () => {
                         className="failure-image"
                         src={Failure}
                     />
-                < /div>
+                </div>
             </Modal.Body>
         </Modal>
     );

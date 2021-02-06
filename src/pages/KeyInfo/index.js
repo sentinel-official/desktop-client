@@ -4,13 +4,13 @@ import Sidebar from '../../components/Sidebar';
 import SocialIcons from '../../components/SocialIcons';
 import TextBox from '../../components/TextBox';
 import Address from '../../containers/KeyInfo/Address';
+import AddressCopy from '../../containers/KeyInfo/AddressCopy';
 import Continue from '../../containers/KeyInfo/Continue';
-import CopyAddress from '../../containers/KeyInfo/CopyAddress';
-import CopyPublicKey from '../../containers/KeyInfo/CopyPublicKey';
-import DownloadSeed from '../../containers/KeyInfo/DownloadSeed';
 import Seed from '../../containers/KeyInfo/Mnemonic';
-import NoteCheckbox from '../../containers/KeyInfo/NoteCheckbox';
+import MnemonicDownload from '../../containers/KeyInfo/MnemonicDownload';
+import Note from '../../containers/KeyInfo/Note';
 import PublicKey from '../../containers/KeyInfo/PublicKey';
+import PublicKeyCopy from '../../containers/KeyInfo/PublicKeyCopy';
 import './index.css';
 
 const KeyInfo = ({ history }) => {
@@ -31,7 +31,7 @@ const KeyInfo = ({ history }) => {
                                 className="label"
                                 value="ADDRESS"
                             />
-                            <CopyAddress/>
+                            <AddressCopy/>
                         </div>
                         <Address/>
                         <div className="label-icon">
@@ -39,7 +39,7 @@ const KeyInfo = ({ history }) => {
                                 className="label"
                                 value="PUBLIC KEY"
                             />
-                            <CopyPublicKey/>
+                            <PublicKeyCopy/>
                         </div>
                         <PublicKey/>
                         <div className="label-icon">
@@ -47,7 +47,7 @@ const KeyInfo = ({ history }) => {
                                 className="label"
                                 value="Seed"
                             />
-                            <DownloadSeed/>
+                            <MnemonicDownload/>
                         </div>
                         <Seed/>
                         <TextBox
@@ -58,7 +58,7 @@ const KeyInfo = ({ history }) => {
                             <div className="login-button flex-center">
                                 <div className="checkbox-section">
                                     <div className="custom-control custom-checkbox">
-                                        <NoteCheckbox/>
+                                        <Note/>
                                         <label className="custom-control-label" htmlFor="customCheck1">I have secured
                                             the seed safely</label>
                                     </div>

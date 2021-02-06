@@ -1,9 +1,6 @@
 import Async from 'async';
 import Axios from 'axios';
 import {
-    KEY_MNEMONIC_SET,
-    KEY_NAME_SET,
-    KEY_PASSWORD_SET,
     KEYS_GET_ERROR,
     KEYS_GET_IN_PROGRESS,
     KEYS_GET_SUCCESS,
@@ -12,6 +9,9 @@ import {
     KEYS_POST_IN_PROGRESS,
     KEYS_POST_SUCCESS,
     KEYS_POST_URL,
+    KEY_MNEMONIC_SET,
+    KEY_NAME_SET,
+    KEY_PASSWORD_SET,
 } from '../constants/keys';
 
 export const getKeysInProgress = (data) => {

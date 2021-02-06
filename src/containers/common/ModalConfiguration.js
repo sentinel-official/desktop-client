@@ -1,11 +1,14 @@
+import * as PropTypes from 'prop-types';
 import React from 'react';
 import { Modal } from 'react-bootstrap';
+import { connect } from 'react-redux';
+import { hideConfigurationModal } from '../../actions/configuration';
 import Label from '../../components/Label';
 import TextBox from '../../components/TextBox';
 import Tooltip from '../../components/Tooltip/Tooltip';
 import BroadcastMode from '../Configuration/BroadcastMode';
 import ChainID from '../Configuration/ChainID';
-import Fee from '../Configuration/Fee';
+import Fee from '../Configuration/Fees';
 import Gas from '../Configuration/Gas';
 import GasAdjustment from '../Configuration/GasAdjustment';
 import GasPrices from '../Configuration/GasPrices';
@@ -14,14 +17,15 @@ import SimulateAndExecute from '../Configuration/SimulateAndExecute';
 import Submit from '../Configuration/Submit';
 import TrustNode from '../Configuration/TrustNode';
 
-const ModalSettings = () => {
+const ModalConfiguration = (props) => {
     return (
         <Modal
+            animation={false}
             backdrop="static"
             centered={true}
             keyboard={false}
-            show={true}
-            onHide={false}>
+            show={props.show}
+            onHide={props.onHide}>
             <Modal.Header closeButton={true}>
                 <TextBox
                     className="modal-title"
@@ -37,7 +41,10 @@ const ModalSettings = () => {
                                     className="label"
                                     label="Broadcast Mode"
                                 />
-                                <Tooltip icon="tooltip" value="Help"/>
+                                <Tooltip
+                                    icon="tooltip"
+                                    value="Help"
+                                />
                             </div>
                             <BroadcastMode/>
                         </div>
@@ -47,7 +54,10 @@ const ModalSettings = () => {
                                     className="label"
                                     label="Fee"
                                 />
-                                <Tooltip icon="tooltip" value="Help"/>
+                                <Tooltip
+                                    icon="tooltip"
+                                    value="Help"
+                                />
                             </div>
                             <Fee/>
                         </div>
@@ -57,7 +67,10 @@ const ModalSettings = () => {
                                     className="label"
                                     label="Gas"
                                 />
-                                <Tooltip icon="tooltip" value="Help"/>
+                                <Tooltip
+                                    icon="tooltip"
+                                    value="Help"
+                                />
                             </div>
                             <Gas/>
                         </div>
@@ -67,7 +80,10 @@ const ModalSettings = () => {
                                     className="label"
                                     label="Gas Adjustment"
                                 />
-                                <Tooltip icon="tooltip" value="Help"/>
+                                <Tooltip
+                                    icon="tooltip"
+                                    value="Help"
+                                />
                             </div>
                             <GasAdjustment/>
                         </div>
@@ -75,9 +91,12 @@ const ModalSettings = () => {
                             <div className="label-icon">
                                 <Label
                                     className="label"
-                                    label="Gas Price"
+                                    label="Gas Prices"
                                 />
-                                <Tooltip icon="tooltip" value="Help"/>
+                                <Tooltip
+                                    icon="tooltip"
+                                    value="Help"
+                                />
                             </div>
                             <GasPrices/>
                         </div>
@@ -89,7 +108,10 @@ const ModalSettings = () => {
                                     className="label"
                                     label="Chain ID"
                                 />
-                                <Tooltip icon="tooltip" value="Help"/>
+                                <Tooltip
+                                    icon="tooltip"
+                                    value="Help"
+                                />
                             </div>
                             <ChainID/>
                         </div>
@@ -99,7 +121,10 @@ const ModalSettings = () => {
                                     className="label"
                                     label="Simulate And Execute"
                                 />
-                                <Tooltip icon="tooltip" value="Help"/>
+                                <Tooltip
+                                    icon="tooltip"
+                                    value="Help"
+                                />
                             </div>
                             <SimulateAndExecute/>
                         </div>
@@ -109,7 +134,10 @@ const ModalSettings = () => {
                                     className="label"
                                     label="Trust Node"
                                 />
-                                <Tooltip icon="tooltip" value="Help"/>
+                                <Tooltip
+                                    icon="tooltip"
+                                    value="Help"
+                                />
                             </div>
                             <TrustNode/>
                         </div>
@@ -119,7 +147,10 @@ const ModalSettings = () => {
                                     className="label"
                                     label="RPC Address"
                                 />
-                                <Tooltip icon="tooltip" value="Help"/>
+                                <Tooltip
+                                    icon="tooltip"
+                                    value="Help"
+                                />
                             </div>
                             <RPCAddress/>
                         </div>
@@ -131,4 +162,19 @@ const ModalSettings = () => {
     );
 };
 
-export default ModalSettings;
+ModalConfiguration.propTypes = {
+    show: PropTypes.bool.isRequired,
+    onHide: PropTypes.func.isRequired,
+};
+
+const stateToProps = (state) => {
+    return {
+        show: state.configuration.modal,
+    };
+};
+
+const actionsToProps = {
+    onHide: hideConfigurationModal,
+};
+
+export default connect(stateToProps, actionsToProps)(ModalConfiguration);

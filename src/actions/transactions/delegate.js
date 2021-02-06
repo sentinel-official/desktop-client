@@ -5,6 +5,8 @@ import {
     TX_DELEGATE_ERROR,
     TX_DELEGATE_IN_PROGRESS,
     TX_DELEGATE_MEMO_SET,
+    TX_DELEGATE_MODAL_HIDE,
+    TX_DELEGATE_MODAL_SHOW,
     TX_DELEGATE_SUCCESS,
     TX_DELEGATE_TO_SET,
     TX_DELEGATE_URL,
@@ -77,4 +79,18 @@ export const txDelegate = (body, cb) => (dispatch, getState) => {
             next(null);
         },
     ], cb);
+};
+
+export const showTxDelegateModal = (data) => {
+    return {
+        type: TX_DELEGATE_MODAL_SHOW,
+        data,
+    };
+};
+
+export const hideTxDelegateModal = (data) => {
+    return {
+        type: TX_DELEGATE_MODAL_HIDE,
+        data,
+    };
 };

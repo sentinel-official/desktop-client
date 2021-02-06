@@ -19,24 +19,30 @@ const Password = (props) => {
     return (
         <TextInputField
             className="form-control"
+            error={props.input.error}
             name="Password"
             placeholder="Enter Password"
             required={true}
             type="password"
-            value={props.value}
+            value={props.input.value}
             onChange={onChange}
         />
     );
 };
 
 Password.propTypes = {
-    value: PropTypes.string.isRequired,
+    input: PropTypes.shape({
+        value: PropTypes.string.isRequired,
+        error: PropTypes.shape({
+            message: PropTypes.string.isRequired,
+        }).isRequired,
+    }).isRequired,
     onChange: PropTypes.func.isRequired,
 };
 
 const stateToProps = (state) => {
     return {
-        value: state.authentication.password.value,
+        input: state.authentication.password,
     };
 };
 

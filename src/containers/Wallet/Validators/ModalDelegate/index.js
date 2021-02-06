@@ -1,5 +1,8 @@
+import * as PropTypes from 'prop-types';
 import React from 'react';
 import { Modal as ReactModal } from 'react-bootstrap';
+import { connect } from 'react-redux';
+import { hideTxDelegateModal } from '../../../../actions/transactions/delegate';
 import Label from '../../../../components/Label';
 import TextBox from '../../../../components/TextBox';
 import Amount from './Amount';
@@ -9,15 +12,16 @@ import Password from './Password';
 import ToAddress from './ToAddress';
 import ToName from './ToName';
 
-const Modal = () => {
+const ModalDelegate = (props) => {
     return (
         <ReactModal
+            animation={false}
             backdrop="static"
             centered={true}
             className="withdraw-modal"
             keyboard={false}
-            show={true}
-            onHide={false}>
+            show={props.show}
+            onHide={props.onHide}>
             <ReactModal.Header closeButton={true}>
                 <TextBox
                     className="modal-title"
@@ -59,4 +63,19 @@ const Modal = () => {
     );
 };
 
-export default Modal;
+ModalDelegate.propTypes = {
+    show: PropTypes.bool.isRequired,
+    onHide: PropTypes.func.isRequired,
+};
+
+const stateToProps = (state) => {
+    return {
+        show: state.transactions.delegate.modal,
+    };
+};
+
+const actionsToProps = {
+    onHide: hideTxDelegateModal,
+};
+
+export default connect(stateToProps, actionsToProps)(ModalDelegate);

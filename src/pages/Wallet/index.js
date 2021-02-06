@@ -6,7 +6,7 @@ import Icon from '../../components/Icon';
 import Image from '../../components/Image';
 import Label from '../../components/Label';
 import TextBox from '../../components/TextBox';
-import CopyAddress from '../../containers/KeyInfo/CopyAddress';
+import CopyAddress from '../../containers/KeyInfo/AddressCopy';
 import Sidebar from '../../containers/Sidebar';
 import Keys from '../../containers/Wallet/Keys';
 import Proposals from '../../containers/Wallet/Proposals';
@@ -16,11 +16,11 @@ import Amount from '../../containers/Wallet/Send/Amount';
 import Send from '../../containers/Wallet/Send/Send';
 import DepositAddress from '../../containers/Wallet/Send/To';
 import Tokens from '../../containers/Wallet/Tokens';
+import Validators from '../../containers/Wallet/Validators';
 import Actions from '../../containers/Wallet/Validators/Actions';
-import Validators from '../../containers/Wallet/Validators/Validators';
-import ValidatorState from '../../containers/Wallet/Validators/ValidatorState';
+import Status from '../../containers/Wallet/Validators/Status';
 import WithDrawValidators from '../../containers/Wallet/Withdraw/Validators';
-import WithDraw from '../../containers/Wallet/Withdraw/WithDraw';
+import WithDraw from '../../containers/Wallet/Withdraw/Withdraw';
 import './index.css';
 
 const toggleClass = () => {
@@ -122,7 +122,7 @@ const Wallet = () => {
                     </div>
                     <div className="wallet-tab col-md-8">
                         <div className="filter-section">
-                            <ValidatorState/>
+                            <Status/>
                             <Actions/>
                         </div>
                         <Tabs defaultActiveKey="Validators" id="uncontrolled-tab-example">

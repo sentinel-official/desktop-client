@@ -1,5 +1,5 @@
 import React from 'react';
-import TextBox from '../../../components/TextBox';
+import TextBox from '../../../../components/TextBox';
 
 const InitialDeposit = () => {
     return (

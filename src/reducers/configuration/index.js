@@ -1,6 +1,8 @@
 import { combineReducers } from 'redux';
 import {
     CONFIGURATION_GET_SUCCESS,
+    CONFIGURATION_MODAL_HIDE,
+    CONFIGURATION_MODAL_SHOW,
     CONFIGURATION_PUT_SUCCESS,
     CONFIGURATION_SETUP_SET,
 } from '../../constants/configuration';
@@ -38,8 +40,22 @@ const setup = (state = {
     }
 };
 
+const modal = (state = false, {
+    type,
+}) => {
+    switch (type) {
+    case CONFIGURATION_MODAL_SHOW:
+        return true;
+    case CONFIGURATION_MODAL_HIDE:
+        return false;
+    default:
+        return state;
+    }
+};
+
 export default combineReducers({
     setup,
+    modal,
     chain,
     get,
     put,

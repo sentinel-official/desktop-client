@@ -2,11 +2,11 @@ export const ValidateBroadcastMode = (value) => {
     return new Error('');
 };
 
-export const ValidateChainID = (value) => {
+export const ValidateID = (value) => {
     return new Error('');
 };
 
-export const ValidateFee = (value) => {
+export const ValidateFees = (value) => {
     return new Error('');
 };
 

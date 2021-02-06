@@ -3,30 +3,52 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { putConfiguration } from '../../actions/configuration';
 import Button from '../../components/Button';
+import {
+    ValidateBroadcastMode,
+    ValidateFees,
+    ValidateGas,
+    ValidateGasAdjustment,
+    ValidateGasPrices,
+    ValidateID,
+    ValidateRPCAddress,
+    ValidateSimulateAndExecute,
+    ValidateTrustNode,
+} from './_validation';
 
 const Submit = (props) => {
     const onClick = () => {
         props.onClick({
             chain: {
-                broadcast_mode: props.chain.broadcastMode.trim(),
-                fees: props.chain.fees.trim(),
-                gas_adjustment: props.chain.gasAdjustment,
-                gas_prices: props.chain.gasPrices.trim(),
-                gas: props.chain.gas,
-                id: props.chain.id.trim(),
-                rpc_address: props.chain.RPCAddress.trim(),
-                simulate_and_execute: props.chain.simulateAndExecute,
-                trust_node: props.chain.trustNode,
+                broadcast_mode: props.chain.broadcastMode.value.trim(),
+                fees: props.chain.fees.value.trim(),
+                gas_adjustment: props.chain.gasAdjustment.value,
+                gas_prices: props.chain.gasPrices.value.trim(),
+                gas: props.chain.gas.value,
+                id: props.chain.id.value.trim(),
+                rpc_address: props.chain.RPCAddress.value.trim(),
+                simulate_and_execute: props.chain.simulateAndExecute.value,
+                trust_node: props.chain.trustNode.value,
             },
             setup: false,
-        }, props.history, () => {
-        });
+        }, props.history, () => ({}));
     };
+
+    const disabled = (
+        ValidateBroadcastMode(props.chain.broadcastMode.value).message !== '' ||
+        ValidateFees(props.chain.fees.value).message !== '' ||
+        ValidateGasAdjustment(props.chain.gasAdjustment.value).message !== '' ||
+        ValidateGasPrices(props.chain.gasPrices.value).message !== '' ||
+        ValidateGas(props.chain.gas.value).message !== '' ||
+        ValidateID(props.chain.id.value).message !== '' ||
+        ValidateRPCAddress(props.chain.RPCAddress.value).message !== '' ||
+        ValidateSimulateAndExecute(props.chain.simulateAndExecute.value).message !== '' ||
+        ValidateTrustNode(props.chain.trustNode.value).message !== ''
+    );
 
     return (
         <Button
             className="btn button-primary"
-            disabled={false}
+            disabled={disabled}
             inProgress={props.inProgress}
             type="button"
             value="Save"
@@ -37,15 +59,60 @@ const Submit = (props) => {
 
 Submit.propTypes = {
     chain: PropTypes.shape({
-        broadcastMode: PropTypes.string.isRequired,
-        fees: PropTypes.string.isRequired,
-        gasAdjustment: PropTypes.number.isRequired,
-        gasPrices: PropTypes.string.isRequired,
-        gas: PropTypes.number.isRequired,
-        id: PropTypes.string.isRequired,
-        RPCAddress: PropTypes.string.isRequired,
-        simulateAndExecute: PropTypes.bool.isRequired,
-        trustNode: PropTypes.bool.isRequired,
+        broadcastMode: PropTypes.shape({
+            value: PropTypes.string.isRequired,
+            error: PropTypes.shape({
+                message: PropTypes.string.isRequired,
+            }).isRequired,
+        }).isRequired,
+        fees: PropTypes.shape({
+            value: PropTypes.string.isRequired,
+            error: PropTypes.shape({
+                message: PropTypes.string.isRequired,
+            }).isRequired,
+        }).isRequired,
+        gasAdjustment: PropTypes.shape({
+            value: PropTypes.number.isRequired,
+            error: PropTypes.shape({
+                message: PropTypes.string.isRequired,
+            }).isRequired,
+        }).isRequired,
+        gasPrices: PropTypes.shape({
+            value: PropTypes.string.isRequired,
+            error: PropTypes.shape({
+                message: PropTypes.string.isRequired,
+            }).isRequired,
+        }).isRequired,
+        gas: PropTypes.shape({
+            value: PropTypes.number.isRequired,
+            error: PropTypes.shape({
+                message: PropTypes.string.isRequired,
+            }).isRequired,
+        }).isRequired,
+        id: PropTypes.shape({
+            value: PropTypes.string.isRequired,
+            error: PropTypes.shape({
+                message: PropTypes.string.isRequired,
+            }).isRequired,
+        }).isRequired,
+        RPCAddress: PropTypes.shape({
+            value: PropTypes.string.isRequired,
+            error: PropTypes.shape({
+                message: PropTypes.string.isRequired,
+            }).isRequired,
+        }).isRequired,
+        simulateAndExecute: PropTypes.shape({
+            value: PropTypes.bool.isRequired,
+            error: PropTypes.shape({
+                message: PropTypes.string.isRequired,
+            }).isRequired,
+        }).isRequired,
+        trustNode: PropTypes.shape({
+            value: PropTypes.bool.isRequired,
+            error: PropTypes.shape({
+                message: PropTypes.string.isRequired,
+            }).isRequired,
+        }).isRequired,
     }).isRequired,
     history: PropTypes.shape({
         push: PropTypes.func.isRequired,
@@ -57,15 +124,15 @@ Submit.propTypes = {
 const stateToProps = (state) => {
     return {
         chain: {
-            broadcastMode: state.configuration.chain.broadcastMode.value,
-            fees: state.configuration.chain.fees.value,
-            gasAdjustment: state.configuration.chain.gasAdjustment.value,
-            gasPrices: state.configuration.chain.gasPrices.value,
-            gas: state.configuration.chain.gas.value,
-            id: state.configuration.chain.id.value,
-            RPCAddress: state.configuration.chain.RPCAddress.value,
-            simulateAndExecute: state.configuration.chain.simulateAndExecute.value,
-            trustNode: state.configuration.chain.trustNode.value,
+            broadcastMode: state.configuration.chain.broadcastMode,
+            fees: state.configuration.chain.fees,
+            gasAdjustment: state.configuration.chain.gasAdjustment,
+            gasPrices: state.configuration.chain.gasPrices,
+            gas: state.configuration.chain.gas,
+            id: state.configuration.chain.id,
+            RPCAddress: state.configuration.chain.RPCAddress,
+            simulateAndExecute: state.configuration.chain.simulateAndExecute,
+            trustNode: state.configuration.chain.trustNode,
         },
         inProgress: state.configuration.put.inProgress,
     };

@@ -5,6 +5,8 @@ import {
     TX_SEND_ERROR,
     TX_SEND_IN_PROGRESS,
     TX_SEND_MEMO_SET,
+    TX_SEND_MODAL_HIDE,
+    TX_SEND_MODAL_SHOW,
     TX_SEND_SUCCESS,
     TX_SEND_TO_SET,
     TX_SEND_URL,
@@ -77,4 +79,18 @@ export const txSend = (body, cb) => (dispatch, getState) => {
             next(null);
         },
     ], cb);
+};
+
+export const showTxSendModal = (data) => {
+    return {
+        type: TX_SEND_MODAL_SHOW,
+        data,
+    };
+};
+
+export const hideTxSendModal = (data) => {
+    return {
+        type: TX_SEND_MODAL_HIDE,
+        data,
+    };
 };

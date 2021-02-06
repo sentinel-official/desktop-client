@@ -8,24 +8,24 @@ import { ValidateBroadcastMode } from './_validation';
 const options = [
     {
         key: 'block',
-        option: 'block',
-        value: 'Block',
+        value: 'block',
+        label: 'Block',
     },
     {
         key: 'sync',
-        option: 'sync',
-        value: 'Sync',
+        value: 'sync',
+        label: 'Sync',
     },
     {
         key: 'async',
-        option: 'async',
-        value: 'Async',
+        value: 'async',
+        label: 'Async',
     },
 ];
 
 const BroadcastMode = (props) => {
     const onClick = (value) => {
-        if (props.value === value) {
+        if (props.input.value === value) {
             return;
         }
 
@@ -44,10 +44,10 @@ const BroadcastMode = (props) => {
                     return (
                         <ChipButton
                             key={item.key}
-                            className={props.value === item.option ? 'selected' : 'primary'}
+                            className={props.input.value === item.value ? 'selected' : 'primary'}
+                            label={item.label}
                             type="button"
-                            value={item.value}
-                            onClick={() => onClick(item.option)}
+                            onClick={() => onClick(item.value)}
                         />
                     );
                 })
@@ -57,13 +57,18 @@ const BroadcastMode = (props) => {
 };
 
 BroadcastMode.propTypes = {
-    value: PropTypes.string.isRequired,
+    input: PropTypes.shape({
+        value: PropTypes.string.isRequired,
+        error: PropTypes.shape({
+            message: PropTypes.string.isRequired,
+        }).isRequired,
+    }).isRequired,
     onClick: PropTypes.func.isRequired,
 };
 
 const stateToProps = (state) => {
     return {
-        value: state.configuration.chain.broadcastMode.value,
+        input: state.configuration.chain.broadcastMode,
     };
 };
 

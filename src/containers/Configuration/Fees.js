@@ -3,16 +3,16 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { setConfigurationChainFees } from '../../actions/configuration';
 import TextInputField from '../../components/TextInputField';
-import { ValidateFee } from './_validation';
+import { ValidateFees } from './_validation';
 
-const Fee = (props) => {
+const Fees = (props) => {
     const onChange = (event) => {
         const value = event.target.value.toString();
 
         props.onChange({
             value,
             error: {
-                message: ValidateFee(value).message,
+                message: ValidateFees(value).message,
             },
         });
     };
@@ -20,24 +20,30 @@ const Fee = (props) => {
     return (
         <TextInputField
             className="form-control"
+            error={props.input.error}
             name="Fee"
             placeholder="Enter Fee"
             required={true}
             type="text"
-            value={props.value}
+            value={props.input.value}
             onChange={onChange}
         />
     );
 };
 
-Fee.propTypes = {
-    value: PropTypes.string.isRequired,
+Fees.propTypes = {
+    input: PropTypes.shape({
+        value: PropTypes.string.isRequired,
+        error: PropTypes.shape({
+            message: PropTypes.string.isRequired,
+        }).isRequired,
+    }).isRequired,
     onChange: PropTypes.func.isRequired,
 };
 
 const stateToProps = (state) => {
     return {
-        value: state.configuration.chain.fees.value,
+        input: state.configuration.chain.fees,
     };
 };
 
@@ -45,4 +51,4 @@ const actionsToProps = {
     onChange: setConfigurationChainFees,
 };
 
-export default connect(stateToProps, actionsToProps)(Fee);
+export default connect(stateToProps, actionsToProps)(Fees);

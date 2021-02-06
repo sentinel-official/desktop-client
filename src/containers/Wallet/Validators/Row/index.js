@@ -1,6 +1,6 @@
 import React from 'react';
-import Logo from '../../../assets/Logo.svg';
-import Image from '../../../components/Image';
+import Logo from '../../../../assets/Logo.svg';
+import Image from '../../../../components/Image';
 
 const Row = (item, index) => {
     return (
@@ -11,7 +11,7 @@ const Row = (item, index) => {
                     className="moniker-image"
                     src={Logo}
                 />
-                {item}
+                {item.label}
             </td>
             <td>
                 1,190,255 (6.62%)
@@ -31,5 +31,7 @@ const Row = (item, index) => {
         </tr>
     );
 };
+
+Row.propTypes = {};
 
 export default Row;

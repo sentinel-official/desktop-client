@@ -2,9 +2,9 @@ import React from 'react';
 import { Modal } from 'react-bootstrap';
 import Label from '../../../components/Label';
 import TextBox from '../../../components/TextBox';
-import ButtonWithVeto from '../../../containers/Wallet/Proposals/ButtonWithVeto';
 import Memo from '../../../containers/Wallet/Proposals/NoWithVeto/Modal/Memo';
 import Password from '../../../containers/Wallet/Proposals/NoWithVeto/Modal/Password';
+import ButtonNoWithVeto from '../../../containers/Wallet/Proposals/Row/ButtonNoWithVeto';
 
 const WithVetoModal = () => {
     return (
@@ -26,7 +26,7 @@ const WithVetoModal = () => {
                     <Label className="" label="Password"/>
                     <Password/>
                 </div>
-                <ButtonWithVeto/>
+                <ButtonNoWithVeto/>
             </Modal.Body>
         </Modal>
     );

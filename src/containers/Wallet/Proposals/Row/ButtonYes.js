@@ -1,7 +1,7 @@
 import React from 'react';
-import Button from '../../../components/Button';
+import Button from '../../../../components/Button';
 
-const ButtonAbstain = () => {
+const ButtonYes = () => {
     const onClick = () => {
 
     };
@@ -11,12 +11,11 @@ const ButtonAbstain = () => {
             className="btn button-primary accordion-button"
             disabled={false}
             inProgress={false}
-            loading={false}
             type="button"
-            value="Abstain"
+            value="Yes"
             onClick={onClick}
         />
     );
 };
 
-export default ButtonAbstain;
+export default ButtonYes;

@@ -1,11 +1,11 @@
 import * as PropTypes from 'prop-types';
 import React from 'react';
 import { Accordion } from 'react-bootstrap';
-import Label from '../../../components/Label';
-import TextBox from '../../../components/TextBox';
+import Label from '../../../../components/Label';
+import TextBox from '../../../../components/TextBox';
 import ButtonAbstain from './ButtonAbstain';
 import ButtonNo from './ButtonNo';
-import ButtonWithVeto from './ButtonWithVeto';
+import ButtonNoWithVeto from './ButtonNoWithVeto';
 import ButtonYes from './ButtonYes';
 import DepositEnd from './DepositEnd';
 import Description from './Description';
@@ -101,7 +101,7 @@ const Row = (props) => {
                             <ButtonYes/>
                             <ButtonNo/>
                             <ButtonAbstain/>
-                            <ButtonWithVeto/>
+                            <ButtonNoWithVeto/>
                         </div>
                     </div>
                 </Accordion.Collapse>

@@ -2,9 +2,9 @@ import React from 'react';
 import { Modal } from 'react-bootstrap';
 import Label from '../../../components/Label';
 import TextBox from '../../../components/TextBox';
-import ButtonNo from '../../../containers/Wallet/Proposals/ButtonNo';
 import Memo from '../../../containers/Wallet/Proposals/No/Popup/Memo';
 import Password from '../../../containers/Wallet/Proposals/No/Popup/Password';
+import ButtonNo from '../../../containers/Wallet/Proposals/Row/ButtonNo';
 
 const VoteNoModal = () => {
     return (

@@ -6,6 +6,7 @@ import './index.css';
 
 const TextArea = ({
     className,
+    error,
     name,
     placeholder,
     required,
@@ -13,11 +14,12 @@ const TextArea = ({
     value,
     onChange,
 }) => {
-    const error = '';
+    const isError = error.message.length > 0;
+
     return (
         <>
             <textarea
-                className={error ? `error ${className}` : className}
+                className={isError ? `error ${className}` : className}
                 name={name}
                 placeholder={placeholder}
                 required={required}
@@ -26,12 +28,12 @@ const TextArea = ({
                 onChange={onChange}
             />
             <Icon
-                className={error ? 'error show' : 'error'}
+                className={isError ? 'error show' : 'error'}
                 icon="errorInfo"
             />
             <TextBox
                 className="error-message"
-                value="error"
+                value={error.message}
             />
         </>
 
@@ -40,6 +42,9 @@ const TextArea = ({
 
 TextArea.propTypes = {
     className: PropTypes.string.isRequired,
+    error: PropTypes.shape({
+        message: PropTypes.string.isRequired,
+    }).isRequired,
     name: PropTypes.string.isRequired,
     placeholder: PropTypes.string.isRequired,
     required: PropTypes.bool.isRequired,

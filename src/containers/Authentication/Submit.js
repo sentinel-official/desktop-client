@@ -3,16 +3,16 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { postAuthentication } from '../../actions/authentication';
 import Button from '../../components/Button';
+import { ValidatePassword } from './_validation';
 
 const Submit = (props) => {
     const onClick = () => {
         props.onClick({
-            password: props.password.trim(),
-        }, props.history, () => {
-        });
+            password: props.password.value.trim(),
+        }, props.history, () => ({}));
     };
 
-    const disabled = props.password === '';
+    const disabled = ValidatePassword(props.password.value).message !== '';
 
     return (
         <Button
@@ -30,14 +30,19 @@ Submit.propTypes = {
         push: PropTypes.func.isRequired,
     }).isRequired,
     inProgress: PropTypes.bool.isRequired,
-    password: PropTypes.string.isRequired,
+    password: PropTypes.shape({
+        value: PropTypes.string.isRequired,
+        error: PropTypes.shape({
+            message: PropTypes.string.isRequired,
+        }).isRequired,
+    }).isRequired,
     onClick: PropTypes.func.isRequired,
 };
 
 const stateToProps = (state) => {
     return {
         inProgress: state.authentication.inProgress,
-        password: state.authentication.password.value,
+        password: state.authentication.password,
     };
 };
 

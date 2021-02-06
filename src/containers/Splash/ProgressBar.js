@@ -3,21 +3,20 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { setSplashCompleted } from '../../actions/splash';
 import ReactProgressBar from '../../components/ProgressBar';
-
-const timeout = 1000;
+import { SPLASH_TIMEOUT } from '../../constants/splash';
 
 const ProgressBar = (props) => {
     useEffect(() => {
         if (props.completed >= 100) {
             setTimeout(() => {
                 props.history.push('/authentication');
-            }, timeout);
+            }, SPLASH_TIMEOUT);
             return;
         }
 
         setTimeout(() => {
             props.setCompleted(props.completed + 50);
-        }, timeout);
+        }, SPLASH_TIMEOUT);
     });
 
     return (

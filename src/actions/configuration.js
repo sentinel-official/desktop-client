@@ -14,6 +14,8 @@ import {
     CONFIGURATION_GET_IN_PROGRESS,
     CONFIGURATION_GET_SUCCESS,
     CONFIGURATION_GET_URL,
+    CONFIGURATION_MODAL_HIDE,
+    CONFIGURATION_MODAL_SHOW,
     CONFIGURATION_PUT_ERROR,
     CONFIGURATION_PUT_IN_PROGRESS,
     CONFIGURATION_PUT_SUCCESS,
@@ -209,4 +211,18 @@ export const putConfiguration = (body, history, cb) => (dispatch, getState) => {
             getKeys(history, next)(dispatch, getState);
         },
     ], cb);
+};
+
+export const showConfigurationModal = (data) => {
+    return {
+        type: CONFIGURATION_MODAL_SHOW,
+        data,
+    };
+};
+
+export const hideConfigurationModal = (data) => {
+    return {
+        type: CONFIGURATION_MODAL_HIDE,
+        data,
+    };
 };

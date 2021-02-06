@@ -1,9 +1,9 @@
+import * as PropTypes from 'prop-types';
 import React from 'react';
-import Button from '../../../components/Button';
+import Button from '../../../../components/Button';
 
-const ButtonWithVeto = () => {
+const ButtonNoWithVeto = (props) => {
     const onClick = () => {
-
     };
 
     return (
@@ -11,7 +11,6 @@ const ButtonWithVeto = () => {
             className="btn button-primary accordion-button"
             disabled={false}
             inProgress={false}
-            loading={false}
             type="button"
             value="NoWithVeto"
             onClick={onClick}
@@ -19,4 +18,9 @@ const ButtonWithVeto = () => {
     );
 };
 
-export default ButtonWithVeto;
+ButtonNoWithVeto.propTypes = {
+    inProgress: PropTypes.bool.isRequired,
+    onClick: PropTypes.func.isRequired,
+};
+
+export default ButtonNoWithVeto;

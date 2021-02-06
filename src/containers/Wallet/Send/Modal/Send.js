@@ -1,16 +1,20 @@
+import * as PropTypes from 'prop-types';
 import React from 'react';
+import { connect } from 'react-redux';
+import { txSend } from '../../../../actions/transactions/send';
 import Button from '../../../../components/Button';
 
-const Send = () => {
+const Send = (props) => {
     const onClick = () => {
     };
+
+    const disabled = false;
 
     return (
         <Button
             className="btn button-primary button-large"
-            disabled={false}
-            inProgress={false}
-            loading={false}
+            disabled={disabled}
+            inProgress={props.inProgress}
             type="button"
             value="Send"
             onClick={onClick}
@@ -18,4 +22,19 @@ const Send = () => {
     );
 };
 
-export default Send;
+Send.propTypes = {
+    inProgress: PropTypes.bool.isRequired,
+    onClick: PropTypes.func.isRequired,
+};
+
+const stateToProps = (state) => {
+    return {
+        inProgress: state.transactions.send.inProgress,
+    };
+};
+
+const actionsToProps = {
+    onClick: txSend,
+};
+
+export default connect(stateToProps, actionsToProps)(Send);

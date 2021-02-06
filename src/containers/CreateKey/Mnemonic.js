@@ -19,24 +19,30 @@ const Mnemonic = (props) => {
     return (
         <TextArea
             className="form-control seed-text-field"
+            error={props.input.error}
             name="mnemonic"
             placeholder="Enter Mnemonic"
             required={true}
             rows={3}
-            value={props.value}
+            value={props.input.value}
             onChange={onChange}
         />
     );
 };
 
 Mnemonic.propTypes = {
-    value: PropTypes.string.isRequired,
+    input: PropTypes.shape({
+        value: PropTypes.number.isRequired,
+        error: PropTypes.shape({
+            message: PropTypes.string.isRequired,
+        }).isRequired,
+    }).isRequired,
     onChange: PropTypes.func.isRequired,
 };
 
 const stateToProps = (state) => {
     return {
-        value: state.keys.post.mnemonic.value,
+        input: state.keys.post.mnemonic,
     };
 };
 

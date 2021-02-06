@@ -2,9 +2,9 @@ import React from 'react';
 import { Modal } from 'react-bootstrap';
 import Label from '../../../components/Label';
 import TextBox from '../../../components/TextBox';
-import ButtonAbstain from '../../../containers/Wallet/Proposals/ButtonAbstain';
 import Memo from '../../../containers/Wallet/Proposals/Modal/Memo';
 import Password from '../../../containers/Wallet/Proposals/Modal/Password';
+import ButtonAbstain from '../../../containers/Wallet/Proposals/Row/ButtonAbstain';
 
 const AbstainModal = () => {
     return (

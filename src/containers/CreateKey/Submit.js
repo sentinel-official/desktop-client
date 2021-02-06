@@ -3,21 +3,27 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { postKeys } from '../../actions/keys';
 import Button from '../../components/Button';
+import { ValidateMnemonic, ValidateName, ValidatePassword } from './_validation';
 
 const Submit = (props) => {
     const onClick = () => {
         props.onClick({
-            mnemonic: props.mnemonic.trim(),
-            name: props.name.trim(),
-            password: props.password.trim(),
-        }, props.history, () => {
-        });
+            mnemonic: props.mnemonic.value.trim(),
+            name: props.name.value.trim(),
+            password: props.password.value.trim(),
+        }, props.history, () => ({}));
     };
+
+    const disabled = (
+        ValidateMnemonic(props.mnemonic.value).message !== '' ||
+        ValidateName(props.name.value).message !== '' ||
+        ValidatePassword(props.password.value).message !== ''
+    );
 
     return (
         <Button
             className="btn button-primary"
-            disabled={false}
+            disabled={disabled}
             inProgress={props.inProgress}
             type="button"
             value="Create"
@@ -31,17 +37,32 @@ Submit.propTypes = {
         push: PropTypes.func.isRequired,
     }).isRequired,
     inProgress: PropTypes.bool.isRequired,
-    mnemonic: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    password: PropTypes.string.isRequired,
+    mnemonic: PropTypes.shape({
+        value: PropTypes.string.isRequired,
+        error: PropTypes.shape({
+            message: PropTypes.string.isRequired,
+        }).isRequired,
+    }).isRequired,
+    name: PropTypes.shape({
+        value: PropTypes.string.isRequired,
+        error: PropTypes.shape({
+            message: PropTypes.string.isRequired,
+        }).isRequired,
+    }).isRequired,
+    password: PropTypes.shape({
+        value: PropTypes.string.isRequired,
+        error: PropTypes.shape({
+            message: PropTypes.string.isRequired,
+        }).isRequired,
+    }).isRequired,
     onClick: PropTypes.func.isRequired,
 };
 
 const stateToProps = (state) => {
     return {
-        mnemonic: state.keys.post.mnemonic.value,
-        name: state.keys.post.name.value,
-        password: state.keys.post.password.value,
+        mnemonic: state.keys.post.mnemonic,
+        name: state.keys.post.name,
+        password: state.keys.post.password,
         inProgress: state.keys.post.inProgress,
     };
 };

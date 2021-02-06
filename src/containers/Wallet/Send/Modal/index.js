@@ -1,21 +1,25 @@
+import * as PropTypes from 'prop-types';
 import React from 'react';
 import { Modal as ReactModal } from 'react-bootstrap';
+import { connect } from 'react-redux';
+import { hideTxSendModal } from '../../../../actions/transactions/send';
 import Label from '../../../../components/Label';
 import TextBox from '../../../../components/TextBox';
-import Address from './Address';
 import Amount from './Amount';
 import Memo from './Memo';
 import Password from './Password';
 import Send from './Send';
+import To from './To';
 
-const Modal = () => {
+const Modal = (props) => {
     return (
         <ReactModal
+            animation={false}
             backdrop="static"
             centered={true}
             keyboard={false}
-            show={true}
-            onHide={false}>
+            show={props.show}
+            onHide={props.onHide}>
             <ReactModal.Header closeButton={true}>
                 <TextBox
                     className="modal-title"
@@ -26,9 +30,9 @@ const Modal = () => {
                 <div className="flex-item">
                     <Label
                         className=""
-                        label="Address Address"
+                        label="To Address"
                     />
-                    <Address/>
+                    <To/>
                 </div>
                 <div className="flex-item">
                     <Label
@@ -57,4 +61,19 @@ const Modal = () => {
     );
 };
 
-export default Modal;
+Modal.propTypes = {
+    show: PropTypes.bool.isRequired,
+    onHide: PropTypes.func.isRequired,
+};
+
+const stateToProps = (state) => {
+    return {
+        show: state.transactions.send.modal,
+    };
+};
+
+const actionsToProps = {
+    onHide: hideTxSendModal,
+};
+
+export default connect(stateToProps, actionsToProps)(Modal);

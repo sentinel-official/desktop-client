@@ -15,6 +15,7 @@ const config = {
         },
     ],
 };
+
 const Sidebar = () => {
     return (
         <DashboardSidebar

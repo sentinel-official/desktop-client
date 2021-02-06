@@ -2,7 +2,7 @@ import React from 'react';
 import { Modal } from 'react-bootstrap';
 import Label from '../../../components/Label';
 import TextBox from '../../../components/TextBox';
-import ButtonYes from '../../../containers/Wallet/Proposals/ButtonYes';
+import ButtonYes from '../../../containers/Wallet/Proposals/Row/ButtonYes';
 import Memo from '../../../containers/Wallet/Proposals/Yes/Popup/Memo';
 import Password from '../../../containers/Wallet/Proposals/Yes/Popup/Password';
 
