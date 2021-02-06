@@ -22,11 +22,12 @@
 }
 
 @media (max-width: 380px) {
-    .login-footer.overflow-text  .login-button {
+    .login-footer.overflow-text .login-button {
         flex-wrap: wrap;
         margin-bottom: 5px;
     }
-    .login-footer.overflow-text  .login-button .terms{
+
+    .login-footer.overflow-text .login-button .terms {
         margin-bottom: 5px;
     }
 }

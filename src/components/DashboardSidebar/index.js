@@ -2,8 +2,8 @@ import * as PropTypes from 'prop-types';
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import Icon from '../Icon';
-import './index.css';
 import TextBox from '../TextBox';
+import './index.css';
 
 const DashboardSidebar = ({
     config,

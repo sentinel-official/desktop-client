@@ -31,9 +31,11 @@
     background: #109FEC;
     color: #FFFFFF;
 }
-.buttons-list{
-    margin-top:20px;
+
+.buttons-list {
+    margin-top: 20px;
 }
+
 .buttons-list button {
     margin-right: 10px;
     background: none !important;
@@ -43,7 +45,7 @@
     color: #55678B !important;
 }
 
-.button-large{
+.button-large {
     width: 180px;
     margin-top: 10px;
     text-transform: uppercase;

@@ -1,8 +1,8 @@
 import * as PropTypes from 'prop-types';
 import React from 'react';
-import './index.css';
 import Icon from '../Icon';
 import TextBox from '../TextBox';
+import './index.css';
 
 const TextArea = ({
     className,
@@ -17,7 +17,7 @@ const TextArea = ({
     return (
         <>
             <textarea
-                className={error ? `error ${className}` : className }
+                className={error ? `error ${className}` : className}
                 name={name}
                 placeholder={placeholder}
                 required={required}
@@ -26,7 +26,7 @@ const TextArea = ({
                 onChange={onChange}
             />
             <Icon
-                className={error ? 'error show' : 'error' }
+                className={error ? 'error show' : 'error'}
                 icon="errorInfo"
             />
             <TextBox

@@ -13,11 +13,11 @@ const Table = ({
         <ReactTable borderless className={className}>
             <Header columns={columns}/>
             <tbody>
-                {
-                    columns.map((item, index) => (
-                        rowComponent(item.label, index)
-                    ))
-                }
+            {
+                columns.map((item, index) => (
+                    rowComponent(item.label, index)
+                ))
+            }
             </tbody>
         </ReactTable>
     );

@@ -15,10 +15,11 @@
     text-align: center;
 }
 
-.list-group .nav-link-text{
+.list-group .nav-link-text {
     margin: 0;
 }
-.list-group a{
+
+.list-group a {
     display: flex;
     align-items: center;
 }
