@@ -20,7 +20,10 @@ const DashboardSidebar = ({
                                 className="icon"
                                 icon={item.icon}
                             />
-                            <TextBox className="nav-link-text" value={item.name}/>
+                            <TextBox
+                                className="nav-link-text"
+                                value={item.name}
+                            />
                         </NavLink>
                     ))
                 }

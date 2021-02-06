@@ -483,11 +483,6 @@
         max-width: 80px;
     }
 
-    /*.dashboard-side-bar-container.active {*/
-    /*    min-width: 250px;*/
-    /*    max-width: 250px;*/
-    /*    margin-left: 0px;*/
-    /*}*/
     .filter-section .buttons-state button {
         padding: 5px 10px;
     }
