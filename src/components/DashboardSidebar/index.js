@@ -3,6 +3,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import Icon from '../Icon';
 import './index.css';
+import TextBox from '../TextBox';
 
 const DashboardSidebar = ({
     config,
@@ -19,7 +20,7 @@ const DashboardSidebar = ({
                                 className="icon"
                                 icon={item.icon}
                             />
-                            {item.name}
+                            <TextBox className="nav-link-text" value={item.name}/>
                         </NavLink>
                     ))
                 }

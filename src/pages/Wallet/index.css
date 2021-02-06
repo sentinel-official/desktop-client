@@ -3,6 +3,11 @@
     background: #F6F8FB;
 }
 
+.wallet-container {
+    flex: 1;
+    overflow-y: auto;
+}
+
 .wallet-section {
     display: flex;
     width: 100%;
@@ -14,17 +19,41 @@
     min-width: 260px;
     max-width: 260px;
     color: #6b6b6b;
-    transition: all .3s;
+    transition: all .1s;
     position: relative;
-    overflow-y: auto;
     height: 100%;
     background: #193254;
     border-right: 1px solid #DCE9F1;
 }
 
+.dashboard-side-bar-container .toggle-section {
+    position: absolute;
+    background: #109FEC;
+    right: -20px;
+    padding: 10px;
+    top: 25px;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 2;
+}
+
+.top-info-section {
+    display: flex;
+    flex: 1;
+}
+
+.top-info-section .col-md-4, .top-info-section .col-md-8 {
+    padding: 0;
+}
+
 .wallet-details {
     display: flex;
     flex: 1;
+    flex-wrap: wrap;
 }
 
 .wallet-tab .nav-tabs {
@@ -32,7 +61,7 @@
     border: 0px solid;
 }
 
-.middle-section {
+.middle-section, .logo-info-section {
     width: 400px;
     padding: 0px;
     border-right: 1px solid #DCE9F1;
@@ -46,7 +75,9 @@
 }
 
 .token-info {
-    padding: 45px 0 30px 0;
+    padding: 45px 30px;
+    max-width: none;
+    flex: 1 1;
 }
 
 .token-info .sent-list {
@@ -66,9 +97,9 @@
     color: #55678B;
 }
 
-.wallet-tab{
-    padding:0 30px;
-    max-width:none;
+.wallet-tab, .token-info-section {
+    padding: 0 30px;
+    max-width: none;
     flex: 1 1;
 }
 
@@ -246,30 +277,35 @@
     color: #55678B;
     text-transform: none;
 }
-.proposal-accordion .accordion-header .flex-item{
+
+.proposal-accordion .accordion-header .flex-item {
     margin-bottom: 20px;;
 }
 
-.proposal-accordion .collapse-content{
+.proposal-accordion .collapse-content {
     padding-top: 15px;
 }
-.horizontal-list-value p, .vertical-list-value p{
+
+.horizontal-list-value p, .vertical-list-value p {
     font-size: 14px;
     margin: 0;
     font-weight: normal;
     color: #142D51;
 }
-.percentage-success p{
+
+.percentage-success p {
     font-size: 14px;
     margin: 0;
     color: #1AB132;
 }
-.button-accordion{
+
+.button-accordion {
     border: 1.13577px solid #DCE9F1;
     box-sizing: border-box;
     border-radius: 56px;
     background: transparent;
 }
+
 .serial-number {
     width: 36px;
     height: 36px;
@@ -285,6 +321,7 @@
     line-height: 146.19%;
     color: #142D51;
 }
+
 .serial-number .number {
     margin: 0;
     position: absolute;
@@ -300,30 +337,26 @@
     justify-content: center;
 }
 
-.accordion-scroll-bar, .validators-section{
+.accordion-scroll-bar, .validators-section {
     position: relative;
     max-height: 61vh;
     overflow-y: scroll;
 }
+
 ::-webkit-scrollbar-track {
     background-color: transparent;
 }
+
 ::-webkit-scrollbar-thumb {
     background-color: #DCE9F1 !important;
 }
+
 ::-webkit-scrollbar {
     width: .5rem;
 }
 
 .accordion-section .accordion {
     margin-bottom: 10px;
-}
-
-@media (min-width: 768px) {
-    .middle-section {
-        flex: none;
-        max-width: none;
-    }
 }
 
 .tab-content .qr-title {
@@ -349,4 +382,140 @@
     padding: 5px;
     background: #FFFFFF;
     height: 104px !important;
+}
+
+@media (min-width: 768px) and (max-width: 1369.98px) {
+    .logo-info-section {
+        border: 0;
+    }
+
+    .middle-section .flex-tabs {
+        display: flex;
+    }
+
+    .middle-section .flex-tabs .tabs-section {
+        flex: 1;
+        border-right: 1px solid #dce9f1;
+        margin-right: 10px;
+        border-left: 1px solid #dce9f1;
+        border-bottom: 1px solid #dce9f1;
+    }
+
+    .middle-section .flex-tabs .withdraw-section {
+        flex: 1;
+        border-right: 1px solid #dce9f1;
+        margin-right: 10px;
+        border-left: 1px solid #dce9f1;
+        border-bottom: 1px solid #dce9f1;
+    }
+
+    .dashboard-side-bar-container {
+        min-width: 80px;
+        max-width: 80px;
+    }
+
+    .dashboard-side-bar-container .list-group a, .dashboard-side-bar-container .settings-dropdown {
+        padding: 25px 10px 20px 25px;
+    }
+
+    .dashboard-side-bar-container .list-group .nav-link-text {
+        display: none;
+    }
+}
+
+@media (min-width: 768px) {
+    .middle-section, .logo-info-section {
+        flex: none;
+        max-width: none;
+    }
+
+    .dashboard-side-bar-container.active {
+        min-width: 80px;
+        max-width: 80px;
+        transition: all 0.3s;
+    }
+
+    .dashboard-side-bar-container.active .toggle-section img {
+        transform: rotate(180deg);
+    }
+
+    .dashboard-side-bar-container.active .list-group a, .dashboard-side-bar-container.active .settings-dropdown {
+        padding: 25px 10px 25px 25px;
+    }
+
+    .dashboard-side-bar-container.active .list-group .nav-link-text {
+        display: none;
+    }
+}
+
+@media (max-width: 680px) {
+    .wallet-tab .nav-tabs .nav-link {
+        font-size: 14px;
+        padding: 0.6rem 1rem
+    }
+
+    .filter-section {
+        top: -15px;
+        flex-direction: column;
+    }
+
+    .filter-section .buttons-state {
+        margin-bottom: 5px;
+    }
+
+    .top-info-section {
+        display: block;
+    }
+
+    .token-info {
+        padding: 10px 30px;
+    }
+
+    .logo-info-section {
+        border: 0;
+        width: auto;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .dashboard-side-bar-container {
+        min-width: 80px;
+        max-width: 80px;
+    }
+
+    /*.dashboard-side-bar-container.active {*/
+    /*    min-width: 250px;*/
+    /*    max-width: 250px;*/
+    /*    margin-left: 0px;*/
+    /*}*/
+    .filter-section .buttons-state button {
+        padding: 5px 10px;
+    }
+
+    .dashboard-side-bar-container .list-group .nav-link-text {
+        display: none;
+    }
+
+    .dashboard-side-bar-container .list-group a, .dashboard-side-bar-container .settings-dropdown {
+        padding: 25px 10px 20px 25px;
+    }
+}
+
+@media (min-width: 1370px) {
+    .wallet-details {
+        height: calc(100vh - 188px);
+    }
+}
+
+@media (max-width: 1369.98px) {
+    .middle-section {
+        width: 100%;
+        margin-bottom: 20px;
+        flex: none;
+        max-width: none;
+    }
+
+    .dashboard-side-bar-container .toggle-section {
+        display: none;
+    }
 }

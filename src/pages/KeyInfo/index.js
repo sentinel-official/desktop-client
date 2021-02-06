@@ -54,7 +54,7 @@ const KeyInfo = ({ history }) => {
                             className="seed-note"
                             value="Note: CopyAddress your keys to a secure location. Remember, we don't store any of your keys in our databases."
                         />
-                        <div className="login-footer">
+                        <div className="login-footer overflow-text">
                             <div className="login-button flex-center">
                                 <div className="checkbox-section">
                                     <div className="custom-control custom-checkbox">

@@ -9,6 +9,7 @@ import CopyAddress from '../../containers/KeyInfo/CopyAddress';
 import Sidebar from '../../containers/Sidebar';
 import Keys from '../../containers/Wallet/Keys';
 import Proposals from '../../containers/Wallet/Proposals';
+import collapse from '../../assets/collapse.svg';
 import Address from '../../containers/Wallet/Receive/Address';
 import QRCode from '../../containers/Wallet/Receive/QRCode';
 import Amount from '../../containers/Wallet/Send/Amount';
@@ -22,10 +23,22 @@ import WithDrawValidators from '../../containers/Wallet/Withdraw/Validators';
 import WithDraw from '../../containers/Wallet/Withdraw/WithDraw';
 import './index.css';
 
+const toggleClass = () => {
+    console.log('Red');
+    if (document.getElementById('side-bar').classList.contains('active')) {
+        document.getElementById('side-bar').classList.remove('active');
+    } else {
+        document.getElementById('side-bar').classList.add('active');
+    }
+};
+
 const Wallet = () => {
     return (
         <div className="wallet-section">
-            <div className="dashboard-side-bar-container">
+            <div className="dashboard-side-bar-container" id="side-bar">
+                <div className="toggle-section" onClick={toggleClass}>
+                    <Image alt="collapse-icon" className="collapse-icon" src={collapse}/>
+                </div>
                 <div className="settings-dropdown">
                     <Keys/>
                 </div>
@@ -33,83 +46,94 @@ const Wallet = () => {
                     <Sidebar/>
                 </div>
             </div>
-            <div className="wallet-details">
-                <div className="middle-section col-md-4">
-                    <div className="top-section">
-                        <TextBox className="sentinel-text" value="Amount"/>
-                        <div className="logo-box">
-                            <div className="left">
-                                <div className="logo">
-                                    <Image alt="Logo" className="" src={Logo}/>
+            <div className="wallet-container">
+                <div className="top-info-section">
+                    <div className="logo-info-section col-md-4">
+                        <div className="top-section">
+                            <TextBox className="sentinel-text" value="Amount"/>
+                            <div className="logo-box">
+                                <div className="left">
+                                    <div className="logo">
+                                        <Image alt="Logo" className="" src={Logo}/>
+                                    </div>
+                                    <TextBox className="sentinel-text" value="Sentinel"/>
+                                    <TextBox className="sub-text" value="(sent)"/>
                                 </div>
-                                <TextBox className="sentinel-text" value="Sentinel"/>
-                                <TextBox className="sub-text" value="(sent)"/>
+                                <Icon
+                                    className="icon"
+                                    icon="success"
+                                />
                             </div>
-                            <Icon
-                                className="icon"
-                                icon="success"
-                            />
                         </div>
                     </div>
-                    <Tabs defaultActiveKey="send">
-                        <Tab eventKey="send" title="send">
-                            <div className="form-group">
-                                <Label
-                                    className="label"
-                                    label="Deposit Address"
-                                />
-                                <DepositAddress/>
-                            </div>
-                            <div className="form-group">
-                                <Label
-                                    className="label"
-                                    label="amount"
-                                />
-                                <Amount/>
-                            </div>
-                            <Send/>
-                        </Tab>
-                        <Tab eventKey="Receive" tabClassName="receive-tab" title="Receive">
-                            <TextBox className="qr-title" value="Show QR code to Receive Amount"/>
-                            <div className="qr-box">
-                                <QRCode/>
-                            </div>
-                            <div className="copy-address">
-                                <TextBox className="" value="Address"/>
-                                <CopyAddress/>
-                            </div>
-                            <Address/>
-                        </Tab>
-                    </Tabs>
-                    <div className="withdraw-section">
-                        <TextBox className="title" value="Withdraw"/>
-                        <div className="withdraw-section-content">
-                            <div className="form-group">
-                                <Label
-                                    className="label"
-                                    label="Select Validator to Withdraw"
-                                />
-                                <WithDrawValidators/>
-                            </div>
-                            <WithDraw/>
-                        </div>
+                    <div className="token-info-section col-md-8">
+                        <Tokens/>
                     </div>
-
                 </div>
-                <div className="wallet-tab col-md-8">
-                    <Tokens/>
-                    <div className="filter-section">
-                        <ValidatorState/>
-                        <Actions/>
+                <div className="wallet-details">
+                    <div className="middle-section col-md-4">
+                        <div className="flex-tabs">
+                            <div className="tabs-section">
+                                <Tabs defaultActiveKey="send">
+                                    <Tab eventKey="send" title="send">
+                                        <div className="form-group">
+                                            <Label
+                                                className="label"
+                                                label="Deposit Address"
+                                            />
+                                            <DepositAddress/>
+                                        </div>
+                                        <div className="form-group">
+                                            <Label
+                                                className="label"
+                                                label="amount"
+                                            />
+                                            <Amount/>
+                                        </div>
+                                        <Send/>
+                                    </Tab>
+                                    <Tab eventKey="Receive" tabClassName="receive-tab" title="Receive">
+                                        <TextBox className="qr-title" value="Show QR code to Receive Amount"/>
+                                        <div className="qr-box">
+                                            <QRCode/>
+                                        </div>
+                                        <div className="copy-address">
+                                            <TextBox className="" value="Address"/>
+                                            <CopyAddress/>
+                                        </div>
+                                        <Address/>
+                                    </Tab>
+                                </Tabs>
+                            </div>
+                            <div className="withdraw-section">
+                                <TextBox className="title" value="Withdraw"/>
+                                <div className="withdraw-section-content">
+                                    <div className="form-group">
+                                        <Label
+                                            className="label"
+                                            label="Select Validator to Withdraw"
+                                        />
+                                        <WithDrawValidators/>
+                                    </div>
+                                    <WithDraw/>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <Tabs defaultActiveKey="Validators" id="uncontrolled-tab-example">
-                        <Tab eventKey="Validators" title="Validators List">
-                            <Validators/>
-                        </Tab>
-                        <Tab eventKey="Proposals" title="Proposals">
-                            <Proposals/>
-                        </Tab>
-                    </Tabs>
+                    <div className="wallet-tab col-md-8">
+                        <div className="filter-section">
+                            <ValidatorState/>
+                            <Actions/>
+                        </div>
+                        <Tabs defaultActiveKey="Validators" id="uncontrolled-tab-example">
+                            <Tab eventKey="Validators" title="Validators List">
+                                <Validators/>
+                            </Tab>
+                            <Tab eventKey="Proposals" title="Proposals">
+                                <Proposals/>
+                            </Tab>
+                        </Tabs>
+                    </div>
                 </div>
             </div>
         </div>

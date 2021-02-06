@@ -15,6 +15,14 @@
     text-align: center;
 }
 
+.list-group .nav-link-text{
+    margin: 0;
+}
+.list-group a{
+    display: flex;
+    align-items: center;
+}
+
 .list-group a .icon {
     width: 20px;
     fill: #55678B;

@@ -45,7 +45,7 @@ const CreateKey = ({ history }) => {
                             />
                             <Mnemonic/>
                         </div>
-                        <div className="login-footer">
+                        <div className="login-footer overflow-text">
                             <div className="login-button flex-center">
                                 <div className="terms flex-center">
                                     <TextBox className="" value="Agree with"/>
