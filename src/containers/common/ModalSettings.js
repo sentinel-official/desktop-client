@@ -37,7 +37,7 @@ const ModalSettings = () => {
                                     className="label"
                                     label="Broadcast Mode"
                                 />
-                                <Tooltip value="Help"/>
+                                <Tooltip icon="tooltip" value="Help"/>
                             </div>
                             <BroadcastMode/>
                         </div>
@@ -47,7 +47,7 @@ const ModalSettings = () => {
                                     className="label"
                                     label="Fee"
                                 />
-                                <Tooltip value="Help"/>
+                                <Tooltip icon="tooltip" value="Help"/>
                             </div>
                             <Fee/>
                         </div>
@@ -57,7 +57,7 @@ const ModalSettings = () => {
                                     className="label"
                                     label="Gas"
                                 />
-                                <Tooltip value="Help"/>
+                                <Tooltip icon="tooltip" value="Help"/>
                             </div>
                             <Gas/>
                         </div>
@@ -67,7 +67,7 @@ const ModalSettings = () => {
                                     className="label"
                                     label="Gas Adjustment"
                                 />
-                                <Tooltip value="Help"/>
+                                <Tooltip icon="tooltip" value="Help"/>
                             </div>
                             <GasAdjustment/>
                         </div>
@@ -77,7 +77,7 @@ const ModalSettings = () => {
                                     className="label"
                                     label="Gas Price"
                                 />
-                                <Tooltip value="Help"/>
+                                <Tooltip icon="tooltip" value="Help"/>
                             </div>
                             <GasPrices/>
                         </div>
@@ -89,7 +89,7 @@ const ModalSettings = () => {
                                     className="label"
                                     label="Chain ID"
                                 />
-                                <Tooltip value="Help"/>
+                                <Tooltip icon="tooltip" value="Help"/>
                             </div>
                             <ChainID/>
                         </div>
@@ -99,7 +99,7 @@ const ModalSettings = () => {
                                     className="label"
                                     label="Simulate And Execute"
                                 />
-                                <Tooltip value="Help"/>
+                                <Tooltip icon="tooltip" value="Help"/>
                             </div>
                             <SimulateAndExecute/>
                         </div>
@@ -109,7 +109,7 @@ const ModalSettings = () => {
                                     className="label"
                                     label="Trust Node"
                                 />
-                                <Tooltip value="Help"/>
+                                <Tooltip icon="tooltip" value="Help"/>
                             </div>
                             <TrustNode/>
                         </div>
@@ -119,7 +119,7 @@ const ModalSettings = () => {
                                     className="label"
                                     label="RPC Address"
                                 />
-                                <Tooltip value="Help"/>
+                                <Tooltip icon="tooltip" value="Help"/>
                             </div>
                             <RPCAddress/>
                         </div>

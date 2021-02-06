@@ -1,6 +1,8 @@
 import * as PropTypes from 'prop-types';
 import React from 'react';
 import './index.css';
+import Icon from '../Icon';
+import TextBox from '../TextBox';
 
 const TextArea = ({
     className,
@@ -11,16 +13,28 @@ const TextArea = ({
     value,
     onChange,
 }) => {
+    const error = '';
     return (
-        <textarea
-            className={className}
-            name={name}
-            placeholder={placeholder}
-            required={required}
-            rows={rows}
-            value={value}
-            onChange={onChange}
-        />
+        <>
+            <textarea
+                className={error ? `error ${className}` : className }
+                name={name}
+                placeholder={placeholder}
+                required={required}
+                rows={rows}
+                value={value}
+                onChange={onChange}
+            />
+            <Icon
+                className={error ? 'error show' : 'error' }
+                icon="errorInfo"
+            />
+            <TextBox
+                className="error-message"
+                value="error"
+            />
+        </>
+
     );
 };
 

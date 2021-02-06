@@ -477,6 +477,16 @@
     }
 }
 
+.modal-header {
+    align-items: center;
+}
+
+.modal-header .account-name {
+    margin: 0 0 0 10px;
+    font-size: 18px;
+    color: #139EEE;
+}
+
 @media (max-width: 767.98px) {
     .dashboard-side-bar-container {
         min-width: 80px;

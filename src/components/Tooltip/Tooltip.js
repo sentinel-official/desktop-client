@@ -5,18 +5,20 @@ import './index.css';
 
 const Tooltip = ({
     value,
+    icon,
 }) => {
     return (
         <div className="tooltip-section" data-placement="top" data-toggle="tooltip" title={value}>
             <Icon
                 className="icon"
-                icon="tooltip"
+                icon={icon}
             />
         </div>
     );
 };
 
 Tooltip.propTypes = {
+    icon: PropTypes.string.isRequired,
     value: PropTypes.string.isRequired,
 };
 

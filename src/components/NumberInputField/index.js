@@ -1,7 +1,8 @@
 import * as PropTypes from 'prop-types';
 import React from 'react';
 import './index.css';
-
+import Icon from '../Icon';
+import TextBox from '../TextBox';
 const NumberInputField = ({
     className,
     name,
@@ -12,17 +13,29 @@ const NumberInputField = ({
     onChange,
     min,
 }) => {
+    const error = '';
     return (
-        <input
-            className={className}
-            min={min}
-            name={name}
-            placeholder={placeholder}
-            required={required}
-            type={type}
-            value={value}
-            onChange={onChange}
-        />
+        <>
+            <input
+                className={error ? `error ${className}` : className }
+                min={min}
+                name={name}
+                placeholder={placeholder}
+                required={required}
+                type={type}
+                value={value}
+                onChange={onChange}
+            />
+            <Icon
+                className={error ? 'error show' : 'error' }
+                icon="errorInfo"
+            />
+            <TextBox
+                className="error-message"
+                value="error"
+            />
+        </>
+
     );
 };
 

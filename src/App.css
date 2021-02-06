@@ -90,6 +90,10 @@ label, .label {
     padding: 2rem;
 }
 
+.modal-body .form-group {
+    margin-bottom: 20px;
+}
+
 .modal-title {
     font-weight: 500;
     font-size: 18px;
@@ -120,6 +124,10 @@ label, .label {
     font-size: 14px;
 }
 
+.flex-item .address {
+    word-break: break-word;
+}
+
 .flex-item p {
     margin: 0;
     font-size: 14px;
@@ -141,4 +149,52 @@ label, .label {
     .account-section .section-body {
         padding-top: 20px;
     }
+}
+
+
+.form-control.error {
+    box-shadow: 0 0 0 0.2rem #dc354563;
+}
+
+.icon-error.show {
+    display: block;
+}
+
+.icon-error {
+    display: none;
+    width: 14px;
+    height: 14px;
+    position: absolute;
+    right: 15px;
+    top: 44px;
+}
+
+.error-message {
+    display: none;
+    margin: 0;
+    font-size: 12px;
+    position: absolute;
+    display: none;
+    background-color: red;
+    right: -15px;
+    top: 65px;
+    padding: 5px 10px;
+    z-index: 1;
+    color: white;
+}
+
+.icon-error:hover + .error-message {
+    display: block;
+}
+
+.form-group {
+    position: relative;
+}
+
+.error .tooltip-section {
+    display: flex;
+    position: absolute;
+    right: 15px;
+    top: 43px;
+    cursor: pointer;
 }

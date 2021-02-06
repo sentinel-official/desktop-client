@@ -7,7 +7,7 @@ const Send = () => {
 
     return (
         <Button
-            className="btn button-primary"
+            className="btn button-primary button-large"
             disabled={false}
             inProgress={false}
             loading={false}

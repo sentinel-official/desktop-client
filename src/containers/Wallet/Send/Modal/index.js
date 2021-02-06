@@ -4,7 +4,6 @@ import Label from '../../../../components/Label';
 import TextBox from '../../../../components/TextBox';
 import Address from './Address';
 import Amount from './Amount';
-import './index.css';
 import Memo from './Memo';
 import Password from './Password';
 import Send from './Send';

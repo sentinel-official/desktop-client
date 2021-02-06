@@ -1,6 +1,8 @@
 import * as PropTypes from 'prop-types';
 import React from 'react';
 import './index.css';
+import Icon from '../Icon';
+import TextBox from '../TextBox';
 
 const TextInputField = ({
     className,
@@ -11,16 +13,29 @@ const TextInputField = ({
     value,
     onChange,
 }) => {
+    const error = '';
     return (
-        <input
-            className={className}
-            name={name}
-            placeholder={placeholder}
-            required={required}
-            type={type}
-            value={value}
-            onChange={onChange}
-        />
+        <>
+            <input
+                className={error ? `error ${className}` : className}
+                name={name}
+                placeholder={placeholder}
+                required={required}
+                type={type}
+                value={value}
+                onChange={onChange}
+            />
+            <Icon
+                className={error ? 'error show' : 'error'}
+                icon="errorInfo"
+            />
+            <TextBox
+                className="error-message"
+                value="error"
+            />
+
+        </>
+
     );
 };
 
