@@ -1,5 +1,6 @@
 import React from 'react';
 import { Tab, Tabs } from 'react-bootstrap';
+import collapse from '../../assets/collapse.svg';
 import Logo from '../../assets/Logo.svg';
 import Icon from '../../components/Icon';
 import Image from '../../components/Image';
@@ -9,7 +10,6 @@ import CopyAddress from '../../containers/KeyInfo/CopyAddress';
 import Sidebar from '../../containers/Sidebar';
 import Keys from '../../containers/Wallet/Keys';
 import Proposals from '../../containers/Wallet/Proposals';
-import collapse from '../../assets/collapse.svg';
 import Address from '../../containers/Wallet/Receive/Address';
 import QRCode from '../../containers/Wallet/Receive/QRCode';
 import Amount from '../../containers/Wallet/Send/Amount';

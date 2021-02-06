@@ -1,7 +1,8 @@
-.validators-table .table th, .table td{
+.validators-table .table th, .table td {
     padding: 1rem 0.75rem;
     vertical-align: initial;
 }
+
 .validators-table tbody tr {
     font-weight: 500;
     font-size: 14px;
@@ -9,7 +10,7 @@
     border-bottom: 1px solid #dee2e6;
 }
 
-.validators-table thead th{
+.validators-table thead th {
     font-weight: 500;
     font-size: 13px;
     line-height: 15px;

@@ -1,8 +1,8 @@
 import * as PropTypes from 'prop-types';
 import React from 'react';
-import './index.css';
 import Icon from '../Icon';
 import TextBox from '../TextBox';
+import './index.css';
 
 const TextInputField = ({
     className,
