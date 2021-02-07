@@ -10,7 +10,7 @@ const MnemonicDownload = (props) => {
 
     return (
         <DownloadLink
-            exportFile={props.mnemonic}
+            exportFile={() => props.mnemonic}
             filename={`${address}.txt`}
             label={
                 <Icon

@@ -12,7 +12,9 @@ const Submit = (props) => {
         }, props.history, () => ({}));
     };
 
-    const disabled = ValidatePassword(props.password.value).message !== '';
+    const disabled = (
+        ValidatePassword(props.password.value).message !== ''
+    );
 
     return (
         <Button

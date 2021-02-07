@@ -1,7 +1,7 @@
 import React from 'react';
 import TextBox from '../../components/TextBox';
 
-const Tokens = () => {
+const Balance = () => {
     return (
         <div className="token-info">
             <TextBox
@@ -22,4 +22,4 @@ const Tokens = () => {
     );
 };
 
-export default Tokens;
+export default Balance;

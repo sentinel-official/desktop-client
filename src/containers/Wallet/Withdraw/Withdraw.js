@@ -25,7 +25,7 @@ Withdraw.propTypes = {
     onClick: PropTypes.func.isRequired,
 };
 
-const stateToProps = (state) => {
+const stateToProps = () => {
     return {};
 };
 

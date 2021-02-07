@@ -43,7 +43,7 @@ const txHash = (state = '', {
 
 const error = (state = {
     code: 0,
-    codespace: 0,
+    codespace: '',
     message: '',
 }, {
     type,

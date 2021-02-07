@@ -2,7 +2,8 @@ import Authentication from './pages/Authentication';
 import Configuration from './pages/Configuration';
 import CreateKey from './pages/CreateKey';
 import KeyInfo from './pages/KeyInfo';
-import Splash from './pages/Wallet';
+import Splash from './pages/Splash';
+import Wallet from './pages/Wallet';
 
 const routes = [{
     path: '/',
@@ -15,15 +16,19 @@ const routes = [{
 }, {
     path: '/configuration',
     component: Configuration,
-    private: false,
+    private: true,
 }, {
     path: '/keys',
     component: CreateKey,
-    private: false,
+    private: true,
 }, {
     path: '/keys/:name',
     component: KeyInfo,
-    private: false,
+    private: true,
+}, {
+    path: '/dashboard',
+    component: Wallet,
+    private: true,
 }];
 
 export default routes;
