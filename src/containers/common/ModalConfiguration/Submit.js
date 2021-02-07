@@ -1,8 +1,8 @@
 import * as PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
-import { putConfiguration } from '../../actions/configuration';
-import Button from '../../components/Button';
+import { hideConfigurationModal, putConfiguration } from '../../../actions/configuration';
+import Button from '../../../components/Button';
 import {
     ValidateBroadcastMode,
     ValidateFees,
@@ -13,7 +13,7 @@ import {
     ValidateRPCAddress,
     ValidateSimulateAndExecute,
     ValidateTrustNode,
-} from './_validation';
+} from '../../Configuration/_validation';
 
 const Submit = (props) => {
     const onClick = () => {
@@ -22,7 +22,7 @@ const Submit = (props) => {
                 return;
             }
 
-            props.history.push('/dashboard');
+            props.hideModal();
         });
     };
 
@@ -107,9 +107,7 @@ Submit.propTypes = {
             }).isRequired,
         }).isRequired,
     }).isRequired,
-    history: PropTypes.shape({
-        push: PropTypes.func.isRequired,
-    }).isRequired,
+    hideModal: PropTypes.func.isRequired,
     inProgress: PropTypes.bool.isRequired,
     onClick: PropTypes.func.isRequired,
 };
@@ -133,6 +131,7 @@ const stateToProps = (state) => {
 
 const actionsToProps = {
     onClick: putConfiguration,
+    hideModal: hideConfigurationModal,
 };
 
 export default connect(stateToProps, actionsToProps)(Submit);

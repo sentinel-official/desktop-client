@@ -7,6 +7,7 @@ import {
     AUTHENTICATION_POST_SUCCESS,
     AUTHENTICATION_POST_URL,
 } from '../constants/authentication';
+import { emptyFunc } from '../constants/common';
 
 export const setAuthenticationPassword = (data) => {
     return {
@@ -36,13 +37,17 @@ export const postAuthenticationError = (data) => {
     };
 };
 
-export const postAuthentication = (body, history, cb) => (dispatch, getState) => {
+export const postAuthentication = (history, cb = emptyFunc) => (dispatch, getState) => {
     Async.waterfall([
         (next) => {
             dispatch(postAuthenticationInProgress());
             next(null);
         }, (next) => {
-            Axios.post(AUTHENTICATION_POST_URL, body)
+            const { authentication } = getState();
+
+            Axios.post(AUTHENTICATION_POST_URL, {
+                password: authentication.password.value.trim(),
+            })
                 .then((res) => {
                     try {
                         next(null, res?.data?.result);

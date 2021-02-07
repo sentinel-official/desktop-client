@@ -4,9 +4,10 @@ import {
     ACCOUNT_GET_ERROR,
     ACCOUNT_GET_IN_PROGRESS,
     ACCOUNT_GET_SUCCESS,
-    ACCOUNT_GET_URL,
     ACCOUNT_PASSWORD_SET,
+    getAccountURL,
 } from '../constants/account';
+import { emptyFunc } from '../constants/common';
 
 export const getAccountInProgress = (data) => {
     return {
@@ -29,15 +30,20 @@ export const getAccountError = (data) => {
     };
 };
 
-export const getAccount = (cb) => (dispatch, getState) => {
+export const getAccount = (cb = emptyFunc) => (dispatch, getState) => {
     Async.waterfall([
         (next) => {
             dispatch(getAccountInProgress(null));
             next(null);
         }, (next) => {
-            const { authentication } = getState();
+            const {
+                authentication,
+                keys,
+            } = getState();
+            const { address } = keys.items[keys.index];
+            const url = getAccountURL(address);
 
-            Axios.get(ACCOUNT_GET_URL, {
+            Axios.get(url, {
                 headers: {
                     Authorization: `Bearer ${authentication.info.value}`,
                 },

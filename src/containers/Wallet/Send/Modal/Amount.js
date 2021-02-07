@@ -4,16 +4,18 @@ import { connect } from 'react-redux';
 import TextBox from '../../../../components/TextBox';
 
 const Amount = (props) => {
+    const value = props.value.toString();
+
     return (
         <TextBox
             className="address"
-            value={props.value}
+            value={value}
         />
     );
 };
 
 Amount.propTypes = {
-    value: PropTypes.string.isRequired,
+    value: PropTypes.number.isRequired,
 };
 
 const stateToProps = (state) => {

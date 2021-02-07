@@ -7,9 +7,7 @@ import { ValidatePassword } from './_validation';
 
 const Submit = (props) => {
     const onClick = () => {
-        props.onClick({
-            password: props.password.value.trim(),
-        }, props.history, () => ({}));
+        props.onClick(props.history);
     };
 
     const disabled = (

@@ -63,7 +63,7 @@ export const TX_SEND_IN_PROGRESS = 'TX_SEND_IN_PROGRESS';
 export const TX_SEND_SUCCESS = 'TX_SEND_SUCCESS';
 export const TX_SEND_ERROR = 'TX_SEND_ERROR';
 
-export const TX_SEND_URL = `${API_BASE_URL}/keys`;
+export const TX_SEND_URL = `${API_BASE_URL}/bank/send`;
 
 export const TX_VOTE_ID_SET = 'TX_VOTE_ID_SET';
 export const TX_VOTE_OPTION_SET = 'TX_VOTE_OPTION_SET';

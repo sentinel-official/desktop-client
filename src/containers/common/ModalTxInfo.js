@@ -13,6 +13,7 @@ const ModalTxInfo = (props) => {
 
     return (
         <Modal
+            animation={false}
             backdrop="static"
             centered={true}
             className={code === 0 ? 'success-modal' : 'failure-modal'}
@@ -22,7 +23,7 @@ const ModalTxInfo = (props) => {
             <Modal.Header closeButton={true}>
                 <TextBox
                     className="modal-title"
-                    value="Delegate to"
+                    value={code === 0 ? 'Success' : 'Failure'}
                 />
             </Modal.Header>
             <Modal.Body>
@@ -41,7 +42,6 @@ const ModalTxInfo = (props) => {
 ModalTxInfo.propTypes = {
     error: PropTypes.shape({
         code: PropTypes.number.isRequired,
-        codespace: PropTypes.string.isRequired,
         message: PropTypes.string.isRequired,
     }).isRequired,
     show: PropTypes.bool.isRequired,

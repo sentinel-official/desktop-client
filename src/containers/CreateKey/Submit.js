@@ -7,11 +7,7 @@ import { ValidateMnemonic, ValidateName, ValidatePassword } from './_validation'
 
 const Submit = (props) => {
     const onClick = () => {
-        props.onClick({
-            mnemonic: props.mnemonic.value.trim(),
-            name: props.name.value.trim(),
-            password: props.password.value.trim(),
-        }, props.history, () => ({}));
+        props.onClick(props.history);
     };
 
     const disabled = (

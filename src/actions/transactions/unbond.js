@@ -69,8 +69,6 @@ export const txUnbond = (body, cb) => (dispatch, getState) => {
                     }
                 })
                 .catch((error) => {
-                    console.error(error);
-
                     dispatch(txUnbondError(error?.response?.data?.error || error));
                     next(error);
                 });

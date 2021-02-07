@@ -32,6 +32,10 @@ const info = (state = {
 }) => {
     switch (type) {
     case ACCOUNT_GET_SUCCESS:
+        if (data === undefined) {
+            return state;
+        }
+
         return {
             ...state,
             address: data.address,

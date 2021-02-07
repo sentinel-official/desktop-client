@@ -7,7 +7,7 @@ const rate = (state = 0, {
 }) => {
     switch (type) {
     case COINGECKO_GET_SUCCESS:
-        return data;
+        return data['market_data']['current_price'].usd;
     default:
         return state;
     }

@@ -44,7 +44,7 @@ const to = (state = {
 };
 
 const amount = (state = {
-    value: '',
+    value: 0,
     error: {
         message: '',
     },
@@ -65,7 +65,7 @@ const amount = (state = {
     case TX_SEND_SUCCESS:
         return {
             ...state,
-            value: '',
+            value: 0,
             error: {
                 ...state.error,
                 message: '',
@@ -130,6 +130,8 @@ const modal = (state = false, {
     case TX_SEND_MODAL_SHOW:
         return true;
     case TX_SEND_MODAL_HIDE:
+    case TX_SEND_SUCCESS:
+    case TX_SEND_ERROR:
         return false;
     default:
         return state;

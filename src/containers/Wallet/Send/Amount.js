@@ -2,12 +2,12 @@ import * as PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 import { setTxSendAmount } from '../../../actions/transactions/send';
-import TextInputField from '../../../components/TextInputField';
+import NumberInputField from '../../../components/NumberInputField';
 import { ValidateAmount } from './_validation';
 
 const Amount = (props) => {
     const onChange = (event) => {
-        const value = event.target.value.toString();
+        const value = parseFloat(event.target.value.toString().trim());
 
         props.onChange({
             value,
@@ -17,15 +17,18 @@ const Amount = (props) => {
         });
     };
 
+    const value = props.input.value.toString();
+
     return (
-        <TextInputField
+        <NumberInputField
             className="form-control"
             error={props.input.error}
+            min={0}
             name="Amount"
             placeholder="Enter Amount"
             required={true}
-            type="text"
-            value={props.input.value}
+            type="number"
+            value={value}
             onChange={onChange}
         />
     );
@@ -33,7 +36,7 @@ const Amount = (props) => {
 
 Amount.propTypes = {
     input: PropTypes.shape({
-        value: PropTypes.string.isRequired,
+        value: PropTypes.number.isRequired,
         error: PropTypes.shape({
             message: PropTypes.string.isRequired,
         }).isRequired,

@@ -69,8 +69,6 @@ export const txDelegate = (body, cb) => (dispatch, getState) => {
                     }
                 })
                 .catch((error) => {
-                    console.error(error);
-
                     dispatch(txDelegateError(error?.response?.data?.error || error));
                     next(error);
                 });

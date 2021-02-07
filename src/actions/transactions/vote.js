@@ -69,8 +69,6 @@ export const txVote = (body, cb) => (dispatch, getState) => {
                     }
                 })
                 .catch((error) => {
-                    console.error(error);
-
                     dispatch(txVoteError(error?.response?.data?.error || error));
                     next(error);
                 });

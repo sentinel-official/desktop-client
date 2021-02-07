@@ -6,38 +6,39 @@ import {
     COINGECKO_GET_SUCCESS,
     COINGECKO_GET_URL,
 } from '../constants/coingecko';
+import { emptyFunc } from '../constants/common';
 
-export const getCoinGeckoInProgress = (data) => {
+export const getCoingeckoInProgress = (data) => {
     return {
         type: COINGECKO_GET_IN_PROGRESS,
         data,
     };
 };
 
-export const getCoinGeckoSuccess = (data) => {
+export const getCoingeckoSuccess = (data) => {
     return {
         type: COINGECKO_GET_SUCCESS,
         data,
     };
 };
 
-export const getCoinGeckoError = (data) => {
+export const getCoingeckoError = (data) => {
     return {
         type: COINGECKO_GET_ERROR,
         data,
     };
 };
 
-export const getCoinGecko = (cb) => (dispatch, getState) => {
+export const getCoingecko = (cb = emptyFunc) => (dispatch, getState) => {
     Async.waterfall([
         (next) => {
-            dispatch(getCoinGeckoInProgress(null));
+            dispatch(getCoingeckoInProgress(null));
             next(null);
         }, (next) => {
             Axios.get(COINGECKO_GET_URL)
                 .then((res) => {
                     try {
-                        next(null, res?.data?.result);
+                        next(null, res?.data);
                     } catch (e) {
                         console.error(e);
                     }
@@ -45,11 +46,11 @@ export const getCoinGecko = (cb) => (dispatch, getState) => {
                 .catch((error) => {
                     console.error(error);
 
-                    dispatch(getCoinGeckoError(error?.response?.data?.error || error));
+                    dispatch(getCoingeckoError(error?.response?.data?.error || error));
                     next(error);
                 });
         }, (result, next) => {
-            dispatch(getCoinGeckoSuccess(result));
+            dispatch(getCoingeckoSuccess(result));
             next(null);
         },
     ], cb);

@@ -1,5 +1,6 @@
 import Async from 'async';
 import Axios from 'axios';
+import { emptyFunc } from '../constants/common';
 import {
     VALIDATORS_ACTION_SET,
     VALIDATORS_FILTER_STATUS_SET,
@@ -30,7 +31,7 @@ export const getValidatorsError = (data) => {
     };
 };
 
-export const getValidators = (cb) => (dispatch, getState) => {
+export const getValidators = (cb = emptyFunc) => (dispatch, getState) => {
     Async.waterfall([
         (next) => {
             dispatch(getValidatorsInProgress(null));

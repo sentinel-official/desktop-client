@@ -77,8 +77,6 @@ export const txRedelegate = (body, cb) => (dispatch, getState) => {
                     }
                 })
                 .catch((error) => {
-                    console.error(error);
-
                     dispatch(txRedelegateError(error?.response?.data?.error || error));
                     next(error);
                 });

@@ -16,11 +16,11 @@ const Table = ({
             className={className}>
             <Header columns={columns}/>
             <tbody>
-                {
-                    items.map((item, index) => (
-                        rowComponent(item, index)
-                    ))
-                }
+            {
+                items.map((item, index) => (
+                    rowComponent(item, index)
+                ))
+            }
             </tbody>
         </ReactTable>
     );

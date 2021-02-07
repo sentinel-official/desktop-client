@@ -29,7 +29,7 @@ const Send = (props) => {
 
 Send.propTypes = {
     amount: PropTypes.shape({
-        value: PropTypes.string.isRequired,
+        value: PropTypes.number.isRequired,
         error: PropTypes.shape({
             message: PropTypes.string.isRequired,
         }).isRequired,

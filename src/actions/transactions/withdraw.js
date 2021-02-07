@@ -61,8 +61,6 @@ export const txWithdraw = (body, cb) => (dispatch, getState) => {
                     }
                 })
                 .catch((error) => {
-                    console.error(error);
-
                     dispatch(txWithdrawError(error?.response?.data?.error || error));
                     next(error);
                 });

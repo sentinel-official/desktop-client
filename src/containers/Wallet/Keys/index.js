@@ -1,7 +1,6 @@
 import * as PropTypes from 'prop-types';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
-import { getKeys } from '../../../actions/keys';
 import Dropdown from '../../../components/Dropdown';
 import Icon from '../../../components/Icon';
 import Settings from './Settings';
@@ -9,10 +8,6 @@ import Settings from './Settings';
 const Keys = (props) => {
     const onClick = (event) => {
     };
-
-    useEffect(() => {
-        props.fetch(props.history, () => ({}));
-    }, []);
 
     return (
         <Dropdown>
@@ -44,10 +39,6 @@ const Keys = (props) => {
 };
 
 Keys.propTypes = {
-    fetch: PropTypes.func.isRequired,
-    history: PropTypes.shape({
-        push: PropTypes.func.isRequired,
-    }).isRequired,
     index: PropTypes.number.isRequired,
     items: PropTypes.arrayOf(
         PropTypes.shape({
@@ -63,8 +54,6 @@ const stateToProps = (state) => {
     };
 };
 
-const actionsToProps = {
-    fetch: getKeys,
-};
+const actionsToProps = {};
 
 export default connect(stateToProps, actionsToProps)(Keys);
