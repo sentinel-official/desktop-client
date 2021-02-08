@@ -29,11 +29,11 @@
 .dashboard-side-bar-container .toggle-section {
     position: absolute;
     background: #109FEC;
-    right: -20px;
+    right: -14px;
     padding: 10px;
     top: 25px;
-    width: 36px;
-    height: 36px;
+    width: 28px;
+    height: 28px;
     display: flex;
     align-items: center;
     border-radius: 50%;
@@ -42,7 +42,7 @@
 }
 
 .dashboard-side-bar-container .toggle-section img {
-    width: 14px;
+    width: 8px;
     height: 16px;
 }
 
@@ -553,5 +553,14 @@
 
     .dashboard-side-bar-container .settings-dropdown .dropdown-toggle::after {
         display: none;
+    }
+}
+@media (max-width: 500px) {
+    .wallet-tab .nav-tabs{
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .filter-section {
+        top: 0;
     }
 }

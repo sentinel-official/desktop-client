@@ -28,7 +28,7 @@ const ModalSettings = () => {
                     value="Configuration"
                 />
             </Modal.Header>
-            <Modal.Body>
+            <Modal.Body className="settings-modal">
                 <div className="row">
                     <div className="col-md-6">
                         <div className="form-group">
