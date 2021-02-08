@@ -29,6 +29,7 @@ import Actions from './Validators/Actions';
 import Status from './Validators/Status';
 import WithDrawValidators from './Withdraw/Validators';
 import WithDraw from './Withdraw/Withdraw';
+import Loader from '../../components/Loader';
 
 const toggleClass = () => {
     if (document.getElementById('side-bar').classList.contains('active')) {
@@ -65,7 +66,7 @@ const Wallet = (props) => {
     }, []);
 
     if (loading) {
-        return <span>Loading</span>;
+        return <Loader/>;
     }
 
     return (
