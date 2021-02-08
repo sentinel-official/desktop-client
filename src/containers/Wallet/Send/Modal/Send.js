@@ -6,10 +6,6 @@ import Button from '../../../../components/Button';
 import { ValidateMemo, ValidatePassword } from './_validation';
 
 const Send = (props) => {
-    const onClick = () => {
-        props.onClick();
-    };
-
     const disabled = (
         ValidatePassword(props.password.value).message !== '' ||
         ValidateMemo(props.memo.value).message !== ''
@@ -22,7 +18,7 @@ const Send = (props) => {
             inProgress={props.inProgress}
             type="button"
             value="Send"
-            onClick={onClick}
+            onClick={props.onClick}
         />
     );
 };

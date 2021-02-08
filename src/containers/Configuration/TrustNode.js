@@ -26,9 +26,7 @@ const TrustNode = (props) => {
 
         props.onClick({
             value,
-            error: {
-                message: ValidateTrustNode(value).message,
-            },
+            error: ValidateTrustNode(value),
         });
     };
 

@@ -4,8 +4,11 @@ import { connect } from 'react-redux';
 import TextBox from '../../../components/TextBox';
 import { encodeToBech32 } from '../../../utils/bech32';
 
-const Address = (props) => {
-    const value = encodeToBech32(props.items[props.index]?.address, 'sent');
+const Address = ({
+    items,
+    index,
+}) => {
+    const value = encodeToBech32(items[index]?.address, 'sent');
 
     return (
         <div className="receive-address">
@@ -22,7 +25,7 @@ Address.propTypes = {
     items: PropTypes.arrayOf(
         PropTypes.shape({
             address: PropTypes.string.isRequired,
-        }),
+        }).isRequired,
     ).isRequired,
 };
 

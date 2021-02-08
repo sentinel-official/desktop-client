@@ -1,14 +1,14 @@
 import * as PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
-import { setTxDelegateTo, showTxDelegateModal } from '../../../../actions/transactions/delegate';
+import { setTxRedelegateFrom, showTxRedelegateModal } from '../../../../actions/transactions/redelegate';
 import Button from '../../../../components/Button';
-import ModalDelegate from '../ModalDelegate';
+import ModalRedelegate from '../ModalRedelegate';
 
-const Delegate = (props) => {
+const Redelegate = (props) => {
     const onClick = () => {
-        props.setTo({
-            value: props.to,
+        props.setFrom({
+            value: props.from,
             error: new Error(''),
         });
         props.showModal();
@@ -16,27 +16,27 @@ const Delegate = (props) => {
 
     return (
         <>
-            <ModalDelegate/>
+            <ModalRedelegate/>
             <Button
                 className="delegate-button"
                 disabled={false}
                 inProgress={false}
-                value="Delegate"
+                value="Redelegate"
                 onClick={onClick}
             />
         </>
     );
 };
 
-Delegate.propTypes = {
-    setTo: PropTypes.func.isRequired,
+Redelegate.propTypes = {
+    from: PropTypes.string.isRequired,
+    setFrom: PropTypes.func.isRequired,
     showModal: PropTypes.func.isRequired,
-    to: PropTypes.string.isRequired,
 };
 
 const actionsToProps = {
-    showModal: showTxDelegateModal,
-    setTo: setTxDelegateTo,
+    showModal: showTxRedelegateModal,
+    setFrom: setTxRedelegateFrom,
 };
 
-export default connect(null, actionsToProps)(Delegate);
+export default connect(null, actionsToProps)(Redelegate);

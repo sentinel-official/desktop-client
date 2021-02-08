@@ -18,10 +18,6 @@ const options = [
 ];
 
 const Status = (props) => {
-    const onClick = (value) => {
-        props.onClick(value);
-    };
-
     return (
         <div className="button-group buttons-state">
             {
@@ -32,7 +28,7 @@ const Status = (props) => {
                             className={props.value === item.value ? 'active' : 'primary'}
                             label={item.label}
                             type="button"
-                            onClick={() => onClick(item.value)}
+                            onClick={() => props.onClick(item.value)}
                         />
                     );
                 })

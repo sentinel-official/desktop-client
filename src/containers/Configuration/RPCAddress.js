@@ -11,9 +11,7 @@ const RPCAddress = (props) => {
 
         props.onChange({
             value,
-            error: {
-                message: ValidateRPCAddress(value).message,
-            },
+            error: ValidateRPCAddress(value),
         });
     };
 

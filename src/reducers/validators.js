@@ -38,6 +38,8 @@ const action = (state = 0, {
     switch (type) {
     case VALIDATORS_ACTION_SET:
         return data;
+    case VALIDATORS_FILTER_STATUS_SET:
+        return 0;
     default:
         return state;
     }

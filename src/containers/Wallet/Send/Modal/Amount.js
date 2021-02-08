@@ -3,8 +3,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import TextBox from '../../../../components/TextBox';
 
-const Amount = (props) => {
-    const value = props.value.toString();
+const Amount = ({
+    value,
+}) => {
+    value = value.toString();
 
     return (
         <TextBox

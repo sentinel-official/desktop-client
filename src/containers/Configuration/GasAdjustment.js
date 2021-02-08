@@ -11,9 +11,7 @@ const GasAdjustment = (props) => {
 
         props.onChange({
             value,
-            error: {
-                message: ValidateGasAdjustment(value).message,
-            },
+            error: ValidateGasAdjustment(value),
         });
     };
 

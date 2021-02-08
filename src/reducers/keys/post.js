@@ -1,11 +1,11 @@
 import { combineReducers } from 'redux';
 import {
-    KEY_MNEMONIC_SET,
-    KEY_NAME_SET,
-    KEY_PASSWORD_SET,
     KEYS_POST_ERROR,
     KEYS_POST_IN_PROGRESS,
     KEYS_POST_SUCCESS,
+    KEY_MNEMONIC_SET,
+    KEY_NAME_SET,
+    KEY_PASSWORD_SET,
 } from '../../constants/keys';
 
 const name = (state = {

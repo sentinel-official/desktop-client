@@ -10,9 +10,7 @@ const Mnemonic = (props) => {
         const value = event.target.value.toString();
         props.onChange({
             value,
-            error: {
-                message: ValidateMnemonic(value).message,
-            },
+            error: ValidateMnemonic(value),
         });
     };
 

@@ -17,10 +17,6 @@ const options = [
 ];
 
 const Actions = (props) => {
-    const onClick = (index) => {
-        props.onClick(index);
-    };
-
     return (
         <Dropdown>
             <Dropdown.Toggle>
@@ -33,7 +29,7 @@ const Actions = (props) => {
                             ? null
                             : <Dropdown.Item
                                 key={index}
-                                onClick={() => onClick(index)}>
+                                onClick={() => props.onClick(index)}>
                                 {item.label}
                             </Dropdown.Item>
                     ))
@@ -45,12 +41,14 @@ const Actions = (props) => {
 
 Actions.propTypes = {
     index: PropTypes.number.isRequired,
+    status: PropTypes.number.isRequired,
     onClick: PropTypes.func.isRequired,
 };
 
 const stateToProps = (state) => {
     return {
         index: state.validators.action,
+        status: state.validators.status,
     };
 };
 

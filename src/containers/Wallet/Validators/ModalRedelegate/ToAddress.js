@@ -11,9 +11,7 @@ const ToAddress = (props) => {
 
         props.onChange({
             value,
-            error: {
-                message: ValidateToAddress(value).message,
-            },
+            error: ValidateToAddress(value),
         });
     };
 

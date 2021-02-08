@@ -3,11 +3,13 @@ import React from 'react';
 import { connect } from 'react-redux';
 import TextBox from '../../../../components/TextBox';
 
-const To = (props) => {
+const To = ({
+    value,
+}) => {
     return (
         <TextBox
             className="address"
-            value={props.value}
+            value={value}
         />
     );
 };

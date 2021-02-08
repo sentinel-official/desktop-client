@@ -11,9 +11,7 @@ const Fees = (props) => {
 
         props.onChange({
             value,
-            error: {
-                message: ValidateFees(value).message,
-            },
+            error: ValidateFees(value),
         });
     };
 

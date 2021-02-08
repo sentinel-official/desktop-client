@@ -11,9 +11,7 @@ const To = (props) => {
 
         props.onChange({
             value,
-            error: {
-                message: ValidateTo(value).message,
-            },
+            error: ValidateTo(value),
         });
     };
 

@@ -7,13 +7,11 @@ import { ValidateAmount } from './_validation';
 
 const Amount = (props) => {
     const onChange = (event) => {
-        const value = parseFloat(event.target.value.toString().trim());
+        const value = parseFloat(event.target.value);
 
         props.onChange({
             value,
-            error: {
-                message: ValidateAmount(value).message,
-            },
+            error: ValidateAmount(value),
         });
     };
 

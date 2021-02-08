@@ -18,7 +18,6 @@ const ModalDelegate = (props) => {
             animation={false}
             backdrop="static"
             centered={true}
-            className="withdraw-modal"
             keyboard={false}
             show={props.show}
             onHide={props.onHide}>

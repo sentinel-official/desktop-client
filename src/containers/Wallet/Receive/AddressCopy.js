@@ -4,8 +4,11 @@ import { connect } from 'react-redux';
 import Copy from '../../../components/Copy';
 import { encodeToBech32 } from '../../../utils/bech32';
 
-const AddressCopy = (props) => {
-    const text = encodeToBech32(props.items[props.index]?.address, 'sent');
+const AddressCopy = ({
+    items,
+    index,
+}) => {
+    const text = encodeToBech32(items[index]?.address, 'sent');
 
     return (
         <Copy text={text}/>
@@ -17,7 +20,7 @@ AddressCopy.propTypes = {
     items: PropTypes.arrayOf(
         PropTypes.shape({
             address: PropTypes.string.isRequired,
-        }),
+        }).isRequired,
     ).isRequired,
 };
 

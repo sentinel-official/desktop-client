@@ -11,9 +11,7 @@ const Amount = (props) => {
 
         props.onChange({
             value,
-            error: {
-                message: ValidateAmount(value).message,
-            },
+            error: ValidateAmount(value),
         });
     };
 

@@ -5,8 +5,11 @@ import Dropdown from '../../../components/Dropdown';
 import Icon from '../../../components/Icon';
 import Settings from './Settings';
 
-const Keys = (props) => {
-    const onClick = (event) => {
+const Keys = ({
+    items,
+    index,
+}) => {
+    const onClick = () => {
     };
 
     return (
@@ -16,11 +19,11 @@ const Keys = (props) => {
                     className="icon"
                     icon="profile"
                 />
-                {props.items[props.index]?.name}
+                {items[index].name}
             </Dropdown.Toggle>
             <Dropdown.Menu>
                 {
-                    props.items.map((item, index) => (
+                    items.map((item, index) => (
                         <Dropdown.Item
                             key={index}
                             onClick={onClick}>

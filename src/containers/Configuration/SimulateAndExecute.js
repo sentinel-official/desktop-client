@@ -26,9 +26,7 @@ const SimulateAndExecute = (props) => {
 
         props.onClick({
             value,
-            error: {
-                message: ValidateSimulateAndExecute(value).message,
-            },
+            error: ValidateSimulateAndExecute(value),
         });
     };
 
