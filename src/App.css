@@ -84,20 +84,32 @@ label, .label {
 }
 
 .modal-header {
-    padding: 1rem 2rem;
+    padding: 40px 40px 0px 40px;
+    border: 0px solid;
 }
 
 .modal-body {
-    padding: 2rem;
+    padding:20px 40px 40px 40px;
+}
+.modal-header {
+    align-items: center;
 }
 
+.modal-header .account-name {
+    margin: 0 0 0 10px;
+    font-size: 18px;
+    color: #139EEE;
+}
 .modal-body .form-group {
     margin-bottom: 20px;
 }
-
+.modal-body .form-control{
+    max-width: 500px;
+}
 .modal-title {
     font-weight: 500;
     font-size: 18px;
+    text-transform: uppercase;
     color: #252E40;
 }
 
@@ -138,7 +150,7 @@ label, .label {
 
 @media (min-width: 576px) {
     .modal-dialog {
-        max-width: 600px;
+        max-width: 780px;
     }
 }
 

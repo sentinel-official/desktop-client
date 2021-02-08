@@ -502,16 +502,6 @@
     }
 }
 
-.modal-header {
-    align-items: center;
-}
-
-.modal-header .account-name {
-    margin: 0 0 0 10px;
-    font-size: 18px;
-    color: #139EEE;
-}
-
 .success-modal .image-section {
     text-align: center;
 }

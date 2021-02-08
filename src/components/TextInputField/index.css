@@ -5,3 +5,7 @@
     color: #8B99B5;
     height: 45px;
 }
+
+textarea.form-control, textarea.form-control::placeholder, textarea.form-control:focus {
+    height: auto;
+}
