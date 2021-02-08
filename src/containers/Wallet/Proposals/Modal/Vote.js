@@ -1,14 +1,18 @@
 import * as PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
+import { txVote } from '../../../../actions/transactions/vote';
 import Button from '../../../../components/Button';
+import { ValidateMemo, ValidatePassword } from './_validation';
 
 const Vote = (props) => {
     const onClick = () => {
-
     };
 
-    const disabled = true;
+    const disabled = (
+        ValidateMemo(props.memo.value).message !== '' ||
+        ValidatePassword(props.password.value).message !== ''
+    );
 
     return (
         <Button
@@ -24,7 +28,31 @@ const Vote = (props) => {
 
 Vote.propTypes = {
     inProgress: PropTypes.bool.isRequired,
+    memo: PropTypes.shape({
+        value: PropTypes.string.isRequired,
+        error: PropTypes.shape({
+            message: PropTypes.string.isRequired,
+        }).isRequired,
+    }).isRequired,
+    password: PropTypes.shape({
+        value: PropTypes.string.isRequired,
+        error: PropTypes.shape({
+            message: PropTypes.string.isRequired,
+        }).isRequired,
+    }).isRequired,
     onClick: PropTypes.func.isRequired,
 };
 
-export default connect()(Vote);
+const stateToProps = (state) => {
+    return {
+        inProgress: state.transactions.vote.inProgress,
+        memo: state.transactions.vote.memo,
+        password: state.account.password,
+    };
+};
+
+const actionsToProps = {
+    onClick: txVote,
+};
+
+export default connect(stateToProps, actionsToProps)(Vote);

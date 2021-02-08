@@ -7,8 +7,8 @@ import { ValidateMemo, ValidatePassword } from './_validation';
 
 const Send = (props) => {
     const disabled = (
-        ValidatePassword(props.password.value).message !== '' ||
-        ValidateMemo(props.memo.value).message !== ''
+        ValidateMemo(props.memo.value).message !== '' ||
+        ValidatePassword(props.password.value).message !== ''
     );
 
     return (

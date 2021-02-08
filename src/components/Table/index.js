@@ -21,8 +21,7 @@ const Table = ({
                         return (
                             <Component
                                 key={index}
-                                index={index}
-                                {...item}
+                                item={item}
                             />
                         );
                     })

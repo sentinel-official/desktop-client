@@ -26,6 +26,9 @@ import Send from './Send/Send';
 import DepositAddress from './Send/To';
 import Validators from './Validators';
 import Actions from './Validators/Actions';
+import ModalDelegate from './Validators/ModalDelegate';
+import ModalRedelegate from './Validators/ModalRedelegate';
+import ModalUnbond from './Validators/ModalUnbond';
 import Status from './Validators/Status';
 import WithDrawValidators from './Withdraw/Validators';
 import WithDraw from './Withdraw/Withdraw';
@@ -70,9 +73,12 @@ const Wallet = (props) => {
 
     return (
         <>
-            <ModalTxInfo/>
             <ModalConfiguration history={props.history}/>
             <ModalSend/>
+            <ModalDelegate/>
+            <ModalRedelegate/>
+            <ModalUnbond/>
+            <ModalTxInfo/>
             <div className="wallet-section">
                 <div className="dashboard-side-bar-container" id="side-bar">
                     <div className="toggle-section" onClick={toggleClass}>

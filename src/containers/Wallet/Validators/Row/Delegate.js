@@ -3,7 +3,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { setTxDelegateTo, showTxDelegateModal } from '../../../../actions/transactions/delegate';
 import Button from '../../../../components/Button';
-import ModalDelegate from '../ModalDelegate';
 
 const Delegate = (props) => {
     const onClick = () => {
@@ -15,16 +14,13 @@ const Delegate = (props) => {
     };
 
     return (
-        <>
-            <ModalDelegate/>
-            <Button
-                className="delegate-button"
-                disabled={false}
-                inProgress={false}
-                value="Delegate"
-                onClick={onClick}
-            />
-        </>
+        <Button
+            className="delegate-button"
+            disabled={false}
+            inProgress={false}
+            value="Delegate"
+            onClick={onClick}
+        />
     );
 };
 

@@ -1,10 +1,18 @@
 import * as PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
+import { setTxVoteMemo } from '../../../../actions/transactions/vote';
 import TextArea from '../../../../components/TextArea';
+import { ValidateMemo } from './_validation';
 
 const Memo = (props) => {
     const onChange = (event) => {
+        const value = event.target.value.toString();
+
+        props.onChange({
+            value,
+            error: ValidateMemo(value),
+        });
     };
 
     return (
@@ -31,4 +39,14 @@ Memo.propTypes = {
     onChange: PropTypes.func.isRequired,
 };
 
-export default connect()(Memo);
+const stateToProps = (state) => {
+    return {
+        input: state.transactions.vote.memo,
+    };
+};
+
+const actionsToProps = {
+    onChange: setTxVoteMemo,
+};
+
+export default connect(stateToProps, actionsToProps)(Memo);

@@ -61,6 +61,11 @@ export const getValidators = (cb = emptyFunc) => (dispatch, getState) => {
                     next(error);
                 });
         }, (result, next) => {
+            result = Lodash.orderBy(result, ['amount.value'], ['desc']);
+            result.forEach((item, index) => {
+                item.index = index;
+            });
+
             dispatch(getValidatorsSuccess(result));
             next(null);
         },

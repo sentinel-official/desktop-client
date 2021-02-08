@@ -3,7 +3,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { setTxUnbondFrom, showTxUnbondModal } from '../../../../actions/transactions/unbond';
 import Button from '../../../../components/Button';
-import ModalUnbond from '../ModalUnbond';
 
 const Unbond = (props) => {
     const onClick = () => {
@@ -15,16 +14,13 @@ const Unbond = (props) => {
     };
 
     return (
-        <>
-            <ModalUnbond/>
-            <Button
-                className="delegate-button"
-                disabled={false}
-                inProgress={false}
-                value="Unbond"
-                onClick={onClick}
-            />
-        </>
+        <Button
+            className="delegate-button"
+            disabled={false}
+            inProgress={false}
+            value="Unbond"
+            onClick={onClick}
+        />
     );
 };
 

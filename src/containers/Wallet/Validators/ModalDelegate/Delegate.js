@@ -3,12 +3,17 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { txDelegate } from '../../../../actions/transactions/delegate';
 import Button from '../../../../components/Button';
+import { ValidateAmount, ValidateMemo, ValidatePassword } from './_validation';
 
 const Delegate = (props) => {
     const onClick = () => {
     };
 
-    const disabled = false;
+    const disabled = (
+        ValidateAmount(props.amount.value).message !== '' ||
+        ValidateMemo(props.memo.value).message !== '' ||
+        ValidatePassword(props.password.value).message !== ''
+    );
 
     return (
         <Button
@@ -23,13 +28,34 @@ const Delegate = (props) => {
 };
 
 Delegate.propTypes = {
+    amount: PropTypes.shape({
+        value: PropTypes.number.isRequired,
+        error: PropTypes.shape({
+            message: PropTypes.string.isRequired,
+        }).isRequired,
+    }).isRequired,
     inProgress: PropTypes.bool.isRequired,
+    memo: PropTypes.shape({
+        value: PropTypes.string.isRequired,
+        error: PropTypes.shape({
+            message: PropTypes.string.isRequired,
+        }).isRequired,
+    }).isRequired,
+    password: PropTypes.shape({
+        value: PropTypes.string.isRequired,
+        error: PropTypes.shape({
+            message: PropTypes.string.isRequired,
+        }).isRequired,
+    }).isRequired,
     onClick: PropTypes.func.isRequired,
 };
 
 const stateToProps = (state) => {
     return {
+        amount: state.transactions.delegate.amount,
         inProgress: state.transactions.delegate.inProgress,
+        memo: state.transactions.delegate.memo,
+        password: state.account.password,
     };
 };
 

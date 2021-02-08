@@ -8,11 +8,16 @@ import Delegate from './Delegate';
 import Redelegate from './Redelegate';
 import Unbond from './Unbond';
 
-const Row = (props) => {
+const Row = ({
+    action,
+    item,
+    status,
+    totalVotingPower,
+}) => {
     const [avatarURL, setAvatarURL] = useState('');
 
     useEffect(() => {
-        const { identity } = props.description;
+        const { identity } = item.description;
         if (identity === '') {
             setAvatarURL('');
             return;
@@ -29,18 +34,21 @@ const Row = (props) => {
                 }
             })
             .catch(console.error);
-    }, [props.description.identity]);
+    }, [item.description.identity]);
 
-    const active = props.jailed === false && props['bond_status'] === 'Bonded';
-    if ((active && props.status === 0) || (!active && props.status === 1)) {
+    const active = item.jailed === false && item['bond_status'] === 'Bonded';
+    if ((active && status === 0) || (!active && status === 1)) {
         return null;
     }
 
+    const votingPower = (item.amount.value / Math.pow(10, 6)).toFixed(2);
+    const votingPowerPercentage = (item.amount.value * 100 / totalVotingPower).toFixed(2);
+
     return (
-        <tr key={props.index}>
+        <tr key={item.index}>
             <td className="flex-center">
                 <div className="serial">
-                    {props.index}
+                    {item.index + 1}
                 </div>
                 <Image
                     alt="moniker-image"
@@ -49,24 +57,27 @@ const Row = (props) => {
                 />
             </td>
             <td>
-                {props.description.moniker}
+                {item.description.moniker}
             </td>
             <td>
-                {(props.amount.value / Math.pow(10, 6)).toFixed(2)}
+                {`${votingPower} (${votingPowerPercentage}%)`}
             </td>
             <td>
-                {(props.commission.rate * 100).toFixed(2)}%
+                {(item.commission.rate * 100).toFixed(2)}%
             </td>
             <td>
                 {
-                    props.action === 0 && props.status === 1 ? <Delegate to={props.address}/> : null
+                    item.delegation
+                        ? (item.amount.value / parseFloat(item.delegator_shares) * parseFloat(item.delegation.shares) * Math.pow(10, -6)).toFixed(2)
+                        : parseFloat('0').toFixed(2)
                 }
-                {
-                    props.action === 1 ? <Redelegate from={props.address}/> : null
-                }
-                {
-                    props.action === 2 ? <Unbond from={props.address}/> : null
-                }
+            </td>
+            <td>
+                {status === 1 && action === 0 ? <Delegate to={item.address}/> : null}
+                {status === 1 && action === 1 ? <Redelegate from={item.address}/> : null}
+                {status === 1 && action === 2 ? <Unbond from={item.address}/> : null}
+                {status === 0 && action === 0 ? <Redelegate from={item.address}/> : null}
+                {status === 0 && action === 1 ? <Unbond from={item.address}/> : null}
             </td>
         </tr>
     );
@@ -74,29 +85,37 @@ const Row = (props) => {
 
 Row.propTypes = {
     action: PropTypes.number.isRequired,
-    address: PropTypes.string.isRequired,
-    amount: PropTypes.shape({
-        value: PropTypes.number.isRequired,
+    item: PropTypes.shape({
+        address: PropTypes.string.isRequired,
+        amount: PropTypes.shape({
+            value: PropTypes.number.isRequired,
+        }).isRequired,
+        bond_status: PropTypes.string.isRequired,
+        commission: PropTypes.shape({
+            rate: PropTypes.string.isRequired,
+            updated_at: PropTypes.string.isRequired,
+        }).isRequired,
+        delegation: PropTypes.shape({
+            shares: PropTypes.string.isRequired,
+        }),
+        delegator_shares: PropTypes.string.isRequired,
+        description: PropTypes.shape({
+            identity: PropTypes.string.isRequired,
+            moniker: PropTypes.string.isRequired,
+            website: PropTypes.string.isRequired,
+        }).isRequired,
+        index: PropTypes.number.isRequired,
+        jailed: PropTypes.bool.isRequired,
     }).isRequired,
-    bond_status: PropTypes.string.isRequired,
-    commission: PropTypes.shape({
-        rate: PropTypes.string.isRequired,
-        updated_at: PropTypes.string.isRequired,
-    }).isRequired,
-    description: PropTypes.shape({
-        identity: PropTypes.string.isRequired,
-        moniker: PropTypes.string.isRequired,
-        website: PropTypes.string.isRequired,
-    }).isRequired,
-    index: PropTypes.number.isRequired,
-    jailed: PropTypes.bool.isRequired,
     status: PropTypes.number.isRequired,
+    totalVotingPower: PropTypes.number.isRequired,
 };
 
 const stateToProps = (state) => {
     return {
         action: state.validators.action,
         status: state.validators.status,
+        totalVotingPower: state.validators.totalVotingPower,
     };
 };
 

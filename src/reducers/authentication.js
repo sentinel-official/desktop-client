@@ -7,7 +7,7 @@ import {
 } from '../constants/authentication';
 
 const password = (state = {
-    value: '',
+    value: 'admin',
     error: {
         message: '',
     },

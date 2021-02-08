@@ -4,19 +4,17 @@ import { connect } from 'react-redux';
 import { setValidatorsActionSet } from '../../../actions/validators';
 import Dropdown from '../../../components/Dropdown';
 
-const options = [
-    {
-        label: 'Delegate',
-    },
-    {
-        label: 'Redelegate',
-    },
-    {
-        label: 'Unbond',
-    },
-];
-
 const Actions = (props) => {
+    const options = [
+        { label: 'Delegate' },
+        { label: 'Redelegate' },
+        { label: 'Unbond' },
+    ];
+
+    if (props.status === 0) {
+        options.splice(0, 1);
+    }
+
     return (
         <Dropdown>
             <Dropdown.Toggle>

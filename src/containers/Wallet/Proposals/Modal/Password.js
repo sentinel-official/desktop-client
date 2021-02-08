@@ -1,10 +1,18 @@
 import * as PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
+import { setAccountPassword } from '../../../../actions/account';
 import TextInputField from '../../../../components/TextInputField';
+import { ValidatePassword } from './_validation';
 
 const Password = (props) => {
     const onChange = (event) => {
+        const value = event.target.value.toString();
+
+        props.onChange({
+            value,
+            error: ValidatePassword(value),
+        });
     };
 
     return (
@@ -31,4 +39,14 @@ Password.propTypes = {
     onChange: PropTypes.func.isRequired,
 };
 
-export default connect()(Password);
+const stateToProps = (state) => {
+    return {
+        input: state.account.password,
+    };
+};
+
+const actionsToProps = {
+    onChange: setAccountPassword,
+};
+
+export default connect(stateToProps, actionsToProps)(Password);

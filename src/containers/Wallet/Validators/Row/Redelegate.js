@@ -3,7 +3,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { setTxRedelegateFrom, showTxRedelegateModal } from '../../../../actions/transactions/redelegate';
 import Button from '../../../../components/Button';
-import ModalRedelegate from '../ModalRedelegate';
 
 const Redelegate = (props) => {
     const onClick = () => {
@@ -15,16 +14,13 @@ const Redelegate = (props) => {
     };
 
     return (
-        <>
-            <ModalRedelegate/>
-            <Button
-                className="delegate-button"
-                disabled={false}
-                inProgress={false}
-                value="Redelegate"
-                onClick={onClick}
-            />
-        </>
+        <Button
+            className="delegate-button"
+            disabled={false}
+            inProgress={false}
+            value="Redelegate"
+            onClick={onClick}
+        />
     );
 };
 

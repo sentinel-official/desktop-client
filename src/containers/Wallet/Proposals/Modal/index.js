@@ -1,19 +1,26 @@
+import * as PropTypes from 'prop-types';
 import React from 'react';
 import { Modal as ReactModal } from 'react-bootstrap';
+import { connect } from 'react-redux';
+import { hideTxVoteModal } from '../../../../actions/transactions/vote';
 import Label from '../../../../components/Label';
 import TextBox from '../../../../components/TextBox';
 import Memo from './Memo';
 import Password from './Password';
 import Vote from './Vote';
 
-const Modal = () => {
+const Modal = ({
+    show,
+    onHide,
+}) => {
     return (
         <ReactModal
+            animation={false}
             backdrop="static"
             centered={true}
             keyboard={false}
-            show={true}
-            onHide={false}>
+            show={show}
+            onHide={onHide}>
             <ReactModal.Header closeButton={true}>
                 <TextBox
                     className="modal-title"
@@ -41,4 +48,19 @@ const Modal = () => {
     );
 };
 
-export default Modal;
+Modal.propTypes = {
+    show: PropTypes.bool.isRequired,
+    onHide: PropTypes.func.isRequired,
+};
+
+const stateToProps = (state) => {
+    return {
+        show: state.transactions.vote.modal,
+    };
+};
+
+const actionsToProps = {
+    onHide: hideTxVoteModal,
+};
+
+export default connect(stateToProps, actionsToProps)(Modal);
