@@ -24,7 +24,7 @@
 }
 
 .section-body .key-info {
-    width: 60%;
+    width: 70%;
 }
 
 .label-icon {
@@ -60,6 +60,29 @@
     text-transform: none;
 }
 
+.custom-control-label::before {
+    width: 1.4rem;
+    top: 0.05rem;
+    left: -1.8rem;
+    height: 1.4rem;
+    border-width: 2px;
+}
+
+.custom-control-label::after {
+    top: 0.05rem;
+    width: 1.4rem;
+    left: -1.8rem;
+    height: 1.4rem;
+}
+
 .checkbox-section .custom-checkbox .custom-control-label::before {
     border-radius: 50%;
+}
+
+.custom-control-input:checked ~ .custom-control-label::before {
+    background-color: #FFFFFF;
+}
+
+.custom-checkbox .custom-control-input:checked ~ .custom-control-label::after {
+    background-image: url('../../assets/checkbox.svg');
 }
