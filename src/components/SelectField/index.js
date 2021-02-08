@@ -14,7 +14,7 @@ const SelectField = ({
             {
                 list.map((item, index) => (
                     <option key={index}>
-                        {item}
+                        {item.value} ({item.address})
                     </option>
                 ))
             }

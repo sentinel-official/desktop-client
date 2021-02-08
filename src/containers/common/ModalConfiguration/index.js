@@ -16,6 +16,7 @@ import RPCAddress from '../../Configuration/RPCAddress';
 import SimulateAndExecute from '../../Configuration/SimulateAndExecute';
 import TrustNode from '../../Configuration/TrustNode';
 import Submit from './Submit';
+import Loader from '../../../components/Loader';
 
 const ModalConfiguration = (props) => {
     const [loading, setLoading] = useState(true);
@@ -52,7 +53,7 @@ const ModalConfiguration = (props) => {
             <Modal.Body className="settings-modal">
                 {
                     loading
-                        ? <span>Loading</span>
+                        ? <span><Loader/></span>
                         : <>
                             <div className="row">
                                 <div className="col-md-6">

@@ -4,26 +4,23 @@ import { connect } from 'react-redux';
 import Dropdown from '../../../components/Dropdown';
 import Icon from '../../../components/Icon';
 import Settings from './Settings';
-
-const Keys = ({
-    items,
-    index,
-}) => {
-    const onClick = () => {
+import TextBox from '../../../components/TextBox';
+const Keys = (props) => {
+    const onClick = (event) => {
     };
 
     return (
         <Dropdown>
-            <Dropdown.Toggle>
+            <Dropdown.Toggle className="flex-center">
                 <Icon
                     className="icon"
                     icon="profile"
                 />
-                {items[index].name}
+                <TextBox className="dropdown-title" value={props.items[props.index]?.name}/>
             </Dropdown.Toggle>
             <Dropdown.Menu>
                 {
-                    items.map((item, index) => (
+                    props.items.map((item, index) => (
                         <Dropdown.Item
                             key={index}
                             onClick={onClick}>
