@@ -10,7 +10,7 @@
 }
 
 .login-button button, .login-button button:hover {
-    height: 30px;
+    height: 36px;
     width: 100px;
     display: flex;
     align-items: center;
@@ -49,4 +49,11 @@
     width: 180px;
     margin-top: 10px;
     text-transform: uppercase;
+}
+
+.delegate-button {
+    font-weight: 500;
+    font-size: 14px;
+    color: #139EEE;
+    background: transparent !important;
 }

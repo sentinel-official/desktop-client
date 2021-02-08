@@ -6,6 +6,8 @@ import {
     TX_REDELEGATE_FROM_SET,
     TX_REDELEGATE_IN_PROGRESS,
     TX_REDELEGATE_MEMO_SET,
+    TX_REDELEGATE_MODAL_HIDE,
+    TX_REDELEGATE_MODAL_SHOW,
     TX_REDELEGATE_SUCCESS,
     TX_REDELEGATE_TO_SET,
     TX_REDELEGATE_URL,
@@ -75,8 +77,6 @@ export const txRedelegate = (body, cb) => (dispatch, getState) => {
                     }
                 })
                 .catch((error) => {
-                    console.error(error);
-
                     dispatch(txRedelegateError(error?.response?.data?.error || error));
                     next(error);
                 });
@@ -85,4 +85,18 @@ export const txRedelegate = (body, cb) => (dispatch, getState) => {
             next(null);
         },
     ], cb);
+};
+
+export const showTxRedelegateModal = (data) => {
+    return {
+        type: TX_REDELEGATE_MODAL_SHOW,
+        data,
+    };
+};
+
+export const hideTxRedelegateModal = (data) => {
+    return {
+        type: TX_REDELEGATE_MODAL_HIDE,
+        data,
+    };
 };

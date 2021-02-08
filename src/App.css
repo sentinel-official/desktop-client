@@ -197,7 +197,6 @@ label, .label {
     margin: 0;
     font-size: 12px;
     position: absolute;
-    display: none;
     background-color: red;
     right: -15px;
     top: 65px;

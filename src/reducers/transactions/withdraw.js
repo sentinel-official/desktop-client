@@ -11,7 +11,7 @@ import {
 } from '../../constants/transactions';
 
 const from = (state = {
-    value: [],
+    value: '',
     error: {
         message: '',
     },
@@ -32,7 +32,7 @@ const from = (state = {
     case TX_WITHDRAW_SUCCESS:
         return {
             ...state,
-            value: [],
+            value: '',
             error: {
                 ...state.error,
                 message: '',

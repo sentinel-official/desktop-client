@@ -3,6 +3,7 @@ import Configuration from './pages/Configuration';
 import CreateKey from './pages/CreateKey';
 import KeyInfo from './pages/KeyInfo';
 import Splash from './pages/Splash';
+import Wallet from './pages/Wallet';
 
 const routes = [{
     path: '/',
@@ -23,6 +24,10 @@ const routes = [{
 }, {
     path: '/keys/:name',
     component: KeyInfo,
+    private: true,
+}, {
+    path: '/dashboard',
+    component: Wallet,
     private: true,
 }];
 

@@ -7,17 +7,20 @@ import './index.css';
 const Table = ({
     className,
     columns,
+    items,
     rowComponent,
 }) => {
     return (
-        <ReactTable borderless className={className}>
+        <ReactTable
+            borderless={true}
+            className={className}>
             <Header columns={columns}/>
             <tbody>
-            {
-                columns.map((item, index) => (
-                    rowComponent(item.label, index)
-                ))
-            }
+                {
+                    items.map((item, index) => (
+                        rowComponent(item, index)
+                    ))
+                }
             </tbody>
         </ReactTable>
     );
@@ -25,7 +28,12 @@ const Table = ({
 
 Table.propTypes = {
     className: PropTypes.string.isRequired,
-    columns: PropTypes.array.isRequired,
+    columns: PropTypes.arrayOf(
+        PropTypes.shape({
+            label: PropTypes.string.isRequired,
+        }),
+    ).isRequired,
+    items: PropTypes.array.isRequired,
     rowComponent: PropTypes.func.isRequired,
 };
 

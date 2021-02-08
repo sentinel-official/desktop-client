@@ -5,6 +5,8 @@ import {
     TX_WITHDRAW_FROM_SET,
     TX_WITHDRAW_IN_PROGRESS,
     TX_WITHDRAW_MEMO_SET,
+    TX_WITHDRAW_MODAL_HIDE,
+    TX_WITHDRAW_MODAL_SHOW,
     TX_WITHDRAW_SUCCESS,
     TX_WITHDRAW_URL,
 } from '../../constants/transactions';
@@ -59,8 +61,6 @@ export const txWithdraw = (body, cb) => (dispatch, getState) => {
                     }
                 })
                 .catch((error) => {
-                    console.error(error);
-
                     dispatch(txWithdrawError(error?.response?.data?.error || error));
                     next(error);
                 });
@@ -69,4 +69,18 @@ export const txWithdraw = (body, cb) => (dispatch, getState) => {
             next(null);
         },
     ], cb);
+};
+
+export const showTxWithdrawModal = (data) => {
+    return {
+        type: TX_WITHDRAW_MODAL_SHOW,
+        data,
+    };
+};
+
+export const hideTxWithdrawModal = (data) => {
+    return {
+        type: TX_WITHDRAW_MODAL_HIDE,
+        data,
+    };
 };

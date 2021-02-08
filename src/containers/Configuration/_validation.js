@@ -2,11 +2,16 @@ export const ValidateBroadcastMode = (value) => {
     return new Error('');
 };
 
-export const ValidateChainID = (value) => {
+export const ValidateID = (value) => {
+    value = value.trim();
+    if (value.length === 0) {
+        return new Error('Length must be greater than 0');
+    }
+
     return new Error('');
 };
 
-export const ValidateFee = (value) => {
+export const ValidateFees = (value) => {
     return new Error('');
 };
 
@@ -23,6 +28,11 @@ export const ValidateGasPrices = (value) => {
 };
 
 export const ValidateRPCAddress = (value) => {
+    value = value.trim();
+    if (value.length === 0) {
+        return new Error('Length must be greater than 0');
+    }
+
     return new Error('');
 };
 

@@ -1,5 +1,6 @@
 import Async from 'async';
 import Axios from 'axios';
+import { emptyFunc } from '../constants/common';
 import {
     DELEGATIONS_GET_ERROR,
     DELEGATIONS_GET_IN_PROGRESS,
@@ -28,7 +29,7 @@ export const getDelegationsError = (data) => {
     };
 };
 
-export const getDelegations = (cb) => (dispatch, getState) => {
+export const getDelegations = (cb = emptyFunc) => (dispatch, getState) => {
     Async.waterfall([
         (next) => {
             dispatch(getDelegationsInProgress(null));

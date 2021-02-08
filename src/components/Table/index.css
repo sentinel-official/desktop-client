@@ -17,5 +17,27 @@
     letter-spacing: 0.05em;
     color: #55678B;
     text-transform: uppercase;
+    cursor: pointer;
+}
 
+.validators-table thead th .sort {
+    display: flex;
+}
+
+.validators-table thead th .icon {
+    width: 12px;
+    height: 10px;
+    margin-bottom: 3px;
+    margin-left: 3px
+}
+
+.serial {
+    width: 26px;
+    height: 26px;
+    background: #e5f5fd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
+    border-radius: 50%;
 }

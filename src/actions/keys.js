@@ -1,5 +1,6 @@
 import Async from 'async';
 import Axios from 'axios';
+import { emptyFunc } from '../constants/common';
 import {
     KEY_MNEMONIC_SET,
     KEY_NAME_SET,
@@ -35,7 +36,7 @@ export const getKeysError = (data) => {
     };
 };
 
-export const getKeys = (history, cb) => (dispatch, getState) => {
+export const getKeys = (history, cb = emptyFunc) => (dispatch, getState) => {
     Async.waterfall([
         (next) => {
             dispatch(getKeysInProgress(null));
@@ -67,12 +68,11 @@ export const getKeys = (history, cb) => (dispatch, getState) => {
         }, (next) => {
             const { keys } = getState();
 
-            if (keys.items.length) {
-                history.push('/dashboard');
-                next(new Error(''));
-            } else {
+            if (keys.items.length === 0) {
                 history.push('/keys');
                 next(new Error(''));
+            } else {
+                next(null);
             }
         },
     ], cb);
@@ -120,15 +120,22 @@ export const postKeysError = (data) => {
     };
 };
 
-export const postKeys = (body, history, cb) => (dispatch, getState) => {
+export const postKeys = (history, cb = emptyFunc) => (dispatch, getState) => {
     Async.waterfall([
         (next) => {
             dispatch(postKeysInProgress(null));
             next(null);
         }, (next) => {
-            const { authentication } = getState();
+            const {
+                authentication,
+                keys,
+            } = getState();
 
-            Axios.post(KEYS_POST_URL, body, {
+            Axios.post(KEYS_POST_URL, {
+                mnemonic: keys.post.mnemonic.value.trim(),
+                name: keys.post.name.value.trim(),
+                password: keys.post.password.value.trim(),
+            }, {
                 headers: {
                     Authorization: `Bearer ${authentication.info.value}`,
                 },
@@ -140,6 +147,7 @@ export const postKeys = (body, history, cb) => (dispatch, getState) => {
                 }
             }).catch((error) => {
                 console.error(error);
+
                 dispatch(postKeysError(error?.response?.data?.error || error));
                 next(error);
             });

@@ -1,38 +1,61 @@
 import * as PropTypes from 'prop-types';
 import React from 'react';
+import { connect } from 'react-redux';
+import { setValidatorsActionSet } from '../../../actions/validators';
 import Dropdown from '../../../components/Dropdown';
 
 const options = [
     {
         label: 'Delegate',
-        value: 'delegate',
     },
     {
         label: 'Redelegate',
-        value: 'redelegate',
     },
     {
         label: 'Unbond',
-        value: 'unbond',
     },
 ];
 
 const Actions = (props) => {
-    const onClick = (event) => {
-
+    const onClick = (index) => {
+        props.onClick(index);
     };
 
     return (
-        <Dropdown
-            index={0}
-            options={options}
-            onClick={onClick}
-        />
+        <Dropdown>
+            <Dropdown.Toggle>
+                {options[props.index]?.label}
+            </Dropdown.Toggle>
+            <Dropdown.Menu>
+                {
+                    options.map((item, index) => (
+                        index === props.index
+                            ? null
+                            : <Dropdown.Item
+                                key={index}
+                                onClick={() => onClick(index)}>
+                                {item.label}
+                            </Dropdown.Item>
+                    ))
+                }
+            </Dropdown.Menu>
+        </Dropdown>
     );
 };
 
 Actions.propTypes = {
-    value: PropTypes.string.isRequired,
+    index: PropTypes.number.isRequired,
+    onClick: PropTypes.func.isRequired,
 };
 
-export default Actions;
+const stateToProps = (state) => {
+    return {
+        index: state.validators.action,
+    };
+};
+
+const actionsToProps = {
+    onClick: setValidatorsActionSet,
+};
+
+export default connect(stateToProps, actionsToProps)(Actions);

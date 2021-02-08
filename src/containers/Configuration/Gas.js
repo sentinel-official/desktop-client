@@ -17,11 +17,12 @@ const Gas = (props) => {
         });
     };
 
-    const value = props.value.toString();
+    const value = props.input.value.toString();
 
     return (
         <NumberInputField
             className="form-control"
+            error={props.input.error}
             min={0}
             name="gas"
             placeholder="Enter Gas"
@@ -34,13 +35,18 @@ const Gas = (props) => {
 };
 
 Gas.propTypes = {
-    value: PropTypes.number.isRequired,
+    input: PropTypes.shape({
+        value: PropTypes.number.isRequired,
+        error: PropTypes.shape({
+            message: PropTypes.string.isRequired,
+        }).isRequired,
+    }).isRequired,
     onChange: PropTypes.func.isRequired,
 };
 
 const stateToProps = (state) => {
     return {
-        value: state.configuration.chain.gas.value,
+        input: state.configuration.chain.gas,
     };
 };
 

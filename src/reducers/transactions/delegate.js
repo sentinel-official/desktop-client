@@ -44,7 +44,7 @@ const to = (state = {
 };
 
 const amount = (state = {
-    value: [],
+    value: '',
     error: {
         message: '',
     },
@@ -65,7 +65,7 @@ const amount = (state = {
     case TX_DELEGATE_SUCCESS:
         return {
             ...state,
-            value: [],
+            value: '',
             error: {
                 ...state.error,
                 message: '',

@@ -4,8 +4,8 @@ import './index.css';
 
 const ChipButton = ({
     className,
+    label,
     type,
-    value,
     onClick,
 }) => {
     return (
@@ -13,15 +13,15 @@ const ChipButton = ({
             className={className}
             type={type}
             onClick={onClick}>
-            {value}
+            {label}
         </button>
     );
 };
 
 ChipButton.propTypes = {
     className: PropTypes.string.isRequired,
+    label: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
-    value: PropTypes.string.isRequired,
     onClick: PropTypes.func.isRequired,
 };
 

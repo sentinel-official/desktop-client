@@ -1,5 +1,6 @@
 import Async from 'async';
 import Axios from 'axios';
+import { emptyFunc } from '../constants/common';
 import {
     CONFIGURATION_CHAIN_BROADCAST_MODE_SET,
     CONFIGURATION_CHAIN_FEES_SET,
@@ -14,13 +15,14 @@ import {
     CONFIGURATION_GET_IN_PROGRESS,
     CONFIGURATION_GET_SUCCESS,
     CONFIGURATION_GET_URL,
+    CONFIGURATION_MODAL_HIDE,
+    CONFIGURATION_MODAL_SHOW,
     CONFIGURATION_PUT_ERROR,
     CONFIGURATION_PUT_IN_PROGRESS,
     CONFIGURATION_PUT_SUCCESS,
     CONFIGURATION_PUT_URL,
     CONFIGURATION_SETUP_SET,
 } from '../constants/configuration';
-import { getKeys } from './keys';
 
 export const setConfigurationSetup = (data) => {
     return {
@@ -113,7 +115,7 @@ export const getConfigurationSuccess = (data) => {
     };
 };
 
-export const getConfiguration = (history, cb) => (dispatch, getState) => {
+export const getConfiguration = (history, cb = emptyFunc) => (dispatch, getState) => {
     Async.waterfall([
         (next) => {
             dispatch(getConfigurationInProgress());
@@ -176,15 +178,33 @@ export const putConfigurationSuccess = (data) => {
     };
 };
 
-export const putConfiguration = (body, history, cb) => (dispatch, getState) => {
+export const putConfiguration = (cb = emptyFunc) => (dispatch, getState) => {
     Async.waterfall([
         (next) => {
             dispatch(putConfigurationInProgress());
             next(null);
         }, (next) => {
-            const { authentication } = getState();
+            const {
+                keys,
+                authentication,
+                configuration,
+            } = getState();
 
-            Axios.put(CONFIGURATION_PUT_URL, body, {
+            Axios.put(CONFIGURATION_PUT_URL, {
+                from: keys.items[keys.index]?.name,
+                chain: {
+                    broadcast_mode: configuration.chain.broadcastMode.value.trim(),
+                    fees: configuration.chain.fees.value.trim(),
+                    gas_adjustment: configuration.chain.gasAdjustment.value,
+                    gas_prices: configuration.chain.gasPrices.value.trim(),
+                    gas: configuration.chain.gas.value,
+                    id: configuration.chain.id.value.trim(),
+                    rpc_address: configuration.chain.RPCAddress.value.trim(),
+                    simulate_and_execute: configuration.chain.simulateAndExecute.value,
+                    trust_node: configuration.chain.trustNode.value,
+                },
+                setup: false,
+            }, {
                 headers: {
                     Authorization: `Bearer ${authentication.info.value}`,
                 },
@@ -205,8 +225,20 @@ export const putConfiguration = (body, history, cb) => (dispatch, getState) => {
         }, (result, next) => {
             dispatch(putConfigurationSuccess(result));
             next(null);
-        }, (next) => {
-            getKeys(history, next)(dispatch, getState);
         },
     ], cb);
+};
+
+export const showConfigurationModal = (data) => {
+    return {
+        type: CONFIGURATION_MODAL_SHOW,
+        data,
+    };
+};
+
+export const hideConfigurationModal = (data) => {
+    return {
+        type: CONFIGURATION_MODAL_HIDE,
+        data,
+    };
 };

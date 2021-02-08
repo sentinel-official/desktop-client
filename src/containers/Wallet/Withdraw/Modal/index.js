@@ -1,22 +1,26 @@
+import * as PropTypes from 'prop-types';
 import React from 'react';
 import { Modal as ReactModal } from 'react-bootstrap';
+import { connect } from 'react-redux';
+import { hideTxWithdrawModal } from '../../../../actions/transactions/withdraw';
 import Label from '../../../../components/Label';
 import TextBox from '../../../../components/TextBox';
-import Amount from './Amount';
 import FromAddress from './FromAddress';
 import FromName from './FromName';
 import Memo from './Memo';
 import Password from './Password';
+import Withdraw from './Withdraw';
 
-const Modal = () => {
+const Modal = (props) => {
     return (
         <ReactModal
+            animation={false}
             backdrop="static"
             centered={true}
             className="withdraw-modal"
             keyboard={false}
-            show={true}
-            onHide={false}>
+            show={props.show}
+            onHide={props.onHide}>
             <ReactModal.Header closeButton={true}>
                 <TextBox
                     className="modal-title"
@@ -32,13 +36,6 @@ const Modal = () => {
                     />
                     <FromAddress/>
                 </div>
-                <div className="flex-item">
-                    <Label
-                        className=""
-                        label="Amount"
-                    />
-                    <Amount/>
-                </div>
                 <div className="form-group">
                     <Label
                         className=""
@@ -53,10 +50,25 @@ const Modal = () => {
                     />
                     <Password/>
                 </div>
-                <Modal/>
+                <Withdraw/>
             </ReactModal.Body>
         </ReactModal>
     );
 };
 
-export default Modal;
+Modal.propTypes = {
+    show: PropTypes.bool.isRequired,
+    onHide: PropTypes.func.isRequired,
+};
+
+const stateToProps = (state) => {
+    return {
+        show: state.transactions.withdraw.modal,
+    };
+};
+
+const actionsToProps = {
+    onHide: hideTxWithdrawModal,
+};
+
+export default connect(stateToProps, actionsToProps)(Modal);

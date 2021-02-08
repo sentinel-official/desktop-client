@@ -1,7 +1,9 @@
+import * as PropTypes from 'prop-types';
 import React from 'react';
+import { connect } from 'react-redux';
 import TextBox from '../../../../components/TextBox';
 
-const FromName = () => {
+const FromName = (props) => {
     return (
         <TextBox
             className="account-name"
@@ -10,4 +12,14 @@ const FromName = () => {
     );
 };
 
-export default FromName;
+FromName.propTypes = {
+    value: PropTypes.string.isRequired,
+};
+
+const stateToProps = (state) => {
+    return {
+        value: state.transactions.withdraw.from.value,
+    };
+};
+
+export default connect(stateToProps)(FromName);

@@ -62,5 +62,15 @@
                   d="M11 22c6.075 0 11-4.925 11-11S17.075 0 11 0 0 4.925 0 11s4.925 11 11 11zm0-2a9 9 0 1 0 0-18 9 9 0 0 0 0 18zM10 6h2v7h-2V6zm0 8h2v2h-2v-2z"
                   fill="#DC3545"/>
         </symbol>
+        <symbol id="icon-arrowDown" viewBox="0 0 51 51">
+            <path fill-rule="evenodd" clip-rule="evenodd"
+                  d="M24.503 46.407L23.921.33l2.155-.028.582 46.077L48.79 23.958l1.528 1.464-24.688 24.89L.321 26.054l1.382-1.5 22.8 21.853z"
+                  fill="#818181"/>
+        </symbol>
+        <symbol id="icon-arrowUp" viewBox="0 0 50 50">
+            <path fill-rule="evenodd" clip-rule="evenodd"
+                  d="M26.078 3.92V50h-2.156V3.92L1.51 26.06 0 24.575 25 0l25 24.576-1.4 1.483L26.077 3.92z"
+                  fill="#818181"/>
+        </symbol>
     </defs>
 </svg>

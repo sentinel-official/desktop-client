@@ -1,13 +1,28 @@
+import * as PropTypes from 'prop-types';
 import React from 'react';
+import { connect } from 'react-redux';
 import TextBox from '../../../../components/TextBox';
+import { encodeToBech32 } from '../../../../utils/bech32';
 
-const ToAddress = () => {
+const ToAddress = (props) => {
+    const value = encodeToBech32(props.value, 'sentvaloper');
+
     return (
         <TextBox
             className="address"
-            value="sentvaloper14th3gcu50q778wal7fug8h5hf07l8t8dxzkuu0"
+            value={value}
         />
     );
 };
 
-export default ToAddress;
+ToAddress.propTypes = {
+    value: PropTypes.string.isRequired,
+};
+
+const stateToProps = (state) => {
+    return {
+        value: state.transactions.delegate.to.value,
+    };
+};
+
+export default connect(stateToProps)(ToAddress);

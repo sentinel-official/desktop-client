@@ -1,22 +1,54 @@
+import * as PropTypes from 'prop-types';
 import React from 'react';
+import { connect } from 'react-redux';
+import { setTxSendTo } from '../../../actions/transactions/send';
 import TextInputField from '../../../components/TextInputField';
+import { ValidateTo } from './_validation';
 
-const To = () => {
-    const onChange = (value) => {
-        console.log(value, 'in test');
+const To = (props) => {
+    const onChange = (event) => {
+        const value = event.target.value.toString();
+
+        props.onChange({
+            value,
+            error: {
+                message: ValidateTo(value).message,
+            },
+        });
     };
 
     return (
         <TextInputField
             className="form-control"
+            error={props.input.error}
             name="To Address"
-            placeholder="Enter Address Address"
+            placeholder="Enter Address"
             required={true}
             type="text"
-            value={''}
+            value={props.input.value}
             onChange={onChange}
         />
     );
 };
 
-export default To;
+To.propTypes = {
+    input: PropTypes.shape({
+        value: PropTypes.string.isRequired,
+        error: PropTypes.shape({
+            message: PropTypes.string.isRequired,
+        }).isRequired,
+    }).isRequired,
+    onChange: PropTypes.func.isRequired,
+};
+
+const stateToProps = (state) => {
+    return {
+        input: state.transactions.send.to,
+    };
+};
+
+const actionsToProps = {
+    onChange: setTxSendTo,
+};
+
+export default connect(stateToProps, actionsToProps)(To);

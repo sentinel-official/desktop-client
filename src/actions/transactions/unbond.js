@@ -6,6 +6,8 @@ import {
     TX_UNBOND_FROM_SET,
     TX_UNBOND_IN_PROGRESS,
     TX_UNBOND_MEMO_SET,
+    TX_UNBOND_MODAL_HIDE,
+    TX_UNBOND_MODAL_SHOW,
     TX_UNBOND_SUCCESS,
     TX_UNBOND_URL,
 } from '../../constants/transactions';
@@ -67,8 +69,6 @@ export const txUnbond = (body, cb) => (dispatch, getState) => {
                     }
                 })
                 .catch((error) => {
-                    console.error(error);
-
                     dispatch(txUnbondError(error?.response?.data?.error || error));
                     next(error);
                 });
@@ -77,4 +77,18 @@ export const txUnbond = (body, cb) => (dispatch, getState) => {
             next(null);
         },
     ], cb);
+};
+
+export const showTxUnbondModal = (data) => {
+    return {
+        type: TX_UNBOND_MODAL_SHOW,
+        data,
+    };
+};
+
+export const hideTxUnbondModal = (data) => {
+    return {
+        type: TX_UNBOND_MODAL_HIDE,
+        data,
+    };
 };
