@@ -42,6 +42,7 @@ const Validators = ({
     getValidators,
     setValidatorsSort,
     sort,
+    status,
     validators,
 }) => {
     const [loading, setLoading] = useState(true);
@@ -62,8 +63,21 @@ const Validators = ({
         return <Loader/>;
     }
 
-    let items = [];
+    const filteredValidators = [];
     validators.forEach((validator) => {
+        if (status === 1) {
+            if (validator.jailed === false && validator['bond_status'] === 'Bonded') {
+                filteredValidators.push(validator);
+            }
+        } else {
+            if (validator.jailed === true || validator['bond_status'] !== 'Bonded') {
+                filteredValidators.push(validator);
+            }
+        }
+    });
+
+    let items = [];
+    filteredValidators.forEach((validator) => {
         const delegation = Lodash.find(delegations, ['validator_address', validator.address]);
         items.push({
             ...validator,
@@ -109,6 +123,7 @@ Validators.propTypes = {
         by: PropTypes.string.isRequired,
         order: PropTypes.string.isRequired,
     }).isRequired,
+    status: PropTypes.number.isRequired,
     validators: PropTypes.arrayOf(
         PropTypes.shape({
             address: PropTypes.string.isRequired,
@@ -135,6 +150,7 @@ const stateToProps = (state) => {
     return {
         delegations: state.delegations.items,
         sort: state.validators.sort,
+        status: state.validators.status,
         validators: state.validators.items,
     };
 };

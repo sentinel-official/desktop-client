@@ -12,7 +12,6 @@ import Unbond from './Unbond';
 const Row = ({
     action,
     item,
-    status,
     totalVotingPower,
 }) => {
     const [avatarURL, setAvatarURL] = useState('');
@@ -44,9 +43,6 @@ const Row = ({
     }, [item.description.identity]);
 
     const active = item.jailed === false && item['bond_status'] === 'Bonded';
-    if ((status === 1 && active === false) || (status === 0 && active === true)) {
-        return null;
-    }
 
     let votingPower = item.amount.value * Math.pow(10, -6);
     let votingPowerPercentage = item.amount.value * 100 / totalVotingPower;
@@ -84,11 +80,11 @@ const Row = ({
                 {delegation}
             </td>
             <td>
-                {status === 1 && action === 0 ? <Delegate to={item.address}/> : null}
-                {status === 1 && action === 1 ? <Redelegate from={item.address}/> : null}
-                {status === 1 && action === 2 ? <Unbond from={item.address}/> : null}
-                {status === 0 && action === 0 ? <Redelegate from={item.address}/> : null}
-                {status === 0 && action === 1 ? <Unbond from={item.address}/> : null}
+                {active === true && action === 0 ? <Delegate to={item.address}/> : null}
+                {active === true && action === 1 ? <Redelegate from={item.address}/> : null}
+                {active === true && action === 2 ? <Unbond from={item.address}/> : null}
+                {active === false && action === 0 ? <Redelegate from={item.address}/> : null}
+                {active === false && action === 1 ? <Unbond from={item.address}/> : null}
             </td>
         </tr>
     );
@@ -118,14 +114,12 @@ Row.propTypes = {
         index: PropTypes.number.isRequired,
         jailed: PropTypes.bool.isRequired,
     }).isRequired,
-    status: PropTypes.number.isRequired,
     totalVotingPower: PropTypes.number.isRequired,
 };
 
 const stateToProps = (state) => {
     return {
         action: state.validators.action,
-        status: state.validators.status,
         totalVotingPower: state.validators.totalVotingPower,
     };
 };
