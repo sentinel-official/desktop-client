@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { getDelegations } from '../../../actions/delegations';
 import { getValidators } from '../../../actions/validators';
 import Table from '../../../components/Table';
+import Loader from '../../../components/Loader';
 import Row from './Row';
 
 const columns = [
@@ -48,7 +49,7 @@ const Validators = ({
     }, []);
 
     if (loading) {
-        return <span>Loading</span>;
+        return <Loader/>;
     }
 
     let items = [];

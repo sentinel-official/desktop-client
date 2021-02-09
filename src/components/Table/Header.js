@@ -18,21 +18,17 @@ const Header = ({ columns }) => {
                             onClick={() => onClick(item.id, 'ascending')}>
                             <div className="sort">
                                 {item.label}
-                                {
-                                    item.id === 'Moniker' /* sortBy */
-                                        ? <div className="sort-icon">
-                                            {
-                                                ascending
-                                                    ? <Icon
-                                                        className="arrow-up"
-                                                        icon="arrowUp"/>
-                                                    : <Icon
-                                                        className="arrowDown"
-                                                        icon="arrowDown"/>
-                                            }
-                                        </div>
-                                        : null
-                                }
+                                <div className="sort-icon">
+                                    {
+                                        ascending
+                                            ? <Icon
+                                                className="arrow-up"
+                                                icon="arrowUp"/>
+                                            : <Icon
+                                                className="arrowDown"
+                                                icon="arrowDown"/>
+                                    }
+                                </div>
                             </div>
                         </th>
                     ))
