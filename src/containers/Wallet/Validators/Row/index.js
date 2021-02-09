@@ -1,10 +1,7 @@
-import Axios from 'axios';
 import * as PropTypes from 'prop-types';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
-import Profile from '../../../../assets/Profile.svg';
-import Image from '../../../../components/Image';
-import cache from '../../../../constants/cache';
+import Avatar from './Avatar';
 import Delegate from './Delegate';
 import Redelegate from './Redelegate';
 import Unbond from './Unbond';
@@ -14,34 +11,6 @@ const Row = ({
     item,
     totalVotingPower,
 }) => {
-    const [avatarURL, setAvatarURL] = useState('');
-
-    useEffect(() => {
-        const { identity } = item.description;
-        if (identity === '') {
-            setAvatarURL('');
-            return;
-        }
-
-        if (cache.validators.avatars[identity]) {
-            setAvatarURL(cache.validators.avatars[identity]);
-            return;
-        }
-
-        const url = 'https://keybase.io/_/api/1.0/user/lookup.json' +
-            `?key_suffix=${identity}&fields=pictures`;
-
-        Axios.get(url)
-            .then((res) => {
-                const url = res?.data?.them[0]?.pictures?.primary?.url;
-                if (url) {
-                    cache.validators.avatars[identity] = url;
-                    setAvatarURL(url);
-                }
-            })
-            .catch(console.error);
-    }, [item.description.identity]);
-
     const active = item.jailed === false && item['bond_status'] === 'Bonded';
 
     let votingPower = item.amount.value * Math.pow(10, -6);
@@ -61,11 +30,7 @@ const Row = ({
                 <div className="serial">
                     {item.index + 1}
                 </div>
-                <Image
-                    alt="moniker-image"
-                    className="moniker-image"
-                    src={avatarURL || Profile}
-                />
+                <Avatar identity={item.description.identity}/>
             </td>
             <td>
                 {item.description.moniker}
