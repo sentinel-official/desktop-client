@@ -28,7 +28,7 @@ const Keys = (props) => {
                                 className="icon"
                                 icon="profile"
                             />
-                            {item.name}
+                            <TextBox className="dropdown-item-text" value={item.name}/>
                         </Dropdown.Item>
                     ))
                 }

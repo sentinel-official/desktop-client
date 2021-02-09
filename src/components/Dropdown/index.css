@@ -45,10 +45,12 @@
 }
 
 .settings-dropdown .dropdown-menu {
+    position: relative !important;
     padding: 0;
-    transform: translate(-10px, 27px) !important;
+    transform: translate(-15px, 15px) !important;
     background: #FFFFFF;
-    box-shadow: 0px 4px 17px rgba(0, 0, 0, 0.08);
+    box-shadow: none;
+    float: none;
     border: 0px solid;
     border-radius: 0;
 }
@@ -58,7 +60,6 @@
 }
 
 .settings-dropdown .dropdown-item {
-    border-bottom: 0.5px solid #DCE9F1;
     padding: 0.55rem 1.5rem 0.55rem 1rem;
 }
 

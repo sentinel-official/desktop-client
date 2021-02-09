@@ -134,6 +134,10 @@ label, .label {
     justify-content: space-between;
 }
 
+.m-0 {
+    margin: 0;
+}
+
 .flex-center {
     display: flex;
     align-items: center;

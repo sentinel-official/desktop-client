@@ -4,7 +4,7 @@ import { Dropdown } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { showConfigurationModal } from '../../../actions/configuration';
 import Icon from '../../../components/Icon';
-
+import TextBox from '../../../components/TextBox';
 const Settings = ({ onClick }) => {
     return (
         <Dropdown.Item
@@ -14,7 +14,7 @@ const Settings = ({ onClick }) => {
                 className="icon"
                 icon="setting"
             />
-            {'Settings'}
+            <TextBox className="dropdown-item-text" value="Settings"/>
         </Dropdown.Item>
     );
 };
