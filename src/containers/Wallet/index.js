@@ -5,7 +5,7 @@ import { Tab, Tabs } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { getConfiguration, putConfiguration } from '../../actions/configuration';
 import { getKeys } from '../../actions/keys';
-import collapse from '../../assets/collapse.svg';
+import Collapse from '../../assets/Collapse.svg';
 import Logo from '../../assets/Logo.svg';
 import Icon from '../../components/Icon';
 import Image from '../../components/Image';
@@ -82,7 +82,7 @@ const Wallet = (props) => {
             <div className="wallet-section">
                 <div className="dashboard-side-bar-container" id="side-bar">
                     <div className="toggle-section" onClick={toggleClass}>
-                        <Image alt="collapse-icon" className="collapse-icon" src={collapse}/>
+                        <Image alt="collapse-icon" className="collapse-icon" src={Collapse}/>
                     </div>
                     <div className="settings-dropdown">
                         <Keys/>

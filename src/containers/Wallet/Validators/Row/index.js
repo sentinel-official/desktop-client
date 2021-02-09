@@ -2,7 +2,7 @@ import Axios from 'axios';
 import * as PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import profile from '../../../../assets/profile.svg';
+import Profile from '../../../../assets/Profile.svg';
 import Image from '../../../../components/Image';
 import Delegate from './Delegate';
 import Redelegate from './Redelegate';
@@ -61,7 +61,7 @@ const Row = ({
                 <Image
                     alt="moniker-image"
                     className="moniker-image"
-                    src={avatarURL || profile}
+                    src={avatarURL || Profile}
                 />
             </td>
             <td>

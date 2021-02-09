@@ -84,5 +84,5 @@
 }
 
 .checkbox-section .custom-checkbox .custom-control-input:checked ~ .custom-control-label::after {
-    background-image: url('../../assets/checkbox.svg');
+    background-image: url('../../assets/Checkbox.svg');
 }
