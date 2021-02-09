@@ -22,7 +22,7 @@ const Submit = (props) => {
                 return;
             }
 
-            props.history.push('/dashboard');
+            props.history.push('/dashboard/wallet');
         });
     };
 

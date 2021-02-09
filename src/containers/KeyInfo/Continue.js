@@ -4,7 +4,7 @@ import Button from '../../components/Button';
 
 const Continue = (props) => {
     const onClick = () => {
-        props.history.push('/dashboard');
+        props.history.push('/dashboard/wallet');
     };
 
     return (

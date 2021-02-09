@@ -9,7 +9,7 @@ const ProgressBar = (props) => {
     useEffect(() => {
         if (props.completed >= 100) {
             setTimeout(() => {
-                props.history.push('/dashboard');
+                props.history.push('/dashboard/wallet');
             }, SPLASH_TIMEOUT);
             return;
         }

@@ -80,9 +80,17 @@ const Wallet = (props) => {
             <ModalUnbond/>
             <ModalTxInfo/>
             <div className="wallet-section">
-                <div className="dashboard-side-bar-container" id="side-bar">
-                    <div className="toggle-section" onClick={toggleClass}>
-                        <Image alt="collapse-icon" className="collapse-icon" src={Collapse}/>
+                <div
+                    className="dashboard-side-bar-container"
+                    id="side-bar">
+                    <div
+                        className="toggle-section"
+                        onClick={toggleClass}>
+                        <Image
+                            alt="collapse-icon"
+                            className="collapse-icon"
+                            src={Collapse}
+                        />
                     </div>
                     <div className="settings-dropdown">
                         <Keys/>
@@ -102,10 +110,20 @@ const Wallet = (props) => {
                                 <div className="logo-box">
                                     <div className="left">
                                         <div className="logo">
-                                            <Image alt="Logo" className="" src={Logo}/>
+                                            <Image
+                                                alt="Logo"
+                                                className=""
+                                                src={Logo}
+                                            />
                                         </div>
-                                        <TextBox className="sentinel-text" value="Sentinel"/>
-                                        <TextBox className="sub-text" value="(sent)"/>
+                                        <TextBox
+                                            className="sentinel-text"
+                                            value="Sentinel"
+                                        />
+                                        <TextBox
+                                            className="sub-text"
+                                            value="(sent)"
+                                        />
                                     </div>
                                     <Icon
                                         className="icon"
@@ -123,7 +141,9 @@ const Wallet = (props) => {
                             <div className="flex-tabs">
                                 <div className="tabs-section">
                                     <Tabs defaultActiveKey="send">
-                                        <Tab eventKey="send" title="send">
+                                        <Tab
+                                            eventKey="send"
+                                            title="Send">
                                             <div className="form-group">
                                                 <Label
                                                     className="label"
@@ -140,13 +160,21 @@ const Wallet = (props) => {
                                             </div>
                                             <Send/>
                                         </Tab>
-                                        <Tab eventKey="Receive" tabClassName="receive-tab" title="Receive">
-                                            <TextBox className="qr-title" value="Show QR code to Receive Amount"/>
+                                        <Tab
+                                            eventKey="Receive"
+                                            tabClassName="receive-tab"
+                                            title="Receive">
+                                            <TextBox
+                                                className="qr-title"
+                                                value="Show QR code to Receive Amount"/>
                                             <div className="qr-box">
                                                 <QRCode/>
                                             </div>
                                             <div className="copy-address">
-                                                <TextBox className="" value="Address"/>
+                                                <TextBox
+                                                    className=""
+                                                    value="Address"
+                                                />
                                                 <CopyAddress/>
                                             </div>
                                             <Address/>
@@ -154,7 +182,10 @@ const Wallet = (props) => {
                                     </Tabs>
                                 </div>
                                 <div className="withdraw-section">
-                                    <TextBox className="title" value="Withdraw"/>
+                                    <TextBox
+                                        className="title"
+                                        value="Withdraw"
+                                    />
                                     <div className="withdraw-section-content">
                                         <div className="form-group">
                                             <Label
@@ -173,8 +204,12 @@ const Wallet = (props) => {
                                 <Status/>
                                 <Actions/>
                             </div>
-                            <Tabs defaultActiveKey="Validators" id="uncontrolled-tab-example">
-                                <Tab eventKey="Validators" title="Validators List">
+                            <Tabs
+                                defaultActiveKey="Validators"
+                                id="uncontrolled-tab-example">
+                                <Tab
+                                    eventKey="Validators"
+                                    title="Validators List">
                                     <Validators/>
                                 </Tab>
                                 {/* <Tab eventKey="Proposals" title="Proposals"> */}

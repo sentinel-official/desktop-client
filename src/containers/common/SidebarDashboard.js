@@ -6,7 +6,7 @@ import TextBox from '../../components/TextBox';
 
 const options = [
     {
-        pathname: '/dashboard',
+        pathname: '/dashboard/wallet',
         icon: 'wallet',
         name: 'Wallet',
     },

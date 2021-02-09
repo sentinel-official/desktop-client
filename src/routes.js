@@ -26,7 +26,7 @@ const routes = [{
     component: KeyInfo,
     private: true,
 }, {
-    path: '/dashboard',
+    path: '/dashboard/wallet',
     component: Wallet,
     private: true,
 }];

@@ -67,7 +67,7 @@ export const postAuthentication = (history, cb = emptyFunc) => (dispatch, getSta
             dispatch(postAuthenticationSuccess(result));
             next(null);
         }, (next) => {
-            history.push('/dashboard');
+            history.push('/dashboard/wallet');
             next(null);
         },
     ], cb);
