@@ -7,6 +7,7 @@ import (
 
 type RequestLogin struct {
 	Password string `json:"password"`
+	Token    string `json:"token"`
 }
 
 func NewRequestLogin(r *http.Request) (*RequestLogin, error) {

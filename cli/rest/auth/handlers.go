@@ -5,7 +5,6 @@ import (
 	"crypto/sha256"
 	"fmt"
 	"net/http"
-	"strings"
 	"time"
 
 	"github.com/sentinel-official/desktop-client/cli/context"
@@ -25,42 +24,72 @@ func HandlerLogin(ctx *context.Context) http.HandlerFunc {
 			return
 		}
 
-		auth := r.Header.Get("Authorization")
-		if auth == "" {
+		if body.Token == "" {
 			password := fmt.Sprintf("%X", sha256.Sum256([]byte(body.Password)))
 			if password != ctx.Config().Password {
-				utils.WriteErrorToResponse(w, http.StatusUnauthorized, 1003, "")
+				utils.WriteErrorToResponse(w, http.StatusUnauthorized, 1003, "password does not match")
 				return
 			}
+
+			var (
+				access  = make([]byte, 32)
+				refresh = make([]byte, 32)
+			)
+
+			_, err = rand.Read(access)
+			if err != nil {
+				utils.WriteErrorToResponse(w, http.StatusInternalServerError, 1004, err.Error())
+				return
+			}
+
+			_, err = rand.Read(refresh)
+			if err != nil {
+				utils.WriteErrorToResponse(w, http.StatusInternalServerError, 1004, err.Error())
+				return
+			}
+
+			ctx.WithAuthToken(&types.AuthToken{
+				Refresh: types.Token{
+					Value:  fmt.Sprintf("%X", refresh),
+					Expiry: time.Now().Add(30 * time.Minute),
+				},
+				Access: types.Token{
+					Value:  fmt.Sprintf("%X", access),
+					Expiry: time.Now().Add(30 * time.Second),
+				},
+			})
 		} else {
-			if len(auth) < 7 || !strings.EqualFold(auth[:7], "Bearer ") {
-				utils.WriteErrorToResponse(w, http.StatusUnauthorized, 1004, "")
+			if ctx.AuthToken() == nil {
+				utils.WriteErrorToResponse(w, http.StatusUnauthorized, 1004, "token does not exist")
 				return
 			}
 
-			token := ctx.AuthToken()
-			if token == nil || token.Value != auth[7:] {
-				utils.WriteErrorToResponse(w, http.StatusUnauthorized, 1004, "")
+			refresh := ctx.AuthToken().Refresh
+			if body.Token != refresh.Value {
+				utils.WriteErrorToResponse(w, http.StatusUnauthorized, 1004, "token does not match")
 				return
 			}
-			if time.Now().After(token.Expiry) {
-				utils.WriteErrorToResponse(w, http.StatusUnauthorized, 1004, "")
+			if time.Now().After(refresh.Expiry) {
+				utils.WriteErrorToResponse(w, http.StatusUnauthorized, 1004, "token expired")
 				return
 			}
+
+			bytes := make([]byte, 32)
+
+			_, err = rand.Read(bytes)
+			if err != nil {
+				utils.WriteErrorToResponse(w, http.StatusInternalServerError, 1005, err.Error())
+				return
+			}
+
+			ctx.WithAuthToken(&types.AuthToken{
+				Refresh: refresh,
+				Access: types.Token{
+					Value:  fmt.Sprintf("%X", bytes),
+					Expiry: time.Now().Add(30 * time.Second),
+				},
+			})
 		}
-
-		bytes := make([]byte, 32)
-
-		_, err = rand.Read(bytes)
-		if err != nil {
-			utils.WriteErrorToResponse(w, http.StatusInternalServerError, 1005, "")
-			return
-		}
-
-		ctx.WithAuthToken(&types.AuthToken{
-			Value:  fmt.Sprintf("%X", bytes),
-			Expiry: time.Now().Add(15 * time.Minute),
-		})
 
 		utils.WriteResultToResponse(w, http.StatusOK, ctx.AuthToken())
 	}
