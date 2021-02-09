@@ -113,7 +113,7 @@
 }
 
 .wallet-tab, .token-info-section {
-    padding: 0 30px;
+    padding: 0 20px;
     max-width: none;
     flex: 1 1;
 }
