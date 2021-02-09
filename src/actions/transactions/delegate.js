@@ -1,5 +1,4 @@
 import Async from 'async';
-import Axios from 'axios';
 import {
     TX_DELEGATE_AMOUNT_SET,
     TX_DELEGATE_ERROR,
@@ -11,6 +10,7 @@ import {
     TX_DELEGATE_TO_SET,
     TX_DELEGATE_URL,
 } from '../../constants/transactions';
+import Axios from '../../services/axios';
 
 export const setTxDelegateTo = (data) => {
     return {

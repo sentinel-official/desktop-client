@@ -1,8 +1,8 @@
 import * as PropTypes from 'prop-types';
 import React from 'react';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
-import './index.css';
 import Icon from '../Icon';
+import './index.css';
 
 const Copy = ({ text }) => {
     return (

@@ -1,5 +1,4 @@
 import Async from 'async';
-import Axios from 'axios';
 import { emptyFunc } from '../constants/common';
 import {
     DELEGATIONS_GET_ERROR,
@@ -7,6 +6,7 @@ import {
     DELEGATIONS_GET_SUCCESS,
     getDelegationsURL,
 } from '../constants/delegations';
+import Axios from '../services/axios';
 
 export const getDelegationsInProgress = (data) => {
     return {
@@ -35,18 +35,10 @@ export const getDelegations = (cb = emptyFunc) => (dispatch, getState) => {
             dispatch(getDelegationsInProgress(null));
             next(null);
         }, (next) => {
-            const {
-                authentication,
-                keys,
-            } = getState();
-            const { address } = keys.items[keys.index];
-            const url = getDelegationsURL(address);
+            const { keys } = getState();
+            const url = getDelegationsURL(keys.items[keys.index].address);
 
-            Axios.get(url, {
-                headers: {
-                    Authorization: `Bearer ${authentication.info.value}`,
-                },
-            })
+            Axios.get(url)
                 .then((res) => {
                     try {
                         next(null, res?.data?.result);

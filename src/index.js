@@ -8,6 +8,7 @@ import thunk from 'redux-thunk';
 import App from './App';
 import reducer from './reducers';
 import reportWebVitals from './reportWebVitals';
+import Axios, { withInterceptors } from './services/axios';
 
 const store = createStore(
     reducer,
@@ -15,6 +16,8 @@ const store = createStore(
         trace: true,
     })(applyMiddleware(thunk)),
 );
+
+withInterceptors(Axios, store);
 
 const app = (
     <React.StrictMode>

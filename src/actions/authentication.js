@@ -1,6 +1,8 @@
 import Async from 'async';
 import Axios from 'axios';
 import {
+    AUTHENTICATION_INFO_CLEAR,
+    AUTHENTICATION_INFO_SET,
     AUTHENTICATION_PASSWORD_SET,
     AUTHENTICATION_POST_ERROR,
     AUTHENTICATION_POST_IN_PROGRESS,
@@ -69,4 +71,18 @@ export const postAuthentication = (history, cb = emptyFunc) => (dispatch, getSta
             next(null);
         },
     ], cb);
+};
+
+export const setAuthenticationInfo = (data) => {
+    return {
+        type: AUTHENTICATION_INFO_SET,
+        data,
+    };
+};
+
+export const clearAuthenticationInfo = (data) => {
+    return {
+        type: AUTHENTICATION_INFO_CLEAR,
+        data,
+    };
 };

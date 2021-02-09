@@ -1,5 +1,4 @@
 import Async from 'async';
-import Axios from 'axios';
 import Lodash from 'lodash';
 import { emptyFunc } from '../constants/common';
 import {
@@ -12,6 +11,7 @@ import {
     VALIDATORS_GET_URL,
     VALIDATORS_SET,
 } from '../constants/validators';
+import Axios from '../services/axios';
 
 export const getValidatorsInProgress = (data) => {
     return {
@@ -40,13 +40,7 @@ export const getValidators = (cb = emptyFunc) => (dispatch, getState) => {
             dispatch(getValidatorsInProgress(null));
             next(null);
         }, (next) => {
-            const { authentication } = getState();
-
-            Axios.get(VALIDATORS_GET_URL, {
-                headers: {
-                    Authorization: `Bearer ${authentication.info.value}`,
-                },
-            })
+            Axios.get(VALIDATORS_GET_URL)
                 .then((res) => {
                     try {
                         next(null, res?.data?.result);

@@ -3,8 +3,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Dropdown from '../../../components/Dropdown';
 import Icon from '../../../components/Icon';
-import Settings from './Settings';
 import TextBox from '../../../components/TextBox';
+import Settings from './Settings';
+
 const Keys = (props) => {
     const onClick = (event) => {
     };

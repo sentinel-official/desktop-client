@@ -1,5 +1,4 @@
 import Async from 'async';
-import Axios from 'axios';
 import {
     ACCOUNT_GET_ERROR,
     ACCOUNT_GET_IN_PROGRESS,
@@ -8,6 +7,7 @@ import {
     getAccountURL,
 } from '../constants/account';
 import { emptyFunc } from '../constants/common';
+import Axios from '../services/axios';
 
 export const getAccountInProgress = (data) => {
     return {
@@ -36,18 +36,10 @@ export const getAccount = (cb = emptyFunc) => (dispatch, getState) => {
             dispatch(getAccountInProgress(null));
             next(null);
         }, (next) => {
-            const {
-                authentication,
-                keys,
-            } = getState();
-            const { address } = keys.items[keys.index];
-            const url = getAccountURL(address);
+            const { keys } = getState();
+            const url = getAccountURL(keys.items[keys.index].address);
 
-            Axios.get(url, {
-                headers: {
-                    Authorization: `Bearer ${authentication.info.value}`,
-                },
-            })
+            Axios.get(url)
                 .then((res) => {
                     try {
                         next(null, res?.data?.result);

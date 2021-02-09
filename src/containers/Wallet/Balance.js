@@ -14,8 +14,11 @@ const Balance = (props) => {
         props.getAccount();
     }, [props.items, props.index]);
 
-    const tokens = (props.coins[0]?.value / Math.pow(10, 6)) || 0;
-    const usd = tokens * props.rate;
+    let tokens = (props.coins[0]?.value * Math.pow(10, -6)) || 0;
+    let USD = tokens * props.rate;
+
+    tokens = parseFloat(tokens.toFixed(2)).toLocaleString();
+    USD = parseFloat(USD.toFixed(2)).toLocaleString();
 
     return (
         <div className="token-info">
@@ -26,11 +29,11 @@ const Balance = (props) => {
             <div className="sent-list">
                 <TextBox
                     className="heading"
-                    value={tokens.toFixed(2)}
+                    value={tokens}
                 />
                 <TextBox
                     className="value"
-                    value={`(= $${usd.toFixed(2)} USD)`}
+                    value={`(= $${USD} USD)`}
                 />
             </div>
         </div>
