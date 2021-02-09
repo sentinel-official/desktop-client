@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { showConfigurationModal } from '../../../actions/configuration';
 import Icon from '../../../components/Icon';
 import TextBox from '../../../components/TextBox';
+
 const Settings = ({ onClick }) => {
     return (
         <Dropdown.Item

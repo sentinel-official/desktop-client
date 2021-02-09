@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
-import { hideSnackbar } from '../actions/snackbar';
-import Snackbar from '../components/Snackbar';
+import { hideSnackbar } from '../../actions/snackbar';
+import Snackbar from '../../components/Snackbar';
 
 const stateToProps = (state) => {
     return {

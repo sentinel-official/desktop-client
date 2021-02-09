@@ -1,10 +1,10 @@
 import * as PropTypes from 'prop-types';
 import React from 'react';
 import Label from '../../components/Label';
-import Sidebar from '../../components/Sidebar';
 import SocialIcons from '../../components/SocialIcons';
 import TextBox from '../../components/TextBox';
 import Tooltip from '../../components/Tooltip/Tooltip';
+import Sidebar from '../common/SidebarOnboard';
 import BroadcastMode from './BroadcastMode';
 import ChainID from './ChainID';
 import Fee from './Fees';

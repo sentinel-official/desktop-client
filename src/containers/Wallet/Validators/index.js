@@ -5,8 +5,8 @@ import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { getDelegations } from '../../../actions/delegations';
 import { getValidators } from '../../../actions/validators';
-import Table from '../../../components/Table';
 import Loader from '../../../components/Loader';
+import Table from '../../../components/Table';
 import Row from './Row';
 
 const columns = [

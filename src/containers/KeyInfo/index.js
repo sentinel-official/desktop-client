@@ -1,8 +1,8 @@
 import * as PropTypes from 'prop-types';
 import React from 'react';
-import Sidebar from '../../components/Sidebar';
 import SocialIcons from '../../components/SocialIcons';
 import TextBox from '../../components/TextBox';
+import Sidebar from '../common/SidebarOnboard';
 import Address from './Address';
 import AddressCopy from './AddressCopy';
 import Continue from './Continue';

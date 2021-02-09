@@ -1,10 +1,11 @@
 import React from 'react';
 import { Accordion, Card } from 'react-bootstrap';
 import Icon from '../../../../components/Icon';
-import SelectKey from './SelectKey';
-import Password from '../DeleteKey/Password';
-import Delete from '../DeleteKey/Delete';
 import Label from '../../../../components/Label';
+import Delete from '../DeleteKey/Delete';
+import Password from '../DeleteKey/Password';
+import SelectKey from './SelectKey';
+
 const list = [
     {
         name: 'key1',

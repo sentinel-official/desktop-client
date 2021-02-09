@@ -13,12 +13,11 @@ import Label from '../../components/Label';
 import Loader from '../../components/Loader';
 import TextBox from '../../components/TextBox';
 import CopyAddress from '../../containers/KeyInfo/AddressCopy';
-import Sidebar from '../../containers/Sidebar';
 import ModalConfiguration from '../common/ModalConfiguration';
 import ModalTxInfo from '../common/ModalTxInfo';
+import Sidebar from '../common/SidebarDashboard';
 import Balance from './Balance';
 import Keys from './Keys';
-// import Proposals from './Proposals';
 import Address from './Receive/Address';
 import QRCode from './Receive/QRCode';
 import Amount from './Send/Amount';
@@ -89,7 +88,7 @@ const Wallet = (props) => {
                         <Keys/>
                     </div>
                     <div className="side-bar-list">
-                        <Sidebar/>
+                        <Sidebar location={props.location}/>
                     </div>
                 </div>
                 <div className="wallet-container">

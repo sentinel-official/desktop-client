@@ -9,31 +9,31 @@ const Header = ({ columns }) => {
     const ascending = false;
     return (
         <thead>
-            <tr>
-                <th></th>
-                {
-                    columns.map((item) => (
-                        <th
-                            key={item.id}
-                            onClick={() => onClick(item.id, 'ascending')}>
-                            <div className="sort">
-                                {item.label}
-                                <div className="sort-icon">
-                                    {
-                                        ascending
-                                            ? <Icon
-                                                className="arrow-up"
-                                                icon="arrowUp"/>
-                                            : <Icon
-                                                className="arrowDown"
-                                                icon="arrowDown"/>
-                                    }
-                                </div>
+        <tr>
+            <th></th>
+            {
+                columns.map((item) => (
+                    <th
+                        key={item.id}
+                        onClick={() => onClick(item.id, 'ascending')}>
+                        <div className="sort">
+                            {item.label}
+                            <div className="sort-icon">
+                                {
+                                    ascending
+                                        ? <Icon
+                                            className="arrow-up"
+                                            icon="arrowUp"/>
+                                        : <Icon
+                                            className="arrowDown"
+                                            icon="arrowDown"/>
+                                }
                             </div>
-                        </th>
-                    ))
-                }
-            </tr>
+                        </div>
+                    </th>
+                ))
+            }
+        </tr>
         </thead>
     );
 };

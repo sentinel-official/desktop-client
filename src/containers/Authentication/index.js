@@ -1,9 +1,9 @@
 import * as PropTypes from 'prop-types';
 import React from 'react';
 import Label from '../../components/Label';
-import Sidebar from '../../components/Sidebar';
 import SocialIcons from '../../components/SocialIcons';
 import TextBox from '../../components/TextBox';
+import Sidebar from '../common/SidebarOnboard';
 import Password from './Password';
 import Submit from './Submit';
 

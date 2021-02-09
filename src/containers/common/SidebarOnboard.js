@@ -1,10 +1,9 @@
 import React from 'react';
 import Logo from '../../assets/Logo.svg';
-import Image from '../Image';
-import TextBox from '../TextBox';
-import './index.css';
+import Image from '../../components/Image';
+import TextBox from '../../components/TextBox';
 
-const Sidebar = () => {
+const SidebarOnboard = () => {
     return (
         <div className="side-bar">
             <Image
@@ -31,4 +30,4 @@ const Sidebar = () => {
     );
 };
 
-export default Sidebar;
+export default SidebarOnboard;
