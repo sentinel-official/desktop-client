@@ -33,7 +33,6 @@ import Status from './Validators/Status';
 import WithDrawValidators from './Withdraw/Validators';
 import WithDraw from './Withdraw/Withdraw';
 import Loader from '../../components/Loader';
-import Switch from '../../components/Switch';
 
 const toggleClass = () => {
     if (document.getElementById('side-bar').classList.contains('active')) {
@@ -118,7 +117,6 @@ const Wallet = (props) => {
                         </div>
                         <div className="token-info-section col-md-8">
                             <Balance/>
-                            <Switch/>
                         </div>
                     </div>
                     <div className="wallet-details">
