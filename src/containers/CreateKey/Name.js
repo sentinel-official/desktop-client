@@ -10,9 +10,7 @@ const Name = (props) => {
         const value = event.target.value.toString();
         props.onChange({
             value,
-            error: {
-                message: ValidateName(value).message,
-            },
+            error: ValidateName(value),
         });
     };
 

@@ -4,8 +4,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { encodeToBech32 } from '../../../utils/bech32';
 
-const QRCode = (props) => {
-    const value = encodeToBech32(props.items[props.index]?.address, 'sent');
+const QRCode = ({
+    items,
+    index,
+}) => {
+    const value = encodeToBech32(items[index]?.address, 'sent');
 
     return (
         <ReactQRCode value={value}/>

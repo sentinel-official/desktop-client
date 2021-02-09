@@ -8,7 +8,7 @@ const Table = ({
     className,
     columns,
     items,
-    rowComponent,
+    row: Component,
 }) => {
     return (
         <ReactTable
@@ -17,9 +17,14 @@ const Table = ({
             <Header columns={columns}/>
             <tbody>
                 {
-                    items.map((item, index) => (
-                        rowComponent(item, index)
-                    ))
+                    items.map((item, index) => {
+                        return (
+                            <Component
+                                key={index}
+                                item={item}
+                            />
+                        );
+                    })
                 }
             </tbody>
         </ReactTable>
@@ -34,7 +39,7 @@ Table.propTypes = {
         }),
     ).isRequired,
     items: PropTypes.array.isRequired,
-    rowComponent: PropTypes.func.isRequired,
+    row: PropTypes.object.isRequired,
 };
 
 export default Table;

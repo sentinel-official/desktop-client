@@ -5,7 +5,7 @@ import {
     DELEGATIONS_GET_ERROR,
     DELEGATIONS_GET_IN_PROGRESS,
     DELEGATIONS_GET_SUCCESS,
-    DELEGATIONS_GET_URL,
+    getDelegationsURL,
 } from '../constants/delegations';
 
 export const getDelegationsInProgress = (data) => {
@@ -35,9 +35,14 @@ export const getDelegations = (cb = emptyFunc) => (dispatch, getState) => {
             dispatch(getDelegationsInProgress(null));
             next(null);
         }, (next) => {
-            const { authentication } = getState();
+            const {
+                authentication,
+                keys,
+            } = getState();
+            const { address } = keys.items[keys.index];
+            const url = getDelegationsURL(address);
 
-            Axios.get(DELEGATIONS_GET_URL, {
+            Axios.get(url, {
                 headers: {
                     Authorization: `Bearer ${authentication.info.value}`,
                 },

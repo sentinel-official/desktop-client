@@ -78,7 +78,7 @@ const to = (state = {
 };
 
 const amount = (state = {
-    value: [],
+    value: 0,
     error: {
         message: '',
     },
@@ -99,7 +99,7 @@ const amount = (state = {
     case TX_REDELEGATE_SUCCESS:
         return {
             ...state,
-            value: [],
+            value: 0,
             error: {
                 ...state.error,
                 message: '',

@@ -11,9 +11,7 @@ const GasPrices = (props) => {
 
         props.onChange({
             value,
-            error: {
-                message: ValidateGasPrices(value).message,
-            },
+            error: ValidateGasPrices(value),
         });
     };
 

@@ -11,9 +11,7 @@ const Memo = (props) => {
 
         props.onChange({
             value,
-            error: {
-                message: ValidateMemo(value).message,
-            },
+            error: ValidateMemo(value),
         });
     };
 

@@ -11,9 +11,7 @@ const ChainID = (props) => {
 
         props.onChange({
             value,
-            error: {
-                message: ValidateID(value).message,
-            },
+            error: ValidateID(value),
         });
     };
 

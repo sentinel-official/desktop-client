@@ -1,13 +1,16 @@
 import Async from 'async';
 import Axios from 'axios';
+import Lodash from 'lodash';
 import { emptyFunc } from '../constants/common';
 import {
     VALIDATORS_ACTION_SET,
+    VALIDATORS_AVATAR_URL_SET,
     VALIDATORS_FILTER_STATUS_SET,
     VALIDATORS_GET_ERROR,
     VALIDATORS_GET_IN_PROGRESS,
     VALIDATORS_GET_SUCCESS,
     VALIDATORS_GET_URL,
+    VALIDATORS_SET,
 } from '../constants/validators';
 
 export const getValidatorsInProgress = (data) => {
@@ -58,6 +61,11 @@ export const getValidators = (cb = emptyFunc) => (dispatch, getState) => {
                     next(error);
                 });
         }, (result, next) => {
+            result = Lodash.orderBy(result, ['amount.value'], ['desc']);
+            result.forEach((item, index) => {
+                item.index = index;
+            });
+
             dispatch(getValidatorsSuccess(result));
             next(null);
         },
@@ -74,6 +82,34 @@ export const setValidatorsFilterStatus = (data) => {
 export const setValidatorsActionSet = (data) => {
     return {
         type: VALIDATORS_ACTION_SET,
+        data,
+    };
+};
+
+export const setValidatorsAvatarURL = (data) => {
+    return {
+        type: VALIDATORS_AVATAR_URL_SET,
+        data,
+    };
+};
+
+export const sortValidators = (by, asc = true) => (dispatch, getState) => {
+    const { items } = getState().validators;
+    items.sort((X, Y) => {
+        const x = Lodash.get(X, by);
+        const y = Lodash.get(Y, by);
+
+        return asc
+            ? (x > y ? 1 : x < y ? -1 : 0)
+            : (x < y ? 1 : x > y ? -1 : 0);
+    });
+
+    dispatch(setValidators(items));
+};
+
+export const setValidators = (data) => {
+    return {
+        type: VALIDATORS_SET,
         data,
     };
 };

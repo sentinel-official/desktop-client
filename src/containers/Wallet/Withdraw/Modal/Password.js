@@ -11,9 +11,7 @@ const Password = (props) => {
 
         props.onChange({
             value,
-            error: {
-                message: ValidatePassword(value).message,
-            },
+            error: ValidatePassword(value),
         });
     };
 

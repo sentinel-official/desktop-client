@@ -11,15 +11,18 @@ import Password from './Password';
 import Send from './Send';
 import To from './To';
 
-const Modal = (props) => {
+const Modal = ({
+    show,
+    onHide,
+}) => {
     return (
         <ReactModal
             animation={false}
             backdrop="static"
             centered={true}
             keyboard={false}
-            show={props.show}
-            onHide={props.onHide}>
+            show={show}
+            onHide={onHide}>
             <ReactModal.Header closeButton={true}>
                 <TextBox
                     className="modal-title"

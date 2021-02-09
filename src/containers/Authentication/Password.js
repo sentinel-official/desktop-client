@@ -10,9 +10,7 @@ const Password = (props) => {
         const value = event.target.value.toString();
         props.onChange({
             value,
-            error: {
-                message: ValidatePassword(value).message,
-            },
+            error: ValidatePassword(value),
         });
     };
 

@@ -4,22 +4,16 @@ import { connect } from 'react-redux';
 import { setValidatorsActionSet } from '../../../actions/validators';
 import Dropdown from '../../../components/Dropdown';
 
-const options = [
-    {
-        label: 'Delegate',
-    },
-    {
-        label: 'Redelegate',
-    },
-    {
-        label: 'Unbond',
-    },
-];
-
 const Actions = (props) => {
-    const onClick = (index) => {
-        props.onClick(index);
-    };
+    const options = [
+        { label: 'Delegate' },
+        { label: 'Redelegate' },
+        { label: 'Unbond' },
+    ];
+
+    if (props.status === 0) {
+        options.splice(0, 1);
+    }
 
     return (
         <Dropdown>
@@ -33,7 +27,7 @@ const Actions = (props) => {
                             ? null
                             : <Dropdown.Item
                                 key={index}
-                                onClick={() => onClick(index)}>
+                                onClick={() => props.onClick(index)}>
                                 {item.label}
                             </Dropdown.Item>
                     ))
@@ -45,12 +39,14 @@ const Actions = (props) => {
 
 Actions.propTypes = {
     index: PropTypes.number.isRequired,
+    status: PropTypes.number.isRequired,
     onClick: PropTypes.func.isRequired,
 };
 
 const stateToProps = (state) => {
     return {
         index: state.validators.action,
+        status: state.validators.status,
     };
 };
 

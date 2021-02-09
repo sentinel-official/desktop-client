@@ -1,13 +1,13 @@
 import * as PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
-import { setTxDelegateTo, showTxDelegateModal } from '../../../../actions/transactions/delegate';
+import { setTxUnbondFrom, showTxUnbondModal } from '../../../../actions/transactions/unbond';
 import Button from '../../../../components/Button';
 
-const Delegate = (props) => {
+const Unbond = (props) => {
     const onClick = () => {
-        props.setTo({
-            value: props.to,
+        props.setFrom({
+            value: props.from,
             error: new Error(''),
         });
         props.showModal();
@@ -18,21 +18,21 @@ const Delegate = (props) => {
             className="delegate-button"
             disabled={false}
             inProgress={false}
-            value="Delegate"
+            value="Unbond"
             onClick={onClick}
         />
     );
 };
 
-Delegate.propTypes = {
-    setTo: PropTypes.func.isRequired,
+Unbond.propTypes = {
+    from: PropTypes.string.isRequired,
+    setFrom: PropTypes.func.isRequired,
     showModal: PropTypes.func.isRequired,
-    to: PropTypes.string.isRequired,
 };
 
 const actionsToProps = {
-    showModal: showTxDelegateModal,
-    setTo: setTxDelegateTo,
+    showModal: showTxUnbondModal,
+    setFrom: setTxUnbondFrom,
 };
 
-export default connect(null, actionsToProps)(Delegate);
+export default connect(null, actionsToProps)(Unbond);

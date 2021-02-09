@@ -31,9 +31,7 @@ const BroadcastMode = (props) => {
 
         props.onClick({
             value,
-            error: {
-                message: ValidateBroadcastMode(value).message,
-            },
+            error: ValidateBroadcastMode(value),
         });
     };
 
