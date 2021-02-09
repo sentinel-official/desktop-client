@@ -37,7 +37,7 @@ const Row = ({
     }, [item.description.identity]);
 
     const active = item.jailed === false && item['bond_status'] === 'Bonded';
-    if ((active && status === 0) || (!active && status === 1)) {
+    if ((status === 1 && active === false) || (status === 0 && active === true)) {
         return null;
     }
 
