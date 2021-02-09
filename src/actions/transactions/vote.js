@@ -1,5 +1,4 @@
 import Async from 'async';
-import Axios from 'axios';
 import {
     TX_VOTE_ERROR,
     TX_VOTE_ID_SET,
@@ -11,6 +10,7 @@ import {
     TX_VOTE_SUCCESS,
     TX_VOTE_URL,
 } from '../../constants/transactions';
+import Axios from '../../services/axios';
 
 export const setTxVoteID = (data) => {
     return {

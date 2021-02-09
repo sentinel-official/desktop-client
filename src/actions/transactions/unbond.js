@@ -1,5 +1,4 @@
 import Async from 'async';
-import Axios from 'axios';
 import {
     TX_UNBOND_AMOUNT_SET,
     TX_UNBOND_ERROR,
@@ -11,6 +10,7 @@ import {
     TX_UNBOND_SUCCESS,
     TX_UNBOND_URL,
 } from '../../constants/transactions';
+import Axios from '../../services/axios';
 
 export const setTxUnbondFrom = (data) => {
     return {

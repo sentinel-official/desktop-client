@@ -1,5 +1,4 @@
 import Async from 'async';
-import Axios from 'axios';
 import {
     TX_REDELEGATE_AMOUNT_SET,
     TX_REDELEGATE_ERROR,
@@ -12,6 +11,7 @@ import {
     TX_REDELEGATE_TO_SET,
     TX_REDELEGATE_URL,
 } from '../../constants/transactions';
+import Axios from '../../services/axios';
 
 export const setTxRedelegateFrom = (data) => {
     return {

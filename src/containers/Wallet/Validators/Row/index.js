@@ -41,8 +41,16 @@ const Row = ({
         return null;
     }
 
-    const votingPower = (item.amount.value / Math.pow(10, 6)).toFixed(2);
-    const votingPowerPercentage = (item.amount.value * 100 / totalVotingPower).toFixed(2);
+    let votingPower = item.amount.value * Math.pow(10, -6);
+    let votingPowerPercentage = item.amount.value * 100 / totalVotingPower;
+    let commissionRate = item.commission.rate * 100;
+    let delegation = item.delegation ? item.amount.value * parseFloat(item.delegation.shares) : 0;
+    delegation = (delegation / parseFloat(item['delegator_shares'])) * Math.pow(10, -6);
+
+    votingPower = parseFloat(votingPower.toFixed(2)).toLocaleString();
+    votingPowerPercentage = parseFloat(votingPowerPercentage.toFixed(2)).toLocaleString();
+    commissionRate = parseFloat(commissionRate.toFixed(2)).toLocaleString();
+    delegation = parseFloat(delegation.toFixed(2)).toLocaleString();
 
     return (
         <tr key={item.index}>
@@ -63,14 +71,15 @@ const Row = ({
                 {`${votingPower} (${votingPowerPercentage}%)`}
             </td>
             <td>
-                {(item.commission.rate * 100).toFixed(2)}%
+                {commissionRate}%
             </td>
             <td>
-                {
-                    item.delegation
-                        ? (item.amount.value / parseFloat(item.delegator_shares) * parseFloat(item.delegation.shares) * Math.pow(10, -6)).toFixed(2)
-                        : parseFloat('0').toFixed(2)
-                }
+                {/* { */}
+                {/*    item.delegation */}
+                {/*        ? (item.amount.value / parseFloat(item.delegator_shares) * parseFloat(item.delegation.shares) * Math.pow(10, -6)).toFixed(2) */}
+                {/*        : parseFloat('0').toFixed(2) */}
+                {/* } */}
+                {delegation}
             </td>
             <td>
                 {status === 1 && action === 0 ? <Delegate to={item.address}/> : null}

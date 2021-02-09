@@ -1,5 +1,4 @@
 import Async from 'async';
-import Axios from 'axios';
 import { emptyFunc } from '../constants/common';
 import {
     CONFIGURATION_CHAIN_BROADCAST_MODE_SET,
@@ -23,6 +22,7 @@ import {
     CONFIGURATION_PUT_URL,
     CONFIGURATION_SETUP_SET,
 } from '../constants/configuration';
+import Axios from '../services/axios';
 
 export const setConfigurationSetup = (data) => {
     return {
@@ -121,13 +121,7 @@ export const getConfiguration = (history, cb = emptyFunc) => (dispatch, getState
             dispatch(getConfigurationInProgress());
             next(null);
         }, (next) => {
-            const { authentication } = getState();
-
-            Axios.get(CONFIGURATION_GET_URL, {
-                headers: {
-                    Authorization: `Bearer ${authentication.info.value}`,
-                },
-            })
+            Axios.get(CONFIGURATION_GET_URL)
                 .then((res) => {
                     try {
                         next(null, res?.data?.result);
@@ -186,7 +180,6 @@ export const putConfiguration = (cb = emptyFunc) => (dispatch, getState) => {
         }, (next) => {
             const {
                 keys,
-                authentication,
                 configuration,
             } = getState();
 
@@ -204,10 +197,6 @@ export const putConfiguration = (cb = emptyFunc) => (dispatch, getState) => {
                     trust_node: configuration.chain.trustNode.value,
                 },
                 setup: false,
-            }, {
-                headers: {
-                    Authorization: `Bearer ${authentication.info.value}`,
-                },
             })
                 .then((res) => {
                     try {

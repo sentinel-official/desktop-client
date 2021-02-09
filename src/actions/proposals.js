@@ -1,5 +1,4 @@
 import Async from 'async';
-import Axios from 'axios';
 import { emptyFunc } from '../constants/common';
 import {
     PROPOSALS_GET_ERROR,
@@ -7,6 +6,7 @@ import {
     PROPOSALS_GET_SUCCESS,
     PROPOSALS_GET_URL,
 } from '../constants/proposals';
+import Axios from '../services/axios';
 
 export const getProposalsInProgress = (data) => {
     return {
@@ -35,13 +35,7 @@ export const getProposals = (cb = emptyFunc) => (dispatch, getState) => {
             dispatch(getProposalsInProgress(null));
             next(null);
         }, (next) => {
-            const { authentication } = getState();
-
-            Axios.get(PROPOSALS_GET_URL, {
-                headers: {
-                    Authorization: `Bearer ${authentication.info.value}`,
-                },
-            })
+            Axios.get(PROPOSALS_GET_URL)
                 .then((res) => {
                     try {
                         next(null, res?.data?.result);

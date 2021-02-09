@@ -41,7 +41,12 @@ func (r *ResponseWriter) WriteHeader(status int) {
 	r.Status = status
 }
 
-type AuthToken struct {
+type Token struct {
 	Value  string    `json:"value"`
 	Expiry time.Time `json:"expiry"`
+}
+
+type AuthToken struct {
+	Access  Token `json:"access"`
+	Refresh Token `json:"refresh"`
 }

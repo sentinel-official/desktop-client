@@ -1,5 +1,7 @@
 import { combineReducers } from 'redux';
 import {
+    AUTHENTICATION_INFO_CLEAR,
+    AUTHENTICATION_INFO_SET,
     AUTHENTICATION_PASSWORD_SET,
     AUTHENTICATION_POST_ERROR,
     AUTHENTICATION_POST_IN_PROGRESS,
@@ -41,18 +43,47 @@ const password = (state = {
 };
 
 const info = (state = {
-    value: '',
-    expiry: '',
+    access: {
+        value: '',
+        expiry: '',
+    },
+    refresh: {
+        value: '',
+        expiry: '',
+    },
 }, {
     type,
     data,
 }) => {
     switch (type) {
     case AUTHENTICATION_POST_SUCCESS:
+    case AUTHENTICATION_INFO_SET:
         return {
             ...state,
-            value: data.value,
-            expiry: data.expiry,
+            access: {
+                ...state.access,
+                value: data.access.value,
+                expiry: data.access.expiry,
+            },
+            refresh: {
+                ...state.refresh,
+                value: data.refresh.value,
+                expiry: data.refresh.expiry,
+            },
+        };
+    case AUTHENTICATION_INFO_CLEAR:
+        return {
+            ...state,
+            access: {
+                ...state.access,
+                value: '',
+                expiry: '',
+            },
+            refresh: {
+                ...state.refresh,
+                value: '',
+                expiry: '',
+            },
         };
     default:
         return state;

@@ -10,6 +10,7 @@ import Logo from '../../assets/Logo.svg';
 import Icon from '../../components/Icon';
 import Image from '../../components/Image';
 import Label from '../../components/Label';
+import Loader from '../../components/Loader';
 import TextBox from '../../components/TextBox';
 import CopyAddress from '../../containers/KeyInfo/AddressCopy';
 import Sidebar from '../../containers/Sidebar';
@@ -32,7 +33,6 @@ import ModalUnbond from './Validators/ModalUnbond';
 import Status from './Validators/Status';
 import WithDrawValidators from './Withdraw/Validators';
 import WithDraw from './Withdraw/Withdraw';
-import Loader from '../../components/Loader';
 
 const toggleClass = () => {
     if (document.getElementById('side-bar').classList.contains('active')) {

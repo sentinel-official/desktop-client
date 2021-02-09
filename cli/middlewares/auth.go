@@ -20,12 +20,17 @@ func TokenVerify(ctx *context.Context) mux.MiddlewareFunc {
 				return
 			}
 
-			token := ctx.AuthToken()
-			if token == nil || token.Value != auth[7:] {
+			if ctx.AuthToken() == nil {
 				utils.WriteErrorToResponse(w, http.StatusUnauthorized, -1, "")
 				return
 			}
-			if time.Now().After(token.Expiry) {
+
+			access := ctx.AuthToken().Access
+			if access.Value != auth[7:] {
+				utils.WriteErrorToResponse(w, http.StatusUnauthorized, -1, "")
+				return
+			}
+			if time.Now().After(access.Expiry) {
 				utils.WriteErrorToResponse(w, http.StatusUnauthorized, -1, "")
 				return
 			}

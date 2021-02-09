@@ -1,5 +1,4 @@
 import Async from 'async';
-import Axios from 'axios';
 import { emptyFunc } from '../../constants/common';
 import {
     TX_SEND_AMOUNT_SET,
@@ -12,6 +11,7 @@ import {
     TX_SEND_TO_SET,
     TX_SEND_URL,
 } from '../../constants/transactions';
+import Axios from '../../services/axios';
 import { decodeFromBech32 } from '../../utils/bech32';
 
 export const setTxSendTo = (data) => {
@@ -65,7 +65,6 @@ export const txSend = (cb = emptyFunc) => (dispatch, getState) => {
             next(null);
         }, (next) => {
             const {
-                authentication,
                 transactions,
                 account,
             } = getState();
@@ -78,10 +77,6 @@ export const txSend = (cb = emptyFunc) => (dispatch, getState) => {
                 }],
                 memo: transactions.send.memo.value.trim(),
                 password: account.password.value.trim(),
-            }, {
-                headers: {
-                    Authorization: `Bearer ${authentication.info.value}`,
-                },
             })
                 .then((res) => {
                     try {

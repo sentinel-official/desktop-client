@@ -4,7 +4,7 @@ import React from 'react';
 import './index.css';
 
 const TransitionUp = (props) => {
-    return <Slide direction="up" {...props}/>;
+    return <Slide direction="down" {...props}/>;
 };
 
 const Snackbar = ({
@@ -19,8 +19,8 @@ const Snackbar = ({
             }}
             TransitionComponent={TransitionUp}
             anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left',
+                vertical: 'top',
+                horizontal: 'right',
             }}
             autoHideDuration={5000}
             className="snackbar"

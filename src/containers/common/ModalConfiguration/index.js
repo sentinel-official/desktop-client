@@ -4,6 +4,7 @@ import { Modal } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { getConfiguration, hideConfigurationModal } from '../../../actions/configuration';
 import Label from '../../../components/Label';
+import Loader from '../../../components/Loader';
 import TextBox from '../../../components/TextBox';
 import Tooltip from '../../../components/Tooltip/Tooltip';
 import BroadcastMode from '../../Configuration/BroadcastMode';
@@ -16,7 +17,6 @@ import RPCAddress from '../../Configuration/RPCAddress';
 import SimulateAndExecute from '../../Configuration/SimulateAndExecute';
 import TrustNode from '../../Configuration/TrustNode';
 import Submit from './Submit';
-import Loader from '../../../components/Loader';
 
 const ModalConfiguration = (props) => {
     const [loading, setLoading] = useState(true);
@@ -53,7 +53,7 @@ const ModalConfiguration = (props) => {
             <Modal.Body className="settings-modal">
                 {
                     loading
-                        ? <span><Loader/></span>
+                        ? <Loader/>
                         : <>
                             <div className="row">
                                 <div className="col-md-6">

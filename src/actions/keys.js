@@ -1,5 +1,4 @@
 import Async from 'async';
-import Axios from 'axios';
 import { emptyFunc } from '../constants/common';
 import {
     KEYS_GET_ERROR,
@@ -14,6 +13,7 @@ import {
     KEY_NAME_SET,
     KEY_PASSWORD_SET,
 } from '../constants/keys';
+import Axios from '../services/axios';
 
 export const getKeysInProgress = (data) => {
     return {
@@ -42,13 +42,7 @@ export const getKeys = (history, cb = emptyFunc) => (dispatch, getState) => {
             dispatch(getKeysInProgress(null));
             next(null);
         }, (next) => {
-            const { authentication } = getState();
-
-            Axios.get(KEYS_GET_URL, {
-                headers: {
-                    Authorization: `Bearer ${authentication.info.value}`,
-                },
-            })
+            Axios.get(KEYS_GET_URL)
                 .then((res) => {
                     try {
                         next(null, res?.data?.result);
@@ -126,19 +120,12 @@ export const postKeys = (history, cb = emptyFunc) => (dispatch, getState) => {
             dispatch(postKeysInProgress(null));
             next(null);
         }, (next) => {
-            const {
-                authentication,
-                keys,
-            } = getState();
+            const { keys } = getState();
 
             Axios.post(KEYS_POST_URL, {
                 mnemonic: keys.post.mnemonic.value.trim(),
                 name: keys.post.name.value.trim(),
                 password: keys.post.password.value.trim(),
-            }, {
-                headers: {
-                    Authorization: `Bearer ${authentication.info.value}`,
-                },
             }).then((res) => {
                 try {
                     next(null, res?.data?.result);
