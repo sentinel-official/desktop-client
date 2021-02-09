@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import Profile from '../../../../assets/Profile.svg';
 import Image from '../../../../components/Image';
+import cache from '../../../../constants/cache';
 import Delegate from './Delegate';
 import Redelegate from './Redelegate';
 import Unbond from './Unbond';
@@ -23,6 +24,11 @@ const Row = ({
             return;
         }
 
+        if (cache.validators.avatars[identity]) {
+            setAvatarURL(cache.validators.avatars[identity]);
+            return;
+        }
+
         const url = 'https://keybase.io/_/api/1.0/user/lookup.json' +
             `?key_suffix=${identity}&fields=pictures`;
 
@@ -30,6 +36,7 @@ const Row = ({
             .then((res) => {
                 const url = res?.data?.them[0]?.pictures?.primary?.url;
                 if (url) {
+                    cache.validators.avatars[identity] = url;
                     setAvatarURL(url);
                 }
             })
@@ -74,11 +81,6 @@ const Row = ({
                 {commissionRate}%
             </td>
             <td>
-                {/* { */}
-                {/*    item.delegation */}
-                {/*        ? (item.amount.value / parseFloat(item.delegator_shares) * parseFloat(item.delegation.shares) * Math.pow(10, -6)).toFixed(2) */}
-                {/*        : parseFloat('0').toFixed(2) */}
-                {/* } */}
                 {delegation}
             </td>
             <td>

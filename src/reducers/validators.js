@@ -7,6 +7,7 @@ import {
     VALIDATORS_GET_IN_PROGRESS,
     VALIDATORS_GET_SUCCESS,
     VALIDATORS_SET,
+    VALIDATORS_SORT_SET,
 } from '../constants/validators';
 
 const items = (state = [], {
@@ -74,10 +75,30 @@ const totalVotingPower = (state = 0, {
     }
 };
 
+const sort = (state = {
+    by: 'amount.value',
+    order: 'desc',
+}, {
+    type,
+    data,
+}) => {
+    switch (type) {
+    case VALIDATORS_SORT_SET:
+        return {
+            ...state,
+            by: data.by,
+            order: data.order,
+        };
+    default:
+        return state;
+    }
+};
+
 export default combineReducers({
     items,
     status,
     action,
     inProgress,
     totalVotingPower,
+    sort,
 });

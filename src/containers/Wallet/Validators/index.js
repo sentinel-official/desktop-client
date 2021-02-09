@@ -4,27 +4,35 @@ import * as PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { getDelegations } from '../../../actions/delegations';
-import { getValidators } from '../../../actions/validators';
+import { getValidators, setValidatorsSort } from '../../../actions/validators';
 import Loader from '../../../components/Loader';
 import Table from '../../../components/Table';
 import Row from './Row';
 
 const columns = [
     {
-        label: 'Moniker',
         id: 'moniker',
+        key: 'description.moniker',
+        label: 'Moniker',
+        sort: true,
     },
     {
-        label: 'Voting Power',
         id: 'voting_power',
+        key: 'amount.value',
+        label: 'Voting Power',
+        sort: true,
     },
     {
-        label: 'Commission',
         id: 'commission',
+        key: 'commission.rate',
+        label: 'Commission',
+        sort: true,
     },
     {
-        label: 'Shares',
-        id: 'shares',
+        id: 'delegation',
+        key: 'delegation',
+        label: 'Delegation',
+        sort: false,
     },
 ];
 
@@ -32,6 +40,8 @@ const Validators = ({
     delegations,
     getDelegations,
     getValidators,
+    setValidatorsSort,
+    sort,
     validators,
 }) => {
     const [loading, setLoading] = useState(true);
@@ -61,7 +71,15 @@ const Validators = ({
         });
     });
 
-    items = Lodash.orderBy(items, ['amount.value'], ['desc']);
+    items = Lodash.orderBy(items, [sort.by], [sort.order]);
+
+    const onClick = (by) => {
+        const order = by === sort.by ? sort.order === 'asc' ? 'desc' : 'asc' : 'asc';
+        setValidatorsSort({
+            by,
+            order,
+        });
+    };
 
     return (
         <div className="validators-section">
@@ -70,6 +88,8 @@ const Validators = ({
                 columns={columns}
                 items={items}
                 row={Row}
+                sort={sort}
+                onClick={onClick}
             />
         </div>
     );
@@ -84,6 +104,11 @@ Validators.propTypes = {
     ).isRequired,
     getDelegations: PropTypes.func.isRequired,
     getValidators: PropTypes.func.isRequired,
+    setValidatorsSort: PropTypes.func.isRequired,
+    sort: PropTypes.shape({
+        by: PropTypes.string.isRequired,
+        order: PropTypes.string.isRequired,
+    }).isRequired,
     validators: PropTypes.arrayOf(
         PropTypes.shape({
             address: PropTypes.string.isRequired,
@@ -109,6 +134,7 @@ Validators.propTypes = {
 const stateToProps = (state) => {
     return {
         delegations: state.delegations.items,
+        sort: state.validators.sort,
         validators: state.validators.items,
     };
 };
@@ -116,6 +142,7 @@ const stateToProps = (state) => {
 const actionsToProps = {
     getValidators,
     getDelegations,
+    setValidatorsSort,
 };
 
 export default connect(stateToProps, actionsToProps)(Validators);

@@ -8,13 +8,19 @@ const Table = ({
     className,
     columns,
     items,
+    onClick,
+    sort,
     row: Component,
 }) => {
     return (
         <ReactTable
             borderless={true}
             className={className}>
-            <Header columns={columns}/>
+            <Header
+                columns={columns}
+                sort={sort}
+                onClick={onClick}
+            />
             <tbody>
                 {
                     items.map((item, index) => {
@@ -40,6 +46,11 @@ Table.propTypes = {
     ).isRequired,
     items: PropTypes.array.isRequired,
     row: PropTypes.object.isRequired,
+    sort: PropTypes.shape({
+        by: PropTypes.string.isRequired,
+        order: PropTypes.string.isRequired,
+    }).isRequired,
+    onClick: PropTypes.func.isRequired,
 };
 
 export default Table;

@@ -10,6 +10,7 @@ import {
     VALIDATORS_GET_SUCCESS,
     VALIDATORS_GET_URL,
     VALIDATORS_SET,
+    VALIDATORS_SORT_SET,
 } from '../constants/validators';
 import Axios from '../services/axios';
 
@@ -104,6 +105,13 @@ export const sortValidators = (by, asc = true) => (dispatch, getState) => {
 export const setValidators = (data) => {
     return {
         type: VALIDATORS_SET,
+        data,
+    };
+};
+
+export const setValidatorsSort = (data) => {
+    return {
+        type: VALIDATORS_SORT_SET,
         data,
     };
 };
