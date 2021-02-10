@@ -1,19 +1,19 @@
 import * as PropTypes from 'prop-types';
-import React from 'react';
-import Label from '../../components/Label';
-import SocialIcons from '../../components/SocialIcons';
-import TextBox from '../../components/TextBox';
-import Tooltip from '../../components/Tooltip/Tooltip';
-import Sidebar from '../common/SidebarOnboard';
 import BroadcastMode from './BroadcastMode';
 import ChainID from './ChainID';
 import Fee from './Fees';
 import Gas from './Gas';
 import GasAdjustment from './GasAdjustment';
 import GasPrices from './GasPrices';
+import Label from '../../components/Label';
 import RPCAddress from './RPCAddress';
+import React from 'react';
+import Sidebar from '../common/SidebarOnboard';
 import SimulateAndExecute from './SimulateAndExecute';
+import SocialIcons from '../../components/SocialIcons';
 import Submit from './Submit';
+import TextBox from '../../components/TextBox';
+import Tooltip from '../../components/Tooltip/Tooltip';
 import TrustNode from './TrustNode';
 
 const Configuration = ({ history }) => {

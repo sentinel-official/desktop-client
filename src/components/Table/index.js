@@ -1,8 +1,8 @@
+import './index.css';
 import * as PropTypes from 'prop-types';
-import React from 'react';
 import { Table as ReactTable } from 'react-bootstrap';
 import Header from './Header';
-import './index.css';
+import React from 'react';
 
 const Table = ({
     className,

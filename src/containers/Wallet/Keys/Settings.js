@@ -1,9 +1,9 @@
 import * as PropTypes from 'prop-types';
-import React from 'react';
 import { Dropdown } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { showConfigurationModal } from '../../../actions/configuration';
 import Icon from '../../../components/Icon';
+import React from 'react';
 import TextBox from '../../../components/TextBox';
 
 const Settings = ({ onClick }) => {

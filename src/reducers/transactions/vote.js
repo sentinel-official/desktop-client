@@ -1,4 +1,3 @@
-import { combineReducers } from 'redux';
 import {
     TX_VOTE_ERROR,
     TX_VOTE_ID_SET,
@@ -9,6 +8,7 @@ import {
     TX_VOTE_OPTION_SET,
     TX_VOTE_SUCCESS,
 } from '../../constants/transactions';
+import { combineReducers } from 'redux';
 
 const id = (state = {
     value: 0,

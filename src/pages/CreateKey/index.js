@@ -1,4 +1,4 @@
-import Page from '../../containers/CreateKey';
 import './index.css';
+import Page from '../../containers/CreateKey';
 
 export default Page;

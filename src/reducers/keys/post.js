@@ -1,4 +1,3 @@
-import { combineReducers } from 'redux';
 import {
     KEYS_POST_ERROR,
     KEYS_POST_IN_PROGRESS,
@@ -7,6 +6,7 @@ import {
     KEY_NAME_SET,
     KEY_PASSWORD_SET,
 } from '../../constants/keys';
+import { combineReducers } from 'redux';
 
 const name = (state = {
     value: '',

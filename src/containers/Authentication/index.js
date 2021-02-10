@@ -1,11 +1,11 @@
 import * as PropTypes from 'prop-types';
-import React from 'react';
 import Label from '../../components/Label';
-import SocialIcons from '../../components/SocialIcons';
-import TextBox from '../../components/TextBox';
-import Sidebar from '../common/SidebarOnboard';
 import Password from './Password';
+import React from 'react';
+import Sidebar from '../common/SidebarOnboard';
+import SocialIcons from '../../components/SocialIcons';
 import Submit from './Submit';
+import TextBox from '../../components/TextBox';
 
 const Authentication = ({ history }) => {
     return (

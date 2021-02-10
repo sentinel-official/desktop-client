@@ -1,8 +1,8 @@
-import React from 'react';
 import { Modal as ReactModal } from 'react-bootstrap';
-import TextBox from '../../../../components/TextBox';
 import AddKey from './AddKey';
 import Keys from './Keys';
+import React from 'react';
+import TextBox from '../../../../components/TextBox';
 
 const ModalViewKeys = () => {
     return (

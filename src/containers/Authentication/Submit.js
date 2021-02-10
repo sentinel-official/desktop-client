@@ -1,9 +1,9 @@
 import * as PropTypes from 'prop-types';
-import React from 'react';
+import { ValidatePassword } from './_validation';
 import { connect } from 'react-redux';
 import { postAuthentication } from '../../actions/authentication';
 import Button from '../../components/Button';
-import { ValidatePassword } from './_validation';
+import React from 'react';
 
 const Submit = (props) => {
     const onClick = () => {

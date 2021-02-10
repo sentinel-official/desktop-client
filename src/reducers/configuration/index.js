@@ -1,4 +1,3 @@
-import { combineReducers } from 'redux';
 import {
     CONFIGURATION_GET_SUCCESS,
     CONFIGURATION_MODAL_HIDE,
@@ -6,6 +5,7 @@ import {
     CONFIGURATION_PUT_SUCCESS,
     CONFIGURATION_SETUP_SET,
 } from '../../constants/configuration';
+import { combineReducers } from 'redux';
 import chain from './chain';
 import get from './get';
 import put from './put';

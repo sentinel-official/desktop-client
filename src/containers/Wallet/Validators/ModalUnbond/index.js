@@ -1,15 +1,15 @@
 import * as PropTypes from 'prop-types';
-import React from 'react';
 import { Modal as ReactModal } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { hideTxUnbondModal } from '../../../../actions/transactions/unbond';
-import Label from '../../../../components/Label';
-import TextBox from '../../../../components/TextBox';
 import Amount from './Amount';
 import FromAddress from './FromAddress';
 import FromName from './FromName';
+import Label from '../../../../components/Label';
 import Memo from './Memo';
 import Password from './Password';
+import React from 'react';
+import TextBox from '../../../../components/TextBox';
 import Unbond from './Unbond';
 
 const ModalUnbond = (props) => {

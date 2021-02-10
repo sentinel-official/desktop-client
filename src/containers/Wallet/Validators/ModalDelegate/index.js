@@ -1,14 +1,14 @@
 import * as PropTypes from 'prop-types';
-import React from 'react';
 import { Modal as ReactModal } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { hideTxDelegateModal } from '../../../../actions/transactions/delegate';
-import Label from '../../../../components/Label';
-import TextBox from '../../../../components/TextBox';
 import Amount from './Amount';
 import Delegate from './Delegate';
+import Label from '../../../../components/Label';
 import Memo from './Memo';
 import Password from './Password';
+import React from 'react';
+import TextBox from '../../../../components/TextBox';
 import ToAddress from './ToAddress';
 import ToName from './ToName';
 

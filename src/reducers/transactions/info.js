@@ -1,4 +1,3 @@
-import { combineReducers } from 'redux';
 import {
     TX_DELEGATE_ERROR,
     TX_DELEGATE_SUCCESS,
@@ -15,6 +14,7 @@ import {
     TX_WITHDRAW_ERROR,
     TX_WITHDRAW_SUCCESS,
 } from '../../constants/transactions';
+import { combineReducers } from 'redux';
 
 const txHash = (state = '', {
     type,

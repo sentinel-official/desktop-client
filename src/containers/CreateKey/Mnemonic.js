@@ -1,9 +1,9 @@
 import * as PropTypes from 'prop-types';
-import React from 'react';
+import { ValidateMnemonic } from './_validation';
 import { connect } from 'react-redux';
 import { setKeyMnemonic } from '../../actions/keys';
+import React from 'react';
 import TextArea from '../../components/TextArea';
-import { ValidateMnemonic } from './_validation';
 
 const Mnemonic = (props) => {
     const onChange = (event) => {

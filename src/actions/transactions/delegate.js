@@ -1,4 +1,3 @@
-import Async from 'async';
 import { COIN_DENOM, emptyFunc } from '../../constants/common';
 import {
     TX_DELEGATE_AMOUNT_SET,
@@ -11,6 +10,7 @@ import {
     TX_DELEGATE_TO_SET,
     getTxDelegateURL,
 } from '../../constants/transactions';
+import Async from 'async';
 import Axios from '../../services/axios';
 
 export const setTxDelegateTo = (data) => {

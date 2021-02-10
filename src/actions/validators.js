@@ -1,6 +1,3 @@
-import Async from 'async';
-import Lodash from 'lodash';
-import { emptyFunc } from '../constants/common';
 import {
     VALIDATORS_ACTION_SET,
     VALIDATORS_AVATAR_URL_SET,
@@ -12,7 +9,10 @@ import {
     VALIDATORS_SET,
     VALIDATORS_SORT_SET,
 } from '../constants/validators';
+import { emptyFunc } from '../constants/common';
+import Async from 'async';
 import Axios from '../services/axios';
+import Lodash from 'lodash';
 
 export const getValidatorsInProgress = (data) => {
     return {

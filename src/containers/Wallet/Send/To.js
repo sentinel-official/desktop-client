@@ -1,9 +1,9 @@
 import * as PropTypes from 'prop-types';
-import React from 'react';
+import { ValidateTo } from './_validation';
 import { connect } from 'react-redux';
 import { setTxSendTo } from '../../../actions/transactions/send';
+import React from 'react';
 import TextInputField from '../../../components/TextInputField';
-import { ValidateTo } from './_validation';
 
 const To = (props) => {
     const onChange = (event) => {

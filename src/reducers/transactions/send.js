@@ -1,4 +1,3 @@
-import { combineReducers } from 'redux';
 import {
     TX_SEND_AMOUNT_SET,
     TX_SEND_ERROR,
@@ -9,6 +8,7 @@ import {
     TX_SEND_SUCCESS,
     TX_SEND_TO_SET,
 } from '../../constants/transactions';
+import { combineReducers } from 'redux';
 
 const to = (state = {
     value: '',

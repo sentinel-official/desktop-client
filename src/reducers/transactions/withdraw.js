@@ -1,4 +1,3 @@
-import { combineReducers } from 'redux';
 import {
     TX_WITHDRAW_ERROR,
     TX_WITHDRAW_FROM_SET,
@@ -8,6 +7,7 @@ import {
     TX_WITHDRAW_MODAL_SHOW,
     TX_WITHDRAW_SUCCESS,
 } from '../../constants/transactions';
+import { combineReducers } from 'redux';
 
 const from = (state = {
     value: '',

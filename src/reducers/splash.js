@@ -1,5 +1,5 @@
-import { combineReducers } from 'redux';
 import { SPLASH_COMPLETED_SET } from '../constants/splash';
+import { combineReducers } from 'redux';
 
 const completed = (state = 0, {
     type,

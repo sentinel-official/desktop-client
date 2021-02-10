@@ -1,9 +1,9 @@
 import * as PropTypes from 'prop-types';
-import React from 'react';
+import { ValidateAmount, ValidateMemo, ValidatePassword } from './_validation';
 import { connect } from 'react-redux';
 import { txDelegate } from '../../../../actions/transactions/delegate';
 import Button from '../../../../components/Button';
-import { ValidateAmount, ValidateMemo, ValidatePassword } from './_validation';
+import React from 'react';
 
 const Delegate = (props) => {
     const onClick = () => {

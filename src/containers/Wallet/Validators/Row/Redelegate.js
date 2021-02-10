@@ -1,8 +1,8 @@
 import * as PropTypes from 'prop-types';
-import React from 'react';
 import { connect } from 'react-redux';
 import { setTxRedelegateFrom, showTxRedelegateModal } from '../../../../actions/transactions/redelegate';
 import Button from '../../../../components/Button';
+import React from 'react';
 
 const Redelegate = (props) => {
     const onClick = () => {

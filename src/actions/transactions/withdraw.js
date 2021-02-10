@@ -1,5 +1,3 @@
-import Async from 'async';
-import { emptyFunc } from '../../constants/common';
 import {
     TX_WITHDRAW_ERROR,
     TX_WITHDRAW_FROM_SET,
@@ -10,6 +8,8 @@ import {
     TX_WITHDRAW_SUCCESS,
     getTxWithdrawURL,
 } from '../../constants/transactions';
+import { emptyFunc } from '../../constants/common';
+import Async from 'async';
 import Axios from '../../services/axios';
 
 export const setTxWithdrawFrom = (data) => {

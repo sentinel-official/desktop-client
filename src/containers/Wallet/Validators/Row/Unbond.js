@@ -1,8 +1,8 @@
 import * as PropTypes from 'prop-types';
-import React from 'react';
 import { connect } from 'react-redux';
 import { setTxUnbondFrom, showTxUnbondModal } from '../../../../actions/transactions/unbond';
 import Button from '../../../../components/Button';
+import React from 'react';
 
 const Unbond = (props) => {
     const onClick = () => {

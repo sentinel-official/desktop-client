@@ -1,9 +1,9 @@
 import * as PropTypes from 'prop-types';
-import React, { useEffect } from 'react';
+import { SPLASH_TIMEOUT } from '../../constants/splash';
 import { connect } from 'react-redux';
 import { setSplashCompleted } from '../../actions/splash';
+import React, { useEffect } from 'react';
 import ReactProgressBar from '../../components/ProgressBar';
-import { SPLASH_TIMEOUT } from '../../constants/splash';
 
 const ProgressBar = (props) => {
     useEffect(() => {

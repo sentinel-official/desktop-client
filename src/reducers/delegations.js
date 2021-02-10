@@ -1,5 +1,5 @@
-import { combineReducers } from 'redux';
 import { DELEGATIONS_GET_ERROR, DELEGATIONS_GET_IN_PROGRESS, DELEGATIONS_GET_SUCCESS } from '../constants/delegations';
+import { combineReducers } from 'redux';
 
 const items = (state = [], {
     type,

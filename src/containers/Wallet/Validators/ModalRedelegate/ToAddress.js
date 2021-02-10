@@ -1,9 +1,9 @@
 import * as PropTypes from 'prop-types';
-import React from 'react';
+import { ValidateToAddress } from './_validation';
 import { connect } from 'react-redux';
 import { setTxRedelegateTo } from '../../../../actions/transactions/redelegate';
+import React from 'react';
 import TextInputField from '../../../../components/TextInputField';
-import { ValidateToAddress } from './_validation';
 
 const ToAddress = (props) => {
     const onChange = (event) => {

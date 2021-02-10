@@ -1,8 +1,8 @@
 import * as PropTypes from 'prop-types';
-import React from 'react';
 import { connect } from 'react-redux';
 import Avatar from './Avatar';
 import Delegate from './Delegate';
+import React from 'react';
 import Redelegate from './Redelegate';
 import Unbond from './Unbond';
 

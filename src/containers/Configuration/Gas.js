@@ -1,9 +1,9 @@
 import * as PropTypes from 'prop-types';
-import React from 'react';
+import { ValidateGas } from './_validation';
 import { connect } from 'react-redux';
 import { setConfigurationChainGas } from '../../actions/configuration';
 import NumberInputField from '../../components/NumberInputField';
-import { ValidateGas } from './_validation';
+import React from 'react';
 
 const Gas = (props) => {
     const onChange = (event) => {

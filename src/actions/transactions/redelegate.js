@@ -1,4 +1,3 @@
-import Async from 'async';
 import { COIN_DENOM, emptyFunc } from '../../constants/common';
 import {
     TX_REDELEGATE_AMOUNT_SET,
@@ -12,8 +11,9 @@ import {
     TX_REDELEGATE_TO_SET,
     getTxRedelegateURL,
 } from '../../constants/transactions';
-import Axios from '../../services/axios';
 import { decodeFromBech32 } from '../../utils/bech32';
+import Async from 'async';
+import Axios from '../../services/axios';
 
 export const setTxRedelegateFrom = (data) => {
     return {

@@ -1,5 +1,3 @@
-import Async from 'async';
-import { emptyFunc } from '../constants/common';
 import {
     KEYS_GET_ERROR,
     KEYS_GET_IN_PROGRESS,
@@ -13,6 +11,8 @@ import {
     KEY_NAME_SET,
     KEY_PASSWORD_SET,
 } from '../constants/keys';
+import { emptyFunc } from '../constants/common';
+import Async from 'async';
 import Axios from '../services/axios';
 
 export const getKeysInProgress = (data) => {

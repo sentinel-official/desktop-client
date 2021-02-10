@@ -1,9 +1,9 @@
 import * as PropTypes from 'prop-types';
-import React from 'react';
-import DownloadLink from 'react-download-link';
 import { connect } from 'react-redux';
-import Icon from '../../components/Icon';
 import { encodeToBech32 } from '../../utils/bech32';
+import DownloadLink from 'react-download-link';
+import Icon from '../../components/Icon';
+import React from 'react';
 
 const MnemonicDownload = (props) => {
     const address = encodeToBech32(props.address, 'sent');

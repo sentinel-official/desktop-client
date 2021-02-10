@@ -1,6 +1,6 @@
-import React from 'react';
-import Icon from '../Icon';
 import './index.css';
+import Icon from '../Icon';
+import React from 'react';
 
 const SocialIcons = () => {
     return (

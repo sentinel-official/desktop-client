@@ -1,5 +1,5 @@
-import React from 'react';
 import Checkbox from '../../components/Checkbox';
+import React from 'react';
 
 const Note = () => {
     return (

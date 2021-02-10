@@ -1,4 +1,3 @@
-import { combineReducers } from 'redux';
 import {
     TX_UNBOND_AMOUNT_SET,
     TX_UNBOND_ERROR,
@@ -9,6 +8,7 @@ import {
     TX_UNBOND_MODAL_SHOW,
     TX_UNBOND_SUCCESS,
 } from '../../constants/transactions';
+import { combineReducers } from 'redux';
 
 const from = (state = {
     value: '',

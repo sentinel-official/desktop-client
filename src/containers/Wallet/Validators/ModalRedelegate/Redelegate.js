@@ -1,9 +1,9 @@
 import * as PropTypes from 'prop-types';
-import React from 'react';
+import { ValidateAmount, ValidateMemo, ValidatePassword, ValidateToAddress } from './_validation';
 import { connect } from 'react-redux';
 import { txRedelegate } from '../../../../actions/transactions/redelegate';
 import Button from '../../../../components/Button';
-import { ValidateAmount, ValidateMemo, ValidatePassword, ValidateToAddress } from './_validation';
+import React from 'react';
 
 const Redelegate = (props) => {
     const disabled = (

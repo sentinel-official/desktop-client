@@ -1,9 +1,9 @@
 import * as PropTypes from 'prop-types';
-import React from 'react';
+import { ValidateAmount } from './_validation';
 import { connect } from 'react-redux';
 import { setTxUnbondAmount } from '../../../../actions/transactions/unbond';
 import NumberInputField from '../../../../components/NumberInputField';
-import { ValidateAmount } from './_validation';
+import React from 'react';
 
 const Amount = (props) => {
     const onChange = (event) => {

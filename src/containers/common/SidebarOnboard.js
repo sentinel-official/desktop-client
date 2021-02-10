@@ -1,6 +1,6 @@
-import React from 'react';
-import Logo from '../../assets/Logo.svg';
 import Image from '../../components/Image';
+import Logo from '../../assets/Logo.svg';
+import React from 'react';
 import TextBox from '../../components/TextBox';
 
 const SidebarOnboard = () => {

@@ -1,8 +1,8 @@
 import * as PropTypes from 'prop-types';
-import React from 'react';
 import { connect } from 'react-redux';
 import { setValidatorsActionSet } from '../../../actions/validators';
 import Dropdown from '../../../components/Dropdown';
+import React from 'react';
 
 const Actions = (props) => {
     const options = [

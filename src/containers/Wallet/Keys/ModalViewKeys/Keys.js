@@ -1,9 +1,9 @@
-import React from 'react';
 import { Accordion, Card } from 'react-bootstrap';
+import Delete from '../DeleteKey/Delete';
 import Icon from '../../../../components/Icon';
 import Label from '../../../../components/Label';
-import Delete from '../DeleteKey/Delete';
 import Password from '../DeleteKey/Password';
+import React from 'react';
 import SelectKey from './SelectKey';
 
 const list = [

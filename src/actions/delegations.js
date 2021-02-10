@@ -1,11 +1,11 @@
-import Async from 'async';
-import { emptyFunc } from '../constants/common';
 import {
     DELEGATIONS_GET_ERROR,
     DELEGATIONS_GET_IN_PROGRESS,
     DELEGATIONS_GET_SUCCESS,
     getDelegationsURL,
 } from '../constants/delegations';
+import { emptyFunc } from '../constants/common';
+import Async from 'async';
 import Axios from '../services/axios';
 
 export const getDelegationsInProgress = (data) => {

@@ -1,6 +1,6 @@
-import Axios from 'axios';
-import { clearAuthenticationInfo, setAuthenticationInfo } from '../actions/authentication';
 import { AUTHENTICATION_POST_URL } from '../constants/authentication';
+import { clearAuthenticationInfo, setAuthenticationInfo } from '../actions/authentication';
+import Axios from 'axios';
 
 const axios = Axios.create({});
 

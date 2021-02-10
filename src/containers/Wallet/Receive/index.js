@@ -1,11 +1,11 @@
 import * as PropTypes from 'prop-types';
-import React from 'react';
 import { connect } from 'react-redux';
-import TextBox from '../../../components/TextBox';
 import { encodeToBech32 } from '../../../utils/bech32';
 import Address from './Address';
 import AddressCopy from './AddressCopy';
 import QRCode from './QRCode';
+import React from 'react';
+import TextBox from '../../../components/TextBox';
 
 const Receive = ({
     index,

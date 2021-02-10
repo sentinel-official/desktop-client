@@ -1,6 +1,6 @@
 import * as PropTypes from 'prop-types';
-import ReactQRCode from 'qrcode.react';
 import React from 'react';
+import ReactQRCode from 'qrcode.react';
 
 const QRCode = ({
     value,

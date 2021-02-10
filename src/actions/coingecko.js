@@ -1,5 +1,3 @@
-import Async from 'async';
-import Axios from 'axios';
 import {
     COINGECKO_GET_ERROR,
     COINGECKO_GET_IN_PROGRESS,
@@ -7,6 +5,8 @@ import {
     COINGECKO_GET_URL,
 } from '../constants/coingecko';
 import { emptyFunc } from '../constants/common';
+import Async from 'async';
+import Axios from 'axios';
 
 export const getCoingeckoInProgress = (data) => {
     return {

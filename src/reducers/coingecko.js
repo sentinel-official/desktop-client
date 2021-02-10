@@ -1,5 +1,5 @@
-import { combineReducers } from 'redux';
 import { COINGECKO_GET_ERROR, COINGECKO_GET_IN_PROGRESS, COINGECKO_GET_SUCCESS } from '../constants/coingecko';
+import { combineReducers } from 'redux';
 
 const rate = (state = 0, {
     type,

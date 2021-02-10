@@ -1,16 +1,16 @@
 import * as PropTypes from 'prop-types';
-import React from 'react';
 import { Modal as ReactModal } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { hideTxRedelegateModal } from '../../../../actions/transactions/redelegate';
-import Label from '../../../../components/Label';
-import TextBox from '../../../../components/TextBox';
 import Amount from './Amount';
 import FromAddress from './FromAddress';
 import FromName from './FromName';
+import Label from '../../../../components/Label';
 import Memo from './Memo';
 import Password from './Password';
+import React from 'react';
 import Redelegate from './Redelegate';
+import TextBox from '../../../../components/TextBox';
 import ToAddress from './ToAddress';
 
 const ModalRedelegate = (props) => {

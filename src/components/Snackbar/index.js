@@ -1,7 +1,7 @@
-import { Snackbar as MaterialSnackbar, Slide } from '@material-ui/core';
-import * as PropTypes from 'prop-types';
-import React from 'react';
 import './index.css';
+import * as PropTypes from 'prop-types';
+import { Snackbar as MaterialSnackbar, Slide } from '@material-ui/core';
+import React from 'react';
 
 const TransitionUp = (props) => {
     return <Slide direction="down" {...props}/>;

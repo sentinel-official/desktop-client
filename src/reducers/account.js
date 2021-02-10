@@ -1,4 +1,3 @@
-import { combineReducers } from 'redux';
 import {
     ACCOUNT_GET_ERROR,
     ACCOUNT_GET_IN_PROGRESS,
@@ -25,6 +24,7 @@ import {
     TX_WITHDRAW_MODAL_HIDE,
     TX_WITHDRAW_SUCCESS,
 } from '../constants/transactions';
+import { combineReducers } from 'redux';
 
 const info = (state = {
     address: '',

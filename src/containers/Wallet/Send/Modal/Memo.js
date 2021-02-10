@@ -1,9 +1,9 @@
 import * as PropTypes from 'prop-types';
-import React from 'react';
+import { ValidateMemo } from './_validation';
 import { connect } from 'react-redux';
 import { setTxSendMemo } from '../../../../actions/transactions/send';
+import React from 'react';
 import TextArea from '../../../../components/TextArea';
-import { ValidateMemo } from './_validation';
 
 const Memo = (props) => {
     const onChange = (event) => {

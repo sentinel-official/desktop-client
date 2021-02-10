@@ -1,7 +1,7 @@
-import * as PropTypes from 'prop-types';
-import React from 'react';
-import Icon from '../Icon';
 import './index.css';
+import * as PropTypes from 'prop-types';
+import Icon from '../Icon';
+import React from 'react';
 
 const Tooltip = ({
     value,

@@ -1,4 +1,3 @@
-import { combineReducers } from 'redux';
 import {
     AUTHENTICATION_INFO_CLEAR,
     AUTHENTICATION_INFO_SET,
@@ -7,6 +6,7 @@ import {
     AUTHENTICATION_POST_IN_PROGRESS,
     AUTHENTICATION_POST_SUCCESS,
 } from '../constants/authentication';
+import { combineReducers } from 'redux';
 
 const password = (state = {
     value: 'admin',

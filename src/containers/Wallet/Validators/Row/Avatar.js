@@ -1,8 +1,8 @@
-import Axios from 'axios';
 import * as PropTypes from 'prop-types';
-import React, { useEffect, useState } from 'react';
-import Profile from '../../../../assets/Profile.svg';
+import Axios from 'axios';
 import Image from '../../../../components/Image';
+import Profile from '../../../../assets/Profile.svg';
+import React, { useEffect, useState } from 'react';
 import cache from '../../../../constants/cache';
 
 const Avatar = ({ identity }) => {

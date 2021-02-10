@@ -1,6 +1,6 @@
 import * as PropTypes from 'prop-types';
-import React from 'react';
 import Copy from '../../../components/Copy';
+import React from 'react';
 
 const AddressCopy = ({
     text,

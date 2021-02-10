@@ -1,9 +1,9 @@
 import * as PropTypes from 'prop-types';
-import React from 'react';
+import { ValidateSimulateAndExecute } from './_validation';
 import { connect } from 'react-redux';
 import { setConfigurationChainSimulateAndExecute } from '../../actions/configuration';
 import ChipButton from '../../components/ChipButton';
-import { ValidateSimulateAndExecute } from './_validation';
+import React from 'react';
 
 const options = [
     {

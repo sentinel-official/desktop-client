@@ -1,5 +1,3 @@
-import Lodash from 'lodash';
-import { combineReducers } from 'redux';
 import {
     VALIDATORS_ACTION_SET,
     VALIDATORS_FILTER_STATUS_SET,
@@ -9,6 +7,8 @@ import {
     VALIDATORS_SET,
     VALIDATORS_SORT_SET,
 } from '../constants/validators';
+import { combineReducers } from 'redux';
+import Lodash from 'lodash';
 
 const items = (state = [], {
     type,

@@ -1,7 +1,7 @@
 import * as PropTypes from 'prop-types';
-import React from 'react';
 import { NavLink } from 'react-router-dom';
 import Icon from '../../components/Icon';
+import React from 'react';
 import TextBox from '../../components/TextBox';
 
 const options = [

@@ -1,9 +1,9 @@
 import * as PropTypes from 'prop-types';
-import React from 'react';
+import { ValidateAmount, ValidateTo } from './_validation';
 import { connect } from 'react-redux';
 import { showTxSendModal } from '../../../actions/transactions/send';
 import Button from '../../../components/Button';
-import { ValidateAmount, ValidateTo } from './_validation';
+import React from 'react';
 
 const Send = (props) => {
     const disabled = (

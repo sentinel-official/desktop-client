@@ -1,8 +1,4 @@
 import * as PropTypes from 'prop-types';
-import React from 'react';
-import { connect } from 'react-redux';
-import { putConfiguration } from '../../actions/configuration';
-import Button from '../../components/Button';
 import {
     ValidateBroadcastMode,
     ValidateFees,
@@ -14,6 +10,10 @@ import {
     ValidateSimulateAndExecute,
     ValidateTrustNode,
 } from './_validation';
+import { connect } from 'react-redux';
+import { putConfiguration } from '../../actions/configuration';
+import Button from '../../components/Button';
+import React from 'react';
 
 const Submit = (props) => {
     const onClick = () => {

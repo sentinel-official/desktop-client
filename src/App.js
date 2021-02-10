@@ -1,9 +1,9 @@
-import 'bootstrap/dist/css/bootstrap.css';
-import React from 'react';
-import { Redirect, Route, Switch, withRouter } from 'react-router-dom';
 import './App.css';
-import Snackbar from './containers/common/Snackbar';
+import 'bootstrap/dist/css/bootstrap.css';
+import { Redirect, Route, Switch, withRouter } from 'react-router-dom';
 import PrivateRoute from './containers/PrivateRoute';
+import React from 'react';
+import Snackbar from './containers/common/Snackbar';
 import routes from './routes';
 
 const App = () => {

@@ -1,8 +1,8 @@
 import * as PropTypes from 'prop-types';
-import React from 'react';
 import { connect } from 'react-redux';
 import { setValidatorsFilterStatus } from '../../../actions/validators';
 import ChipButton from '../../../components/ChipButton';
+import React from 'react';
 
 const options = [
     {

@@ -1,22 +1,22 @@
 import * as PropTypes from 'prop-types';
-import React, { useEffect, useState } from 'react';
 import { Modal } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { getConfiguration, hideConfigurationModal } from '../../../actions/configuration';
-import Label from '../../../components/Label';
-import Loader from '../../../components/Loader';
-import TextBox from '../../../components/TextBox';
-import Tooltip from '../../../components/Tooltip/Tooltip';
 import BroadcastMode from '../../Configuration/BroadcastMode';
 import ChainID from '../../Configuration/ChainID';
 import Fee from '../../Configuration/Fees';
 import Gas from '../../Configuration/Gas';
 import GasAdjustment from '../../Configuration/GasAdjustment';
 import GasPrices from '../../Configuration/GasPrices';
+import Label from '../../../components/Label';
+import Loader from '../../../components/Loader';
 import RPCAddress from '../../Configuration/RPCAddress';
+import React, { useEffect, useState } from 'react';
 import SimulateAndExecute from '../../Configuration/SimulateAndExecute';
-import TrustNode from '../../Configuration/TrustNode';
 import Submit from './Submit';
+import TextBox from '../../../components/TextBox';
+import Tooltip from '../../../components/Tooltip/Tooltip';
+import TrustNode from '../../Configuration/TrustNode';
 
 const ModalConfiguration = (props) => {
     const [loading, setLoading] = useState(true);

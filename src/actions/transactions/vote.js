@@ -1,5 +1,3 @@
-import Async from 'async';
-import { emptyFunc } from '../../constants/common';
 import {
     TX_VOTE_ERROR,
     TX_VOTE_ID_SET,
@@ -11,6 +9,8 @@ import {
     TX_VOTE_SUCCESS,
     getTxVoteURL,
 } from '../../constants/transactions';
+import { emptyFunc } from '../../constants/common';
+import Async from 'async';
 import Axios from '../../services/axios';
 
 export const setTxVoteID = (data) => {

@@ -1,9 +1,9 @@
 import * as PropTypes from 'prop-types';
-import React from 'react';
+import { ValidateID } from './_validation';
 import { connect } from 'react-redux';
 import { setConfigurationChainID } from '../../actions/configuration';
+import React from 'react';
 import TextInputField from '../../components/TextInputField';
-import { ValidateID } from './_validation';
 
 const ChainID = (props) => {
     const onChange = (event) => {

@@ -1,9 +1,9 @@
 import * as PropTypes from 'prop-types';
-import React from 'react';
+import { ValidateMnemonic, ValidateName, ValidatePassword } from './_validation';
 import { connect } from 'react-redux';
 import { postKeys } from '../../actions/keys';
 import Button from '../../components/Button';
-import { ValidateMnemonic, ValidateName, ValidatePassword } from './_validation';
+import React from 'react';
 
 const Submit = (props) => {
     const onClick = () => {

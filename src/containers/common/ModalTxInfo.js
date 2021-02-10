@@ -1,11 +1,11 @@
 import * as PropTypes from 'prop-types';
-import React from 'react';
 import { Modal } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { setTxInfoModalHide } from '../../actions/transactions/info';
 import Failure from '../../assets/Failure.svg';
-import Success from '../../assets/Success.svg';
 import Image from '../../components/Image';
+import React from 'react';
+import Success from '../../assets/Success.svg';
 import TextBox from '../../components/TextBox';
 
 const ModalTxInfo = ({

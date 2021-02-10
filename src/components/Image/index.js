@@ -1,6 +1,6 @@
+import './index.css';
 import * as PropTypes from 'prop-types';
 import React from 'react';
-import './index.css';
 
 const Image = ({
     alt,

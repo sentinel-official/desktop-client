@@ -1,8 +1,8 @@
 import * as PropTypes from 'prop-types';
-import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { getAccount } from '../../actions/account';
 import { getCoingecko } from '../../actions/coingecko';
+import React, { useEffect } from 'react';
 import TextBox from '../../components/TextBox';
 
 const Balance = (props) => {

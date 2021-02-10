@@ -1,14 +1,14 @@
 import * as PropTypes from 'prop-types';
-import React from 'react';
 import { Modal as ReactModal } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { hideTxSendModal } from '../../../../actions/transactions/send';
-import Label from '../../../../components/Label';
-import TextBox from '../../../../components/TextBox';
 import Amount from './Amount';
+import Label from '../../../../components/Label';
 import Memo from './Memo';
 import Password from './Password';
+import React from 'react';
 import Send from './Send';
+import TextBox from '../../../../components/TextBox';
 import To from './To';
 
 const Modal = ({

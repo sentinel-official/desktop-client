@@ -1,4 +1,3 @@
-import { combineReducers } from 'redux';
 import {
     CONFIGURATION_CHAIN_BROADCAST_MODE_SET,
     CONFIGURATION_CHAIN_FEES_SET,
@@ -12,6 +11,7 @@ import {
     CONFIGURATION_GET_SUCCESS,
     CONFIGURATION_PUT_SUCCESS,
 } from '../../constants/configuration';
+import { combineReducers } from 'redux';
 
 const broadcastMode = (state = {
     value: '',

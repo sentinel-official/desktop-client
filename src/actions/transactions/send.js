@@ -1,4 +1,3 @@
-import Async from 'async';
 import { COIN_DENOM, emptyFunc } from '../../constants/common';
 import {
     TX_SEND_AMOUNT_SET,
@@ -11,8 +10,9 @@ import {
     TX_SEND_TO_SET,
     TX_SEND_URL,
 } from '../../constants/transactions';
-import Axios from '../../services/axios';
 import { decodeFromBech32 } from '../../utils/bech32';
+import Async from 'async';
+import Axios from '../../services/axios';
 
 export const setTxSendTo = (data) => {
     return {

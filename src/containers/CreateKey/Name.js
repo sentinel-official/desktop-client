@@ -1,9 +1,9 @@
 import * as PropTypes from 'prop-types';
-import React from 'react';
+import { ValidateName } from './_validation';
 import { connect } from 'react-redux';
 import { setKeyName } from '../../actions/keys';
+import React from 'react';
 import TextInputField from '../../components/TextInputField';
-import { ValidateName } from './_validation';
 
 const Name = (props) => {
     const onChange = (event) => {

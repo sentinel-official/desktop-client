@@ -1,8 +1,8 @@
-import Lodash from 'lodash';
 import * as PropTypes from 'prop-types';
-import React from 'react';
 import { connect } from 'react-redux';
 import { setTxWithdrawFrom } from '../../../actions/transactions/withdraw';
+import Lodash from 'lodash';
+import React from 'react';
 import SelectField from '../../../components/SelectField';
 
 const Validators = ({

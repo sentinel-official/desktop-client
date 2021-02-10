@@ -1,9 +1,9 @@
-import { combineReducers } from 'redux';
 import {
     CONFIGURATION_GET_ERROR,
     CONFIGURATION_GET_IN_PROGRESS,
     CONFIGURATION_GET_SUCCESS,
 } from '../../constants/configuration';
+import { combineReducers } from 'redux';
 
 const inProgress = (state = false, { type }) => {
     switch (type) {

@@ -1,5 +1,5 @@
-import { combineReducers } from 'redux';
 import { KEYS_GET_ERROR, KEYS_GET_IN_PROGRESS, KEYS_GET_SUCCESS, KEYS_INDEX_SET } from '../../constants/keys';
+import { combineReducers } from 'redux';
 import post from './post';
 
 const items = (state = [], {

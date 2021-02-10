@@ -1,9 +1,9 @@
 import * as PropTypes from 'prop-types';
-import React from 'react';
+import { ValidateTrustNode } from './_validation';
 import { connect } from 'react-redux';
 import { setConfigurationChainTrustNode } from '../../actions/configuration';
 import ChipButton from '../../components/ChipButton';
-import { ValidateTrustNode } from './_validation';
+import React from 'react';
 
 const options = [
     {

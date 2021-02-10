@@ -1,9 +1,9 @@
 import * as PropTypes from 'prop-types';
-import React from 'react';
+import { ValidateMemo, ValidatePassword } from './_validation';
 import { connect } from 'react-redux';
 import { txWithdraw } from '../../../../actions/transactions/withdraw';
 import Button from '../../../../components/Button';
-import { ValidateMemo, ValidatePassword } from './_validation';
+import React from 'react';
 
 const Withdraw = (props) => {
     const onClick = () => {

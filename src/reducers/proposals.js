@@ -1,5 +1,5 @@
-import { combineReducers } from 'redux';
 import { PROPOSALS_GET_ERROR, PROPOSALS_GET_IN_PROGRESS, PROPOSALS_GET_SUCCESS } from '../constants/proposals';
+import { combineReducers } from 'redux';
 
 const items = (state = [], {
     type,

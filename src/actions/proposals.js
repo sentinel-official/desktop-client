@@ -1,11 +1,11 @@
-import Async from 'async';
-import { emptyFunc } from '../constants/common';
 import {
     PROPOSALS_GET_ERROR,
     PROPOSALS_GET_IN_PROGRESS,
     PROPOSALS_GET_SUCCESS,
     PROPOSALS_GET_URL,
 } from '../constants/proposals';
+import { emptyFunc } from '../constants/common';
+import Async from 'async';
 import Axios from '../services/axios';
 
 export const getProposalsInProgress = (data) => {

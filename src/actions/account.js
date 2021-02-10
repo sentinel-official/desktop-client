@@ -1,4 +1,3 @@
-import Async from 'async';
 import {
     ACCOUNT_GET_ERROR,
     ACCOUNT_GET_IN_PROGRESS,
@@ -7,6 +6,7 @@ import {
     getAccountURL,
 } from '../constants/account';
 import { emptyFunc } from '../constants/common';
+import Async from 'async';
 import Axios from '../services/axios';
 
 export const getAccountInProgress = (data) => {

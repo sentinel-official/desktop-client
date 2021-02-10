@@ -1,9 +1,9 @@
 import * as PropTypes from 'prop-types';
-import React from 'react';
+import { ValidatePassword } from '../Authentication/_validation';
 import { connect } from 'react-redux';
 import { setKeyPassword } from '../../actions/keys';
+import React from 'react';
 import TextInputField from '../../components/TextInputField';
-import { ValidatePassword } from '../Authentication/_validation';
 
 const Password = (props) => {
     const onChange = (event) => {

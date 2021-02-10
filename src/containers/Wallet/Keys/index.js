@@ -1,10 +1,10 @@
 import * as PropTypes from 'prop-types';
-import React from 'react';
 import { connect } from 'react-redux';
 import Dropdown from '../../../components/Dropdown';
 import Icon from '../../../components/Icon';
-import TextBox from '../../../components/TextBox';
+import React from 'react';
 import Settings from './Settings';
+import TextBox from '../../../components/TextBox';
 
 const Keys = ({
     index,

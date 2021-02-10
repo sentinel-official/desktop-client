@@ -1,5 +1,3 @@
-import Async from 'async';
-import { emptyFunc } from '../constants/common';
 import {
     CONFIGURATION_CHAIN_BROADCAST_MODE_SET,
     CONFIGURATION_CHAIN_FEES_SET,
@@ -22,6 +20,8 @@ import {
     CONFIGURATION_PUT_URL,
     CONFIGURATION_SETUP_SET,
 } from '../constants/configuration';
+import { emptyFunc } from '../constants/common';
+import Async from 'async';
 import Axios from '../services/axios';
 
 export const setConfigurationSetup = (data) => {

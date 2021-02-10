@@ -1,4 +1,3 @@
-import { combineReducers } from 'redux';
 import {
     TX_REDELEGATE_AMOUNT_SET,
     TX_REDELEGATE_ERROR,
@@ -10,6 +9,7 @@ import {
     TX_REDELEGATE_SUCCESS,
     TX_REDELEGATE_TO_SET,
 } from '../../constants/transactions';
+import { combineReducers } from 'redux';
 
 const from = (state = {
     value: '',

@@ -1,7 +1,7 @@
-import Lodash from 'lodash';
 import * as PropTypes from 'prop-types';
-import React from 'react';
 import { connect } from 'react-redux';
+import Lodash from 'lodash';
+import React from 'react';
 import TextBox from '../../../../components/TextBox';
 
 const ToName = ({

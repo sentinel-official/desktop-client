@@ -1,9 +1,9 @@
 import * as PropTypes from 'prop-types';
-import React from 'react';
+import { ValidateAmount } from './_validation';
 import { connect } from 'react-redux';
 import { setTxDelegateAmount } from '../../../../actions/transactions/delegate';
 import NumberInputField from '../../../../components/NumberInputField';
-import { ValidateAmount } from './_validation';
+import React from 'react';
 
 const Amount = (props) => {
     const onChange = (event) => {

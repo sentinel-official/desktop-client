@@ -1,9 +1,9 @@
 import * as PropTypes from 'prop-types';
-import React from 'react';
-import LogoWithText from '../../assets/LogoWithText.svg';
 import Image from '../../components/Image';
-import TextBox from '../../components/TextBox';
+import LogoWithText from '../../assets/LogoWithText.svg';
 import ProgressBar from './ProgressBar';
+import React from 'react';
+import TextBox from '../../components/TextBox';
 
 const Splash = ({ history }) => {
     return (

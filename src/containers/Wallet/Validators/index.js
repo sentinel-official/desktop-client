@@ -1,13 +1,13 @@
-import Async from 'async';
-import Lodash from 'lodash';
 import * as PropTypes from 'prop-types';
-import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { getDelegations } from '../../../actions/delegations';
 import { getValidators, setValidatorsSort } from '../../../actions/validators';
+import Async from 'async';
 import Loader from '../../../components/Loader';
-import Table from '../../../components/Table';
+import Lodash from 'lodash';
+import React, { useEffect, useState } from 'react';
 import Row from './Row';
+import Table from '../../../components/Table';
 
 const columns = [
     {

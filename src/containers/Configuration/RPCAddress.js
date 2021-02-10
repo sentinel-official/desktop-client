@@ -1,9 +1,9 @@
 import * as PropTypes from 'prop-types';
-import React from 'react';
+import { ValidateRPCAddress } from './_validation';
 import { connect } from 'react-redux';
 import { setConfigurationChainRPCAddress } from '../../actions/configuration';
+import React from 'react';
 import TextInputField from '../../components/TextInputField';
-import { ValidateRPCAddress } from './_validation';
 
 const RPCAddress = (props) => {
     const onChange = (event) => {

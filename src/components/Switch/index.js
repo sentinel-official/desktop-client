@@ -1,6 +1,6 @@
 import * as PropTypes from 'prop-types';
-import React from 'react';
 import { Form } from 'react-bootstrap';
+import React from 'react';
 
 const Switch = ({
     className,

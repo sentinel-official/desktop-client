@@ -1,5 +1,3 @@
-import Async from 'async';
-import Axios from 'axios';
 import {
     AUTHENTICATION_INFO_CLEAR,
     AUTHENTICATION_INFO_SET,
@@ -10,6 +8,8 @@ import {
     AUTHENTICATION_POST_URL,
 } from '../constants/authentication';
 import { emptyFunc } from '../constants/common';
+import Async from 'async';
+import Axios from 'axios';
 
 export const setAuthenticationPassword = (data) => {
     return {

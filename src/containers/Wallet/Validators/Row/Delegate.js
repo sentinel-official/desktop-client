@@ -1,8 +1,8 @@
 import * as PropTypes from 'prop-types';
-import React from 'react';
 import { connect } from 'react-redux';
 import { setTxDelegateTo, showTxDelegateModal } from '../../../../actions/transactions/delegate';
 import Button from '../../../../components/Button';
+import React from 'react';
 
 const Delegate = (props) => {
     const onClick = () => {

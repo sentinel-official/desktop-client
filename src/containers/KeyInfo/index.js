@@ -1,8 +1,4 @@
 import * as PropTypes from 'prop-types';
-import React from 'react';
-import SocialIcons from '../../components/SocialIcons';
-import TextBox from '../../components/TextBox';
-import Sidebar from '../common/SidebarOnboard';
 import Address from './Address';
 import AddressCopy from './AddressCopy';
 import Continue from './Continue';
@@ -11,6 +7,10 @@ import MnemonicDownload from './MnemonicDownload';
 import Note from './Note';
 import PublicKey from './PublicKey';
 import PublicKeyCopy from './PublicKeyCopy';
+import React from 'react';
+import Sidebar from '../common/SidebarOnboard';
+import SocialIcons from '../../components/SocialIcons';
+import TextBox from '../../components/TextBox';
 
 const KeyInfo = ({ history }) => {
     return (

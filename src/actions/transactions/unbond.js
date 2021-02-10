@@ -1,4 +1,3 @@
-import Async from 'async';
 import { COIN_DENOM, emptyFunc } from '../../constants/common';
 import {
     TX_UNBOND_AMOUNT_SET,
@@ -11,6 +10,7 @@ import {
     TX_UNBOND_SUCCESS,
     getTxUnbondURL,
 } from '../../constants/transactions';
+import Async from 'async';
 import Axios from '../../services/axios';
 
 export const setTxUnbondFrom = (data) => {

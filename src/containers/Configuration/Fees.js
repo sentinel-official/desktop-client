@@ -1,9 +1,9 @@
 import * as PropTypes from 'prop-types';
-import React from 'react';
+import { ValidateFees } from './_validation';
 import { connect } from 'react-redux';
 import { setConfigurationChainFees } from '../../actions/configuration';
+import React from 'react';
 import TextInputField from '../../components/TextInputField';
-import { ValidateFees } from './_validation';
 
 const Fees = (props) => {
     const onChange = (event) => {
