@@ -1,7 +1,7 @@
 import * as PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
-import { Redirect, Route } from 'react-router';
+import { Redirect, Route } from 'react-router-dom';
 
 const PrivateRoute = ({
     component: Component,

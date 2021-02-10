@@ -6,6 +6,14 @@ import Button from '../../../../components/Button';
 import { ValidateMemo, ValidatePassword } from './_validation';
 
 const Withdraw = (props) => {
+    const onClick = () => {
+        if (props.inProgress) {
+            return;
+        }
+
+        props.txWithdraw();
+    };
+
     const disabled = (
         ValidateMemo(props.memo.value).message !== '' ||
         ValidatePassword(props.password.value).message !== ''
@@ -18,7 +26,7 @@ const Withdraw = (props) => {
             inProgress={props.inProgress}
             type="button"
             value="Withdraw"
-            onClick={props.onClick}
+            onClick={onClick}
         />
     );
 };
@@ -37,7 +45,7 @@ Withdraw.propTypes = {
             message: PropTypes.string.isRequired,
         }).isRequired,
     }).isRequired,
-    onClick: PropTypes.func.isRequired,
+    txWithdraw: PropTypes.func.isRequired,
 };
 
 const stateToProps = (state) => {
@@ -49,7 +57,7 @@ const stateToProps = (state) => {
 };
 
 const actionsToProps = {
-    onClick: txWithdraw,
+    txWithdraw,
 };
 
 export default connect(stateToProps, actionsToProps)(Withdraw);

@@ -17,6 +17,10 @@ import {
 
 const Submit = (props) => {
     const onClick = () => {
+        if (props.inProgress) {
+            return;
+        }
+
         props.onClick((error) => {
             if (error) {
                 return;

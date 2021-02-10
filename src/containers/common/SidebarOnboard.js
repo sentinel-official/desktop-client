@@ -23,7 +23,7 @@ const SidebarOnboard = () => {
                 />
                 <TextBox
                     className="side-bar-version-text"
-                    value="v3.01.12"
+                    value={process.env.REACT_APP_VERSION}
                 />
             </div>
         </div>

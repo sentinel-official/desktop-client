@@ -195,11 +195,11 @@ const Wallet = (props) => {
                                 <ValidatorsActions/>
                             </div>
                             <Tabs
-                                defaultActiveKey="Validators"
+                                defaultActiveKey="validators"
                                 id="uncontrolled-tab-example">
                                 <Tab
-                                    eventKey="Validators"
-                                    title="Validators List">
+                                    eventKey="validators"
+                                    title="Validators">
                                     <Validators/>
                                 </Tab>
                                 {/* <Tab eventKey="Proposals" title="Proposals"> */}

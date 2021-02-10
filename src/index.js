@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { BrowserRouter } from 'react-router-dom';
+import { MemoryRouter } from 'react-router-dom';
 import { applyMiddleware, createStore } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
 import thunk from 'redux-thunk';
@@ -22,9 +22,9 @@ withInterceptors(Axios, store);
 const app = (
     <React.StrictMode>
         <Provider store={store}>
-            <BrowserRouter>
+            <MemoryRouter>
                 <App/>
-            </BrowserRouter>
+            </MemoryRouter>
         </Provider>
     </React.StrictMode>
 );

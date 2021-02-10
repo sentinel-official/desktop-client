@@ -17,12 +17,16 @@ import {
 
 const Submit = (props) => {
     const onClick = () => {
-        props.onClick((error) => {
+        if (props.inProgress) {
+            return;
+        }
+
+        props.putConfiguration((error) => {
             if (error) {
                 return;
             }
 
-            props.hideModal();
+            props.hideConfigurationModal();
         });
     };
 
@@ -107,9 +111,9 @@ Submit.propTypes = {
             }).isRequired,
         }).isRequired,
     }).isRequired,
-    hideModal: PropTypes.func.isRequired,
+    hideConfigurationModal: PropTypes.func.isRequired,
     inProgress: PropTypes.bool.isRequired,
-    onClick: PropTypes.func.isRequired,
+    putConfiguration: PropTypes.func.isRequired,
 };
 
 const stateToProps = (state) => {
@@ -130,8 +134,8 @@ const stateToProps = (state) => {
 };
 
 const actionsToProps = {
-    onClick: putConfiguration,
-    hideModal: hideConfigurationModal,
+    putConfiguration,
+    hideConfigurationModal,
 };
 
 export default connect(stateToProps, actionsToProps)(Submit);

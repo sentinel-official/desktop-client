@@ -6,6 +6,14 @@ import Button from '../../../../components/Button';
 import { ValidateAmount, ValidateMemo, ValidatePassword } from './_validation';
 
 const Delegate = (props) => {
+    const onClick = () => {
+        if (props.inProgress) {
+            return;
+        }
+
+        props.txDelegate();
+    };
+
     const disabled = (
         ValidateAmount(props.amount.value).message !== '' ||
         ValidateMemo(props.memo.value).message !== '' ||
@@ -19,7 +27,7 @@ const Delegate = (props) => {
             inProgress={props.inProgress}
             type="button"
             value="Delegate"
-            onClick={props.onClick}
+            onClick={onClick}
         />
     );
 };
@@ -44,7 +52,7 @@ Delegate.propTypes = {
             message: PropTypes.string.isRequired,
         }).isRequired,
     }).isRequired,
-    onClick: PropTypes.func.isRequired,
+    txDelegate: PropTypes.func.isRequired,
 };
 
 const stateToProps = (state) => {
@@ -57,7 +65,7 @@ const stateToProps = (state) => {
 };
 
 const actionsToProps = {
-    onClick: txDelegate,
+    txDelegate,
 };
 
 export default connect(stateToProps, actionsToProps)(Delegate);

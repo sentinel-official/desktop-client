@@ -6,6 +6,14 @@ import Button from '../../../../components/Button';
 import { ValidateAmount, ValidateMemo, ValidatePassword } from './_validation';
 
 const Unbond = (props) => {
+    const onClick = () => {
+        if (props.inProgress) {
+            return;
+        }
+
+        props.txUnbond();
+    };
+
     const disabled = (
         ValidateAmount(props.amount.value).message !== '' ||
         ValidateMemo(props.memo.value).message !== '' ||
@@ -19,7 +27,7 @@ const Unbond = (props) => {
             inProgress={props.inProgress}
             type="button"
             value="Unbond"
-            onClick={props.onClick}
+            onClick={onClick}
         />
     );
 };
@@ -44,7 +52,7 @@ Unbond.propTypes = {
             message: PropTypes.string.isRequired,
         }).isRequired,
     }).isRequired,
-    onClick: PropTypes.func.isRequired,
+    txUnbond: PropTypes.func.isRequired,
 };
 
 const stateToProps = (state) => {
@@ -57,7 +65,7 @@ const stateToProps = (state) => {
 };
 
 const actionsToProps = {
-    onClick: txUnbond,
+    txUnbond,
 };
 
 export default connect(stateToProps, actionsToProps)(Unbond);

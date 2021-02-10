@@ -7,6 +7,10 @@ import { ValidateMnemonic, ValidateName, ValidatePassword } from './_validation'
 
 const Submit = (props) => {
     const onClick = () => {
+        if (props.inProgress) {
+            return;
+        }
+
         props.onClick(props.history);
     };
 

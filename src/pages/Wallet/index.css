@@ -365,7 +365,7 @@
 
 .accordion-scroll-bar, .validators-section {
     position: relative;
-    max-height: 61vh;
+    max-height: 72vh;
     overflow-y: scroll;
 }
 

@@ -12,9 +12,7 @@
     "axios": "^0.21.1",
     "bech32": "^1.1.4",
     "bootstrap": "^4.6.0",
-    "history": "^5.0.0",
     "lodash": "^4.17.20",
-    "moment": "^2.29.1",
     "prop-types": "^15.7.2",
     "qrcode.react": "^1.0.1",
     "react": "^17.0.1",
@@ -23,7 +21,6 @@
     "react-dom": "^17.0.1",
     "react-download-link": "^2.3.0",
     "react-redux": "^7.2.2",
-    "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.2",
     "react-simple-maps": "^2.3.0",
@@ -34,7 +31,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "GENERATE_SOURCEMAP=false react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
