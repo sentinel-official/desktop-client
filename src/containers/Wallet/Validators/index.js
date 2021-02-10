@@ -48,7 +48,7 @@ const Validators = ({
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        Async.waterfall([
+        Async.parallel([
             (next) => {
                 getValidators(next);
             }, (next) => {

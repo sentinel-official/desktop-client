@@ -196,7 +196,7 @@ const Wallet = (props) => {
                             </div>
                             <Tabs
                                 defaultActiveKey="validators"
-                                id="uncontrolled-tab-example">
+                                transition={false}>
                                 <Tab
                                     eventKey="validators"
                                     title="Validators">
