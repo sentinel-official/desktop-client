@@ -1,6 +1,6 @@
+import './index.css';
 import * as PropTypes from 'prop-types';
 import React from 'react';
-import './index.css';
 
 const Label = ({
     className,
@@ -18,4 +18,4 @@ Label.propTypes = {
     label: PropTypes.string.isRequired,
 };
 
-export default Label;
+export default React.memo(Label);

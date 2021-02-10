@@ -1,7 +1,7 @@
 import * as PropTypes from 'prop-types';
-import React from 'react';
+import { Redirect, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Redirect, Route } from 'react-router';
+import React from 'react';
 
 const PrivateRoute = ({
     component: Component,
@@ -13,7 +13,7 @@ const PrivateRoute = ({
             {...rest}
             render={
                 (props) => {
-                    if (info.value === '' || info.expiry === '') {
+                    if (info.access.value === '' || info.access.expiry === '') {
                         return <Redirect to={'/authentication'}/>;
                     }
 
@@ -27,8 +27,10 @@ const PrivateRoute = ({
 PrivateRoute.propTypes = {
     component: PropTypes.func.isRequired,
     info: PropTypes.shape({
-        value: PropTypes.string.isRequired,
-        expiry: PropTypes.string.isRequired,
+        access: PropTypes.shape({
+            value: PropTypes.string.isRequired,
+            expiry: PropTypes.string.isRequired,
+        }).isRequired,
     }).isRequired,
 };
 

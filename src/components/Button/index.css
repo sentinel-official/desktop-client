@@ -5,12 +5,12 @@
     font-size: 16px;
     text-align: center;
     letter-spacing: 0.05em;
-    color: #FFFFFF;
+    color: #FFFFFF !important;
     padding: 5px 25px;
-    height: 30px;
 }
 
-.login-button button {
+.login-button button, .login-button button:hover {
+    height: 36px;
     width: 100px;
     display: flex;
     align-items: center;
@@ -25,4 +25,36 @@
 .btn.disabled, .btn:disabled {
     background: #109FEC;
     color: #FFFFFF;
+}
+
+.btn.disabled, .btn:disabled {
+    background: #109FEC;
+    color: #FFFFFF;
+}
+
+.buttons-list {
+    margin-top: 20px;
+}
+
+.buttons-list button {
+    margin-right: 10px;
+    background: none !important;
+    border: 1.13577px solid #DCE9F1 !important;
+    font-weight: bold;
+    font-size: 12px;
+    color: #55678B !important;
+}
+
+.button-large {
+    width: 180px;
+    margin-top: 10px;
+    text-transform: uppercase;
+}
+
+.delegate-button {
+    padding: 0;
+    font-weight: 500;
+    font-size: 14px;
+    color: #139EEE;
+    background: transparent !important;
 }

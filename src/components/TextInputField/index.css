@@ -1,5 +1,16 @@
+.form-control {
+    padding: 0.375rem 2rem 0.375rem 0.75rem;
+}
+
 .form-control, .form-control::placeholder, .form-control:focus {
     font-size: 16px;
     background: #E9F0F4;
     border: none;
+    color: #8B99B5;
+    height: 45px;
+    box-shadow: none;
+}
+
+textarea.form-control, textarea.form-control::placeholder, textarea.form-control:focus {
+    height: auto;
 }

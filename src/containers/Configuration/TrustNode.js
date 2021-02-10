@@ -1,34 +1,32 @@
 import * as PropTypes from 'prop-types';
-import React from 'react';
+import { ValidateTrustNode } from './_validation';
 import { connect } from 'react-redux';
 import { setConfigurationChainTrustNode } from '../../actions/configuration';
 import ChipButton from '../../components/ChipButton';
-import { ValidateTrustNode } from './_validation';
+import React from 'react';
 
 const options = [
     {
         key: 'yes',
-        option: true,
-        value: 'Yes',
+        value: true,
+        label: 'Yes',
     },
     {
         key: 'no',
-        option: false,
-        value: 'No',
+        value: false,
+        label: 'No',
     },
 ];
 
 const TrustNode = (props) => {
     const onClick = (value) => {
-        if (props.value === value) {
+        if (props.input.value === value) {
             return;
         }
 
         props.onClick({
             value,
-            error: {
-                message: ValidateTrustNode(value).message,
-            },
+            error: ValidateTrustNode(value),
         });
     };
 
@@ -39,10 +37,10 @@ const TrustNode = (props) => {
                     return (
                         <ChipButton
                             key={item.key}
-                            className={props.value === item.option ? 'selected' : 'primary'}
+                            className={props.input.value === item.value ? 'selected' : 'primary'}
+                            label={item.label}
                             type="button"
-                            value={item.value}
-                            onClick={() => onClick(item.option)}
+                            onClick={() => onClick(item.value)}
                         />
                     );
                 })
@@ -52,13 +50,18 @@ const TrustNode = (props) => {
 };
 
 TrustNode.propTypes = {
-    value: PropTypes.bool.isRequired,
+    input: PropTypes.shape({
+        value: PropTypes.bool.isRequired,
+        error: PropTypes.shape({
+            message: PropTypes.string.isRequired,
+        }).isRequired,
+    }).isRequired,
     onClick: PropTypes.func.isRequired,
 };
 
 const stateToProps = (state) => {
     return {
-        value: state.configuration.chain.trustNode.value,
+        input: state.configuration.chain.trustNode,
     };
 };
 

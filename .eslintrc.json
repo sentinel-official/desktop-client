@@ -16,7 +16,8 @@
     "sourceType": "module"
   },
   "plugins": [
-    "react"
+    "react",
+    "sort-imports-es6-autofix"
   ],
   "rules": {
     "indent": [
@@ -65,19 +66,17 @@
         "shorthandFirst": true
       }
     ],
-    "sort-imports": [
+    "sort-imports-es6-autofix/sort-imports-es6": [
       "warn",
       {
         "ignoreCase": false,
-        "ignoreDeclarationSort": false,
         "ignoreMemberSort": false,
         "memberSyntaxSortOrder": [
           "none",
           "all",
           "multiple",
           "single"
-        ],
-        "allowSeparatedGroups": false
+        ]
       }
     ],
     "dot-notation": [

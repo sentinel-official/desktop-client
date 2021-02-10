@@ -1,1 +1,2 @@
+export const SPLASH_TIMEOUT = 1000;
 export const SPLASH_COMPLETED_SET = 'SPLASH_COMPLETED_SET';

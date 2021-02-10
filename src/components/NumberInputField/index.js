@@ -1,9 +1,12 @@
-import * as PropTypes from 'prop-types';
-import React from 'react';
 import './index.css';
+import * as PropTypes from 'prop-types';
+import Icon from '../Icon';
+import React from 'react';
+import TextBox from '../TextBox';
 
 const NumberInputField = ({
     className,
+    error,
     name,
     placeholder,
     required,
@@ -12,22 +15,39 @@ const NumberInputField = ({
     onChange,
     min,
 }) => {
+    const isError = error.message.length > 0;
+
     return (
-        <input
-            className={className}
-            min={min}
-            name={name}
-            placeholder={placeholder}
-            required={required}
-            type={type}
-            value={value}
-            onChange={onChange}
-        />
+        <div>
+            <input
+                className={isError ? `error ${className}` : className}
+                min={min}
+                name={name}
+                placeholder={placeholder}
+                required={required}
+                type={type}
+                value={value}
+                onChange={onChange}
+            />
+            <div>
+                <Icon
+                    className={isError ? 'error show' : 'error'}
+                    icon="errorInfo"
+                />
+                <TextBox
+                    className="error-message"
+                    value={error.message}
+                />
+            </div>
+        </div>
     );
 };
 
 NumberInputField.propTypes = {
     className: PropTypes.string.isRequired,
+    error: PropTypes.shape({
+        message: PropTypes.string.isRequired,
+    }).isRequired,
     min: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
     placeholder: PropTypes.string.isRequired,

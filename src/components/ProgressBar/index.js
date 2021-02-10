@@ -1,7 +1,7 @@
-import ReactProgressBar from '@ramonak/react-progress-bar';
+import './index.css';
 import * as PropTypes from 'prop-types';
 import React from 'react';
-import './index.css';
+import ReactProgressBar from '@ramonak/react-progress-bar';
 
 const ProgressBar = ({ completed }) => {
     return (

@@ -1,13 +1,14 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import { MemoryRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import { BrowserRouter } from 'react-router-dom';
 import { applyMiddleware, createStore } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
-import thunk from 'redux-thunk';
 import App from './App';
+import Axios, { withInterceptors } from './services/axios';
+import React from 'react';
+import ReactDOM from 'react-dom';
 import reducer from './reducers';
 import reportWebVitals from './reportWebVitals';
+import thunk from 'redux-thunk';
 
 const store = createStore(
     reducer,
@@ -16,12 +17,14 @@ const store = createStore(
     })(applyMiddleware(thunk)),
 );
 
+withInterceptors(Axios, store);
+
 const app = (
     <React.StrictMode>
         <Provider store={store}>
-            <BrowserRouter>
+            <MemoryRouter>
                 <App/>
-            </BrowserRouter>
+            </MemoryRouter>
         </Provider>
     </React.StrictMode>
 );

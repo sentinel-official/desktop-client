@@ -1,9 +1,9 @@
 import * as PropTypes from 'prop-types';
-import React from 'react';
+import { ValidateGasAdjustment } from './_validation';
 import { connect } from 'react-redux';
 import { setConfigurationChainGasAdjustment } from '../../actions/configuration';
 import NumberInputField from '../../components/NumberInputField';
-import { ValidateGasAdjustment } from './_validation';
+import React from 'react';
 
 const GasAdjustment = (props) => {
     const onChange = (event) => {
@@ -11,17 +11,16 @@ const GasAdjustment = (props) => {
 
         props.onChange({
             value,
-            error: {
-                message: ValidateGasAdjustment(value).message,
-            },
+            error: ValidateGasAdjustment(value),
         });
     };
 
-    const value = props.value.toString();
+    const value = props.input.value.toString();
 
     return (
         <NumberInputField
             className="form-control"
+            error={props.input.error}
             min={0}
             name="GasAdjustment"
             placeholder="Enter Gas Adjustment"
@@ -34,13 +33,18 @@ const GasAdjustment = (props) => {
 };
 
 GasAdjustment.propTypes = {
-    value: PropTypes.number.isRequired,
+    input: PropTypes.shape({
+        value: PropTypes.number.isRequired,
+        error: PropTypes.shape({
+            message: PropTypes.string.isRequired,
+        }).isRequired,
+    }).isRequired,
     onChange: PropTypes.func.isRequired,
 };
 
 const stateToProps = (state) => {
     return {
-        value: state.configuration.chain.gasAdjustment.value,
+        input: state.configuration.chain.gasAdjustment,
     };
 };
 

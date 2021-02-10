@@ -1,3 +1,4 @@
+import './index.css';
 import * as PropTypes from 'prop-types';
 import React from 'react';
 
@@ -21,4 +22,4 @@ Image.propTypes = {
     src: PropTypes.string.isRequired,
 };
 
-export default Image;
+export default React.memo(Image);

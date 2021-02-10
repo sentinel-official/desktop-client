@@ -1,9 +1,9 @@
 import * as PropTypes from 'prop-types';
-import React from 'react';
+import { ValidateGasPrices } from './_validation';
 import { connect } from 'react-redux';
 import { setConfigurationChainGasPrices } from '../../actions/configuration';
+import React from 'react';
 import TextInputField from '../../components/TextInputField';
-import { ValidateGasPrices } from './_validation';
 
 const GasPrices = (props) => {
     const onChange = (event) => {
@@ -11,33 +11,37 @@ const GasPrices = (props) => {
 
         props.onChange({
             value,
-            error: {
-                message: ValidateGasPrices(value).message,
-            },
+            error: ValidateGasPrices(value),
         });
     };
 
     return (
         <TextInputField
             className="form-control"
+            error={props.input.error}
             name="GasPrices"
             placeholder="Enter Gas Prices"
             required={true}
             type="text"
-            value={props.value}
+            value={props.input.value}
             onChange={onChange}
         />
     );
 };
 
 GasPrices.propTypes = {
-    value: PropTypes.string.isRequired,
+    input: PropTypes.shape({
+        value: PropTypes.string.isRequired,
+        error: PropTypes.shape({
+            message: PropTypes.string.isRequired,
+        }).isRequired,
+    }).isRequired,
     onChange: PropTypes.func.isRequired,
 };
 
 const stateToProps = (state) => {
     return {
-        value: state.configuration.chain.gasPrices.value,
+        input: state.configuration.chain.gasPrices,
     };
 };
 

@@ -1,6 +1,6 @@
+import './index.css';
 import * as PropTypes from 'prop-types';
 import React from 'react';
-import './index.css';
 
 const TextBox = ({
     className,
@@ -18,4 +18,4 @@ TextBox.propTypes = {
     value: PropTypes.string.isRequired,
 };
 
-export default TextBox;
+export default React.memo(TextBox);

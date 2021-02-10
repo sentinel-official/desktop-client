@@ -1,8 +1,8 @@
 import * as PropTypes from 'prop-types';
-import React from 'react';
 import { connect } from 'react-redux';
-import TextBox from '../../components/TextBox';
 import { encodeToBech32 } from '../../utils/bech32';
+import React from 'react';
+import TextBox from '../../components/TextBox';
 
 const PublicKey = (props) => {
     const value = encodeToBech32(props.value, 'sentpub');
@@ -21,7 +21,7 @@ PublicKey.propTypes = {
 
 const stateToProps = (state) => {
     return {
-        value: state.keys.post.info['pub_key'],
+        value: state.keys.post.info.publicKey,
     };
 };
 

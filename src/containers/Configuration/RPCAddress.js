@@ -1,9 +1,9 @@
 import * as PropTypes from 'prop-types';
-import React from 'react';
+import { ValidateRPCAddress } from './_validation';
 import { connect } from 'react-redux';
 import { setConfigurationChainRPCAddress } from '../../actions/configuration';
+import React from 'react';
 import TextInputField from '../../components/TextInputField';
-import { ValidateRPCAddress } from './_validation';
 
 const RPCAddress = (props) => {
     const onChange = (event) => {
@@ -11,33 +11,37 @@ const RPCAddress = (props) => {
 
         props.onChange({
             value,
-            error: {
-                message: ValidateRPCAddress(value).message,
-            },
+            error: ValidateRPCAddress(value),
         });
     };
 
     return (
         <TextInputField
             className="form-control"
+            error={props.input.error}
             name="RPCAddress"
             placeholder="Enter RPC Address"
             required={true}
             type="text"
-            value={props.value}
+            value={props.input.value}
             onChange={onChange}
         />
     );
 };
 
 RPCAddress.propTypes = {
-    value: PropTypes.string.isRequired,
+    input: PropTypes.shape({
+        value: PropTypes.string.isRequired,
+        error: PropTypes.shape({
+            message: PropTypes.string.isRequired,
+        }).isRequired,
+    }).isRequired,
     onChange: PropTypes.func.isRequired,
 };
 
 const stateToProps = (state) => {
     return {
-        value: state.configuration.chain.RPCAddress.value,
+        input: state.configuration.chain.RPCAddress,
     };
 };
 

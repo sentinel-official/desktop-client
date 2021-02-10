@@ -1,23 +1,22 @@
 import * as PropTypes from 'prop-types';
-import React, { useEffect } from 'react';
+import { SPLASH_TIMEOUT } from '../../constants/splash';
 import { connect } from 'react-redux';
 import { setSplashCompleted } from '../../actions/splash';
+import React, { useEffect } from 'react';
 import ReactProgressBar from '../../components/ProgressBar';
-
-const timeout = 1000;
 
 const ProgressBar = (props) => {
     useEffect(() => {
         if (props.completed >= 100) {
             setTimeout(() => {
-                props.history.push('/authentication');
-            }, timeout);
+                props.history.push('/dashboard/wallet');
+            }, SPLASH_TIMEOUT);
             return;
         }
 
         setTimeout(() => {
             props.setCompleted(props.completed + 50);
-        }, timeout);
+        }, SPLASH_TIMEOUT);
     });
 
     return (

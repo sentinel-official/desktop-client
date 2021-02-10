@@ -1,4 +1,3 @@
-import { combineReducers } from 'redux';
 import {
     KEYS_POST_ERROR,
     KEYS_POST_IN_PROGRESS,
@@ -7,6 +6,7 @@ import {
     KEY_NAME_SET,
     KEY_PASSWORD_SET,
 } from '../../constants/keys';
+import { combineReducers } from 'redux';
 
 const name = (state = {
     value: '',
@@ -109,7 +109,7 @@ const mnemonic = (state = {
 
 const info = (state = {
     address: '',
-    pub_key: '',
+    publicKey: '',
     mnemonic: '',
     name: '',
 }, {
@@ -121,7 +121,7 @@ const info = (state = {
         return {
             ...state,
             address: data.address,
-            pub_key: data['pub_key'],
+            publicKey: data['pub_key'],
             mnemonic: data.mnemonic,
             name: data.name,
         };

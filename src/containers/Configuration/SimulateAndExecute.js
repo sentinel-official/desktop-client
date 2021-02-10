@@ -1,34 +1,32 @@
 import * as PropTypes from 'prop-types';
-import React from 'react';
+import { ValidateSimulateAndExecute } from './_validation';
 import { connect } from 'react-redux';
 import { setConfigurationChainSimulateAndExecute } from '../../actions/configuration';
 import ChipButton from '../../components/ChipButton';
-import { ValidateSimulateAndExecute } from './_validation';
+import React from 'react';
 
 const options = [
     {
-        key: 'Yes',
-        option: true,
-        value: 'Yes',
+        key: 'yes',
+        value: true,
+        label: 'Yes',
     },
     {
-        key: 'No',
-        option: false,
-        value: 'No',
+        key: 'no',
+        value: false,
+        label: 'No',
     },
 ];
 
 const SimulateAndExecute = (props) => {
     const onClick = (value) => {
-        if (props.value === value) {
+        if (props.input.value === value) {
             return;
         }
 
         props.onClick({
             value,
-            error: {
-                message: ValidateSimulateAndExecute(value).message,
-            },
+            error: ValidateSimulateAndExecute(value),
         });
     };
 
@@ -39,10 +37,10 @@ const SimulateAndExecute = (props) => {
                     return (
                         <ChipButton
                             key={item.key}
-                            className={props.value === item.option ? 'selected' : 'primary'}
+                            className={props.input.value === item.value ? 'selected' : 'primary'}
+                            label={item.label}
                             type="button"
-                            value={item.value}
-                            onClick={() => onClick(item.option)}
+                            onClick={() => onClick(item.value)}
                         />
                     );
                 })
@@ -52,13 +50,18 @@ const SimulateAndExecute = (props) => {
 };
 
 SimulateAndExecute.propTypes = {
-    value: PropTypes.bool.isRequired,
+    input: PropTypes.shape({
+        value: PropTypes.bool.isRequired,
+        error: PropTypes.shape({
+            message: PropTypes.string.isRequired,
+        }).isRequired,
+    }).isRequired,
     onClick: PropTypes.func.isRequired,
 };
 
 const stateToProps = (state) => {
     return {
-        value: state.configuration.chain.simulateAndExecute.value,
+        input: state.configuration.chain.simulateAndExecute,
     };
 };
 

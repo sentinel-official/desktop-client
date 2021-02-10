@@ -1,5 +1,3 @@
-import Async from 'async';
-import Axios from 'axios';
 import {
     CONFIGURATION_CHAIN_BROADCAST_MODE_SET,
     CONFIGURATION_CHAIN_FEES_SET,
@@ -14,13 +12,17 @@ import {
     CONFIGURATION_GET_IN_PROGRESS,
     CONFIGURATION_GET_SUCCESS,
     CONFIGURATION_GET_URL,
+    CONFIGURATION_MODAL_HIDE,
+    CONFIGURATION_MODAL_SHOW,
     CONFIGURATION_PUT_ERROR,
     CONFIGURATION_PUT_IN_PROGRESS,
     CONFIGURATION_PUT_SUCCESS,
     CONFIGURATION_PUT_URL,
     CONFIGURATION_SETUP_SET,
 } from '../constants/configuration';
-import { getKeys } from './keys';
+import { emptyFunc } from '../constants/common';
+import Async from 'async';
+import Axios from '../services/axios';
 
 export const setConfigurationSetup = (data) => {
     return {
@@ -113,19 +115,13 @@ export const getConfigurationSuccess = (data) => {
     };
 };
 
-export const getConfiguration = (history, cb) => (dispatch, getState) => {
+export const getConfiguration = (history, cb = emptyFunc) => (dispatch, getState) => {
     Async.waterfall([
         (next) => {
             dispatch(getConfigurationInProgress());
             next(null);
         }, (next) => {
-            const { authentication } = getState();
-
-            Axios.get(CONFIGURATION_GET_URL, {
-                headers: {
-                    Authorization: `Bearer ${authentication.info.value}`,
-                },
-            })
+            Axios.get(CONFIGURATION_GET_URL)
                 .then((res) => {
                     try {
                         next(null, res?.data?.result);
@@ -134,7 +130,9 @@ export const getConfiguration = (history, cb) => (dispatch, getState) => {
                     }
                 })
                 .catch((error) => {
-                    dispatch(getConfigurationError(error?.response?.data?.error));
+                    console.error(error);
+
+                    dispatch(getConfigurationError(error?.response?.data?.error || error));
                     next(error);
                 });
         }, (result, next) => {
@@ -174,18 +172,31 @@ export const putConfigurationSuccess = (data) => {
     };
 };
 
-export const putConfiguration = (body, history, cb) => (dispatch, getState) => {
+export const putConfiguration = (cb = emptyFunc) => (dispatch, getState) => {
     Async.waterfall([
         (next) => {
             dispatch(putConfigurationInProgress());
             next(null);
         }, (next) => {
-            const { authentication } = getState();
+            const {
+                keys,
+                configuration,
+            } = getState();
 
-            Axios.put(CONFIGURATION_PUT_URL, body, {
-                headers: {
-                    Authorization: `Bearer ${authentication.info.value}`,
+            Axios.put(CONFIGURATION_PUT_URL, {
+                from: keys.items[keys.index]?.name,
+                chain: {
+                    broadcast_mode: configuration.chain.broadcastMode.value.trim(),
+                    fees: configuration.chain.fees.value.trim(),
+                    gas_adjustment: configuration.chain.gasAdjustment.value,
+                    gas_prices: configuration.chain.gasPrices.value.trim(),
+                    gas: configuration.chain.gas.value,
+                    id: configuration.chain.id.value.trim(),
+                    rpc_address: configuration.chain.RPCAddress.value.trim(),
+                    simulate_and_execute: configuration.chain.simulateAndExecute.value,
+                    trust_node: configuration.chain.trustNode.value,
                 },
+                setup: false,
             })
                 .then((res) => {
                     try {
@@ -195,14 +206,28 @@ export const putConfiguration = (body, history, cb) => (dispatch, getState) => {
                     }
                 })
                 .catch((error) => {
-                    dispatch(putConfigurationError(error?.response?.data?.error));
+                    console.error(error);
+
+                    dispatch(putConfigurationError(error?.response?.data?.error || error));
                     next(error);
                 });
         }, (result, next) => {
             dispatch(putConfigurationSuccess(result));
             next(null);
-        }, (next) => {
-            getKeys(history, next)(dispatch, getState);
         },
     ], cb);
+};
+
+export const showConfigurationModal = (data) => {
+    return {
+        type: CONFIGURATION_MODAL_SHOW,
+        data,
+    };
+};
+
+export const hideConfigurationModal = (data) => {
+    return {
+        type: CONFIGURATION_MODAL_HIDE,
+        data,
+    };
 };

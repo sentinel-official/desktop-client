@@ -1,10 +1,10 @@
-import { Snackbar as MaterialSnackbar, Slide } from '@material-ui/core';
-import * as PropTypes from 'prop-types';
-import React from 'react';
 import './index.css';
+import * as PropTypes from 'prop-types';
+import { Snackbar as MaterialSnackbar, Slide } from '@material-ui/core';
+import React from 'react';
 
 const TransitionUp = (props) => {
-    return <Slide direction="up" {...props}/>;
+    return <Slide direction="down" {...props}/>;
 };
 
 const Snackbar = ({
@@ -19,8 +19,8 @@ const Snackbar = ({
             }}
             TransitionComponent={TransitionUp}
             anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left',
+                vertical: 'top',
+                horizontal: 'right',
             }}
             autoHideDuration={5000}
             className="snackbar"

@@ -1,6 +1,11 @@
+html, body, #root {
+    height: 100%;
+}
+
 body {
     margin: 0;
     font-family: 'Roboto', sans-serif;
+    background: #F6F8FB;;
 }
 
 .f-14 {
@@ -39,7 +44,7 @@ body {
 }
 
 .button-group button {
-    margin: 0px 10px 5px 0;
+    margin: 0 10px 5px 0;
 }
 
 .login-button button {
@@ -78,6 +83,96 @@ label, .label {
     margin: 15px 0;
 }
 
+.modal-header {
+    padding: 40px 40px 0 40px;
+    border: 0 solid;
+}
+
+.modal-body {
+    padding: 20px 40px 40px 40px;
+}
+
+.modal-header {
+    align-items: center;
+}
+
+.settings-modal {
+    position: relative;
+}
+
+.settings-modal .btn.button-primary {
+    width: 180px;
+    margin-top: 10px;
+    text-transform: uppercase;
+}
+
+.modal-header .account-name {
+    margin: 0 0 0 10px;
+    font-size: 18px;
+    color: #139EEE;
+}
+
+.modal-body .form-group {
+    margin-bottom: 20px;
+    max-width: 500px;
+}
+
+.modal-body .form-control {
+    max-width: 500px;
+}
+
+.modal-title {
+    font-weight: 500;
+    font-size: 18px;
+    text-transform: uppercase;
+    color: #252E40;
+}
+
+.flex-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.m-0 {
+    margin: 0;
+}
+
+.flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.flex-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.flex-item label {
+    margin: 0 10px 0 0;
+    width: 150px;
+    font-size: 14px;
+}
+
+.flex-item .address {
+    word-break: break-word;
+}
+
+.flex-item p {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 500;
+    color: #142D51;
+}
+
+@media (min-width: 576px) {
+    .modal-dialog {
+        max-width: 780px;
+    }
+}
+
 @media (max-width: 767px) {
     .account-section {
         display: block;
@@ -86,4 +181,51 @@ label, .label {
     .account-section .section-body {
         padding-top: 20px;
     }
+}
+
+
+.form-control.error {
+    box-shadow: 0 0 0 0.2rem #dc354563;
+}
+
+.icon-error.show {
+    display: block;
+}
+
+.icon-error {
+    display: none;
+    width: 14px;
+    height: 14px;
+    position: absolute;
+    right: 15px;
+    top: 47px;
+}
+
+.error-message {
+    display: none;
+    margin: 0;
+    font-size: 12px;
+    position: absolute;
+    background-color: red;
+    right: -15px;
+    top: 65px;
+    padding: 5px 10px;
+    z-index: 1;
+    color: white;
+}
+
+.icon-error:hover + .error-message {
+    display: block;
+}
+
+.form-group {
+    position: relative;
+}
+
+.error .tooltip-section {
+    display: flex;
+    position: absolute;
+    right: 15px;
+    top: 43px;
+    cursor: pointer;
 }

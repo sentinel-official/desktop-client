@@ -1,10 +1,10 @@
 import * as PropTypes from 'prop-types';
-import React from 'react';
 import Button from '../../components/Button';
+import React from 'react';
 
 const Continue = (props) => {
     const onClick = () => {
-        props.history.push('/dashboard');
+        props.history.push('/dashboard/wallet');
     };
 
     return (

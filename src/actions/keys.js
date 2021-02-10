@@ -1,5 +1,3 @@
-import Async from 'async';
-import Axios from 'axios';
 import {
     KEYS_GET_ERROR,
     KEYS_GET_IN_PROGRESS,
@@ -13,6 +11,9 @@ import {
     KEY_NAME_SET,
     KEY_PASSWORD_SET,
 } from '../constants/keys';
+import { emptyFunc } from '../constants/common';
+import Async from 'async';
+import Axios from '../services/axios';
 
 export const getKeysInProgress = (data) => {
     return {
@@ -35,19 +36,13 @@ export const getKeysError = (data) => {
     };
 };
 
-export const getKeys = (history, cb) => (dispatch, getState) => {
+export const getKeys = (history, cb = emptyFunc) => (dispatch, getState) => {
     Async.waterfall([
         (next) => {
             dispatch(getKeysInProgress(null));
             next(null);
         }, (next) => {
-            const { authentication } = getState();
-
-            Axios.get(KEYS_GET_URL, {
-                headers: {
-                    Authorization: `Bearer ${authentication.info.value}`,
-                },
-            })
+            Axios.get(KEYS_GET_URL)
                 .then((res) => {
                     try {
                         next(null, res?.data?.result);
@@ -56,7 +51,9 @@ export const getKeys = (history, cb) => (dispatch, getState) => {
                     }
                 })
                 .catch((error) => {
-                    dispatch(getKeysError(error?.response?.data?.error));
+                    console.error(error);
+
+                    dispatch(getKeysError(error?.response?.data?.error || error));
                     next(error);
                 });
         }, (result, next) => {
@@ -65,12 +62,11 @@ export const getKeys = (history, cb) => (dispatch, getState) => {
         }, (next) => {
             const { keys } = getState();
 
-            if (keys.items.length) {
-                history.push('/dashboard');
-                next(new Error(''));
-            } else {
+            if (keys.items.length === 0) {
                 history.push('/keys');
                 next(new Error(''));
+            } else {
+                next(null);
             }
         },
     ], cb);
@@ -118,18 +114,18 @@ export const postKeysError = (data) => {
     };
 };
 
-export const postKeys = (body, history, cb) => (dispatch, getState) => {
+export const postKeys = (history, cb = emptyFunc) => (dispatch, getState) => {
     Async.waterfall([
         (next) => {
             dispatch(postKeysInProgress(null));
             next(null);
         }, (next) => {
-            const { authentication } = getState();
+            const { keys } = getState();
 
-            Axios.post(KEYS_POST_URL, body, {
-                headers: {
-                    Authorization: `Bearer ${authentication.info.value}`,
-                },
+            Axios.post(KEYS_POST_URL, {
+                mnemonic: keys.post.mnemonic.value.trim(),
+                name: keys.post.name.value.trim(),
+                password: keys.post.password.value.trim(),
             }).then((res) => {
                 try {
                     next(null, res?.data?.result);
@@ -137,7 +133,9 @@ export const postKeys = (body, history, cb) => (dispatch, getState) => {
                     console.error(e);
                 }
             }).catch((error) => {
-                dispatch(postKeysError(error?.response?.data?.error));
+                console.error(error);
+
+                dispatch(postKeysError(error?.response?.data?.error || error));
                 next(error);
             });
         }, (result, next) => {

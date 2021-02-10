@@ -1,0 +1,7 @@
+import { API_BASE_URL } from './common';
+
+export const PROPOSALS_GET_IN_PROGRESS = 'PROPOSALS_GET_IN_PROGRESS';
+export const PROPOSALS_GET_SUCCESS = 'PROPOSALS_GET_SUCCESS';
+export const PROPOSALS_GET_ERROR = 'PROPOSALS_GET_ERROR';
+
+export const PROPOSALS_GET_URL = `${API_BASE_URL}/accounts`;
