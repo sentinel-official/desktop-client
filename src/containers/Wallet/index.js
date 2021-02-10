@@ -12,24 +12,26 @@ import Image from '../../components/Image';
 import Label from '../../components/Label';
 import Loader from '../../components/Loader';
 import TextBox from '../../components/TextBox';
+import { COIN_DENOM } from '../../constants/common';
 import ModalConfiguration from '../common/ModalConfiguration';
 import ModalTxInfo from '../common/ModalTxInfo';
 import Sidebar from '../common/SidebarDashboard';
 import Balance from './Balance';
 import Keys from './Keys';
 import Receive from './Receive';
-import Amount from './Send/Amount';
-import ModalSend from './Send/Modal';
-import Send from './Send/Send';
-import DepositAddress from './Send/To';
+import SendAmount from './Send/Amount';
+import SendModal from './Send/Modal';
+import SendSend from './Send/Send';
+import SendTo from './Send/To';
 import Validators from './Validators';
-import Actions from './Validators/Actions';
-import ModalDelegate from './Validators/ModalDelegate';
-import ModalRedelegate from './Validators/ModalRedelegate';
-import ModalUnbond from './Validators/ModalUnbond';
-import Status from './Validators/Status';
-import WithDrawValidators from './Withdraw/Validators';
-import WithDraw from './Withdraw/Withdraw';
+import ValidatorsActions from './Validators/Actions';
+import ValidatorsModalDelegate from './Validators/ModalDelegate';
+import ValidatorsModalRedelegate from './Validators/ModalRedelegate';
+import ValidatorsModalUnbond from './Validators/ModalUnbond';
+import ValidatorsStatus from './Validators/Status';
+import WithdrawRewardsModal from './WithdrawRewards/Modal';
+import WithdrawRewardsValidators from './WithdrawRewards/Validators';
+import WithdrawRewardsWithDraw from './WithdrawRewards/Withdraw';
 
 const toggleClass = () => {
     if (document.getElementById('side-bar').classList.contains('active')) {
@@ -72,10 +74,11 @@ const Wallet = (props) => {
     return (
         <>
             <ModalConfiguration history={props.history}/>
-            <ModalSend/>
-            <ModalDelegate/>
-            <ModalRedelegate/>
-            <ModalUnbond/>
+            <SendModal/>
+            <ValidatorsModalDelegate/>
+            <ValidatorsModalRedelegate/>
+            <ValidatorsModalUnbond/>
+            <WithdrawRewardsModal/>
             <ModalTxInfo/>
             <div className="wallet-section">
                 <div
@@ -120,7 +123,7 @@ const Wallet = (props) => {
                                         />
                                         <TextBox
                                             className="sub-text"
-                                            value="(sent)"
+                                            value={`(${COIN_DENOM})`}
                                         />
                                     </div>
                                     <Icon
@@ -139,8 +142,14 @@ const Wallet = (props) => {
                             <div className="flex-tabs">
                                 <div className="tabs-section">
                                     <Tabs
-                                        defaultActiveKey="send"
+                                        defaultActiveKey="receive"
                                         transition={false}>
+                                        <Tab
+                                            eventKey="receive"
+                                            tabClassName="receive-tab"
+                                            title="Receive">
+                                            <Receive/>
+                                        </Tab>
                                         <Tab
                                             eventKey="send"
                                             title="Send">
@@ -149,47 +158,41 @@ const Wallet = (props) => {
                                                     className="label"
                                                     label="To Address"
                                                 />
-                                                <DepositAddress/>
+                                                <SendTo/>
                                             </div>
                                             <div className="form-group">
                                                 <Label
                                                     className="label"
                                                     label="amount"
                                                 />
-                                                <Amount/>
+                                                <SendAmount/>
                                             </div>
-                                            <Send/>
-                                        </Tab>
-                                        <Tab
-                                            eventKey="Receive"
-                                            tabClassName="receive-tab"
-                                            title="Receive">
-                                            <Receive/>
+                                            <SendSend/>
                                         </Tab>
                                     </Tabs>
                                 </div>
                                 <div className="withdraw-section">
                                     <TextBox
                                         className="title"
-                                        value="Withdraw"
+                                        value="Withdraw Rewards"
                                     />
                                     <div className="withdraw-section-content">
                                         <div className="form-group">
                                             <Label
                                                 className="label"
-                                                label="Select Validator to Withdraw"
+                                                label="Validators"
                                             />
-                                            <WithDrawValidators/>
+                                            <WithdrawRewardsValidators/>
                                         </div>
-                                        <WithDraw/>
+                                        <WithdrawRewardsWithDraw/>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div className="wallet-tab col-md-8">
                             <div className="filter-section">
-                                <Status/>
-                                <Actions/>
+                                <ValidatorsStatus/>
+                                <ValidatorsActions/>
                             </div>
                             <Tabs
                                 defaultActiveKey="Validators"

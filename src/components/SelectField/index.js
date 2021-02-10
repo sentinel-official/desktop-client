@@ -5,16 +5,25 @@ import './index.css';
 const SelectField = ({
     className,
     items,
+    value,
     onChange,
 }) => {
     return (
         <select
             className={className}
+            value={value}
             onChange={onChange}>
+            <option
+                key={0}
+                value="">
+                {'None'}
+            </option>
             {
                 items.map((item, index) => (
-                    <option key={index}>
-                        {item.description.moniker} ({item.address})
+                    <option
+                        key={index + 1}
+                        value={item.address}>
+                        {item.description.moniker}
                     </option>
                 ))
             }
@@ -25,6 +34,7 @@ const SelectField = ({
 SelectField.propTypes = {
     className: PropTypes.string.isRequired,
     items: PropTypes.array.isRequired,
+    value: PropTypes.string.isRequired,
     onChange: PropTypes.func.isRequired,
 };
 

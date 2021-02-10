@@ -67,7 +67,7 @@ export const txWithdraw = (cb = emptyFunc) => (dispatch, getState) => {
                 },
             } = getState();
 
-            validators = [].push(validators.value.trim());
+            validators = [validators.value.trim()];
             memo = memo.value.trim();
             password = password.value.trim();
 

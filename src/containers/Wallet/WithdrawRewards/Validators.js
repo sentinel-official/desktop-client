@@ -2,13 +2,20 @@ import Lodash from 'lodash';
 import * as PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
+import { setTxWithdrawFrom } from '../../../actions/transactions/withdraw';
 import SelectField from '../../../components/SelectField';
 
 const Validators = ({
     delegations,
+    from,
     validators,
+    setTxWithdrawFrom,
 }) => {
-    const onChange = (event) => {
+    const onChange = ({ target: { value } }) => {
+        setTxWithdrawFrom({
+            value,
+            error: new Error(''),
+        });
     };
 
     const items = [];
@@ -26,6 +33,7 @@ const Validators = ({
         <SelectField
             className="form-control"
             items={items}
+            value={from}
             onChange={onChange}
         />
     );
@@ -37,6 +45,8 @@ Validators.propTypes = {
             validator_address: PropTypes.string.isRequired,
         }).isRequired,
     ).isRequired,
+    from: PropTypes.string.isRequired,
+    setTxWithdrawFrom: PropTypes.func.isRequired,
     validators: PropTypes.arrayOf(
         PropTypes.shape({
             address: PropTypes.string.isRequired,
@@ -50,8 +60,13 @@ Validators.propTypes = {
 const stateToProps = (state) => {
     return {
         delegations: state.delegations.items,
+        from: state.transactions.withdraw.from.value,
         validators: state.validators.items,
     };
 };
 
-export default connect(stateToProps)(Validators);
+const actionsToProps = {
+    setTxWithdrawFrom,
+};
+
+export default connect(stateToProps, actionsToProps)(Validators);
