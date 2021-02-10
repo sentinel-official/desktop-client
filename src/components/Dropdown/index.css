@@ -51,7 +51,7 @@
     background: #FFFFFF;
     box-shadow: none;
     float: none;
-    border: 0px solid;
+    border: 0 solid;
     border-radius: 0;
 }
 
@@ -68,9 +68,9 @@
 }
 
 .filter-section .dropdown-menu {
-    border-radius: 0px;
+    border-radius: 0;
     background: rgb(246, 248, 251);
     border: 1px solid rgb(220, 233, 241);
     box-sizing: border-box;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 4px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0 4px 4px;
 }

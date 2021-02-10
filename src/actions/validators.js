@@ -1,6 +1,5 @@
 import {
     VALIDATORS_ACTION_SET,
-    VALIDATORS_AVATAR_URL_SET,
     VALIDATORS_FILTER_STATUS_SET,
     VALIDATORS_GET_ERROR,
     VALIDATORS_GET_IN_PROGRESS,
@@ -77,13 +76,6 @@ export const setValidatorsFilterStatus = (data) => {
 export const setValidatorsActionSet = (data) => {
     return {
         type: VALIDATORS_ACTION_SET,
-        data,
-    };
-};
-
-export const setValidatorsAvatarURL = (data) => {
-    return {
-        type: VALIDATORS_AVATAR_URL_SET,
         data,
     };
 };

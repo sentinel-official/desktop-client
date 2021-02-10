@@ -1,6 +1,6 @@
 button {
     border-radius: 39px;
-    border: 0px solid;
+    border: 0 solid;
     font-size: 16px;
     text-align: center;
     letter-spacing: 0.05em;
@@ -33,9 +33,9 @@ button.selected {
 }
 
 .buttons-state button:first-child {
-    border-right: 0px solid;
+    border-right: 0 solid;
 }
 
 .buttons-state button:last-child {
-    border-left: 0px solid;
+    border-left: 0 solid;
 }

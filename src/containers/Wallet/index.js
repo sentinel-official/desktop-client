@@ -226,7 +226,7 @@ Wallet.propTypes = {
     putConfiguration: PropTypes.func.isRequired,
 };
 
-const stateToProps = (state) => {
+const stateToProps = () => {
     return {};
 };
 

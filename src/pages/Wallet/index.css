@@ -72,12 +72,12 @@
 
 .wallet-tab .nav-tabs {
     padding-bottom: 20px;
-    border: 0px solid;
+    border: 0 solid;
 }
 
 .middle-section, .logo-info-section {
     width: 400px;
-    padding: 0px;
+    padding: 0;
     border-right: 1px solid #DCE9F1;
 }
 
@@ -127,7 +127,6 @@
 
 .wallet-tab .nav-tabs .nav-link {
     margin: 0;
-    border: 0px solid;
     font-weight: 500;
     font-size: 16px;
     line-height: 19px;
@@ -177,7 +176,7 @@
     font-weight: 500;
     font-size: 16px;
     color: #142D51;
-    border-radius: 0px;
+    border-radius: 0;
 }
 
 .middle-section .nav-tabs .nav-link.active,
@@ -235,7 +234,7 @@
     align-items: center;
     background: #F6F8FB;
     border: 1px solid #DCE9F1;
-    box-shadow: 0px 4px 17px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 4px 17px rgba(0, 0, 0, 0.08);
     justify-content: space-between;
 }
 
@@ -472,7 +471,7 @@
 }
 
 .key .button-accordion {
-    border: 0px solid;
+    border: 0 solid;
     background-color: transparent;
     padding: 0;
     display: flex;
@@ -609,7 +608,7 @@
     }
 
     .dashboard-side-bar-container .settings-dropdown .dropdown-toggle::after,
-    .dropdown-toggle .dropdown-title
+    .dropdown-toggle .dropdown-title,
     .settings-dropdown .dropdown-item-text {
         display: none;
     }

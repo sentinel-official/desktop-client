@@ -44,7 +44,7 @@ body {
 }
 
 .button-group button {
-    margin: 0px 10px 5px 0;
+    margin: 0 10px 5px 0;
 }
 
 .login-button button {
@@ -84,8 +84,8 @@ label, .label {
 }
 
 .modal-header {
-    padding: 40px 40px 0px 40px;
-    border: 0px solid;
+    padding: 40px 40px 0 40px;
+    border: 0 solid;
 }
 
 .modal-body {
