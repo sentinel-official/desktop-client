@@ -6,9 +6,6 @@ import Button from '../../../../components/Button';
 import { ValidateAmount, ValidateMemo, ValidatePassword, ValidateToAddress } from './_validation';
 
 const Redelegate = (props) => {
-    const onClick = () => {
-    };
-
     const disabled = (
         ValidateToAddress(props.to.value).message !== '' ||
         ValidateAmount(props.amount.value).message !== '' ||
@@ -23,7 +20,7 @@ const Redelegate = (props) => {
             inProgress={props.inProgress}
             type="button"
             value="Redelegate"
-            onClick={onClick}
+            onClick={props.onClick}
         />
     );
 };

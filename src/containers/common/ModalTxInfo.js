@@ -8,9 +8,11 @@ import Success from '../../assets/Success.svg';
 import Image from '../../components/Image';
 import TextBox from '../../components/TextBox';
 
-const ModalTxInfo = (props) => {
-    const { code } = props.error;
-
+const ModalTxInfo = ({
+    error: { code },
+    onHide,
+    show,
+}) => {
     return (
         <Modal
             animation={false}
@@ -18,8 +20,8 @@ const ModalTxInfo = (props) => {
             centered={true}
             className={code === 0 ? 'success-modal' : 'failure-modal'}
             keyboard={false}
-            show={props.show}
-            onHide={props.onHide}>
+            show={show}
+            onHide={onHide}>
             <Modal.Header closeButton={true}>
                 <TextBox
                     className="modal-title"

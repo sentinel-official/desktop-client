@@ -18,4 +18,4 @@ Label.propTypes = {
     label: PropTypes.string.isRequired,
 };
 
-export default Label;
+export default React.memo(Label);

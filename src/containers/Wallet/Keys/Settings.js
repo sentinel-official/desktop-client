@@ -15,7 +15,10 @@ const Settings = ({ onClick }) => {
                 className="icon"
                 icon="setting"
             />
-            <TextBox className="dropdown-item-text" value="Settings"/>
+            <TextBox
+                className="dropdown-item-text"
+                value="Settings"
+            />
         </Dropdown.Item>
     );
 };

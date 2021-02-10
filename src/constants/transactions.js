@@ -11,7 +11,9 @@ export const TX_DELEGATE_IN_PROGRESS = 'TX_DELEGATE_IN_PROGRESS';
 export const TX_DELEGATE_SUCCESS = 'TX_DELEGATE_SUCCESS';
 export const TX_DELEGATE_ERROR = 'TX_DELEGATE_ERROR';
 
-export const TX_DELEGATE_URL = `${API_BASE_URL}/keys`;
+export const getTxDelegateURL = (address) => {
+    return `${API_BASE_URL}/delegators/${address}/delegations`;
+};
 
 export const TX_REDELEGATE_FROM_SET = 'TX_REDELEGATE_FROM_SET';
 export const TX_REDELEGATE_TO_SET = 'TX_REDELEGATE_TO_SET';
@@ -25,7 +27,9 @@ export const TX_REDELEGATE_IN_PROGRESS = 'TX_REDELEGATE_IN_PROGRESS';
 export const TX_REDELEGATE_SUCCESS = 'TX_REDELEGATE_SUCCESS';
 export const TX_REDELEGATE_ERROR = 'TX_REDELEGATE_ERROR';
 
-export const TX_REDELEGATE_URL = `${API_BASE_URL}/keys`;
+export const getTxRedelegateURL = (address) => {
+    return `${API_BASE_URL}/delegators/${address}/delegations/redelegate`;
+};
 
 export const TX_UNBOND_FROM_SET = 'TX_UNBOND_FROM_SET';
 export const TX_UNBOND_AMOUNT_SET = 'TX_UNBOND_AMOUNT_SET';
@@ -38,7 +42,9 @@ export const TX_UNBOND_IN_PROGRESS = 'TX_UNBOND_IN_PROGRESS';
 export const TX_UNBOND_SUCCESS = 'TX_UNBOND_SUCCESS';
 export const TX_UNBOND_ERROR = 'TX_UNBOND_ERROR';
 
-export const TX_UNBOND_URL = `${API_BASE_URL}/keys`;
+export const getTxUnbondURL = (address) => {
+    return `${API_BASE_URL}/delegators/${address}/delegations/undelegate`;
+};
 
 export const TX_WITHDRAW_FROM_SET = 'TX_WITHDRAW_FROM_SET';
 export const TX_WITHDRAW_MEMO_SET = 'TX_WITHDRAW_MEMO_SET';
@@ -50,7 +56,9 @@ export const TX_WITHDRAW_IN_PROGRESS = 'TX_WITHDRAW_IN_PROGRESS';
 export const TX_WITHDRAW_SUCCESS = 'TX_WITHDRAW_SUCCESS';
 export const TX_WITHDRAW_ERROR = 'TX_WITHDRAW_ERROR';
 
-export const TX_WITHDRAW_URL = `${API_BASE_URL}/keys`;
+export const getTxWithdrawURL = (address) => {
+    return `${API_BASE_URL}/delegators/${address}/rewards`;
+};
 
 export const TX_SEND_TO_SET = 'TX_SENT_TO_SET';
 export const TX_SEND_AMOUNT_SET = 'TX_SEND_AMOUNT_SET';
@@ -76,7 +84,9 @@ export const TX_VOTE_IN_PROGRESS = 'TX_VOTE_IN_PROGRESS';
 export const TX_VOTE_SUCCESS = 'TX_VOTE_SUCCESS';
 export const TX_VOTE_ERROR = 'TX_VOTE_ERROR';
 
-export const TX_VOTE_URL = `${API_BASE_URL}/keys`;
+export const getTxVoteURL = (id) => {
+    return `${API_BASE_URL}/proposals/${id}/votes`;
+};
 
 export const TX_INFO_MODAL_SHOW = 'TX_INFO_MODAL_SHOW';
 export const TX_INFO_MODAL_HIDE = 'TX_INFO_MODAL_HIDE';

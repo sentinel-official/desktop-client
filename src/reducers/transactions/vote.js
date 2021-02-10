@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
 import {
+    TX_UNBOND_MODAL_HIDE,
     TX_VOTE_ERROR,
     TX_VOTE_ID_SET,
     TX_VOTE_IN_PROGRESS,
@@ -30,6 +31,7 @@ const id = (state = {
             },
         };
     case TX_VOTE_SUCCESS:
+    case TX_UNBOND_MODAL_HIDE:
         return {
             ...state,
             value: 0,
@@ -63,6 +65,7 @@ const option = (state = {
             },
         };
     case TX_VOTE_SUCCESS:
+    case TX_UNBOND_MODAL_HIDE:
         return {
             ...state,
             value: '',
@@ -96,6 +99,7 @@ const memo = (state = {
             },
         };
     case TX_VOTE_SUCCESS:
+    case TX_UNBOND_MODAL_HIDE:
         return {
             ...state,
             value: '',
@@ -130,6 +134,8 @@ const modal = (state = false, {
     case TX_VOTE_MODAL_SHOW:
         return true;
     case TX_VOTE_MODAL_HIDE:
+    case TX_VOTE_ERROR:
+    case TX_VOTE_SUCCESS:
         return false;
     default:
         return state;

@@ -21,9 +21,9 @@ const txHash = (state = '', {
     data,
 }) => {
     switch (type) {
-    case TX_SEND_SUCCESS:
     case TX_DELEGATE_SUCCESS:
     case TX_REDELEGATE_SUCCESS:
+    case TX_SEND_SUCCESS:
     case TX_UNBOND_SUCCESS:
     case TX_VOTE_SUCCESS:
     case TX_WITHDRAW_SUCCESS:
@@ -43,9 +43,9 @@ const error = (state = {
     data,
 }) => {
     switch (type) {
-    case TX_SEND_ERROR:
     case TX_DELEGATE_ERROR:
     case TX_REDELEGATE_ERROR:
+    case TX_SEND_ERROR:
     case TX_UNBOND_ERROR:
     case TX_VOTE_ERROR:
     case TX_WITHDRAW_ERROR:
@@ -70,8 +70,18 @@ const modal = (state = false, {
 }) => {
     switch (type) {
     case TX_INFO_MODAL_SHOW:
-    case TX_SEND_SUCCESS:
+    case TX_DELEGATE_ERROR:
+    case TX_DELEGATE_SUCCESS:
+    case TX_REDELEGATE_ERROR:
+    case TX_REDELEGATE_SUCCESS:
     case TX_SEND_ERROR:
+    case TX_SEND_SUCCESS:
+    case TX_UNBOND_ERROR:
+    case TX_UNBOND_SUCCESS:
+    case TX_VOTE_ERROR:
+    case TX_VOTE_SUCCESS:
+    case TX_WITHDRAW_ERROR:
+    case TX_WITHDRAW_SUCCESS:
         return true;
     case TX_INFO_MODAL_HIDE:
         return false;

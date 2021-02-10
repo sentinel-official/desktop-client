@@ -1,5 +1,5 @@
 import Async from 'async';
-import { emptyFunc } from '../../constants/common';
+import { COIN_DENOM, emptyFunc } from '../../constants/common';
 import {
     TX_SEND_AMOUNT_SET,
     TX_SEND_ERROR,
@@ -64,19 +64,30 @@ export const txSend = (cb = emptyFunc) => (dispatch, getState) => {
             dispatch(txSendInProgress());
             next(null);
         }, (next) => {
-            const {
-                transactions,
-                account,
+            let {
+                transactions: {
+                    send: {
+                        to,
+                        amount,
+                        memo,
+                    },
+                },
+                account: { password },
             } = getState();
 
+            to = decodeFromBech32(to.value.trim());
+            amount = [{
+                denom: COIN_DENOM,
+                value: amount.value * Math.pow(10, 6),
+            }];
+            memo = memo.value.trim();
+            password = password.value.trim();
+
             Axios.post(TX_SEND_URL, {
-                to: decodeFromBech32(transactions.send.to.value.trim()),
-                amount: [{
-                    denom: 'tsent',
-                    value: parseInt((transactions.send.amount.value * Math.pow(10, 6)).toFixed(0)),
-                }],
-                memo: transactions.send.memo.value.trim(),
-                password: account.password.value.trim(),
+                to,
+                amount,
+                memo,
+                password,
             })
                 .then((res) => {
                     try {

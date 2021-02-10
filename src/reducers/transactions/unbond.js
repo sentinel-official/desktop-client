@@ -30,6 +30,7 @@ const from = (state = {
             },
         };
     case TX_UNBOND_SUCCESS:
+    case TX_UNBOND_MODAL_HIDE:
         return {
             ...state,
             value: '',
@@ -44,7 +45,7 @@ const from = (state = {
 };
 
 const amount = (state = {
-    value: [],
+    value: 0,
     error: {
         message: '',
     },
@@ -63,9 +64,10 @@ const amount = (state = {
             },
         };
     case TX_UNBOND_SUCCESS:
+    case TX_UNBOND_MODAL_HIDE:
         return {
             ...state,
-            value: [],
+            value: 0,
             error: {
                 ...state.error,
                 message: '',
@@ -96,6 +98,7 @@ const memo = (state = {
             },
         };
     case TX_UNBOND_SUCCESS:
+    case TX_UNBOND_MODAL_HIDE:
         return {
             ...state,
             value: '',
@@ -130,6 +133,8 @@ const modal = (state = false, {
     case TX_UNBOND_MODAL_SHOW:
         return true;
     case TX_UNBOND_MODAL_HIDE:
+    case TX_UNBOND_ERROR:
+    case TX_UNBOND_SUCCESS:
         return false;
     default:
         return state;

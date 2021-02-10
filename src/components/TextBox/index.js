@@ -18,4 +18,4 @@ TextBox.propTypes = {
     value: PropTypes.string.isRequired,
 };
 
-export default TextBox;
+export default React.memo(TextBox);

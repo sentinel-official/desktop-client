@@ -31,6 +31,7 @@ const from = (state = {
             },
         };
     case TX_REDELEGATE_SUCCESS:
+    case TX_REDELEGATE_MODAL_HIDE:
         return {
             ...state,
             value: '',
@@ -64,6 +65,7 @@ const to = (state = {
             },
         };
     case TX_REDELEGATE_SUCCESS:
+    case TX_REDELEGATE_MODAL_HIDE:
         return {
             ...state,
             value: '',
@@ -97,6 +99,7 @@ const amount = (state = {
             },
         };
     case TX_REDELEGATE_SUCCESS:
+    case TX_REDELEGATE_MODAL_HIDE:
         return {
             ...state,
             value: 0,
@@ -130,6 +133,7 @@ const memo = (state = {
             },
         };
     case TX_REDELEGATE_SUCCESS:
+    case TX_REDELEGATE_MODAL_HIDE:
         return {
             ...state,
             value: '',
@@ -164,6 +168,8 @@ const modal = (state = false, {
     case TX_REDELEGATE_MODAL_SHOW:
         return true;
     case TX_REDELEGATE_MODAL_HIDE:
+    case TX_REDELEGATE_ERROR:
+    case TX_REDELEGATE_SUCCESS:
         return false;
     default:
         return state;

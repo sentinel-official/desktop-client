@@ -1,4 +1,5 @@
 import Async from 'async';
+import { COIN_DENOM, emptyFunc } from '../../constants/common';
 import {
     TX_REDELEGATE_AMOUNT_SET,
     TX_REDELEGATE_ERROR,
@@ -9,9 +10,10 @@ import {
     TX_REDELEGATE_MODAL_SHOW,
     TX_REDELEGATE_SUCCESS,
     TX_REDELEGATE_TO_SET,
-    TX_REDELEGATE_URL,
+    getTxRedelegateURL,
 } from '../../constants/transactions';
 import Axios from '../../services/axios';
+import { decodeFromBech32 } from '../../utils/bech32';
 
 export const setTxRedelegateFrom = (data) => {
     return {
@@ -62,13 +64,45 @@ export const txRedelegateError = (data) => {
     };
 };
 
-export const txRedelegate = (body, cb) => (dispatch, getState) => {
+export const txRedelegate = (cb = emptyFunc) => (dispatch, getState) => {
     Async.waterfall([
         (next) => {
             dispatch(txRedelegateInProgress());
             next(null);
         }, (next) => {
-            Axios.post(TX_REDELEGATE_URL, body)
+            let {
+                account: { password },
+                keys: {
+                    items,
+                    index,
+                },
+                transactions: {
+                    redelegate: {
+                        from,
+                        to,
+                        amount,
+                        memo,
+                    },
+                },
+            } = getState();
+
+            from = from.value.trim();
+            to = decodeFromBech32(to.value.trim());
+            amount = {
+                denom: COIN_DENOM,
+                value: amount.value * Math.pow(10, 6),
+            };
+            memo = memo.value.trim();
+            password = password.value.trim();
+
+            const url = getTxRedelegateURL(items[index].address);
+            Axios.post(url, {
+                from,
+                to,
+                amount,
+                memo,
+                password,
+            })
                 .then((res) => {
                     try {
                         next(null, res?.data?.result);

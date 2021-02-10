@@ -6,9 +6,14 @@ import Icon from '../../../components/Icon';
 import TextBox from '../../../components/TextBox';
 import Settings from './Settings';
 
-const Keys = (props) => {
+const Keys = ({
+    index,
+    items,
+}) => {
     const onClick = (event) => {
     };
+
+    const name = items[index].name;
 
     return (
         <Dropdown>
@@ -17,21 +22,29 @@ const Keys = (props) => {
                     className="icon"
                     icon="profile"
                 />
-                <TextBox className="dropdown-title" value={props.items[props.index]?.name}/>
+                <TextBox
+                    className="dropdown-title"
+                    value={name}
+                />
             </Dropdown.Toggle>
             <Dropdown.Menu>
                 {
-                    props.items.map((item, index) => (
-                        <Dropdown.Item
-                            key={index}
-                            onClick={onClick}>
-                            <Icon
-                                className="icon"
-                                icon="profile"
-                            />
-                            <TextBox className="dropdown-item-text" value={item.name}/>
-                        </Dropdown.Item>
-                    ))
+                    items.map((item, index) => {
+                        return item.name === name
+                            ? null
+                            : <Dropdown.Item
+                                key={index}
+                                onClick={onClick}>
+                                <Icon
+                                    className="icon"
+                                    icon="profile"
+                                />
+                                <TextBox
+                                    className="dropdown-item-text"
+                                    value={item.name}
+                                />
+                            </Dropdown.Item>;
+                    })
                 }
                 <Settings/>
             </Dropdown.Menu>

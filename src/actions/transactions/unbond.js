@@ -1,4 +1,5 @@
 import Async from 'async';
+import { COIN_DENOM, emptyFunc } from '../../constants/common';
 import {
     TX_UNBOND_AMOUNT_SET,
     TX_UNBOND_ERROR,
@@ -8,7 +9,7 @@ import {
     TX_UNBOND_MODAL_HIDE,
     TX_UNBOND_MODAL_SHOW,
     TX_UNBOND_SUCCESS,
-    TX_UNBOND_URL,
+    getTxUnbondURL,
 } from '../../constants/transactions';
 import Axios from '../../services/axios';
 
@@ -54,13 +55,42 @@ export const txUnbondError = (data) => {
     };
 };
 
-export const txUnbond = (body, cb) => (dispatch, getState) => {
+export const txUnbond = (cb = emptyFunc) => (dispatch, getState) => {
     Async.waterfall([
         (next) => {
             dispatch(txUnbondInProgress());
             next(null);
         }, (next) => {
-            Axios.post(TX_UNBOND_URL, body)
+            let {
+                account: { password },
+                keys: {
+                    items,
+                    index,
+                },
+                transactions: {
+                    unbond: {
+                        from,
+                        amount,
+                        memo,
+                    },
+                },
+            } = getState();
+
+            from = from.value.trim();
+            amount = {
+                denom: COIN_DENOM,
+                value: amount.value * Math.pow(10, 6),
+            };
+            memo = memo.value.trim();
+            password = password.value.trim();
+
+            const url = getTxUnbondURL(items[index].address);
+            Axios.post(url, {
+                from,
+                amount,
+                memo,
+                password,
+            })
                 .then((res) => {
                     try {
                         next(null, res?.data?.result);

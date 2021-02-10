@@ -12,14 +12,12 @@ import Image from '../../components/Image';
 import Label from '../../components/Label';
 import Loader from '../../components/Loader';
 import TextBox from '../../components/TextBox';
-import CopyAddress from '../../containers/KeyInfo/AddressCopy';
 import ModalConfiguration from '../common/ModalConfiguration';
 import ModalTxInfo from '../common/ModalTxInfo';
 import Sidebar from '../common/SidebarDashboard';
 import Balance from './Balance';
 import Keys from './Keys';
-import Address from './Receive/Address';
-import QRCode from './Receive/QRCode';
+import Receive from './Receive';
 import Amount from './Send/Amount';
 import ModalSend from './Send/Modal';
 import Send from './Send/Send';
@@ -140,7 +138,9 @@ const Wallet = (props) => {
                         <div className="middle-section col-md-4">
                             <div className="flex-tabs">
                                 <div className="tabs-section">
-                                    <Tabs defaultActiveKey="send">
+                                    <Tabs
+                                        defaultActiveKey="send"
+                                        transition={false}>
                                         <Tab
                                             eventKey="send"
                                             title="Send">
@@ -164,20 +164,7 @@ const Wallet = (props) => {
                                             eventKey="Receive"
                                             tabClassName="receive-tab"
                                             title="Receive">
-                                            <TextBox
-                                                className="qr-title"
-                                                value="Show QR code to Receive Amount"/>
-                                            <div className="qr-box">
-                                                <QRCode/>
-                                            </div>
-                                            <div className="copy-address">
-                                                <TextBox
-                                                    className=""
-                                                    value="Address"
-                                                />
-                                                <CopyAddress/>
-                                            </div>
-                                            <Address/>
+                                            <Receive/>
                                         </Tab>
                                     </Tabs>
                                 </div>

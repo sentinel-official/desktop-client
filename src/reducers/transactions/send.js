@@ -30,6 +30,7 @@ const to = (state = {
             },
         };
     case TX_SEND_SUCCESS:
+    case TX_SEND_MODAL_HIDE:
         return {
             ...state,
             value: '',
@@ -63,6 +64,7 @@ const amount = (state = {
             },
         };
     case TX_SEND_SUCCESS:
+    case TX_SEND_MODAL_HIDE:
         return {
             ...state,
             value: 0,
@@ -96,6 +98,7 @@ const memo = (state = {
             },
         };
     case TX_SEND_SUCCESS:
+    case TX_SEND_MODAL_HIDE:
         return {
             ...state,
             value: '',

@@ -1,4 +1,5 @@
 import Async from 'async';
+import { COIN_DENOM, emptyFunc } from '../../constants/common';
 import {
     TX_DELEGATE_AMOUNT_SET,
     TX_DELEGATE_ERROR,
@@ -8,7 +9,7 @@ import {
     TX_DELEGATE_MODAL_SHOW,
     TX_DELEGATE_SUCCESS,
     TX_DELEGATE_TO_SET,
-    TX_DELEGATE_URL,
+    getTxDelegateURL,
 } from '../../constants/transactions';
 import Axios from '../../services/axios';
 
@@ -54,13 +55,42 @@ export const txDelegateError = (data) => {
     };
 };
 
-export const txDelegate = (body, cb) => (dispatch, getState) => {
+export const txDelegate = (cb = emptyFunc) => (dispatch, getState) => {
     Async.waterfall([
         (next) => {
             dispatch(txDelegateInProgress());
             next(null);
         }, (next) => {
-            Axios.post(TX_DELEGATE_URL, body)
+            let {
+                account: { password },
+                keys: {
+                    items,
+                    index,
+                },
+                transactions: {
+                    delegate: {
+                        to,
+                        amount,
+                        memo,
+                    },
+                },
+            } = getState();
+
+            to = to.value.trim();
+            amount = {
+                denom: COIN_DENOM,
+                value: amount.value * Math.pow(10, 6),
+            };
+            memo = memo.value.trim();
+            password = password.value.trim();
+
+            const url = getTxDelegateURL(items[index].address);
+            Axios.post(url, {
+                to,
+                amount,
+                memo,
+                password,
+            })
                 .then((res) => {
                     try {
                         next(null, res?.data?.result);

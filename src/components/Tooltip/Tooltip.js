@@ -8,7 +8,11 @@ const Tooltip = ({
     icon,
 }) => {
     return (
-        <div className="tooltip-section" data-placement="top" data-toggle="tooltip" title={value}>
+        <div
+            className="tooltip-section"
+            data-placement="top"
+            data-toggle="tooltip"
+            title={value}>
             <Icon
                 className="icon"
                 icon={icon}

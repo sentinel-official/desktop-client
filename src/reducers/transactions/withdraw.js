@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
 import {
     TX_DELEGATE_SUCCESS,
+    TX_UNBOND_MODAL_HIDE,
     TX_WITHDRAW_ERROR,
     TX_WITHDRAW_FROM_SET,
     TX_WITHDRAW_IN_PROGRESS,
@@ -30,6 +31,7 @@ const from = (state = {
             },
         };
     case TX_WITHDRAW_SUCCESS:
+    case TX_UNBOND_MODAL_HIDE:
         return {
             ...state,
             value: '',
@@ -63,6 +65,7 @@ const memo = (state = {
             },
         };
     case TX_WITHDRAW_SUCCESS:
+    case TX_UNBOND_MODAL_HIDE:
         return {
             ...state,
             value: '',
@@ -97,6 +100,8 @@ const modal = (state = false, {
     case TX_WITHDRAW_MODAL_SHOW:
         return true;
     case TX_WITHDRAW_MODAL_HIDE:
+    case TX_WITHDRAW_ERROR:
+    case TX_WITHDRAW_SUCCESS:
         return false;
     default:
         return state;

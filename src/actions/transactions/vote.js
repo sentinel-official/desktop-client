@@ -1,4 +1,5 @@
 import Async from 'async';
+import { emptyFunc } from '../../constants/common';
 import {
     TX_VOTE_ERROR,
     TX_VOTE_ID_SET,
@@ -8,7 +9,7 @@ import {
     TX_VOTE_MODAL_SHOW,
     TX_VOTE_OPTION_SET,
     TX_VOTE_SUCCESS,
-    TX_VOTE_URL,
+    getTxVoteURL,
 } from '../../constants/transactions';
 import Axios from '../../services/axios';
 
@@ -54,13 +55,34 @@ export const txVoteError = (data) => {
     };
 };
 
-export const txVote = (body, cb) => (dispatch, getState) => {
+export const txVote = (cb = emptyFunc) => (dispatch, getState) => {
     Async.waterfall([
         (next) => {
             dispatch(txVoteInProgress());
             next(null);
         }, (next) => {
-            Axios.post(TX_VOTE_URL, body)
+            let {
+                transactions: {
+                    vote: {
+                        id,
+                        option,
+                        memo,
+                    },
+                },
+                account: { password },
+            } = getState();
+
+            id = id.value;
+            option = option.value.trim();
+            memo = memo.value.trim();
+            password = password.value.trim();
+
+            const url = getTxVoteURL(id);
+            Axios.post(url, {
+                option,
+                memo,
+                password,
+            })
                 .then((res) => {
                     try {
                         next(null, res?.data?.result);

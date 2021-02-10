@@ -1,4 +1,5 @@
 import Async from 'async';
+import { emptyFunc } from '../../constants/common';
 import {
     TX_WITHDRAW_ERROR,
     TX_WITHDRAW_FROM_SET,
@@ -7,7 +8,7 @@ import {
     TX_WITHDRAW_MODAL_HIDE,
     TX_WITHDRAW_MODAL_SHOW,
     TX_WITHDRAW_SUCCESS,
-    TX_WITHDRAW_URL,
+    getTxWithdrawURL,
 } from '../../constants/transactions';
 import Axios from '../../services/axios';
 
@@ -46,13 +47,36 @@ export const txWithdrawError = (data) => {
     };
 };
 
-export const txWithdraw = (body, cb) => (dispatch, getState) => {
+export const txWithdraw = (cb = emptyFunc) => (dispatch, getState) => {
     Async.waterfall([
         (next) => {
             dispatch(txWithdrawInProgress());
             next(null);
         }, (next) => {
-            Axios.post(TX_WITHDRAW_URL, body)
+            let {
+                account: { password },
+                keys: {
+                    items,
+                    index,
+                },
+                transactions: {
+                    withdraw: {
+                        from: validators,
+                        memo,
+                    },
+                },
+            } = getState();
+
+            validators = [].push(validators.value.trim());
+            memo = memo.value.trim();
+            password = password.value.trim();
+
+            const url = getTxWithdrawURL(items[index].address);
+            Axios.post(url, {
+                validators,
+                memo,
+                password,
+            })
                 .then((res) => {
                     try {
                         next(null, res?.data?.result);

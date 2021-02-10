@@ -6,9 +6,6 @@ import Button from '../../../../components/Button';
 import { ValidateAmount, ValidateMemo, ValidatePassword } from './_validation';
 
 const Unbond = (props) => {
-    const onClick = () => {
-    };
-
     const disabled = (
         ValidateAmount(props.amount.value).message !== '' ||
         ValidateMemo(props.memo.value).message !== '' ||
@@ -22,7 +19,7 @@ const Unbond = (props) => {
             inProgress={props.inProgress}
             type="button"
             value="Unbond"
-            onClick={onClick}
+            onClick={props.onClick}
         />
     );
 };

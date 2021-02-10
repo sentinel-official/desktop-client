@@ -13,7 +13,7 @@ const options = [
 ];
 
 const SidebarDashboard = ({
-    location,
+    location: { pathname },
 }) => {
     return (
         <ul className="list-group">
@@ -21,7 +21,7 @@ const SidebarDashboard = ({
                 options.map((item, index) => (
                     <NavLink
                         key={index}
-                        className={location.pathname === item.pathname ? 'active' : ''}
+                        className={pathname === item.pathname ? 'active' : ''}
                         to={item.pathname}>
                         <Icon
                             className="icon"
