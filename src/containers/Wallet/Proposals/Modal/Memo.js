@@ -6,8 +6,8 @@ import React from 'react';
 import TextArea from '../../../../components/TextArea';
 
 const Memo = (props) => {
-    const onChange = (event) => {
-        const value = event.target.value.toString();
+    const onChange = ({ target: { value } }) => {
+        value = value.toString();
 
         props.onChange({
             value,

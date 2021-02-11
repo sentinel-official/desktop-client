@@ -6,8 +6,8 @@ import NumberInputField from '../../components/NumberInputField';
 import React from 'react';
 
 const Gas = (props) => {
-    const onChange = (event) => {
-        const value = parseInt(event.target.value.toString().trim());
+    const onChange = ({ target: { value } }) => {
+        value = parseInt(value.toString().trim());
 
         props.onChange({
             value,

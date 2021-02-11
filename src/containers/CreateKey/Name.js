@@ -1,13 +1,14 @@
 import * as PropTypes from 'prop-types';
 import { ValidateName } from './_validation';
+import { capitalizeFirstLetter } from '../../utils/string';
 import { connect } from 'react-redux';
 import { setKeyName } from '../../actions/keys';
 import React from 'react';
 import TextInputField from '../../components/TextInputField';
 
 const Name = (props) => {
-    const onChange = (event) => {
-        const value = event.target.value.toString();
+    const onChange = ({ target: { value } }) => {
+        value = capitalizeFirstLetter(value);
         props.onChange({
             value,
             error: ValidateName(value),

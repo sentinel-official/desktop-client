@@ -6,8 +6,8 @@ import NumberInputField from '../../../../components/NumberInputField';
 import React from 'react';
 
 const Amount = (props) => {
-    const onChange = (event) => {
-        const value = parseFloat(event.target.value);
+    const onChange = ({ target: { value } }) => {
+        value = parseFloat(value);
 
         props.onChange({
             value,

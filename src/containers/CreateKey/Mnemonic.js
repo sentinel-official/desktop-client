@@ -6,8 +6,9 @@ import React from 'react';
 import TextArea from '../../components/TextArea';
 
 const Mnemonic = (props) => {
-    const onChange = (event) => {
-        const value = event.target.value.toString();
+    const onChange = ({ target: { value } }) => {
+        value = value.toString();
+
         props.onChange({
             value,
             error: ValidateMnemonic(value),
