@@ -1,6 +1,6 @@
 import * as PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { setValidatorsActionSet } from '../../../actions/validators';
+import { setValidatorsAction } from '../../../actions/validators';
 import Dropdown from '../../../components/Dropdown';
 import React from 'react';
 
@@ -51,7 +51,7 @@ const stateToProps = (state) => {
 };
 
 const actionsToProps = {
-    onClick: setValidatorsActionSet,
+    onClick: setValidatorsAction,
 };
 
 export default connect(stateToProps, actionsToProps)(Actions);

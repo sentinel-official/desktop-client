@@ -61,7 +61,8 @@ export const txVote = (cb = emptyFunc) => (dispatch, getState) => {
             dispatch(txVoteInProgress());
             next(null);
         }, (next) => {
-            let {
+            const {
+                account: { password },
                 transactions: {
                     vote: {
                         id,
@@ -69,19 +70,13 @@ export const txVote = (cb = emptyFunc) => (dispatch, getState) => {
                         memo,
                     },
                 },
-                account: { password },
             } = getState();
 
-            id = id.value;
-            option = option.value.trim();
-            memo = memo.value.trim();
-            password = password.value.trim();
-
-            const url = getTxVoteURL(id);
+            const url = getTxVoteURL(id.value);
             Axios.post(url, {
-                option,
-                memo,
-                password,
+                option: option.value.trim(),
+                memo: memo.value.trim(),
+                password: password.value.trim(),
             })
                 .then((res) => {
                     try {

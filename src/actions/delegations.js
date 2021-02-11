@@ -35,9 +35,14 @@ export const getDelegations = (cb = emptyFunc) => (dispatch, getState) => {
             dispatch(getDelegationsInProgress(null));
             next(null);
         }, (next) => {
-            const { keys } = getState();
-            const url = getDelegationsURL(keys.items[keys.index].address);
+            const {
+                keys: {
+                    items,
+                    index,
+                },
+            } = getState();
 
+            const url = getDelegationsURL(items[index].address);
             Axios.get(url)
                 .then((res) => {
                     try {

@@ -64,7 +64,7 @@ export const txSend = (cb = emptyFunc) => (dispatch, getState) => {
             dispatch(txSendInProgress());
             next(null);
         }, (next) => {
-            let {
+            const {
                 transactions: {
                     send: {
                         to,
@@ -75,19 +75,14 @@ export const txSend = (cb = emptyFunc) => (dispatch, getState) => {
                 account: { password },
             } = getState();
 
-            to = decodeFromBech32(to.value.trim());
-            amount = [{
-                denom: COIN_DENOM,
-                value: amount.value * Math.pow(10, 6),
-            }];
-            memo = memo.value.trim();
-            password = password.value.trim();
-
             Axios.post(TX_SEND_URL, {
-                to,
-                amount,
-                memo,
-                password,
+                to: decodeFromBech32(to.value.trim()),
+                amount: [{
+                    denom: COIN_DENOM,
+                    value: amount.value * Math.pow(10, 6),
+                }],
+                memo: memo.value.trim(),
+                password: password.value.trim(),
             })
                 .then((res) => {
                     try {

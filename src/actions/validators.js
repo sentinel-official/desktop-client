@@ -5,7 +5,6 @@ import {
     VALIDATORS_GET_IN_PROGRESS,
     VALIDATORS_GET_SUCCESS,
     VALIDATORS_GET_URL,
-    VALIDATORS_SET,
     VALIDATORS_SORT_SET,
 } from '../constants/validators';
 import { emptyFunc } from '../constants/common';
@@ -73,30 +72,9 @@ export const setValidatorsFilterStatus = (data) => {
     };
 };
 
-export const setValidatorsActionSet = (data) => {
+export const setValidatorsAction = (data) => {
     return {
         type: VALIDATORS_ACTION_SET,
-        data,
-    };
-};
-
-export const sortValidators = (by, asc = true) => (dispatch, getState) => {
-    const { items } = getState().validators;
-    items.sort((X, Y) => {
-        const x = Lodash.get(X, by);
-        const y = Lodash.get(Y, by);
-
-        return asc
-            ? (x > y ? 1 : x < y ? -1 : 0)
-            : (x < y ? 1 : x > y ? -1 : 0);
-    });
-
-    dispatch(setValidators(items));
-};
-
-export const setValidators = (data) => {
-    return {
-        type: VALIDATORS_SET,
         data,
     };
 };

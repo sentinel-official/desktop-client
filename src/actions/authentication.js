@@ -45,10 +45,10 @@ export const postAuthentication = (history, cb = emptyFunc) => (dispatch, getSta
             dispatch(postAuthenticationInProgress());
             next(null);
         }, (next) => {
-            const { authentication } = getState();
+            const { authentication: { password } } = getState();
 
             Axios.post(AUTHENTICATION_POST_URL, {
-                password: authentication.password.value.trim(),
+                password: password.value.trim(),
             })
                 .then((res) => {
                     try {

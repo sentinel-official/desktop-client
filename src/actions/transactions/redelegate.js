@@ -70,7 +70,7 @@ export const txRedelegate = (cb = emptyFunc) => (dispatch, getState) => {
             dispatch(txRedelegateInProgress());
             next(null);
         }, (next) => {
-            let {
+            const {
                 account: { password },
                 keys: {
                     items,
@@ -86,22 +86,16 @@ export const txRedelegate = (cb = emptyFunc) => (dispatch, getState) => {
                 },
             } = getState();
 
-            from = from.value.trim();
-            to = decodeFromBech32(to.value.trim());
-            amount = {
-                denom: COIN_DENOM,
-                value: amount.value * Math.pow(10, 6),
-            };
-            memo = memo.value.trim();
-            password = password.value.trim();
-
             const url = getTxRedelegateURL(items[index].address);
             Axios.post(url, {
-                from,
-                to,
-                amount,
-                memo,
-                password,
+                from: from.value.trim(),
+                to: decodeFromBech32(to.value.trim()),
+                amount: {
+                    denom: COIN_DENOM,
+                    value: amount.value * Math.pow(10, 6),
+                },
+                memo: memo.value.trim(),
+                password: password.value.trim(),
             })
                 .then((res) => {
                     try {

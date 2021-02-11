@@ -36,9 +36,14 @@ export const getAccount = (cb = emptyFunc) => (dispatch, getState) => {
             dispatch(getAccountInProgress(null));
             next(null);
         }, (next) => {
-            const { keys } = getState();
-            const url = getAccountURL(keys.items[keys.index].address);
+            const {
+                keys: {
+                    items,
+                    index,
+                },
+            } = getState();
 
+            const url = getAccountURL(items[index].address);
             Axios.get(url)
                 .then((res) => {
                     try {

@@ -53,7 +53,7 @@ export const txWithdraw = (cb = emptyFunc) => (dispatch, getState) => {
             dispatch(txWithdrawInProgress());
             next(null);
         }, (next) => {
-            let {
+            const {
                 account: { password },
                 keys: {
                     items,
@@ -61,21 +61,17 @@ export const txWithdraw = (cb = emptyFunc) => (dispatch, getState) => {
                 },
                 transactions: {
                     withdraw: {
-                        from: validators,
+                        from,
                         memo,
                     },
                 },
             } = getState();
 
-            validators = [validators.value.trim()];
-            memo = memo.value.trim();
-            password = password.value.trim();
-
             const url = getTxWithdrawURL(items[index].address);
             Axios.post(url, {
-                validators,
-                memo,
-                password,
+                validators: [from.value.trim()],
+                memo: memo.value.trim(),
+                password: password.value.trim(),
             })
                 .then((res) => {
                     try {

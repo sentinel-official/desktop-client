@@ -61,7 +61,7 @@ export const txUnbond = (cb = emptyFunc) => (dispatch, getState) => {
             dispatch(txUnbondInProgress());
             next(null);
         }, (next) => {
-            let {
+            const {
                 account: { password },
                 keys: {
                     items,
@@ -76,20 +76,15 @@ export const txUnbond = (cb = emptyFunc) => (dispatch, getState) => {
                 },
             } = getState();
 
-            from = from.value.trim();
-            amount = {
-                denom: COIN_DENOM,
-                value: amount.value * Math.pow(10, 6),
-            };
-            memo = memo.value.trim();
-            password = password.value.trim();
-
             const url = getTxUnbondURL(items[index].address);
             Axios.post(url, {
-                from,
-                amount,
-                memo,
-                password,
+                from: from.value.trim(),
+                amount: {
+                    denom: COIN_DENOM,
+                    value: amount.value * Math.pow(10, 6),
+                },
+                memo: memo.value.trim(),
+                password: password.value.trim(),
             })
                 .then((res) => {
                     try {

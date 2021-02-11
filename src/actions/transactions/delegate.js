@@ -61,7 +61,7 @@ export const txDelegate = (cb = emptyFunc) => (dispatch, getState) => {
             dispatch(txDelegateInProgress());
             next(null);
         }, (next) => {
-            let {
+            const {
                 account: { password },
                 keys: {
                     items,
@@ -76,20 +76,15 @@ export const txDelegate = (cb = emptyFunc) => (dispatch, getState) => {
                 },
             } = getState();
 
-            to = to.value.trim();
-            amount = {
-                denom: COIN_DENOM,
-                value: amount.value * Math.pow(10, 6),
-            };
-            memo = memo.value.trim();
-            password = password.value.trim();
-
             const url = getTxDelegateURL(items[index].address);
             Axios.post(url, {
-                to,
-                amount,
-                memo,
-                password,
+                to: to.value.trim(),
+                amount: {
+                    denom: COIN_DENOM,
+                    value: amount.value * Math.pow(10, 6),
+                },
+                memo: memo.value.trim(),
+                password: password.value.trim(),
             })
                 .then((res) => {
                     try {

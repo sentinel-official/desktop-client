@@ -179,22 +179,37 @@ export const putConfiguration = (cb = emptyFunc) => (dispatch, getState) => {
             next(null);
         }, (next) => {
             const {
-                keys,
-                configuration,
+                keys: {
+                    items,
+                    index,
+                },
+                configuration: {
+                    chain: {
+                        broadcastMode,
+                        fees,
+                        gasAdjustment,
+                        gasPrices,
+                        gas,
+                        id,
+                        RPCAddress,
+                        simulateAndExecute,
+                        trustNode,
+                    },
+                },
             } = getState();
 
             Axios.put(CONFIGURATION_PUT_URL, {
-                from: keys.items[keys.index]?.name,
+                from: items[index]?.name,
                 chain: {
-                    broadcast_mode: configuration.chain.broadcastMode.value.trim(),
-                    fees: configuration.chain.fees.value.trim(),
-                    gas_adjustment: configuration.chain.gasAdjustment.value,
-                    gas_prices: configuration.chain.gasPrices.value.trim(),
-                    gas: configuration.chain.gas.value,
-                    id: configuration.chain.id.value.trim(),
-                    rpc_address: configuration.chain.RPCAddress.value.trim(),
-                    simulate_and_execute: configuration.chain.simulateAndExecute.value,
-                    trust_node: configuration.chain.trustNode.value,
+                    broadcast_mode: broadcastMode.value.trim(),
+                    fees: fees.value.trim(),
+                    gas_adjustment: gasAdjustment.value,
+                    gas_prices: gasPrices.value.trim(),
+                    gas: gas.value,
+                    id: id.value.trim(),
+                    rpc_address: RPCAddress.value.trim(),
+                    simulate_and_execute: simulateAndExecute.value,
+                    trust_node: trustNode.value,
                 },
                 setup: false,
             })

@@ -120,12 +120,20 @@ export const postKeys = (history, cb = emptyFunc) => (dispatch, getState) => {
             dispatch(postKeysInProgress(null));
             next(null);
         }, (next) => {
-            const { keys } = getState();
+            const {
+                keys: {
+                    post: {
+                        mnemonic,
+                        name,
+                        password,
+                    },
+                },
+            } = getState();
 
             Axios.post(KEYS_POST_URL, {
-                mnemonic: keys.post.mnemonic.value.trim(),
-                name: keys.post.name.value.trim(),
-                password: keys.post.password.value.trim(),
+                mnemonic: mnemonic.value.trim(),
+                name: name.value.trim(),
+                password: password.value.trim(),
             }).then((res) => {
                 try {
                     next(null, res?.data?.result);
