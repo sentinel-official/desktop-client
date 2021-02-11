@@ -1,3 +1,4 @@
+import 'bootstrap/dist/css/bootstrap.css';
 import { MemoryRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { applyMiddleware, createStore } from 'redux';
