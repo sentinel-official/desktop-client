@@ -142,6 +142,8 @@ func (c *Client) WithGasAdjustment(i float64) *Client {
 		c.txb.Fees(),
 		c.txb.GasPrices(),
 	)
+	c.txb = c.txb.WithKeybase(c.ctx.Keybase)
+
 	return c
 }
 
@@ -158,6 +160,8 @@ func (c *Client) WithSimulateAndExecute(t bool) *Client {
 		c.txb.Fees(),
 		c.txb.GasPrices(),
 	)
+	c.txb = c.txb.WithKeybase(c.ctx.Keybase)
+
 	return c
 }
 
