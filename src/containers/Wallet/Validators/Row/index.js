@@ -1,20 +1,25 @@
 import * as PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { isActive } from '../../../../utils/validator';
 import Avatar from './Avatar';
 import Delegate from './Delegate';
 import React from 'react';
 import Redelegate from './Redelegate';
+import TableCell from '@material-ui/core/TableCell';
+import TableRow from '@material-ui/core/TableRow';
 import Unbond from './Unbond';
 
 const Row = ({
-    action,
     item,
     totalVotingPower,
 }) => {
-    const active = item.jailed === false && item['bond_status'] === 'Bonded';
+    const active = isActive(item);
 
     let votingPower = item.amount.value * Math.pow(10, -6);
-    let votingPowerPercentage = item.amount.value * 100 / totalVotingPower;
+    let votingPowerPercentage = active
+        ? item.amount.value * 100 / totalVotingPower.active
+        : item.amount.value * 100 / totalVotingPower.inactive;
+
     let commissionRate = item.commission.rate * 100;
     let delegation = item.delegation ? item.amount.value * parseFloat(item.delegation.shares) : 0;
     delegation = (delegation / parseFloat(item['delegator_shares'])) * Math.pow(10, -6);
@@ -25,38 +30,37 @@ const Row = ({
     delegation = parseFloat(delegation.toFixed(2)).toLocaleString();
 
     return (
-        <tr key={item.index}>
-            <td className="flex-center">
-                <div className="serial">
-                    {item.index + 1}
+        <TableRow key={item.index}>
+            <TableCell className="">
+                <div className="flex-center">
+                    <div className="serial">
+                        {item.index + 1}
+                    </div>
+                    <Avatar identity={item.description.identity}/>
                 </div>
-                <Avatar identity={item.description.identity}/>
-            </td>
-            <td>
+            </TableCell>
+            <TableCell>
                 {item.description.moniker}
-            </td>
-            <td>
+            </TableCell>
+            <TableCell>
                 {`${votingPower} (${votingPowerPercentage}%)`}
-            </td>
-            <td>
+            </TableCell>
+            <TableCell>
                 {commissionRate}%
-            </td>
-            <td>
+            </TableCell>
+            <TableCell>
                 {delegation}
-            </td>
-            <td>
-                {active === true && action === 0 ? <Delegate to={item.address}/> : null}
-                {active === true && action === 1 ? <Redelegate from={item.address}/> : null}
-                {active === true && action === 2 ? <Unbond from={item.address}/> : null}
-                {active === false && action === 0 ? <Redelegate from={item.address}/> : null}
-                {active === false && action === 1 ? <Unbond from={item.address}/> : null}
-            </td>
-        </tr>
+            </TableCell>
+            <TableCell>
+                {active ? <Delegate to={item.address}/> : null}
+                {item.delegation?.shares ? <Redelegate from={item.address}/> : null}
+                {item.delegation?.shares ? <Unbond from={item.address}/> : null}
+            </TableCell>
+        </TableRow>
     );
 };
 
 Row.propTypes = {
-    action: PropTypes.number.isRequired,
     item: PropTypes.shape({
         address: PropTypes.string.isRequired,
         amount: PropTypes.shape({
@@ -79,12 +83,14 @@ Row.propTypes = {
         index: PropTypes.number.isRequired,
         jailed: PropTypes.bool.isRequired,
     }).isRequired,
-    totalVotingPower: PropTypes.number.isRequired,
+    totalVotingPower: PropTypes.shape({
+        active: PropTypes.number.isRequired,
+        inactive: PropTypes.number.isRequired,
+    }).isRequired,
 };
 
 const stateToProps = (state) => {
     return {
-        action: state.validators.action,
         totalVotingPower: state.validators.totalVotingPower,
     };
 };

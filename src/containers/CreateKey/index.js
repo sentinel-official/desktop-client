@@ -8,6 +8,7 @@ import Sidebar from '../common/SidebarOnboard';
 import SocialIcons from '../../components/SocialIcons';
 import Submit from './Submit';
 import TextBox from '../../components/TextBox';
+import ViewPassword from './ViewPassword';
 
 const CreateKey = ({ history }) => {
     return (
@@ -29,12 +30,15 @@ const CreateKey = ({ history }) => {
                             />
                             <Name/>
                         </div>
-                        <div className="form-group">
-                            <Label
-                                className="label"
-                                label="Password"
-                            />
-                            <Password/>
+                        <div className="password-box">
+                            <div className="form-group">
+                                <Label
+                                    className="label"
+                                    label="PASSWORD"
+                                />
+                                <Password/>
+                            </div>
+                            <ViewPassword/>
                         </div>
                         <hr/>
                         <div className="form-group">
@@ -48,7 +52,7 @@ const CreateKey = ({ history }) => {
                             <div className="login-button flex-center">
                                 <div className="terms flex-center">
                                     <TextBox className="" value="Agree with"/>
-                                    <a href="#" target="_blank">Terms & Conditions</a>
+                                    <a href="#" target="_blank"> Terms & Conditions</a>
                                 </div>
                                 <Submit history={history}/>
                             </div>

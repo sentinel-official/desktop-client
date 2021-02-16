@@ -414,6 +414,75 @@
     height: 104px !important;
 }
 
+.icon-delete {
+    width: 20px;
+}
+
+.build-by {
+    position: absolute;
+    bottom: 50px;
+    left: 60px;
+}
+
+.build-by .build-text {
+    font-size: 14px;
+    text-align: center;
+    color: #ffffff;
+}
+
+.build-by img {
+    width: 115px;
+    height: auto;
+}
+
+.icon-button {
+    line-height: 1 !important;
+    font-weight: bold;
+    font-size: 14px !important;
+    width: 30px;
+    height: 30px;
+}
+
+.delegate-icon-button {
+    color: #28a745 !important;
+    background-color: #b1d8babd !important;
+    margin: 2px 0;
+}
+
+.redelegate-icon-button {
+    background: #efe2cbd6 !important;
+    color: orange !important;
+    margin: 2px 5px !important;
+}
+
+.unbond-icon-button {
+    background: #efcdcde6 !important;
+    color: red !important;
+    margin: 2px 0;
+}
+
+.keys-header {
+    display: flex;
+    align-items: center;
+}
+
+.keys-header .add-key-button {
+    background: #109FEC !important;
+    font-size: 12px;
+    border-radius: 5px;
+    margin-left: 10px;
+}
+
+.keys-header .add-key-button svg {
+    font-size: 1rem;
+}
+
+.refresh-button {
+    position: absolute !important;
+    top: 90px;
+    right: 100px;
+}
+
 @media (min-width: 768px) and (max-width: 1369.98px) {
     .logo-info-section {
         border: 0;
@@ -450,6 +519,17 @@
 
     .dashboard-side-bar-container .list-group .nav-link-text {
         display: none;
+    }
+
+    .dashboard-side-bar-container .build-by {
+        display: none;
+    }
+
+}
+
+@media (min-width: 681px) and (max-width: 1369.98px) {
+    .refresh-button {
+        top: 40px;
     }
 }
 
@@ -493,6 +573,10 @@
         min-width: 80px;
         max-width: 80px;
         transition: all 0.3s;
+    }
+
+    .dashboard-side-bar-container.active .build-by {
+        display: none;
     }
 
     .dashboard-side-bar-container.active .toggle-section img {
@@ -560,6 +644,10 @@
         border: 0;
         width: auto;
     }
+
+    .refresh-button {
+        top: 0px;
+    }
 }
 
 .success-modal .image-section {
@@ -568,6 +656,34 @@
 
 .success-modal .image-section img {
     width: 100px;
+}
+
+.txn-info {
+    display: flex;
+    padding: 20px 0;
+    align-items: center;
+    justify-content: center;
+}
+
+.txn-info .txn-label {
+    font-size: 16px;
+    letter-spacing: 0.01em;
+    color: #8EA1C8;
+    padding-right: 15px;
+}
+
+.txn-info .txn-hash {
+    font-weight: 500;
+    font-size: 14px;
+    color: #142D51;
+}
+
+.error-text {
+    padding: 20px 0;
+    font-weight: 500;
+    font-size: 14px;
+    color: #142D51;
+    text-align: center;
 }
 
 @media (max-width: 767.98px) {
@@ -581,6 +697,10 @@
     }
 
     .dashboard-side-bar-container .list-group .nav-link-text {
+        display: none;
+    }
+
+    .dashboard-side-bar-container .build-by {
         display: none;
     }
 

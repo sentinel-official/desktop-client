@@ -25,7 +25,7 @@ const KeyInfo = ({ history }) => {
                             className="title"
                             value="Account Created Successfully!"
                         />
-                        <div className="label-icon">
+                        <div className="label-icon mb-30">
                             <TextBox
                                 className="label"
                                 value="ADDRESS"
@@ -33,7 +33,7 @@ const KeyInfo = ({ history }) => {
                             <AddressCopy/>
                         </div>
                         <Address/>
-                        <div className="label-icon">
+                        <div className="label-icon mb-30">
                             <TextBox
                                 className="label"
                                 value="PUBLIC KEY"
@@ -60,7 +60,7 @@ const KeyInfo = ({ history }) => {
                                         <Note/>
                                         <label
                                             className="custom-control-label"
-                                            htmlFor="customCheck1">
+                                            htmlFor="customCheck">
                                             I have secured the seed safely
                                         </label>
                                     </div>

@@ -1,4 +1,5 @@
 import {
+    KEYS_PASSWORD_VISIBLE_SET,
     KEYS_POST_ERROR,
     KEYS_POST_IN_PROGRESS,
     KEYS_POST_SUCCESS,
@@ -46,6 +47,7 @@ const password = (state = {
     error: {
         message: '',
     },
+    visible: false,
 }, {
     type,
     data,
@@ -60,6 +62,11 @@ const password = (state = {
                 message: data.error.message,
             },
         };
+    case KEYS_PASSWORD_VISIBLE_SET:
+        return {
+            ...state,
+            visible: data.visible,
+        };
     case KEYS_POST_SUCCESS:
         return {
             ...state,
@@ -68,6 +75,7 @@ const password = (state = {
                 ...state.error,
                 message: '',
             },
+            visible: false,
         };
     default:
         return state;

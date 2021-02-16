@@ -2,8 +2,10 @@ import {
     AUTHENTICATION_INFO_CLEAR,
     AUTHENTICATION_INFO_SET,
     AUTHENTICATION_PASSWORD_SET,
+    AUTHENTICATION_PASSWORD_VISIBLE_SET,
     AUTHENTICATION_POST_ERROR,
     AUTHENTICATION_POST_IN_PROGRESS,
+    AUTHENTICATION_POST_SUBMIT,
     AUTHENTICATION_POST_SUCCESS,
     AUTHENTICATION_POST_URL,
 } from '../constants/authentication';
@@ -14,6 +16,13 @@ import Axios from 'axios';
 export const setAuthenticationPassword = (data) => {
     return {
         type: AUTHENTICATION_PASSWORD_SET,
+        data,
+    };
+};
+
+export const setAuthenticationPasswordVisible = (data) => {
+    return {
+        type: AUTHENTICATION_PASSWORD_VISIBLE_SET,
         data,
     };
 };
@@ -83,6 +92,13 @@ export const setAuthenticationInfo = (data) => {
 export const clearAuthenticationInfo = (data) => {
     return {
         type: AUTHENTICATION_INFO_CLEAR,
+        data,
+    };
+};
+
+export const submitAuthenticationPost = (data) => {
+    return {
+        type: AUTHENTICATION_POST_SUBMIT,
         data,
     };
 };

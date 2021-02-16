@@ -1,8 +1,9 @@
 import './index.css';
 import * as PropTypes from 'prop-types';
-import { Table as ReactTable } from 'react-bootstrap';
+import { Table as MaterialTable } from '@material-ui/core';
 import Header from './Header';
 import React from 'react';
+import TableBody from '@material-ui/core/TableBody';
 
 const Table = ({
     className,
@@ -13,15 +14,15 @@ const Table = ({
     row: Component,
 }) => {
     return (
-        <ReactTable
-            borderless={true}
+        <MaterialTable
+            aria-label="collapsible table"
             className={className}>
             <Header
                 columns={columns}
                 sort={sort}
                 onClick={onClick}
             />
-            <tbody>
+            <TableBody>
                 {
                     items.map((item, index) => {
                         return (
@@ -32,8 +33,8 @@ const Table = ({
                         );
                     })
                 }
-            </tbody>
-        </ReactTable>
+            </TableBody>
+        </MaterialTable>
     );
 };
 

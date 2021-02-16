@@ -1,5 +1,5 @@
 import * as PropTypes from 'prop-types';
-import { ValidateMemo } from './_validation';
+import { ValidateMemo } from '../../../common/_validation';
 import { connect } from 'react-redux';
 import { setTxSendMemo } from '../../../../actions/transactions/send';
 import React from 'react';

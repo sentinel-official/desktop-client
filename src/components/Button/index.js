@@ -14,10 +14,10 @@ const Spinner = () => {
 
 const Button = ({
     className,
-    disabled,
+    disabled = false,
     value,
     onClick,
-    inProgress,
+    inProgress = false,
 }) => {
     return (
         <button

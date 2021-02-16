@@ -21,6 +21,7 @@ const Switch = ({
         />
     );
 };
+
 Switch.propTypes = {
     checked: PropTypes.bool.isRequired,
     className: PropTypes.string.isRequired,
@@ -28,4 +29,5 @@ Switch.propTypes = {
     label: PropTypes.string.isRequired,
     onChange: PropTypes.func.isRequired,
 };
+
 export default Switch;

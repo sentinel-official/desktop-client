@@ -9,8 +9,8 @@ const NumberInputField = ({
     error,
     name,
     placeholder,
-    required,
-    type,
+    required = true,
+    type = 'number',
     value,
     onChange,
     min,
@@ -18,7 +18,7 @@ const NumberInputField = ({
     const isError = error.message.length > 0;
 
     return (
-        <div>
+        <>
             <input
                 className={isError ? `error ${className}` : className}
                 min={min}
@@ -29,17 +29,15 @@ const NumberInputField = ({
                 value={value}
                 onChange={onChange}
             />
-            <div>
-                <Icon
-                    className={isError ? 'error show' : 'error'}
-                    icon="errorInfo"
-                />
-                <TextBox
-                    className="error-message"
-                    value={error.message}
-                />
-            </div>
-        </div>
+            <Icon
+                className={isError ? 'error show' : 'error'}
+                icon="errorInfo"
+            />
+            <TextBox
+                className="error-message"
+                value={error.message}
+            />
+        </>
     );
 };
 

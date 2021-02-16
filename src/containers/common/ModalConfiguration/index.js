@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { getConfiguration, hideConfigurationModal } from '../../../actions/configuration';
 import BroadcastMode from '../../Configuration/BroadcastMode';
 import ChainID from '../../Configuration/ChainID';
-import Fee from '../../Configuration/Fees';
 import Gas from '../../Configuration/Gas';
 import GasAdjustment from '../../Configuration/GasAdjustment';
 import GasPrices from '../../Configuration/GasPrices';
@@ -69,19 +68,6 @@ const ModalConfiguration = (props) => {
                                             />
                                         </div>
                                         <BroadcastMode/>
-                                    </div>
-                                    <div className="form-group">
-                                        <div className="label-icon">
-                                            <Label
-                                                className="label"
-                                                label="Fee"
-                                            />
-                                            <Tooltip
-                                                icon="tooltip"
-                                                value="Help"
-                                            />
-                                        </div>
-                                        <Fee/>
                                     </div>
                                     <div className="form-group">
                                         <div className="label-icon">

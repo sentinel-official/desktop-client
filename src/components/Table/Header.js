@@ -3,6 +3,9 @@ import * as PropTypes from 'prop-types';
 import { emptyFunc } from '../../constants/common';
 import Icon from '../Icon';
 import React from 'react';
+import TableCell from '@material-ui/core/TableCell';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
 
 const Header = ({
     columns,
@@ -10,12 +13,11 @@ const Header = ({
     sort,
 }) => {
     return (
-        <thead>
-            <tr>
-                <th></th>
+        <TableHead>
+            <TableRow>
                 {
                     columns.map((item, index) => (
-                        <th
+                        <TableCell
                             key={index}
                             onClick={item.sort ? () => onClick(item.key) : emptyFunc}>
                             <div className="sort">
@@ -36,11 +38,11 @@ const Header = ({
                                         : null
                                 }
                             </div>
-                        </th>
+                        </TableCell>
                     ))
                 }
-            </tr>
-        </thead>
+            </TableRow>
+        </TableHead>
     );
 };
 

@@ -1,8 +1,9 @@
 import * as PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { setTxUnbondFrom, showTxUnbondModal } from '../../../../actions/transactions/unbond';
-import Button from '../../../../components/Button';
+import IconButton from '@material-ui/core/IconButton';
 import React from 'react';
+import Tooltip from '@material-ui/core/Tooltip';
 
 const Unbond = (props) => {
     const onClick = () => {
@@ -14,13 +15,13 @@ const Unbond = (props) => {
     };
 
     return (
-        <Button
-            className="delegate-button"
-            disabled={false}
-            inProgress={false}
-            value="Unbond"
-            onClick={onClick}
-        />
+        <Tooltip title="Unbond">
+            <IconButton
+                className="icon-button unbond-icon-button"
+                onClick={onClick}>
+                U
+            </IconButton>
+        </Tooltip>
     );
 };
 

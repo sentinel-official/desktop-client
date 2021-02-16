@@ -75,7 +75,7 @@
     height: 1.4rem;
 }
 
-.checkbox-section .checkbox-section .custom-checkbox .custom-control-label::before {
+.checkbox-section .custom-checkbox .custom-control-label::before {
     border-radius: 50%;
 }
 

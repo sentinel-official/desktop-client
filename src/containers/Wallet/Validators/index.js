@@ -11,6 +11,12 @@ import Table from '../../../components/Table';
 
 const columns = [
     {
+        id: '',
+        key: '',
+        label: '',
+        sort: false,
+    },
+    {
         id: 'moniker',
         key: 'description.moniker',
         label: 'Moniker',
@@ -32,6 +38,12 @@ const columns = [
         id: 'delegation',
         key: 'delegation',
         label: 'Delegation',
+        sort: false,
+    },
+    {
+        id: '',
+        key: '',
+        label: '',
         sort: false,
     },
 ];

@@ -17,6 +17,7 @@ const Name = (props) => {
 
     return (
         <TextInputField
+            autofocus={false}
             className="form-control"
             error={props.input.error}
             name="name"

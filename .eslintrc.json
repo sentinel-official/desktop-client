@@ -84,7 +84,8 @@
       {
         "allowPattern": "^[a-z]+(_[a-z]+)+$"
       }
-    ]
+    ],
+    "react/sort-comp": 2
   },
   "settings": {
     "react": {

@@ -3,6 +3,7 @@ import {
     ACCOUNT_GET_IN_PROGRESS,
     ACCOUNT_GET_SUCCESS,
     ACCOUNT_PASSWORD_SET,
+    ACCOUNT_PASSWORD_VISIBLE_SET,
     getAccountURL,
 } from '../constants/account';
 import { emptyFunc } from '../constants/common';
@@ -68,6 +69,13 @@ export const getAccount = (cb = emptyFunc) => (dispatch, getState) => {
 export const setAccountPassword = (data) => {
     return {
         type: ACCOUNT_PASSWORD_SET,
+        data,
+    };
+};
+
+export const setAccountPasswordVisible = (data) => {
+    return {
+        type: ACCOUNT_PASSWORD_VISIBLE_SET,
         data,
     };
 };

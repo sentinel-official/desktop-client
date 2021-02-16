@@ -3,6 +3,7 @@ import {
     ACCOUNT_GET_IN_PROGRESS,
     ACCOUNT_GET_SUCCESS,
     ACCOUNT_PASSWORD_SET,
+    ACCOUNT_PASSWORD_VISIBLE_SET,
 } from '../constants/account';
 import {
     TX_DELEGATE_ERROR,
@@ -74,6 +75,7 @@ const password = (state = {
     error: {
         message: '',
     },
+    visible: false,
 }, {
     type,
     data,
@@ -87,6 +89,11 @@ const password = (state = {
                 ...state.error,
                 message: data.error.message,
             },
+        };
+    case ACCOUNT_PASSWORD_VISIBLE_SET:
+        return {
+            ...state,
+            visible: data.visible,
         };
     case TX_DELEGATE_ERROR:
     case TX_DELEGATE_MODAL_HIDE:
@@ -113,6 +120,7 @@ const password = (state = {
                 ...state.error,
                 message: '',
             },
+            visible: false,
         };
     default:
         return state;

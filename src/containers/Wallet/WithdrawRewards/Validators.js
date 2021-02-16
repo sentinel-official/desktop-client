@@ -31,7 +31,7 @@ const Validators = ({
 
     return (
         <SelectField
-            className="form-control"
+            className="form-control validators-select"
             items={items}
             value={from}
             onChange={onChange}

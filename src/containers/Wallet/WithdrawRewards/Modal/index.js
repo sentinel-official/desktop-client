@@ -9,6 +9,7 @@ import Memo from './Memo';
 import Password from './Password';
 import React from 'react';
 import TextBox from '../../../../components/TextBox';
+import ViewPassword from '../../../../components/Visible';
 import Withdraw from './Withdraw';
 
 const Modal = (props) => {
@@ -43,12 +44,15 @@ const Modal = (props) => {
                     />
                     <Memo/>
                 </div>
-                <div className="form-group">
-                    <Label
-                        className=""
-                        label="Password"
-                    />
-                    <Password/>
+                <div className="password-box">
+                    <div className="form-group">
+                        <Label
+                            className=""
+                            label="Password"
+                        />
+                        <Password/>
+                    </div>
+                    <ViewPassword/>
                 </div>
                 <Withdraw/>
             </ReactModal.Body>

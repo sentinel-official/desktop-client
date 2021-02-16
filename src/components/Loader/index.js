@@ -1,14 +1,14 @@
 import './index.css';
-import { Spinner } from 'react-bootstrap';
+import { Spinner as BootstrapSpinner } from 'react-bootstrap';
 import React from 'react';
 
-const Loader = () => {
+const Spinner = () => {
     return (
-        <Spinner
+        <BootstrapSpinner
             animation="grow"
             className="loader"
         />
     );
 };
 
-export default React.memo(Loader);
+export default React.memo(Spinner);

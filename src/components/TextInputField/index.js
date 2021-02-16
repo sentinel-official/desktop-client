@@ -1,24 +1,28 @@
 import './index.css';
 import * as PropTypes from 'prop-types';
+import { emptyFunc } from '../../constants/common';
 import Icon from '../Icon';
 import React from 'react';
 import TextBox from '../TextBox';
 
 const TextInputField = ({
+    autofocus = false,
     className,
     error,
     name,
     placeholder,
-    required,
-    type,
+    required = true,
+    type = 'text',
     value,
     onChange,
+    onKeyDown = emptyFunc,
 }) => {
     const isError = error.message.length > 0;
 
     return (
         <>
             <input
+                autoFocus={autofocus}
                 className={isError ? `error ${className}` : className}
                 name={name}
                 placeholder={placeholder}
@@ -26,6 +30,7 @@ const TextInputField = ({
                 type={type}
                 value={value}
                 onChange={onChange}
+                onKeyDown={onKeyDown}
             />
             <Icon
                 className={isError ? 'error show' : 'error'}
@@ -40,6 +45,7 @@ const TextInputField = ({
 };
 
 TextInputField.propTypes = {
+    autofocus: PropTypes.bool.isRequired,
     className: PropTypes.string.isRequired,
     error: PropTypes.shape({
         message: PropTypes.string.isRequired,
@@ -50,6 +56,7 @@ TextInputField.propTypes = {
     type: PropTypes.string.isRequired,
     value: PropTypes.string.isRequired,
     onChange: PropTypes.func.isRequired,
+    onKeyDown: PropTypes.func.isRequired,
 };
 
 export default TextInputField;

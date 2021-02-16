@@ -6,6 +6,7 @@ import Sidebar from '../common/SidebarOnboard';
 import SocialIcons from '../../components/SocialIcons';
 import Submit from './Submit';
 import TextBox from '../../components/TextBox';
+import ViewPassword from './ViewPassword';
 
 const Authentication = ({ history }) => {
     return (
@@ -19,12 +20,15 @@ const Authentication = ({ history }) => {
                         className="login-title"
                         value="Authenticate"
                     />
-                    <div className="form-group">
-                        <Label
-                            className="label"
-                            label="PASSWORD"
-                        />
-                        <Password/>
+                    <div className="password-box">
+                        <div className="form-group">
+                            <Label
+                                className="label"
+                                label="PASSWORD"
+                            />
+                            <Password/>
+                        </div>
+                        <ViewPassword/>
                     </div>
                 </div>
                 <div className="login-footer">

@@ -1,5 +1,4 @@
 import {
-    VALIDATORS_ACTION_SET,
     VALIDATORS_FILTER_STATUS_SET,
     VALIDATORS_GET_ERROR,
     VALIDATORS_GET_IN_PROGRESS,
@@ -8,6 +7,7 @@ import {
     VALIDATORS_SORT_SET,
 } from '../constants/validators';
 import { emptyFunc } from '../constants/common';
+import { isActive } from '../utils/validator';
 import Async from 'async';
 import Axios from '../services/axios';
 import Lodash from 'lodash';
@@ -55,8 +55,15 @@ export const getValidators = (cb = emptyFunc) => (dispatch, getState) => {
                 });
         }, (result, next) => {
             result = Lodash.orderBy(result, ['amount.value'], ['desc']);
-            result.forEach((item, index) => {
-                item.index = index;
+
+            let activeIndex = 0;
+            let inactiveIndex = 0;
+            result.forEach((item) => {
+                if (isActive(item)) {
+                    item.index = activeIndex++;
+                } else {
+                    item.index = inactiveIndex++;
+                }
             });
 
             dispatch(getValidatorsSuccess(result));
@@ -68,13 +75,6 @@ export const getValidators = (cb = emptyFunc) => (dispatch, getState) => {
 export const setValidatorsFilterStatus = (data) => {
     return {
         type: VALIDATORS_FILTER_STATUS_SET,
-        data,
-    };
-};
-
-export const setValidatorsAction = (data) => {
-    return {
-        type: VALIDATORS_ACTION_SET,
         data,
     };
 };

@@ -7,6 +7,7 @@ import Memo from './Memo';
 import Password from './Password';
 import React from 'react';
 import TextBox from '../../../../components/TextBox';
+import ViewPassword from '../../../../components/Visible';
 import Vote from './Vote';
 
 const Modal = ({
@@ -35,12 +36,15 @@ const Modal = ({
                     />
                     <Memo/>
                 </div>
-                <div className="form-group">
-                    <Label
-                        className=""
-                        label="Password"
-                    />
-                    <Password/>
+                <div className="password-box">
+                    <div className="form-group">
+                        <Label
+                            className=""
+                            label="Password"
+                        />
+                        <Password/>
+                    </div>
+                    <ViewPassword/>
                 </div>
                 <Vote/>
             </ReactModal.Body>

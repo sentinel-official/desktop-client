@@ -79,17 +79,29 @@ label, .label {
     text-align: center;
 }
 
+.section-body .password-box {
+    margin: 15px 0 0 0;
+}
+
+.section-body .password-box .form-group {
+    margin: 0 0 1rem 0;
+}
+
 .section-body .form-group {
     margin: 15px 0;
 }
 
 .modal-header {
-    padding: 40px 40px 0 40px;
-    border: 0 solid;
+    padding: 40px 40px 0 40px !important;
+    border: 0 solid !important;
 }
 
 .modal-body {
-    padding: 20px 40px 40px 40px;
+    padding: 20px 40px 40px 40px !important;
+}
+
+.modal-body label {
+    font-size: 14px;
 }
 
 .modal-header {
@@ -98,6 +110,7 @@ label, .label {
 
 .settings-modal {
     position: relative;
+    min-height: 350px !important;
 }
 
 .settings-modal .btn.button-primary {
@@ -138,10 +151,14 @@ label, .label {
     margin: 0;
 }
 
+.mb-30 {
+    margin-bottom: 30px !important;
+}
+
 .flex-center {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
 }
 
 .flex-item {
@@ -167,9 +184,26 @@ label, .label {
     color: #142D51;
 }
 
+.password-box {
+    display: flex;
+    align-items: center;
+}
+
+.password-box .form-group {
+    flex: 1;
+}
+
+.password-box .password-icon {
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    margin-bottom: -15px;
+}
+
 @media (min-width: 576px) {
     .modal-dialog {
-        max-width: 780px;
+        max-width: 780px !important;
     }
 }
 

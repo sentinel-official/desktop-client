@@ -3,6 +3,7 @@ import {
     KEYS_GET_IN_PROGRESS,
     KEYS_GET_SUCCESS,
     KEYS_GET_URL,
+    KEYS_PASSWORD_VISIBLE_SET,
     KEYS_POST_ERROR,
     KEYS_POST_IN_PROGRESS,
     KEYS_POST_SUCCESS,
@@ -82,6 +83,13 @@ export const setKeyName = (data) => {
 export const setKeyPassword = (data) => {
     return {
         type: KEY_PASSWORD_SET,
+        data,
+    };
+};
+
+export const setKeyPasswordVisible = (data) => {
+    return {
+        type: KEYS_PASSWORD_VISIBLE_SET,
         data,
     };
 };

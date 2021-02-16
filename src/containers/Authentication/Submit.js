@@ -3,20 +3,26 @@ import { ValidatePassword } from './_validation';
 import { connect } from 'react-redux';
 import { postAuthentication } from '../../actions/authentication';
 import Button from '../../components/Button';
-import React from 'react';
+import React, { useEffect } from 'react';
 
 const Submit = (props) => {
+    const disabled = (
+        ValidatePassword(props.password.value).message !== ''
+    );
+
     const onClick = () => {
-        if (props.inProgress) {
+        if (props.inProgress || disabled) {
             return;
         }
 
         props.onClick(props.history);
     };
 
-    const disabled = (
-        ValidatePassword(props.password.value).message !== ''
-    );
+    useEffect(() => {
+        if (props.submit) {
+            onClick();
+        }
+    }, [props.submit]);
 
     return (
         <Button
@@ -40,6 +46,7 @@ Submit.propTypes = {
             message: PropTypes.string.isRequired,
         }).isRequired,
     }).isRequired,
+    submit: PropTypes.bool.isRequired,
     onClick: PropTypes.func.isRequired,
 };
 
@@ -47,6 +54,7 @@ const stateToProps = (state) => {
     return {
         inProgress: state.authentication.inProgress,
         password: state.authentication.password,
+        submit: state.authentication.submit,
     };
 };
 

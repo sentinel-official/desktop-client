@@ -1,0 +1,11 @@
+.validators-select:before {
+    border: 0px solid !important;
+}
+
+.validators-select:hover:not(.Mui-disabled):before {
+    border: 0px solid !important;
+}
+
+.validators-select:after {
+    border-bottom: 2px solid #109FEC !important;
+}

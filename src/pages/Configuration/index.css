@@ -26,6 +26,10 @@
     margin: 15px 0;
 }
 
+.config-row .form-group.trust-node {
+    margin: 18px 0;
+}
+
 @media (max-width: 767px) {
     .config-section .section-body {
         padding-top: 20px;

@@ -1,7 +1,6 @@
 import * as PropTypes from 'prop-types';
 import BroadcastMode from './BroadcastMode';
 import ChainID from './ChainID';
-import Fee from './Fees';
 import Gas from './Gas';
 import GasAdjustment from './GasAdjustment';
 import GasPrices from './GasPrices';
@@ -39,19 +38,6 @@ const Configuration = ({ history }) => {
                                     />
                                 </div>
                                 <BroadcastMode/>
-                            </div>
-                            <div className="form-group">
-                                <div className="label-icon">
-                                    <Label
-                                        className="label"
-                                        label="Fee"
-                                    />
-                                    <Tooltip
-                                        icon="tooltip"
-                                        value="Help"
-                                    />
-                                </div>
-                                <Fee/>
                             </div>
                             <div className="form-group">
                                 <div className="label-icon">
@@ -120,7 +106,7 @@ const Configuration = ({ history }) => {
                                 </div>
                                 <SimulateAndExecute/>
                             </div>
-                            <div className="form-group">
+                            <div className="form-group trust-node">
                                 <div className="label-icon">
                                     <Label
                                         className="label"

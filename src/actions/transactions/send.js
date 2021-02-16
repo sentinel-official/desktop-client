@@ -50,8 +50,6 @@ export const txSendSuccess = (data) => {
 };
 
 export const txSendError = (data) => {
-    console.log(data);
-
     return {
         type: TX_SEND_ERROR,
         data,

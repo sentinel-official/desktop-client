@@ -9,7 +9,7 @@ const TextArea = ({
     error,
     name,
     placeholder,
-    required,
+    required = true,
     rows,
     value,
     onChange,

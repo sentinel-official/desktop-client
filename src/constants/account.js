@@ -9,3 +9,4 @@ export const getAccountURL = (address) => {
 };
 
 export const ACCOUNT_PASSWORD_SET = 'ACCOUNT_PASSWORD_SET';
+export const ACCOUNT_PASSWORD_VISIBLE_SET = 'ACCOUNT_PASSWORD_VISIBLE_SET';

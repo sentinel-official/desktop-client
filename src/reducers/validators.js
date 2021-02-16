@@ -1,5 +1,4 @@
 import {
-    VALIDATORS_ACTION_SET,
     VALIDATORS_FILTER_STATUS_SET,
     VALIDATORS_GET_ERROR,
     VALIDATORS_GET_IN_PROGRESS,
@@ -8,6 +7,7 @@ import {
     VALIDATORS_SORT_SET,
 } from '../constants/validators';
 import { combineReducers } from 'redux';
+import { isActive } from '../utils/validator';
 import Lodash from 'lodash';
 
 const items = (state = [], {
@@ -35,20 +35,6 @@ const status = (state = 1, {
     }
 };
 
-const action = (state = 0, {
-    type,
-    data,
-}) => {
-    switch (type) {
-    case VALIDATORS_ACTION_SET:
-        return data;
-    case VALIDATORS_FILTER_STATUS_SET:
-        return 0;
-    default:
-        return state;
-    }
-};
-
 const inProgress = (state = false, {
     type,
 }) => {
@@ -63,13 +49,28 @@ const inProgress = (state = false, {
     }
 };
 
-const totalVotingPower = (state = 0, {
+const totalVotingPower = (state = {
+    active: 0,
+    inactive: 0,
+}, {
     type,
     data,
 }) => {
     switch (type) {
-    case VALIDATORS_GET_SUCCESS:
-        return Lodash.sumBy(data, 'amount.value');
+    case VALIDATORS_GET_SUCCESS: {
+        const active = Lodash.sumBy(data, (item) => {
+            return isActive(item) ? item.amount.value : 0;
+        });
+        const inactive = Lodash.sumBy(data, (item) => {
+            return isActive(item) ? 0 : item.amount.value;
+        });
+
+        return {
+            ...state,
+            active,
+            inactive,
+        };
+    }
     default:
         return state;
     }
@@ -97,7 +98,6 @@ const sort = (state = {
 export default combineReducers({
     items,
     status,
-    action,
     inProgress,
     totalVotingPower,
     sort,

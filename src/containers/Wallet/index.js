@@ -7,6 +7,7 @@ import { getKeys } from '../../actions/keys';
 import Async from 'async';
 import Balance from './Balance';
 import Collapse from '../../assets/Collapse.svg';
+import ExidioLogo from '../../assets/Exidio.svg';
 import Icon from '../../components/Icon';
 import Image from '../../components/Image';
 import Keys from './Keys';
@@ -17,6 +18,7 @@ import ModalConfiguration from '../common/ModalConfiguration';
 import ModalTxInfo from '../common/ModalTxInfo';
 import React, { useEffect, useState } from 'react';
 import Receive from './Receive';
+import Refresh from './Refresh';
 import SendAmount from './Send/Amount';
 import SendModal from './Send/Modal';
 import SendSend from './Send/Send';
@@ -24,7 +26,6 @@ import SendTo from './Send/To';
 import Sidebar from '../common/SidebarDashboard';
 import TextBox from '../../components/TextBox';
 import Validators from './Validators';
-import ValidatorsActions from './Validators/Actions';
 import ValidatorsModalDelegate from './Validators/ModalDelegate';
 import ValidatorsModalRedelegate from './Validators/ModalRedelegate';
 import ValidatorsModalUnbond from './Validators/ModalUnbond';
@@ -99,6 +100,16 @@ const Wallet = (props) => {
                     <div className="side-bar-list">
                         <Sidebar location={props.location}/>
                     </div>
+                    <div className="build-by">
+                        <TextBox
+                            className="build-text"
+                            value="Built by"
+                        />
+                        <Image
+                            alt="Exidio Logo"
+                            className="exidio-logo"
+                            src={ExidioLogo}/>
+                    </div>
                 </div>
                 <div className="wallet-container">
                     <div className="top-info-section">
@@ -135,6 +146,7 @@ const Wallet = (props) => {
                         </div>
                         <div className="token-info-section col-md-8">
                             <Balance/>
+                            <Refresh/>
                         </div>
                     </div>
                     <div className="wallet-details">
@@ -180,7 +192,7 @@ const Wallet = (props) => {
                                         <div className="form-group">
                                             <Label
                                                 className="label"
-                                                label="Validators"
+                                                label="Select a Validator"
                                             />
                                             <WithdrawRewardsValidators/>
                                         </div>
@@ -192,7 +204,6 @@ const Wallet = (props) => {
                         <div className="wallet-tab col-md-8">
                             <div className="filter-section">
                                 <ValidatorsStatus/>
-                                <ValidatorsActions/>
                             </div>
                             <Tabs
                                 defaultActiveKey="validators"
