@@ -1,6 +1,8 @@
 {
   "name": "sentinel",
   "version": "0.3.0-rc0",
+  "main": "./electron/index.js",
+  "homepage": "./",
   "private": true,
   "devDependencies": {
     "@material-ui/core": "^4.11.3",
@@ -13,6 +15,8 @@
     "axios": "^0.21.1",
     "bech32": "^2.0.0",
     "bootstrap": "^4.6.0",
+    "electron": "^11.2.3",
+    "electron-builder": "^22.9.1",
     "eslint": "^7.20.0",
     "eslint-config-standard": "^16.0.2",
     "eslint-plugin-import": "^2.22.1",
@@ -39,10 +43,12 @@
     "web-vitals": "^1.1.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "GENERATE_SOURCEMAP=false react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "build:web": "react-scripts build",
+    "start:web": "react-scripts start",
+    "build:desktop": "GENERATE_SOURCEMAP=false react-scripts build && NODE_ENV=production node build.js",
+    "start:desktop": "GENERATE_SOURCEMAP=false react-scripts build && NODE_ENV=production electron .",
+    "build:desktop:development": "react-scripts build && node build.js",
+    "start:desktop:development": "react-scripts build && electron ."
   },
   "eslintConfig": {
     "extends": [
