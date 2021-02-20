@@ -1,6 +1,7 @@
 package main
 
 import (
+	"log"
 	"os"
 	"path/filepath"
 
@@ -25,6 +26,7 @@ const (
 )
 
 func main() {
+	log.SetOutput(os.Stdout)
 	sent.GetConfig().Seal()
 
 	var (
