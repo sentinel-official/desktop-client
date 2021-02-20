@@ -56,7 +56,7 @@ TextInputField.propTypes = {
     type: PropTypes.string.isRequired,
     value: PropTypes.string.isRequired,
     onChange: PropTypes.func.isRequired,
-    onKeyDown: PropTypes.func.isRequired,
+    onKeyDown: PropTypes.func,
 };
 
 export default TextInputField;

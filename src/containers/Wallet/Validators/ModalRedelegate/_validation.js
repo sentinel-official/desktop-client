@@ -1,4 +1,4 @@
-import Bech32 from 'bech32';
+import { bech32 } from 'bech32';
 
 export const ValidateAmount = (value) => {
     if (value === 0) {
@@ -15,7 +15,7 @@ export const ValidateToAddress = (value) => {
     }
 
     try {
-        Bech32.decode(value);
+        bech32.decode(value);
         return new Error('');
     } catch (e) {
         return e;
