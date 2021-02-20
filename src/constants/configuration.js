@@ -1,10 +1,13 @@
-import { API_BASE_URL } from './common';
+import { managerBaseURL } from './common';
 
 export const CONFIGURATION_GET_IN_PROGRESS = 'CONFIGURATION_GET_IN_PROGRESS';
 export const CONFIGURATION_GET_SUCCESS = 'CONFIGURATION_GET_SUCCESS';
 export const CONFIGURATION_GET_ERROR = 'CONFIGURATION_GET_ERROR';
 
-export const CONFIGURATION_GET_URL = `${API_BASE_URL}/config`;
+export const configurationGetURL = () => {
+    const baseURL = managerBaseURL();
+    return `${baseURL}/config`;
+};
 
 export const CONFIGURATION_SETUP_SET = 'CONFIGURATION_SETUP_SET';
 export const CONFIGURATION_CHAIN_BROADCAST_MODE_SET = 'CONFIGURATION_CHAIN_BROADCAST_MODE_SET';
@@ -21,7 +24,10 @@ export const CONFIGURATION_PUT_IN_PROGRESS = 'CONFIGURATION_PUT_IN_PROGRESS';
 export const CONFIGURATION_PUT_SUCCESS = 'CONFIGURATION_PUT_SUCCESS';
 export const CONFIGURATION_PUT_ERROR = 'CONFIGURATION_PUT_ERROR';
 
-export const CONFIGURATION_PUT_URL = `${API_BASE_URL}/config`;
+export const configurationPutURL = () => {
+    const baseURL = managerBaseURL();
+    return `${baseURL}/config`;
+};
 
 export const CONFIGURATION_MODAL_SHOW = 'CONFIGURATION_MODAL_SHOW';
 export const CONFIGURATION_MODAL_HIDE = 'CONFIGURATION_MODAL_HIDE';

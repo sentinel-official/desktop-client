@@ -1,8 +1,8 @@
-import { SPLASH_COMPLETED_SET } from '../constants/splash';
+import { SPLASH_STATUS_SET } from '../constants/splash';
 
-export const setSplashCompleted = (data) => {
+export const setSplashStatus = (data) => {
     return {
-        type: SPLASH_COMPLETED_SET,
+        type: SPLASH_STATUS_SET,
         data,
     };
 };

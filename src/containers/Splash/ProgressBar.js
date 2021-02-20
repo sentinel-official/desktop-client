@@ -1,22 +1,16 @@
 import * as PropTypes from 'prop-types';
 import { SPLASH_TIMEOUT } from '../../constants/splash';
 import { connect } from 'react-redux';
-import { setSplashCompleted } from '../../actions/splash';
 import React, { useEffect } from 'react';
 import ReactProgressBar from '../../components/ProgressBar';
 
 const ProgressBar = (props) => {
     useEffect(() => {
-        if (props.completed >= 100) {
+        if (props.completed === 150) {
             setTimeout(() => {
                 props.history.push('/dashboard/wallet');
             }, SPLASH_TIMEOUT);
-            return;
         }
-
-        setTimeout(() => {
-            props.setCompleted(props.completed + 50);
-        }, SPLASH_TIMEOUT);
     });
 
     return (
@@ -29,7 +23,6 @@ ProgressBar.propTypes = {
     history: PropTypes.shape({
         push: PropTypes.func.isRequired,
     }).isRequired,
-    setCompleted: PropTypes.func.isRequired,
 };
 
 const stateToProps = (state) => {
@@ -38,8 +31,4 @@ const stateToProps = (state) => {
     };
 };
 
-const actionsToProps = {
-    setCompleted: setSplashCompleted,
-};
-
-export default connect(stateToProps, actionsToProps)(ProgressBar);
+export default connect(stateToProps)(ProgressBar);

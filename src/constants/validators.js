@@ -1,10 +1,13 @@
-import { API_BASE_URL } from './common';
+import { managerBaseURL } from './common';
 
 export const VALIDATORS_GET_IN_PROGRESS = 'VALIDATORS_GET_IN_PROGRESS';
 export const VALIDATORS_GET_SUCCESS = 'VALIDATORS_GET_SUCCESS';
 export const VALIDATORS_GET_ERROR = 'VALIDATORS_GET_ERROR';
 
-export const VALIDATORS_GET_URL = `${API_BASE_URL}/validators`;
+export const validatorsGetURL = () => {
+    const baseURL = managerBaseURL();
+    return `${baseURL}/validators`;
+};
 
 export const VALIDATORS_FILTER_STATUS_SET = 'VALIDATORS_FILTER_STATUS_SET';
 

@@ -4,7 +4,7 @@ import {
     ACCOUNT_GET_SUCCESS,
     ACCOUNT_PASSWORD_SET,
     ACCOUNT_PASSWORD_VISIBLE_SET,
-    getAccountURL,
+    accountGetURL,
 } from '../constants/account';
 import { emptyFunc } from '../constants/common';
 import Async from 'async';
@@ -44,7 +44,7 @@ export const getAccount = (cb = emptyFunc) => (dispatch, getState) => {
                 },
             } = getState();
 
-            const url = getAccountURL(items[index].address);
+            const url = accountGetURL(items[index].address);
             Axios.get(url)
                 .then((res) => {
                     try {

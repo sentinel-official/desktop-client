@@ -8,7 +8,7 @@ import {
     TX_UNBOND_MODAL_HIDE,
     TX_UNBOND_MODAL_SHOW,
     TX_UNBOND_SUCCESS,
-    getTxUnbondURL,
+    txUnbondURL,
 } from '../../constants/transactions';
 import Async from 'async';
 import Axios from '../../services/axios';
@@ -76,7 +76,7 @@ export const txUnbond = (cb = emptyFunc) => (dispatch, getState) => {
                 },
             } = getState();
 
-            const url = getTxUnbondURL(items[index].address);
+            const url = txUnbondURL(items[index].address);
             Axios.post(url, {
                 from: from.value.trim(),
                 amount: {

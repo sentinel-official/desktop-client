@@ -2,7 +2,7 @@ import {
     PROPOSALS_GET_ERROR,
     PROPOSALS_GET_IN_PROGRESS,
     PROPOSALS_GET_SUCCESS,
-    PROPOSALS_GET_URL,
+    proposalsGetURL,
 } from '../constants/proposals';
 import { emptyFunc } from '../constants/common';
 import Async from 'async';
@@ -35,7 +35,8 @@ export const getProposals = (cb = emptyFunc) => (dispatch, getState) => {
             dispatch(getProposalsInProgress(null));
             next(null);
         }, (next) => {
-            Axios.get(PROPOSALS_GET_URL)
+            const url = proposalsGetURL();
+            Axios.get(url)
                 .then((res) => {
                     try {
                         next(null, res?.data?.result);

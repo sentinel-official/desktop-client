@@ -3,8 +3,8 @@ import {
     VALIDATORS_GET_ERROR,
     VALIDATORS_GET_IN_PROGRESS,
     VALIDATORS_GET_SUCCESS,
-    VALIDATORS_GET_URL,
     VALIDATORS_SORT_SET,
+    validatorsGetURL,
 } from '../constants/validators';
 import { emptyFunc } from '../constants/common';
 import { isActive } from '../utils/validator';
@@ -39,7 +39,8 @@ export const getValidators = (cb = emptyFunc) => (dispatch, getState) => {
             dispatch(getValidatorsInProgress(null));
             next(null);
         }, (next) => {
-            Axios.get(VALIDATORS_GET_URL)
+            const url = validatorsGetURL();
+            Axios.get(url)
                 .then((res) => {
                     try {
                         next(null, res?.data?.result);

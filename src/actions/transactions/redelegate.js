@@ -9,7 +9,7 @@ import {
     TX_REDELEGATE_MODAL_SHOW,
     TX_REDELEGATE_SUCCESS,
     TX_REDELEGATE_TO_SET,
-    getTxRedelegateURL,
+    txRedelegateURL,
 } from '../../constants/transactions';
 import { decodeFromBech32 } from '../../utils/bech32';
 import Async from 'async';
@@ -86,7 +86,7 @@ export const txRedelegate = (cb = emptyFunc) => (dispatch, getState) => {
                 },
             } = getState();
 
-            const url = getTxRedelegateURL(items[index].address);
+            const url = txRedelegateURL(items[index].address);
             Axios.post(url, {
                 from: from.value.trim(),
                 to: decodeFromBech32(to.value.trim()),

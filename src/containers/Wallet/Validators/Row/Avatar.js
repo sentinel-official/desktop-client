@@ -3,7 +3,7 @@ import Axios from 'axios';
 import Image from '../../../../components/Image';
 import Profile from '../../../../assets/Profile.svg';
 import React, { useEffect, useState } from 'react';
-import cache from '../../../../constants/cache';
+import globals from '../../../../constants/globals';
 
 const Avatar = ({ identity }) => {
     const [avatarURL, setAvatarURL] = useState('');
@@ -14,8 +14,8 @@ const Avatar = ({ identity }) => {
             return;
         }
 
-        if (cache.validators.avatars[identity]) {
-            setAvatarURL(cache.validators.avatars[identity]);
+        if (globals.validators.avatars[identity]) {
+            setAvatarURL(globals.validators.avatars[identity]);
             return;
         }
 
@@ -26,7 +26,7 @@ const Avatar = ({ identity }) => {
             .then((res) => {
                 const url = res?.data?.them[0]?.pictures?.primary?.url;
                 if (url) {
-                    cache.validators.avatars[identity] = url;
+                    globals.validators.avatars[identity] = url;
                     setAvatarURL(url);
                 }
             })

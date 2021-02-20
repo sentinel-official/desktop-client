@@ -2,7 +2,7 @@ import {
     DELEGATIONS_GET_ERROR,
     DELEGATIONS_GET_IN_PROGRESS,
     DELEGATIONS_GET_SUCCESS,
-    getDelegationsURL,
+    delegationsGetURL,
 } from '../constants/delegations';
 import { emptyFunc } from '../constants/common';
 import Async from 'async';
@@ -42,7 +42,7 @@ export const getDelegations = (cb = emptyFunc) => (dispatch, getState) => {
                 },
             } = getState();
 
-            const url = getDelegationsURL(items[index].address);
+            const url = delegationsGetURL(items[index].address);
             Axios.get(url)
                 .then((res) => {
                     try {

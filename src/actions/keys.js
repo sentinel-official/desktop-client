@@ -2,15 +2,15 @@ import {
     KEYS_GET_ERROR,
     KEYS_GET_IN_PROGRESS,
     KEYS_GET_SUCCESS,
-    KEYS_GET_URL,
     KEYS_PASSWORD_VISIBLE_SET,
     KEYS_POST_ERROR,
     KEYS_POST_IN_PROGRESS,
     KEYS_POST_SUCCESS,
-    KEYS_POST_URL,
     KEY_MNEMONIC_SET,
     KEY_NAME_SET,
     KEY_PASSWORD_SET,
+    keysGetURL,
+    keysPostURL,
 } from '../constants/keys';
 import { emptyFunc } from '../constants/common';
 import Async from 'async';
@@ -43,7 +43,8 @@ export const getKeys = (history, cb = emptyFunc) => (dispatch, getState) => {
             dispatch(getKeysInProgress(null));
             next(null);
         }, (next) => {
-            Axios.get(KEYS_GET_URL)
+            const url = keysGetURL();
+            Axios.get(url)
                 .then((res) => {
                     try {
                         next(null, res?.data?.result);
@@ -138,7 +139,8 @@ export const postKeys = (history, cb = emptyFunc) => (dispatch, getState) => {
                 },
             } = getState();
 
-            Axios.post(KEYS_POST_URL, {
+            const url = keysPostURL();
+            Axios.post(url, {
                 mnemonic: mnemonic.value.trim(),
                 name: name.value.trim(),
                 password: password.value.trim(),

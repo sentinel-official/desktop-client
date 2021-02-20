@@ -7,7 +7,7 @@ import {
     TX_VOTE_MODAL_SHOW,
     TX_VOTE_OPTION_SET,
     TX_VOTE_SUCCESS,
-    getTxVoteURL,
+    txVoteURL,
 } from '../../constants/transactions';
 import { emptyFunc } from '../../constants/common';
 import Async from 'async';
@@ -72,7 +72,7 @@ export const txVote = (cb = emptyFunc) => (dispatch, getState) => {
                 },
             } = getState();
 
-            const url = getTxVoteURL(id.value);
+            const url = txVoteURL(id.value);
             Axios.post(url, {
                 option: option.value.trim(),
                 memo: memo.value.trim(),

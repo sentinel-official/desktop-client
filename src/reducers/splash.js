@@ -1,4 +1,4 @@
-import { SPLASH_COMPLETED_SET } from '../constants/splash';
+import { SPLASH_STATUS_SET } from '../constants/splash';
 import { combineReducers } from 'redux';
 
 const completed = (state = 0, {
@@ -6,8 +6,20 @@ const completed = (state = 0, {
     data,
 }) => {
     switch (type) {
-    case SPLASH_COMPLETED_SET:
-        return data;
+    case SPLASH_STATUS_SET:
+        return data.completed;
+    default:
+        return state;
+    }
+};
+
+const message = (state = 'PREPARING THE SENTINEL CLIENT', {
+    type,
+    data,
+}) => {
+    switch (type) {
+    case SPLASH_STATUS_SET:
+        return data.message;
     default:
         return state;
     }
@@ -15,4 +27,5 @@ const completed = (state = 0, {
 
 export default combineReducers({
     completed,
+    message,
 });

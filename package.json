@@ -3,6 +3,12 @@
   "version": "0.3.0-rc0",
   "main": "./electron/index.js",
   "homepage": "./",
+  "description": "Sentinel desktop and web client.",
+  "author": {
+    "name": "Sentinel",
+    "email": "support.desktop@sentinel.co",
+    "url": "https://sentinel.co"
+  },
   "private": true,
   "devDependencies": {
     "@material-ui/core": "^4.11.3",

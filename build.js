@@ -20,7 +20,10 @@ builder.build({
             executableName: 'sentinel',
             icon: './electron/',
             target: [
+                'AppImage',
+                'deb',
                 'dir',
+                'tar.gz',
             ],
         },
         mac: {

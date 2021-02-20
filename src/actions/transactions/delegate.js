@@ -8,7 +8,7 @@ import {
     TX_DELEGATE_MODAL_SHOW,
     TX_DELEGATE_SUCCESS,
     TX_DELEGATE_TO_SET,
-    getTxDelegateURL,
+    txDelegateURL,
 } from '../../constants/transactions';
 import Async from 'async';
 import Axios from '../../services/axios';
@@ -76,7 +76,7 @@ export const txDelegate = (cb = emptyFunc) => (dispatch, getState) => {
                 },
             } = getState();
 
-            const url = getTxDelegateURL(items[index].address);
+            const url = txDelegateURL(items[index].address);
             Axios.post(url, {
                 to: to.value.trim(),
                 amount: {

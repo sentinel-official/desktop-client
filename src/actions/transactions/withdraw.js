@@ -6,7 +6,7 @@ import {
     TX_WITHDRAW_MODAL_HIDE,
     TX_WITHDRAW_MODAL_SHOW,
     TX_WITHDRAW_SUCCESS,
-    getTxWithdrawURL,
+    txWithdrawURL,
 } from '../../constants/transactions';
 import { emptyFunc } from '../../constants/common';
 import Async from 'async';
@@ -67,7 +67,7 @@ export const txWithdraw = (cb = emptyFunc) => (dispatch, getState) => {
                 },
             } = getState();
 
-            const url = getTxWithdrawURL(items[index].address);
+            const url = txWithdrawURL(items[index].address);
             Axios.post(url, {
                 validators: [from.value.trim()],
                 memo: memo.value.trim(),

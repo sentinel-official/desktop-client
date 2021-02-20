@@ -1,4 +1,4 @@
-import { AUTHENTICATION_POST_URL } from '../constants/authentication';
+import { authenticationPostURL } from '../constants/authentication';
 import { clearAuthenticationInfo, setAuthenticationInfo } from '../actions/authentication';
 import Axios from 'axios';
 
@@ -30,7 +30,8 @@ export const withInterceptors = (axios, store) => {
             response,
         } = error;
 
-        if (response.status === 401 && config.url === AUTHENTICATION_POST_URL) {
+        const url = authenticationPostURL();
+        if (response.status === 401 && config.url === url) {
             dispatch(clearAuthenticationInfo());
             return Promise.reject(error);
         }
@@ -39,7 +40,7 @@ export const withInterceptors = (axios, store) => {
             config._retry = true;
 
             const { authentication } = getState();
-            return axios.post(AUTHENTICATION_POST_URL, {
+            return axios.post(url, {
                 token: authentication.info.refresh.value,
             })
                 .then((res) => {

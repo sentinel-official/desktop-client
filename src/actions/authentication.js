@@ -7,7 +7,7 @@ import {
     AUTHENTICATION_POST_IN_PROGRESS,
     AUTHENTICATION_POST_SUBMIT,
     AUTHENTICATION_POST_SUCCESS,
-    AUTHENTICATION_POST_URL,
+    authenticationPostURL,
 } from '../constants/authentication';
 import { emptyFunc } from '../constants/common';
 import Async from 'async';
@@ -56,7 +56,8 @@ export const postAuthentication = (history, cb = emptyFunc) => (dispatch, getSta
         }, (next) => {
             const { authentication: { password } } = getState();
 
-            Axios.post(AUTHENTICATION_POST_URL, {
+            const url = authenticationPostURL();
+            Axios.post(url, {
                 password: password.value.trim(),
             })
                 .then((res) => {

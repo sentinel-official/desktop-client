@@ -8,7 +8,7 @@ import {
     TX_SEND_MODAL_SHOW,
     TX_SEND_SUCCESS,
     TX_SEND_TO_SET,
-    TX_SEND_URL,
+    txSendURL,
 } from '../../constants/transactions';
 import { decodeFromBech32 } from '../../utils/bech32';
 import Async from 'async';
@@ -73,7 +73,8 @@ export const txSend = (cb = emptyFunc) => (dispatch, getState) => {
                 account: { password },
             } = getState();
 
-            Axios.post(TX_SEND_URL, {
+            const url = txSendURL();
+            Axios.post(url, {
                 to: decodeFromBech32(to.value.trim()),
                 amount: [{
                     denom: COIN_DENOM,

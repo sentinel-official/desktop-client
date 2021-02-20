@@ -11,14 +11,14 @@ import {
     CONFIGURATION_GET_ERROR,
     CONFIGURATION_GET_IN_PROGRESS,
     CONFIGURATION_GET_SUCCESS,
-    CONFIGURATION_GET_URL,
     CONFIGURATION_MODAL_HIDE,
     CONFIGURATION_MODAL_SHOW,
     CONFIGURATION_PUT_ERROR,
     CONFIGURATION_PUT_IN_PROGRESS,
     CONFIGURATION_PUT_SUCCESS,
-    CONFIGURATION_PUT_URL,
     CONFIGURATION_SETUP_SET,
+    configurationGetURL,
+    configurationPutURL,
 } from '../constants/configuration';
 import { emptyFunc } from '../constants/common';
 import Async from 'async';
@@ -121,7 +121,8 @@ export const getConfiguration = (history, cb = emptyFunc) => (dispatch, getState
             dispatch(getConfigurationInProgress());
             next(null);
         }, (next) => {
-            Axios.get(CONFIGURATION_GET_URL)
+            const url = configurationGetURL();
+            Axios.get(url)
                 .then((res) => {
                     try {
                         next(null, res?.data?.result);
@@ -198,7 +199,8 @@ export const putConfiguration = (cb = emptyFunc) => (dispatch, getState) => {
                 },
             } = getState();
 
-            Axios.put(CONFIGURATION_PUT_URL, {
+            const url = configurationPutURL();
+            Axios.put(url, {
                 from: items[index]?.name,
                 chain: {
                     broadcast_mode: broadcastMode.value.trim(),
