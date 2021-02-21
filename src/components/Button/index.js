@@ -1,20 +1,41 @@
-import React from 'react';
-import * as PropTypes from 'prop-types';
 import './index.css';
+import * as PropTypes from 'prop-types';
+import React from 'react';
 
-const Button = (props) => {
+const Spinner = () => {
     return (
-        <input
-            className="Button"
-            type="submit"
-            value={props.name}
-            onClick={props.onClick}/>
+        <span
+            aria-hidden="true"
+            className="spinner-border spinner-border-sm"
+            role="status">
+        </span>
+    );
+};
 
+const Button = ({
+    className,
+    disabled = false,
+    value,
+    onClick,
+    inProgress = false,
+}) => {
+    return (
+        <button
+            className={className}
+            disabled={disabled}
+            onClick={onClick}>
+            {
+                inProgress ? <Spinner/> : value
+            }
+        </button>
     );
 };
 
 Button.propTypes = {
-    name: PropTypes.string.isRequired,
+    className: PropTypes.string.isRequired,
+    disabled: PropTypes.bool.isRequired,
+    inProgress: PropTypes.bool.isRequired,
+    value: PropTypes.string.isRequired,
     onClick: PropTypes.func.isRequired,
 };
 

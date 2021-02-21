@@ -7,6 +7,7 @@ import (
 
 var (
 	Version              = ""
+	DefaultListenURL     = "https://127.0.0.1:8080"
 	DefaultHomeDirectory = func() string {
 		home, err := os.UserHomeDir()
 		if err != nil {

@@ -1,0 +1,8 @@
+.snackbar {
+    left: 10px;
+    transform: translatex(10px);
+}
+
+.snackbar > div {
+    background: #282525;
+}

@@ -1,0 +1,6 @@
+.form-control, .form-control::placeholder, .form-control:focus {
+    font-size: 16px;
+    background: #E9F0F4;
+    border: none;
+    height: 45px;
+}

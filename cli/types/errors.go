@@ -1,12 +1,12 @@
 package types
 
 type Error struct {
-	Code    int64  `json:"code,omitempty"`
-	Message string `json:"message,omitempty"`
+	Code    int    `json:"code"`
+	Message string `json:"message"`
 	Module  string `json:"module,omitempty"`
 }
 
-func NewError(code int64, message, module string) *Error {
+func NewError(module string, code int, message string) *Error {
 	return &Error{
 		Code:    code,
 		Message: message,

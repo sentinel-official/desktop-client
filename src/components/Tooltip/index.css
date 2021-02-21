@@ -1,0 +1,10 @@
+.tooltip-section .icon {
+    width: 16px;
+    fill: transparent;
+    margin-bottom: 5px;
+}
+
+.error-message.text-area {
+    right: -15px;
+    top: 65px;
+}

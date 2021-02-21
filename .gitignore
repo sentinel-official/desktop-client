@@ -7,11 +7,11 @@
 .env.local
 .env.production.local
 .env.test.local
-.idea
+.eslintcache
+/.idea
 /node_modules
 npm-debug.log*
 /.pnp
 .pnp.js
-.vscode
 yarn-debug.log*
 yarn-error.log*

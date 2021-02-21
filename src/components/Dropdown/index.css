@@ -1,0 +1,76 @@
+.btn-primary:not(:disabled):not(.disabled):active,
+.btn-primary:not(:disabled):not(.disabled).active,
+.show > .btn-primary.dropdown-toggle,
+.dropdown-toggle, .dropdown-toggle:hover, .dropdown-toggle:focus,
+.show > .btn-primary.dropdown-toggle:focus,
+.btn-primary:not(:disabled):not(.disabled):active:focus {
+    background: transparent;
+    border: 0;
+    outline: 0;
+    box-shadow: none;
+    font-weight: 500;
+    font-size: 16px;
+    text-align: center;
+    color: #142D51;
+    padding: 0;
+}
+
+.dropdown-toggle .dropdown-title {
+    margin: 0;
+}
+
+.filter-section .btn-primary:not(:disabled):not(.disabled):active,
+.filter-section .btn-primary:not(:disabled):not(.disabled).active,
+.filter-section .show > .btn-primary.dropdown-toggle,
+.filter-section .dropdown-toggle,
+.filter-section .dropdown-toggle:hover,
+.filter-section .dropdown-toggle:focus,
+.filter-section .show > .btn-primary.dropdown-toggle:focus,
+.filter-section .btn-primary:not(:disabled):not(.disabled):active:focus {
+    border: 1px solid #DCE9F1;
+    padding: 4px 20px;
+    border-radius: 20px;
+    font-weight: 500;
+    font-size: 12px;
+    color: #55678B;
+}
+
+.dropdown-menu {
+    background-color: #F6F8FB !important;
+}
+
+.dropdown-toggle .icon, .dropdown-item .icon {
+    width: 22px;
+    margin-right: 10px;
+}
+
+.settings-dropdown .dropdown-menu {
+    position: relative !important;
+    padding: 0;
+    transform: translate(-15px, 15px) !important;
+    background: #FFFFFF;
+    box-shadow: none;
+    float: none;
+    border: 0 solid;
+    border-radius: 0;
+}
+
+.dropdown-item.active, .dropdown-item:active {
+    background: #109FEC;
+}
+
+.settings-dropdown .dropdown-item {
+    padding: 0.55rem 1.5rem 0.55rem 1rem;
+}
+
+.dropdown-toggle::after {
+    margin-left: 0.4em;
+}
+
+.filter-section .dropdown-menu {
+    border-radius: 0;
+    background: rgb(246, 248, 251);
+    border: 1px solid rgb(220, 233, 241);
+    box-sizing: border-box;
+    box-shadow: rgba(0, 0, 0, 0.1) 0 4px 4px;
+}

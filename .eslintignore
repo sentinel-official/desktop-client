@@ -1,2 +1,4 @@
-/build/
-/dist/
+/bin
+/build
+/cli
+/dist

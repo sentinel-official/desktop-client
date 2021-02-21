@@ -1,11 +1,61 @@
-.Button {
-    height: 35px;
+.button-primary, .login-button button:hover {
+    background: #109FEC;
+    border-radius: 39px;
+    font-weight: 500;
+    font-size: 16px;
+    text-align: center;
+    letter-spacing: 0.05em;
+    color: #FFFFFF !important;
+    padding: 5px 25px;
+}
+
+.login-button button, .login-button button:hover {
+    height: 36px;
     width: 100px;
-    border: none;
-    background-color: #109FEC;
-    color: white;
-    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-button button:hover {
+    padding-left: 2rem;
+    padding-right: 2rem;
+}
+
+.btn.disabled, .btn:disabled {
+    background: #109FEC;
+    color: #FFFFFF;
+}
+
+.btn.disabled, .btn:disabled {
+    background: #109FEC;
+    color: #FFFFFF;
+}
+
+.buttons-list {
+    margin-top: 20px;
+}
+
+.buttons-list button {
+    margin-right: 10px;
+    background: none !important;
+    border: 1.13577px solid #DCE9F1 !important;
+    font-weight: bold;
+    font-size: 12px;
+    color: #55678B !important;
+}
+
+.button-large {
+    width: 180px;
+    margin-top: 10px;
+    text-transform: uppercase;
+}
+
+.delegate-button {
+    padding: 0;
+    font-weight: 500;
     font-size: 14px;
-    padding-left: 0;
-    padding-right: 0;
+    color: #139EEE;
+    word-break: keep-all;
+    background: transparent !important;
 }

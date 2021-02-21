@@ -6,12 +6,9 @@ import (
 )
 
 type Response struct {
-	Success bool `json:"success"`
-	Error   struct {
-		Code    int    `json:"code"`
-		Message string `json:"message"`
-	} `json:"error,omitempty"`
-	Result interface{} `json:"result,omitempty"`
+	Success bool        `json:"success"`
+	Error   *Error      `json:"error,omitempty"`
+	Result  interface{} `json:"result,omitempty"`
 }
 
 type ResponseWriter struct {
@@ -44,7 +41,12 @@ func (r *ResponseWriter) WriteHeader(status int) {
 	r.Status = status
 }
 
-type AuthToken struct {
+type Token struct {
 	Value  string    `json:"value"`
 	Expiry time.Time `json:"expiry"`
+}
+
+type AuthToken struct {
+	Access  Token `json:"access"`
+	Refresh Token `json:"refresh"`
 }

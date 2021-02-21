@@ -1,33 +1,44 @@
 package account
 
 import (
+	"encoding/hex"
 	"net/http"
+	"strings"
 
-	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/gorilla/mux"
 
 	"github.com/sentinel-official/desktop-client/cli/context"
-	"github.com/sentinel-official/desktop-client/cli/models"
 	"github.com/sentinel-official/desktop-client/cli/utils"
+	"github.com/sentinel-official/desktop-client/cli/x/auth"
 )
 
 func HandlerGetAccount(ctx *context.Context) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		vars := mux.Vars(r)
 
-		address, err := sdk.AccAddressFromHex(vars["address"])
-		if err != nil {
-			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1, err.Error())
+		if ctx.Client().FromAddressHex() != vars["address"] {
+			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1001, "")
 			return
 		}
 
-		account, err := ctx.Client().QueryAccount(address)
+		address, err := hex.DecodeString(vars["address"])
 		if err != nil {
-			utils.WriteErrorToResponse(w, http.StatusInternalServerError, 2, err.Error())
+			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1002, err.Error())
 			return
 		}
 
-		item := models.NewAccountFromRaw(account)
+		result, err := ctx.Client().QueryAccount(address)
+		if err != nil {
+			if strings.Contains(err.Error(), "does not exist") {
+				utils.WriteResultToResponse(w, http.StatusOK, nil)
+				return
+			}
+
+			utils.WriteErrorToResponse(w, http.StatusInternalServerError, 1003, err.Error())
+			return
+		}
+
+		item := auth.NewAccountFromRaw(result)
 		utils.WriteResultToResponse(w, http.StatusOK, item)
 	}
 }

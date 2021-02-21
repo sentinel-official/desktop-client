@@ -1,56 +1,51 @@
-import React from 'react';
-import Sidebar from '../../components/Sidebar';
-import Footer from '../../components/Footer';
-import PasswordField from './PasswordField';
-import './index.css';
-import { connect } from 'react-redux';
 import * as PropTypes from 'prop-types';
-import SubmitButton from './SubmitButton';
+import Label from '../../components/Label';
+import Password from './Password';
+import React from 'react';
+import Sidebar from '../common/SidebarOnboard';
+import SocialIcons from '../../components/SocialIcons';
+import Submit from './Submit';
+import TextBox from '../../components/TextBox';
+import ViewPassword from './ViewPassword';
 
-const Authentication = (props) => {
-    const onSubmit = (e) => {
-        e.preventDefault();
-        onClick();
-    };
-
-    const onClick = () => {
-        // TODO: handle application authentication
-        console.log(props.password);
-    };
-
+const Authentication = ({ history }) => {
     return (
-        <div className="Authentication-container">
-            <div className="Authentication-left">
+        <div className="login auth-container">
+            <div className="col-md-4">
                 <Sidebar/>
             </div>
-            <div className="Authentication-right">
-                <div className="Authentication-main">
-                    <div className="Authentication-title">
-                        Authenticate Sentinel Client
-                    </div>
-                    <form
-                        id="login_form"
-                        onSubmit={onSubmit}>
-                        <div>
-                            <PasswordField/>
+            <div className="col-md-8 login-section">
+                <div className="login-body">
+                    <TextBox
+                        className="login-title"
+                        value="Authenticate"
+                    />
+                    <div className="password-box">
+                        <div className="form-group">
+                            <Label
+                                className="label"
+                                label="PASSWORD"
+                            />
+                            <Password/>
                         </div>
-                    </form>
+                        <ViewPassword/>
+                    </div>
                 </div>
-                <Footer/>
-                <SubmitButton onClick={onClick}/>
+                <div className="login-footer">
+                    <div className="login-button">
+                        <Submit history={history}/>
+                    </div>
+                    <SocialIcons/>
+                </div>
             </div>
         </div>
     );
 };
 
 Authentication.propTypes = {
-    password: PropTypes.string.isRequired,
+    history: PropTypes.shape({
+        push: PropTypes.func.isRequired,
+    }).isRequired,
 };
 
-const stateToProps = (state) => {
-    return {
-        password: state.application.password,
-    };
-};
-
-export default connect(stateToProps)(Authentication);
+export default Authentication;

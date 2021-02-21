@@ -1,0 +1,41 @@
+.account-create-row {
+    width: 50%;
+    margin: auto;
+}
+
+.account-create-row hr {
+    margin: 20px 0;
+}
+
+@media (max-width: 767px) {
+    .account-create-row {
+        width: 70%;
+        margin-bottom: 70px;
+    }
+}
+
+@media (max-width: 576px) {
+    .login-footer.overflow-text {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 380px) {
+    .login-footer.overflow-text .login-button {
+        flex-wrap: wrap;
+        margin-bottom: 5px;
+    }
+
+    .login-footer.overflow-text .login-button .terms {
+        margin-bottom: 5px;
+    }
+}
+
+.terms {
+    margin: 0 10px 0 0;
+}
+
+.terms p {
+    margin: 0;
+}

@@ -5,15 +5,15 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/sentinel-official/desktop-client/cli/models"
+	"github.com/sentinel-official/desktop-client/cli/x/other"
 )
 
 type RequestSend struct {
 	Memo     string `json:"memo"`
 	Password string `json:"password"`
 
-	ToAddress string       `json:"to_address"`
-	Amount    models.Coins `json:"amount"`
+	To     string      `json:"to"`
+	Amount other.Coins `json:"amount"`
 }
 
 func NewRequestSend(r *http.Request) (*RequestSend, error) {
@@ -29,8 +29,8 @@ func (r *RequestSend) Validate() error {
 	if r.Password == "" {
 		return fmt.Errorf("invalid field Password")
 	}
-	if r.ToAddress == "" {
-		return fmt.Errorf("invalid field ToAddress")
+	if r.To == "" {
+		return fmt.Errorf("invalid field To")
 	}
 	if len(r.Amount) == 0 {
 		return fmt.Errorf("invalid field Amount")
