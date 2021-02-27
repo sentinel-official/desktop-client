@@ -21,15 +21,17 @@
 }
 
 @media (max-width: 767px) {
-    .login.auth-container {
-        flex-direction: column;
-    }
-
     .login-section {
         flex: 1;
     }
 
     .auth-container .col-md-8 {
         padding: 0 25px;
+    }
+}
+
+@media (max-width: 962px) {
+    .login-body {
+        width: 450px;
     }
 }

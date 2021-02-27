@@ -33,6 +33,7 @@ const Validators = ({
         <SelectField
             className="form-control validators-select"
             items={items}
+            menuItemClassName="validator-item"
             value={from}
             onChange={onChange}
         />

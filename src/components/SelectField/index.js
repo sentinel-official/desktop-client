@@ -7,6 +7,7 @@ import Select from '@material-ui/core/Select';
 const SelectField = ({
     className,
     items,
+    menuItemClassName,
     value,
     onChange,
 }) => {
@@ -18,6 +19,7 @@ const SelectField = ({
             onChange={onChange}>
             <MenuItem
                 key={0}
+                className={menuItemClassName}
                 value="">
                 {'None'}
             </MenuItem>
@@ -25,6 +27,7 @@ const SelectField = ({
                 items.map((item, index) => (
                     <MenuItem
                         key={index + 1}
+                        className={menuItemClassName}
                         value={item.address}>
                         {item.description.moniker}
                     </MenuItem>
@@ -37,6 +40,7 @@ const SelectField = ({
 SelectField.propTypes = {
     className: PropTypes.string.isRequired,
     items: PropTypes.array.isRequired,
+    menuItemClassName: PropTypes.string.isRequired,
     value: PropTypes.string.isRequired,
     onChange: PropTypes.func.isRequired,
 };

@@ -31,3 +31,10 @@
         height: 80px;
     }
 }
+
+@media (max-width: 1200px) {
+
+    .side-bar img {
+        width: 70px;
+    }
+}

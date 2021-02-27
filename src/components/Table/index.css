@@ -1,6 +1,9 @@
 .validators-table th, .validators-table td {
     padding: 1rem 0.75rem;
     vertical-align: initial;
+}
+
+.validators-table td {
     word-break: break-all;
 }
 
