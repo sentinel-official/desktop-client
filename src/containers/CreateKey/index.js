@@ -30,7 +30,7 @@ const CreateKey = ({ history }) => {
                             />
                             <Name/>
                         </div>
-                        <div className="password-box">
+                        <div className="password-box create-key-password">
                             <div className="form-group">
                                 <Label
                                     className="label"

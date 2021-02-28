@@ -470,6 +470,10 @@
     overflow: auto;
 }
 
+.view-key table tbody tr {
+    padding: 12px;
+}
+
 .keys-header .add-key-button {
     background: #109FEC !important;
     font-size: 12px;
@@ -594,7 +598,7 @@
 }
 
 
-.refresh-start {
+.refresh-start svg {
 
     animation-name: rotate;
     animation-duration: 1s;

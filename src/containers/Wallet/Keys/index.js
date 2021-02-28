@@ -47,8 +47,8 @@ const Keys = ({
                             </Dropdown.Item>;
                     })
                 }
-                <Settings/>
                 <ViewKeys/>
+                <Settings/>
             </Dropdown.Menu>
         </Dropdown>
     );

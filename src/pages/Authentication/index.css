@@ -16,7 +16,9 @@
 
 .login-body {
     margin-bottom: 50px;
-    width: 500px;
+    width: 600px;
+    margin-left: auto;
+    margin-right: auto;
     min-width: 300px;
 }
 
@@ -33,5 +35,10 @@
 @media (max-width: 962px) {
     .login-body {
         width: 450px;
+    }
+}
+@media (min-width: 1400px) {
+    .login-body{
+        width: 700px;
     }
 }
