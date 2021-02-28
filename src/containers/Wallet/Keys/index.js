@@ -4,8 +4,8 @@ import Dropdown from '../../../components/Dropdown';
 import Icon from '../../../components/Icon';
 import React from 'react';
 import Settings from './Settings';
-import ViewKeys from './ViewKeys';
 import TextBox from '../../../components/TextBox';
+import ViewKeys from './ViewKeys';
 
 const Keys = ({
     index,

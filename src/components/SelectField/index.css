@@ -1,6 +1,7 @@
-.validators-select .MuiSelect-select:focus{
-background-color: transparent;
+.validators-select .MuiSelect-select:focus {
+    background-color: transparent;
 }
+
 .validators-select:before {
     border: 0 solid !important;
 }
