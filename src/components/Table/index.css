@@ -14,6 +14,11 @@
     border-bottom: 1px solid #dee2e6;
 }
 
+.validators-table tbody tr td:first-child {
+    width: 80px;
+    padding: 0.75rem 0.5rem;
+}
+
 .validators-table thead th {
     font-weight: 500;
     font-size: 13px;

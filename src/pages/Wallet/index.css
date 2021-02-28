@@ -466,6 +466,14 @@
     align-items: center;
 }
 
+.view-key {
+    overflow: auto;
+}
+
+.view-key table tbody tr {
+    padding: 12px;
+}
+
 .keys-header .add-key-button {
     background: #109FEC !important;
     font-size: 12px;
@@ -590,7 +598,7 @@
 }
 
 
-.refresh-start {
+.refresh-start svg {
 
     animation-name: rotate;
     animation-duration: 1s;
@@ -710,6 +718,7 @@
     font-weight: 500;
     font-size: 14px;
     color: #142D51;
+    word-break: break-all;
 }
 
 .error-text {
@@ -718,6 +727,7 @@
     font-size: 14px;
     color: #142D51;
     text-align: center;
+    word-break: break-all;
 }
 
 @media (max-width: 767.98px) {

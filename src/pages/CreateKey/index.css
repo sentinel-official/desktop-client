@@ -9,6 +9,15 @@
     margin: 20px 0;
 }
 
+.create-key-password {
+    position: relative;
+}
+
+.create-key-password .password-icon {
+    position: absolute;
+    right: -50px;
+}
+
 @media (max-width: 767px) {
     .account-create-row {
         width: 70%;

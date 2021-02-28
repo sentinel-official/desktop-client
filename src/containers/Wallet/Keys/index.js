@@ -5,6 +5,7 @@ import Icon from '../../../components/Icon';
 import React from 'react';
 import Settings from './Settings';
 import TextBox from '../../../components/TextBox';
+import ViewKeys from './ViewKeys';
 
 const Keys = ({
     index,
@@ -46,6 +47,7 @@ const Keys = ({
                             </Dropdown.Item>;
                     })
                 }
+                <ViewKeys/>
                 <Settings/>
             </Dropdown.Menu>
         </Dropdown>
