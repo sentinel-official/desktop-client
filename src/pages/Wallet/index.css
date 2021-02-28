@@ -466,6 +466,10 @@
     align-items: center;
 }
 
+.view-key {
+    overflow: auto;
+}
+
 .keys-header .add-key-button {
     background: #109FEC !important;
     font-size: 12px;

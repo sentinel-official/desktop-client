@@ -10,6 +10,7 @@ const Settings = ({ onClick }) => {
     return (
         <Dropdown.Item
             key="settings"
+            title="settings"
             onClick={onClick}>
             <Icon
                 className="icon"
