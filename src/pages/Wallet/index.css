@@ -718,6 +718,7 @@
     font-weight: 500;
     font-size: 14px;
     color: #142D51;
+    word-break: break-all;
 }
 
 .error-text {
@@ -726,6 +727,7 @@
     font-size: 14px;
     color: #142D51;
     text-align: center;
+    word-break: break-all;
 }
 
 @media (max-width: 767.98px) {
