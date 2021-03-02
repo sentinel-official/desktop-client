@@ -81,7 +81,7 @@ func (c *Config) WithDefaultValues() *Config {
 
 	c.Chain.BroadcastMode = "block"
 	c.Chain.Fees = ""
-	c.Chain.Gas = 1e5
+	c.Chain.Gas = 5e5
 	c.Chain.GasAdjustment = 0
 	c.Chain.GasPrices = "0.01tsent"
 	c.Chain.ID = "sentinel-turing-3a"

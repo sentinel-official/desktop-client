@@ -55,7 +55,7 @@ func HandlerLogin(ctx *context.Context) http.HandlerFunc {
 				},
 				Access: types.Token{
 					Value:  fmt.Sprintf("%X", access),
-					Expiry: time.Now().Add(30 * time.Second),
+					Expiry: time.Now().Add(1 * time.Minute),
 				},
 			})
 		} else {
@@ -86,7 +86,7 @@ func HandlerLogin(ctx *context.Context) http.HandlerFunc {
 				Refresh: refresh,
 				Access: types.Token{
 					Value:  fmt.Sprintf("%X", bytes),
-					Expiry: time.Now().Add(30 * time.Second),
+					Expiry: time.Now().Add(1 * time.Minute),
 				},
 			})
 		}
