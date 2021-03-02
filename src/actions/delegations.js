@@ -7,6 +7,7 @@ import {
 import { emptyFunc } from '../constants/common';
 import Async from 'async';
 import Axios from '../services/axios';
+import Lodash from 'lodash';
 
 export const getDelegationsInProgress = (data) => {
     return {
@@ -38,11 +39,12 @@ export const getDelegations = (cb = emptyFunc) => (dispatch, getState) => {
             const {
                 keys: {
                     items,
-                    index,
+                    name,
                 },
             } = getState();
 
-            const url = delegationsGetURL(items[index].address);
+            const item = Lodash.find(items, ['name', name]);
+            const url = delegationsGetURL(item.address);
             Axios.get(url)
                 .then((res) => {
                     try {

@@ -6,7 +6,11 @@ import Icon from '../../../components/Icon';
 import React from 'react';
 import TextBox from '../../../components/TextBox';
 
-const Settings = ({ onClick }) => {
+const Settings = ({ showConfigurationModal }) => {
+    const onClick = () => {
+        showConfigurationModal();
+    };
+
     return (
         <Dropdown.Item
             key="settings"
@@ -25,11 +29,11 @@ const Settings = ({ onClick }) => {
 };
 
 Settings.propTypes = {
-    onClick: PropTypes.func.isRequired,
+    showConfigurationModal: PropTypes.func.isRequired,
 };
 
 const actionsToProps = {
-    onClick: showConfigurationModal,
+    showConfigurationModal,
 };
 
 export default connect(null, actionsToProps)(Settings);

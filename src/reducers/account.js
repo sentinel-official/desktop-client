@@ -38,19 +38,26 @@ const info = (state = {
     data,
 }) => {
     switch (type) {
-    case ACCOUNT_GET_SUCCESS:
-        if (data === undefined) {
-            return state;
+    case ACCOUNT_GET_SUCCESS: {
+        if (data) {
+            return {
+                ...state,
+                address: data.address,
+                publicKey: data['pub_key'],
+                coins: data.coins,
+                sequence: data.sequence,
+                number: data.number,
+            };
         }
 
         return {
-            ...state,
-            address: data.address,
-            publicKey: data['pub_key'],
-            coins: data.coins,
-            sequence: data.sequence,
-            number: data.number,
+            address: '',
+            publicKey: '',
+            coins: [],
+            sequence: 0,
+            number: 0,
         };
+    }
     default:
         return state;
     }

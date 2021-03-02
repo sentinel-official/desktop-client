@@ -37,9 +37,3 @@
         width: 450px;
     }
 }
-
-@media (min-width: 1400px) {
-    .login-body {
-        width: 700px;
-    }
-}

@@ -1,4 +1,8 @@
 import {
+    KEYS_CREATE_MODAL_HIDE,
+    KEYS_CREATE_MODAL_SHOW,
+    KEYS_INFO_MODAL_HIDE,
+    KEYS_INFO_MODAL_SHOW,
     KEYS_PASSWORD_VISIBLE_SET,
     KEYS_POST_ERROR,
     KEYS_POST_IN_PROGRESS,
@@ -29,6 +33,7 @@ const name = (state = {
             },
         };
     case KEYS_POST_SUCCESS:
+    case KEYS_CREATE_MODAL_HIDE:
         return {
             ...state,
             value: '',
@@ -68,6 +73,7 @@ const password = (state = {
             visible: data.visible,
         };
     case KEYS_POST_SUCCESS:
+    case KEYS_CREATE_MODAL_HIDE:
         return {
             ...state,
             value: '',
@@ -102,6 +108,7 @@ const mnemonic = (state = {
             },
         };
     case KEYS_POST_SUCCESS:
+    case KEYS_CREATE_MODAL_HIDE:
         return {
             ...state,
             value: '',
@@ -120,6 +127,7 @@ const info = (state = {
     publicKey: '',
     mnemonic: '',
     name: '',
+    show: false,
 }, {
     type,
     data,
@@ -132,6 +140,16 @@ const info = (state = {
             publicKey: data['pub_key'],
             mnemonic: data.mnemonic,
             name: data.name,
+        };
+    case KEYS_INFO_MODAL_SHOW:
+        return {
+            ...state,
+            show: true,
+        };
+    case KEYS_INFO_MODAL_HIDE:
+        return {
+            ...state,
+            show: false,
         };
     default:
         return state;
@@ -150,10 +168,24 @@ const inProgress = (state = false, { type }) => {
     }
 };
 
+const show = (state = false, {
+    type,
+}) => {
+    switch (type) {
+    case KEYS_CREATE_MODAL_SHOW:
+        return true;
+    case KEYS_CREATE_MODAL_HIDE:
+        return false;
+    default:
+        return state;
+    }
+};
+
 export default combineReducers({
     name,
     password,
     mnemonic,
     inProgress,
     info,
+    show,
 });
