@@ -46,7 +46,7 @@ Table.propTypes = {
         }),
     ).isRequired,
     items: PropTypes.array.isRequired,
-    row: PropTypes.object.isRequired,
+    row: PropTypes.any.isRequired,
     sort: PropTypes.shape({
         by: PropTypes.string.isRequired,
         order: PropTypes.string.isRequired,

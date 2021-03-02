@@ -173,7 +173,7 @@ export const putConfigurationSuccess = (data) => {
     };
 };
 
-export const putConfiguration = (cb = emptyFunc) => (dispatch, getState) => {
+export const putConfiguration = (from, cb = emptyFunc) => (dispatch, getState) => {
     Async.waterfall([
         (next) => {
             dispatch(putConfigurationInProgress());
@@ -181,8 +181,7 @@ export const putConfiguration = (cb = emptyFunc) => (dispatch, getState) => {
         }, (next) => {
             const {
                 keys: {
-                    items,
-                    index,
+                    name,
                 },
                 configuration: {
                     chain: {
@@ -201,7 +200,7 @@ export const putConfiguration = (cb = emptyFunc) => (dispatch, getState) => {
 
             const url = configurationPutURL();
             Axios.put(url, {
-                from: items[index]?.name,
+                from: from || name,
                 chain: {
                     broadcast_mode: broadcastMode.value.trim(),
                     fees: fees.value.trim(),

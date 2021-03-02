@@ -12,6 +12,7 @@ import {
 } from '../../constants/transactions';
 import Async from 'async';
 import Axios from '../../services/axios';
+import Lodash from 'lodash';
 
 export const setTxDelegateTo = (data) => {
     return {
@@ -65,7 +66,7 @@ export const txDelegate = (cb = emptyFunc) => (dispatch, getState) => {
                 account: { password },
                 keys: {
                     items,
-                    index,
+                    name,
                 },
                 transactions: {
                     delegate: {
@@ -76,7 +77,8 @@ export const txDelegate = (cb = emptyFunc) => (dispatch, getState) => {
                 },
             } = getState();
 
-            const url = txDelegateURL(items[index].address);
+            const item = Lodash.find(items, ['name', name]);
+            const url = txDelegateURL(item.address);
             Axios.post(url, {
                 to: to.value.trim(),
                 amount: {

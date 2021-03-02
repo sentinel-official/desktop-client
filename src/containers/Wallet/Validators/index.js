@@ -49,6 +49,7 @@ const columns = [
 ];
 
 const Validators = ({
+    name,
     delegations,
     getDelegations,
     getValidators,
@@ -60,6 +61,8 @@ const Validators = ({
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
+        setLoading(true);
+
         Async.parallel([
             (next) => {
                 getValidators(next);
@@ -69,7 +72,7 @@ const Validators = ({
         ], () => {
             setLoading(false);
         });
-    }, []);
+    }, [name]);
 
     if (loading) {
         return <Loader/>;
@@ -130,6 +133,7 @@ Validators.propTypes = {
     ).isRequired,
     getDelegations: PropTypes.func.isRequired,
     getValidators: PropTypes.func.isRequired,
+    name: PropTypes.string.isRequired,
     setValidatorsSort: PropTypes.func.isRequired,
     sort: PropTypes.shape({
         by: PropTypes.string.isRequired,
@@ -161,6 +165,7 @@ Validators.propTypes = {
 const stateToProps = (state) => {
     return {
         delegations: state.delegations.items,
+        name: state.keys.name,
         sort: state.validators.sort,
         status: state.validators.status,
         validators: state.validators.items,

@@ -9,6 +9,7 @@ import {
 import { emptyFunc } from '../constants/common';
 import Async from 'async';
 import Axios from '../services/axios';
+import Lodash from 'lodash';
 
 export const getAccountInProgress = (data) => {
     return {
@@ -40,11 +41,12 @@ export const getAccount = (cb = emptyFunc) => (dispatch, getState) => {
             const {
                 keys: {
                     items,
-                    index,
+                    name,
                 },
             } = getState();
 
-            const url = accountGetURL(items[index].address);
+            const item = Lodash.find(items, ['name', name]);
+            const url = accountGetURL(item.address);
             Axios.get(url)
                 .then((res) => {
                     try {

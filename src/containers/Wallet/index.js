@@ -14,7 +14,6 @@ import Keys from './Keys';
 import Label from '../../components/Label';
 import Loader from '../../components/Loader';
 import Logo from '../../assets/Logo.svg';
-import ModalConfiguration from '../common/ModalConfiguration';
 import ModalTxInfo from '../common/ModalTxInfo';
 import React, { useEffect, useState } from 'react';
 import Receive from './Receive';
@@ -59,6 +58,7 @@ const Wallet = (props) => {
                 );
             }, (next) => {
                 props.putConfiguration(
+                    '',
                     next,
                 );
             }, (next) => {
@@ -74,7 +74,6 @@ const Wallet = (props) => {
 
     return (
         <>
-            <ModalConfiguration history={props.history}/>
             <SendModal/>
             <ValidatorsModalDelegate/>
             <ValidatorsModalRedelegate/>
@@ -95,7 +94,7 @@ const Wallet = (props) => {
                         />
                     </div>
                     <div className="settings-dropdown">
-                        <Keys/>
+                        <Keys history={props.history}/>
                     </div>
                     <div className="side-bar-list">
                         <Sidebar location={props.location}/>

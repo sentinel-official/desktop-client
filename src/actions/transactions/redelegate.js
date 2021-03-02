@@ -14,6 +14,7 @@ import {
 import { decodeFromBech32 } from '../../utils/bech32';
 import Async from 'async';
 import Axios from '../../services/axios';
+import Lodash from 'lodash';
 
 export const setTxRedelegateFrom = (data) => {
     return {
@@ -74,7 +75,7 @@ export const txRedelegate = (cb = emptyFunc) => (dispatch, getState) => {
                 account: { password },
                 keys: {
                     items,
-                    index,
+                    name,
                 },
                 transactions: {
                     redelegate: {
@@ -86,7 +87,8 @@ export const txRedelegate = (cb = emptyFunc) => (dispatch, getState) => {
                 },
             } = getState();
 
-            const url = txRedelegateURL(items[index].address);
+            const item = Lodash.find(items, ['name', name]);
+            const url = txRedelegateURL(item.address);
             Axios.post(url, {
                 from: from.value.trim(),
                 to: decodeFromBech32(to.value.trim()),

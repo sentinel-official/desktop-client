@@ -12,7 +12,7 @@ const Balance = (props) => {
 
     useEffect(() => {
         props.getAccount();
-    }, [props.items, props.index]);
+    }, [props.name]);
 
     let tokens = (props.coins[0]?.value * Math.pow(10, -6)) || 0;
     let USD = tokens * props.rate;
@@ -49,20 +49,14 @@ Balance.propTypes = {
     ).isRequired,
     getAccount: PropTypes.func.isRequired,
     getCoingecko: PropTypes.func.isRequired,
-    index: PropTypes.number.isRequired,
-    items: PropTypes.arrayOf(
-        PropTypes.shape({
-            address: PropTypes.string.isRequired,
-        }),
-    ).isRequired,
+    name: PropTypes.string.isRequired,
     rate: PropTypes.number.isRequired,
 };
 
 const stateToProps = (state) => {
     return {
         coins: state.account.info.coins,
-        index: state.keys.index,
-        items: state.keys.items,
+        name: state.keys.name,
         rate: state.coingecko.rate,
     };
 };

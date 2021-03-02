@@ -23,4 +23,27 @@ export const keysPostURL = () => {
     return `${baseURL}/keys`;
 };
 
-export const KEYS_INDEX_SET = 'KEYS_INDEX_SET';
+export const KEYS_NAME_SET = 'KEYS_NAME_SET';
+
+export const KEYS_LIST_MODAL_SHOW = 'KEYS_LIST_MODAL_SHOW';
+export const KEYS_LIST_MODAL_HIDE = 'KEYS_LIST_MODAL_HIDE';
+
+export const KEYS_CREATE_MODAL_SHOW = 'KEYS_CREATE_MODAL_SHOW';
+export const KEYS_CREATE_MODAL_HIDE = 'KEYS_CREATE_MODAL_HIDE';
+
+export const KEYS_DELETE_PASSWORD_SET = 'KEYS_DELETE_PASSWORD_SET';
+export const KEYS_DELETE_PASSWORD_VISIBLE_SET = 'KEYS_DELETE_PASSWORD_VISIBLE_SET';
+
+export const KEYS_DELETE_NAME_SET = 'KEYS_DELETE_NAME_SET';
+
+export const KEYS_INFO_MODAL_SHOW = 'KEYS_INFO_MODAL_SHOW';
+export const KEYS_INFO_MODAL_HIDE = 'KEYS_INFO_MODAL_HIDE';
+
+export const KEYS_DELETE_IN_PROGRESS = 'KEYS_DELETE_IN_PROGRESS';
+export const KEYS_DELETE_ERROR = 'KEYS_DELETE_ERROR';
+export const KEYS_DELETE_SUCCESS = 'KEYS_DELETE_SUCCESS';
+
+export const keysDeleteURL = (name) => {
+    const baseURL = managerBaseURL();
+    return `${baseURL}/keys/${name}/delete`;
+};

@@ -1,15 +1,20 @@
+import * as PropTypes from 'prop-types';
 import { Dropdown } from 'react-bootstrap';
+import { connect } from 'react-redux';
+import { showKeysListModal } from '../../../actions/keys';
 import Icon from '../../../components/Icon';
 import React from 'react';
 import TextBox from '../../../components/TextBox';
 
-const ViewKeys = () => {
+const ShowList = ({ showKeysListModal }) => {
     const onClick = () => {
+        showKeysListModal();
     };
+
     return (
         <Dropdown.Item
             key="viewKeys"
-            title="view keys"
+            title="Show keys"
             onClick={onClick}>
             <Icon
                 className="icon"
@@ -17,10 +22,18 @@ const ViewKeys = () => {
             />
             <TextBox
                 className="dropdown-item-text"
-                value="View Keys"
+                value="Show keys"
             />
         </Dropdown.Item>
     );
 };
 
-export default ViewKeys;
+ShowList.propTypes = {
+    showKeysListModal: PropTypes.func.isRequired,
+};
+
+const actionsToProps = {
+    showKeysListModal: showKeysListModal,
+};
+
+export default connect(null, actionsToProps)(ShowList);
