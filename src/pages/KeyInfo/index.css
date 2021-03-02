@@ -1,6 +1,8 @@
 .account-create-row {
     width: 50%;
-    margin: auto;
+    margin: auto auto 50px;
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
 
 .account-create-section .create-section-body {
@@ -15,16 +17,17 @@
     text-align: center;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 962px) {
     .account-create-row {
-        width: 70%;
-        margin-bottom: 70px;
-        padding-top: 20px;
+        width: 80%;
     }
 }
 
 .section-body .key-info {
     width: 70%;
+    margin-bottom: 100px;
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
 
 .label-icon {

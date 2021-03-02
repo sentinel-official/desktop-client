@@ -1,16 +1,26 @@
 .account-create-row {
     width: 50%;
-    margin: auto;
+    margin: auto auto 50px;
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
 
 .account-create-row hr {
     margin: 20px 0;
 }
 
+.create-key-password {
+    position: relative;
+}
+
+.create-key-password .password-icon {
+    position: absolute;
+    right: -50px;
+}
+
 @media (max-width: 767px) {
     .account-create-row {
         width: 70%;
-        margin-bottom: 70px;
     }
 }
 

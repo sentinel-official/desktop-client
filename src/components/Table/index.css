@@ -1,6 +1,9 @@
 .validators-table th, .validators-table td {
     padding: 1rem 0.75rem;
     vertical-align: initial;
+}
+
+.validators-table td {
     word-break: break-all;
 }
 
@@ -9,6 +12,11 @@
     font-size: 14px;
     color: #142D51;
     border-bottom: 1px solid #dee2e6;
+}
+
+.validators-table tbody tr td:first-child {
+    width: 80px;
+    padding: 0.75rem 0.5rem;
 }
 
 .validators-table thead th {

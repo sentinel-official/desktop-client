@@ -41,7 +41,8 @@
 
 .dropdown-toggle .icon, .dropdown-item .icon {
     width: 22px;
-    margin-right: 10px;
+    margin: 3px 10px 3px 0;
+
 }
 
 .settings-dropdown .dropdown-menu {

@@ -1,23 +1,28 @@
 import * as PropTypes from 'prop-types';
 import { Modal as ReactModal } from 'react-bootstrap';
-import CreateKey from '../../../../CreateKey';
-import Label from '../../../../../components/Label';
-import Mnemonic from '../../../../CreateKey/Mnemonic';
-import Name from '../../../../CreateKey/Name';
-import Password from '../../../../CreateKey/Password';
+import { connect } from 'react-redux';
+import { hideKeysCreateModal } from '../../../../actions/keys';
+import Label from '../../../../components/Label';
+import Mnemonic from '../../../CreateKey/Mnemonic';
+import Name from '../../../CreateKey/Name';
+import Password from '../../../CreateKey/Password';
 import React from 'react';
-import Submit from '../../../../CreateKey/Submit';
-import TextBox from '../../../../../components/TextBox';
-import ViewPassword from '../../../../../components/Visible';
+import Submit from './Submit';
+import TextBox from '../../../../components/TextBox';
+import ViewPassword from '../../../CreateKey/ViewPassword';
 
-const ModalCreateKey = () => {
+const ModalCreate = ({
+    show,
+    hideKeysCreateModal,
+}) => {
     return (
         <ReactModal
             animation={false}
             backdrop="static"
             centered={true}
             keyboard={false}
-            show={true}>
+            show={show}
+            onHide={hideKeysCreateModal}>
             <ReactModal.Header closeButton={true}>
                 <TextBox
                     className="modal-title"
@@ -50,16 +55,25 @@ const ModalCreateKey = () => {
                     />
                     <Mnemonic/>
                 </div>
-                <Submit history={history}/>
+                <Submit/>
             </ReactModal.Body>
         </ReactModal>
     );
 };
 
-CreateKey.propTypes = {
-    history: PropTypes.shape({
-        push: PropTypes.func.isRequired,
-    }).isRequired,
+ModalCreate.propTypes = {
+    hideKeysCreateModal: PropTypes.func.isRequired,
+    show: PropTypes.bool.isRequired,
 };
 
-export default ModalCreateKey;
+const stateToProps = (state) => {
+    return {
+        show: state.keys.post.show,
+    };
+};
+
+const actionsToProps = {
+    hideKeysCreateModal,
+};
+
+export default connect(stateToProps, actionsToProps)(ModalCreate);

@@ -21,13 +21,11 @@ const store = createStore(
 withInterceptors(Axios, store);
 
 const app = (
-    <React.StrictMode>
-        <Provider store={store}>
-            <MemoryRouter>
-                <App/>
-            </MemoryRouter>
-        </Provider>
-    </React.StrictMode>
+    <Provider store={store}>
+        <MemoryRouter>
+            <App/>
+        </MemoryRouter>
+    </Provider>
 );
 
 ReactDOM.render(app, document.getElementById('root'));

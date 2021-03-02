@@ -75,8 +75,10 @@ label, .label {
     align-items: center;
 }
 
-.section-body .title {
+.section-body .title, .section-body .login-title, .login-body .login-title {
     text-align: center;
+    padding: 30px 0;
+    margin: 0;
 }
 
 .section-body .password-box {
@@ -110,7 +112,7 @@ label, .label {
 
 .settings-modal {
     position: relative;
-    min-height: 350px !important;
+    min-height: 476px !important;
 }
 
 .settings-modal .btn.button-primary {

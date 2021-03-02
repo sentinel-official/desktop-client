@@ -12,6 +12,7 @@ import {
 } from '../../constants/transactions';
 import Async from 'async';
 import Axios from '../../services/axios';
+import Lodash from 'lodash';
 
 export const setTxUnbondFrom = (data) => {
     return {
@@ -65,7 +66,7 @@ export const txUnbond = (cb = emptyFunc) => (dispatch, getState) => {
                 account: { password },
                 keys: {
                     items,
-                    index,
+                    name,
                 },
                 transactions: {
                     unbond: {
@@ -76,7 +77,8 @@ export const txUnbond = (cb = emptyFunc) => (dispatch, getState) => {
                 },
             } = getState();
 
-            const url = txUnbondURL(items[index].address);
+            const item = Lodash.find(items, ['name', name]);
+            const url = txUnbondURL(item.address);
             Axios.post(url, {
                 from: from.value.trim(),
                 amount: {

@@ -11,6 +11,7 @@ import {
 import { emptyFunc } from '../../constants/common';
 import Async from 'async';
 import Axios from '../../services/axios';
+import Lodash from 'lodash';
 
 export const setTxWithdrawFrom = (data) => {
     return {
@@ -57,7 +58,7 @@ export const txWithdraw = (cb = emptyFunc) => (dispatch, getState) => {
                 account: { password },
                 keys: {
                     items,
-                    index,
+                    name,
                 },
                 transactions: {
                     withdraw: {
@@ -67,7 +68,8 @@ export const txWithdraw = (cb = emptyFunc) => (dispatch, getState) => {
                 },
             } = getState();
 
-            const url = txWithdrawURL(items[index].address);
+            const item = Lodash.find(items, ['name', name]);
+            const url = txWithdrawURL(item.address);
             Axios.post(url, {
                 validators: [from.value.trim()],
                 memo: memo.value.trim(),

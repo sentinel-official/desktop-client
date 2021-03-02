@@ -3,15 +3,17 @@ import { connect } from 'react-redux';
 import { encodeToBech32 } from '../../../utils/bech32';
 import Address from './Address';
 import AddressCopy from './AddressCopy';
+import Lodash from 'lodash';
 import QRCode from './QRCode';
 import React from 'react';
 import TextBox from '../../../components/TextBox';
 
 const Receive = ({
-    index,
+    name,
     items,
 }) => {
-    const address = encodeToBech32(items[index]?.address, 'sent');
+    const item = Lodash.find(items, ['name', name]);
+    const address = encodeToBech32(item.address, 'sent');
 
     return (
         <>
@@ -34,17 +36,17 @@ const Receive = ({
 };
 
 Receive.propTypes = {
-    index: PropTypes.number.isRequired,
     items: PropTypes.arrayOf(
         PropTypes.shape({
             address: PropTypes.string.isRequired,
         }).isRequired,
     ).isRequired,
+    name: PropTypes.string.isRequired,
 };
 
 const stateToProps = (state) => {
     return {
-        index: state.keys.index,
+        name: state.keys.name,
         items: state.keys.items,
     };
 };

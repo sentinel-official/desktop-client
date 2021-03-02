@@ -1,9 +1,13 @@
+.validators-select .MuiSelect-select:focus {
+    background-color: transparent;
+}
+
 .validators-select:before {
-    border: 0px solid !important;
+    border: 0 solid !important;
 }
 
 .validators-select:hover:not(.Mui-disabled):before {
-    border: 0px solid !important;
+    border: 0 solid !important;
 }
 
 .validators-select:after {

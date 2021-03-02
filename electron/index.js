@@ -16,6 +16,8 @@ const createMainWindow = () => {
         autoHideMenuBar: true,
         height: 720,
         icon: path.join(__dirname, 'icon.png'),
+        minHeight: 480,
+        minWidth: 852,
         title: 'Sentinel',
         webPreferences: {
             preload: path.join(__dirname, 'preload.js'),
