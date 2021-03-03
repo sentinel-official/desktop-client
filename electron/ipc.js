@@ -2,20 +2,20 @@ const path = require('path');
 const { spawn } = require('child_process');
 const { ipcMain } = require('electron');
 const {
-    MANAGER_LISTEN_URL_GET_REQ,
-    MANAGER_START_REQ,
-    MANAGER_START_RES,
+    MANAGER_LISTEN_URL_GET_REQUEST,
+    MANAGER_START_REQUEST,
+    MANAGER_START_RESPONSE,
 } = require('./channels');
 const globals = require('./globals');
 
-ipcMain.on(MANAGER_LISTEN_URL_GET_REQ, (event, args) => {
-    console.log('EVENT:', MANAGER_LISTEN_URL_GET_REQ, 'ARGS:', args);
+ipcMain.on(MANAGER_LISTEN_URL_GET_REQUEST, (event, args) => {
+    console.log('EVENT:', event, 'ARGS:', args);
 
     event.returnValue = globals.listenURL;
 });
 
-ipcMain.on(MANAGER_START_REQ, (event, args) => {
-    console.log('EVENT:', MANAGER_START_REQ, 'ARGS:', args);
+ipcMain.on(MANAGER_START_REQUEST, (event, args) => {
+    console.log('EVENT:', event, 'ARGS:', args);
 
     const manager = spawn(
         path.join(__dirname, '../bin/manager'),
@@ -35,7 +35,7 @@ ipcMain.on(MANAGER_START_REQ, (event, args) => {
         }
 
         error = true;
-        globals.window.webContents.send(MANAGER_START_RES, {
+        globals.window.webContents.send(MANAGER_START_RESPONSE, {
             success: false,
             data,
         });
@@ -49,7 +49,7 @@ ipcMain.on(MANAGER_START_REQ, (event, args) => {
         }
 
         success = true;
-        globals.window.webContents.send(MANAGER_START_RES, {
+        globals.window.webContents.send(MANAGER_START_RESPONSE, {
             success: true,
             data,
         });
