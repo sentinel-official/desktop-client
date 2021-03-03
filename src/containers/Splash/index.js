@@ -1,5 +1,4 @@
 import * as PropTypes from 'prop-types';
-import { MANAGER_LISTEN_URL_GET_REQ, MANAGER_START_REQ, MANAGER_START_RES } from '../../constants/channels';
 import { connect } from 'react-redux';
 import { isManagerRunning } from '../../utils/manager';
 import { setSplashStatus } from '../../actions/splash';
@@ -15,8 +14,8 @@ const Splash = ({
     setSplashStatus,
 }) => {
     useEffect(() => {
-        const { ipcRenderer } = window;
-        if (ipcRenderer === undefined) {
+        const { electron } = window;
+        if (electron === undefined) {
             setSplashStatus({
                 completed: 150,
                 message: 'THE MANAGER IS RUNNING SUCCESSFULLY',
@@ -24,20 +23,20 @@ const Splash = ({
             return;
         }
 
-        globals.listenURL = ipcRenderer.sendSync(MANAGER_LISTEN_URL_GET_REQ);
+        globals.listenURL = electron.sendSync.manager.listenURL();
         setSplashStatus({
             completed: 10,
             message: 'RECEIVED MANAGER LISTEN URL FROM THE MAIN PROCESS',
         });
 
-        ipcRenderer.send(MANAGER_START_REQ);
+        electron.send.manager.startRequest();
         setSplashStatus({
             completed: 30,
             message: `STARTING THE MANAGER ON URL: ${globals.listenURL}`,
         });
 
-        ipcRenderer.on(MANAGER_START_RES, (event, args) => {
-            console.log('EVENT:', MANAGER_START_RES, 'ARGS:', args);
+        electron.on.manager.startResponse((event, args) => {
+            console.log('EVENT:', event, 'ARGS:', args);
 
             if (args.success === true) {
                 setSplashStatus({
@@ -46,7 +45,7 @@ const Splash = ({
                 });
 
                 isManagerRunning((error) => {
-                    ipcRenderer.removeAllListeners(MANAGER_START_RES);
+                    electron.removeAllListeners.manager.startResponse();
 
                     if (error) {
                         setSplashStatus({
@@ -62,7 +61,7 @@ const Splash = ({
                     });
                 });
             } else {
-                ipcRenderer.removeAllListeners(MANAGER_START_RES);
+                electron.removeAllListeners.manager.startResponse();
                 setSplashStatus({
                     completed: 100,
                     message: 'THE MANAGER EXITED UNEXPECTEDLY',

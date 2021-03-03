@@ -27,7 +27,6 @@ builder.build({
             ],
         },
         mac: {
-            strictVerify: false,
             category: 'public.app-category.utilities',
             icon: './electron/icon.icns',
         },
