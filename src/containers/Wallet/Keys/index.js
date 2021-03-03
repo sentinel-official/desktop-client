@@ -2,13 +2,13 @@ import * as PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Dropdown from '../../../components/Dropdown';
 import Icon from '../../../components/Icon';
+import Manage from './Manage';
 import ModalConfiguration from '../../common/ModalConfiguration';
 import ModalCreate from './ModalCreate';
 import ModalInfo from './ModalInfo';
 import ModalList from './ModalList';
 import React from 'react';
 import Settings from './Settings';
-import ShowList from './ShowList';
 import TextBox from '../../../components/TextBox';
 
 const Keys = ({
@@ -33,7 +33,7 @@ const Keys = ({
                     />
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
-                    <ShowList/>
+                    <Manage/>
                     <Settings/>
                 </Dropdown.Menu>
             </Dropdown>

@@ -21,7 +21,7 @@ const Submit = (props) => {
             return;
         }
 
-        props.onClick((error) => {
+        props.onClick(null, (error) => {
             if (error) {
                 return;
             }

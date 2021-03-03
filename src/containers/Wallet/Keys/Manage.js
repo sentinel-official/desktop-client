@@ -6,7 +6,7 @@ import Icon from '../../../components/Icon';
 import React from 'react';
 import TextBox from '../../../components/TextBox';
 
-const ShowList = ({ showKeysListModal }) => {
+const Manage = ({ showKeysListModal }) => {
     const onClick = () => {
         showKeysListModal();
     };
@@ -14,7 +14,7 @@ const ShowList = ({ showKeysListModal }) => {
     return (
         <Dropdown.Item
             key="viewKeys"
-            title="Show keys"
+            title="Manage keys"
             onClick={onClick}>
             <Icon
                 className="icon"
@@ -22,13 +22,13 @@ const ShowList = ({ showKeysListModal }) => {
             />
             <TextBox
                 className="dropdown-item-text"
-                value="Show keys"
+                value="Manage keys"
             />
         </Dropdown.Item>
     );
 };
 
-ShowList.propTypes = {
+Manage.propTypes = {
     showKeysListModal: PropTypes.func.isRequired,
 };
 
@@ -36,4 +36,4 @@ const actionsToProps = {
     showKeysListModal: showKeysListModal,
 };
 
-export default connect(null, actionsToProps)(ShowList);
+export default connect(null, actionsToProps)(Manage);

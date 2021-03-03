@@ -20,7 +20,9 @@ const createMainWindow = () => {
         minWidth: 852,
         title: 'Sentinel',
         webPreferences: {
+            enableWebSQL: false,
             preload: path.join(__dirname, 'preload.js'),
+            webgl: false,
         },
         width: 1280,
     });
@@ -40,7 +42,9 @@ app.on('window-all-closed', () => {
 });
 
 app.on('will-quit', () => {
-    globals.manager.kill();
+    if (globals.manager) {
+        globals.manager.kill();
+    }
 });
 
 app.on('activate', () => {
