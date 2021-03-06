@@ -29,6 +29,7 @@ builder.build({
         mac: {
             category: 'public.app-category.utilities',
             icon: './electron/icon.icns',
+            minimumSystemVersion: '10.12.0',
         },
         win: {
             icon: './electron/icon.ico',
