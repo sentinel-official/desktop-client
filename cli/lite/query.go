@@ -282,13 +282,13 @@ func (c *Client) QuerySession(id uint64) (session.Session, error) {
 	return result, nil
 }
 
-func (c *Client) QuerySessionsForAddress(address sdk.AccAddress, skip, limit int) (session.Sessions, error) {
+func (c *Client) QuerySessionsForAddress(address sdk.AccAddress, status hub.Status, skip, limit int) (session.Sessions, error) {
 	var (
 		result session.Sessions
 		path   = fmt.Sprintf("custom/%s/%s/%s", vpn.QuerierRoute, session.QuerierRoute, session.QuerySessionsForAddress)
 	)
 
-	if err := c.Query(path, session.NewQuerySessionsForAddressParams(address, skip, limit), &result); err != nil {
+	if err := c.Query(path, session.NewQuerySessionsForAddressParams(address, status, skip, limit), &result); err != nil {
 		return result, err
 	}
 

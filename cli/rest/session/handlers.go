@@ -16,6 +16,7 @@ import (
 	"time"
 
 	"github.com/gorilla/mux"
+	hub "github.com/sentinel-official/hub/types"
 
 	"github.com/sentinel-official/desktop-client/cli/context"
 	"github.com/sentinel-official/desktop-client/cli/services/wireguard"
@@ -46,12 +47,12 @@ func HandlerGetSession(ctx *context.Context) http.HandlerFunc {
 	}
 }
 
-func parseQuery(query url.Values) (skip, limit int, err error) {
+func parseQuery(query url.Values) (skip, limit int, status hub.Status, err error) {
 	skip = 0
 	if query.Get("skip") != "" {
 		skip, err = strconv.Atoi(query.Get("skip"))
 		if err != nil {
-			return 0, 0, err
+			return 0, 0, status, err
 		}
 	}
 
@@ -59,16 +60,18 @@ func parseQuery(query url.Values) (skip, limit int, err error) {
 	if query.Get("limit") != "" {
 		limit, err = strconv.Atoi(query.Get("limit"))
 		if err != nil {
-			return 0, 0, err
+			return 0, 0, status, err
 		}
 	}
 
-	return skip, limit, nil
+	status = hub.StatusFromString(query.Get("status"))
+
+	return skip, limit, status, nil
 }
 
 func HandlerGetSessionsForAddress(ctx *context.Context) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		skip, limit, err := parseQuery(r.URL.Query())
+		skip, limit, status, err := parseQuery(r.URL.Query())
 		if err != nil {
 			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1001, err.Error())
 			return
@@ -87,7 +90,7 @@ func HandlerGetSessionsForAddress(ctx *context.Context) http.HandlerFunc {
 			return
 		}
 
-		result, err := ctx.Client().QuerySessionsForAddress(address, skip, limit)
+		result, err := ctx.Client().QuerySessionsForAddress(address, status, skip, limit)
 		if err != nil {
 			utils.WriteErrorToResponse(w, http.StatusInternalServerError, 1004, err.Error())
 			return
