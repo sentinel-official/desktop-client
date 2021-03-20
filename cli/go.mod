@@ -8,7 +8,7 @@ require (
 	github.com/gorilla/mux v1.8.0
 	github.com/pelletier/go-toml v1.8.0
 	github.com/rs/cors v1.7.0
-	github.com/sentinel-official/hub v0.4.0-rc1
+	github.com/sentinel-official/hub v0.5.0
 	github.com/spf13/cobra v1.0.0
 	github.com/spf13/viper v1.7.1
 	github.com/tendermint/tendermint v0.33.9
@@ -16,6 +16,4 @@ require (
 	golang.org/x/net v0.0.0-20201010224723-4f7140c49acb
 )
 
-replace (
-	github.com/keybase/go-keychain => github.com/99designs/go-keychain v0.0.0-20191008050251-8e49817e8af4
-)
+replace github.com/keybase/go-keychain => github.com/99designs/go-keychain v0.0.0-20191008050251-8e49817e8af4
