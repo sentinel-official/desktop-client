@@ -1,21 +1,25 @@
 import * as PropTypes from 'prop-types';
 import { ValidateAmount } from './_validation';
 import { connect } from 'react-redux';
+import { floatCoinFromCoins, validAmountFromInput } from '../../../../utils/amount';
 import { setTxDelegateAmount } from '../../../../actions/transactions/delegate';
 import NumberInputField from '../../../../components/NumberInputField';
 import React from 'react';
 
 const Amount = (props) => {
+    const amount = floatCoinFromCoins(props.coins);
+
     const onChange = ({ target: { value } }) => {
-        value = parseFloat(value);
+        value = validAmountFromInput(amount, props.input.value, value);
+        if (value === undefined) {
+            return;
+        }
 
         props.onChange({
             value,
             error: ValidateAmount(value),
         });
     };
-
-    const value = props.input.value.toString();
 
     return (
         <NumberInputField
@@ -26,15 +30,21 @@ const Amount = (props) => {
             placeholder="Enter Amount"
             required={true}
             type="number"
-            value={value}
+            value={props.input.value}
             onChange={onChange}
         />
     );
 };
 
 Amount.propTypes = {
+    coins: PropTypes.arrayOf(
+        PropTypes.shape({
+            denom: PropTypes.string.isRequired,
+            value: PropTypes.number.isRequired,
+        }).isRequired,
+    ).isRequired,
     input: PropTypes.shape({
-        value: PropTypes.number.isRequired,
+        value: PropTypes.string.isRequired,
         error: PropTypes.shape({
             message: PropTypes.string.isRequired,
         }).isRequired,
@@ -44,6 +54,7 @@ Amount.propTypes = {
 
 const stateToProps = (state) => {
     return {
+        coins: state.account.info.coins,
         input: state.transactions.delegate.amount,
     };
 };

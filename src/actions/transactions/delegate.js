@@ -1,4 +1,4 @@
-import { COIN_DENOM, emptyFunc } from '../../constants/common';
+import { COIN_DECIMALS, COIN_DENOM, emptyFunc } from '../../constants/common';
 import {
     TX_DELEGATE_AMOUNT_SET,
     TX_DELEGATE_ERROR,
@@ -83,7 +83,7 @@ export const txDelegate = (cb = emptyFunc) => (dispatch, getState) => {
                 to: to.value.trim(),
                 amount: {
                     denom: COIN_DENOM,
-                    value: amount.value * Math.pow(10, 6),
+                    value: amount.value * Math.pow(10, COIN_DECIMALS),
                 },
                 memo: memo.value.trim(),
                 password: password.value.trim(),

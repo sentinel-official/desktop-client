@@ -1,4 +1,4 @@
-import { COIN_DENOM, emptyFunc } from '../../constants/common';
+import { COIN_DECIMALS, COIN_DENOM, emptyFunc } from '../../constants/common';
 import {
     TX_SEND_AMOUNT_SET,
     TX_SEND_ERROR,
@@ -78,7 +78,7 @@ export const txSend = (cb = emptyFunc) => (dispatch, getState) => {
                 to: decodeFromBech32(to.value.trim()),
                 amount: [{
                     denom: COIN_DENOM,
-                    value: amount.value * Math.pow(10, 6),
+                    value: amount.value * Math.pow(10, COIN_DECIMALS),
                 }],
                 memo: memo.value.trim(),
                 password: password.value.trim(),

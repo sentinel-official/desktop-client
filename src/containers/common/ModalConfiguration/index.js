@@ -9,6 +9,7 @@ import GasAdjustment from '../../Configuration/GasAdjustment';
 import GasPrices from '../../Configuration/GasPrices';
 import Label from '../../../components/Label';
 import Loader from '../../../components/Loader';
+import Password from '../../Configuration/Password';
 import RPCAddress from '../../Configuration/RPCAddress';
 import React, { useEffect, useState } from 'react';
 import SimulateAndExecute from '../../Configuration/SimulateAndExecute';
@@ -56,6 +57,19 @@ const ModalConfiguration = (props) => {
                         : <>
                             <div className="row">
                                 <div className="col-md-6">
+                                    <div className="form-group">
+                                        <div className="label-icon">
+                                            <Label
+                                                className="label"
+                                                label="Application Password"
+                                            />
+                                            <Tooltip
+                                                icon="tooltip"
+                                                value="Help"
+                                            />
+                                        </div>
+                                        <Password/>
+                                    </div>
                                     <div className="form-group">
                                         <div className="label-icon">
                                             <Label

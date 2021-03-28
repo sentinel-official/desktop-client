@@ -13,6 +13,8 @@ import {
     CONFIGURATION_GET_SUCCESS,
     CONFIGURATION_MODAL_HIDE,
     CONFIGURATION_MODAL_SHOW,
+    CONFIGURATION_PASSWORD_SET,
+    CONFIGURATION_PASSWORD_VISIBLE_SET,
     CONFIGURATION_PUT_ERROR,
     CONFIGURATION_PUT_IN_PROGRESS,
     CONFIGURATION_PUT_SUCCESS,
@@ -90,6 +92,20 @@ export const setConfigurationChainSimulateAndExecute = (data) => {
 export const setConfigurationChainTrustNode = (data) => {
     return {
         type: CONFIGURATION_CHAIN_TRUST_NODE_SET,
+        data,
+    };
+};
+
+export const setConfigurationPassword = (data) => {
+    return {
+        type: CONFIGURATION_PASSWORD_SET,
+        data,
+    };
+};
+
+export const setConfigurationPasswordVisible = (data) => {
+    return {
+        type: CONFIGURATION_PASSWORD_VISIBLE_SET,
         data,
     };
 };
@@ -195,12 +211,14 @@ export const putConfiguration = (from, cb = emptyFunc) => (dispatch, getState) =
                         simulateAndExecute,
                         trustNode,
                     },
+                    password,
                 },
             } = getState();
 
             const url = configurationPutURL();
             Axios.put(url, {
                 from: from || name,
+                password: password.value.trim() || '',
                 chain: {
                     broadcast_mode: broadcastMode.value.trim(),
                     fees: fees.value.trim(),

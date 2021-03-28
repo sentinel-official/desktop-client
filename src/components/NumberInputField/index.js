@@ -1,5 +1,6 @@
 import './index.css';
 import * as PropTypes from 'prop-types';
+import { numberInputInvalidKeyCodes, numberInputInvalidKeys } from '../../constants/common';
 import Icon from '../Icon';
 import React from 'react';
 import TextBox from '../TextBox';
@@ -15,6 +16,17 @@ const NumberInputField = ({
     onChange,
     min,
 }) => {
+    const onKeyDown = (event) => {
+        const prevent = (
+            numberInputInvalidKeys.includes(event.key) ||
+            numberInputInvalidKeyCodes.includes(event.keyCode)
+        );
+
+        if (prevent) {
+            event.preventDefault();
+        }
+    };
+
     const isError = error.message.length > 0;
 
     return (
@@ -28,6 +40,7 @@ const NumberInputField = ({
                 type={type}
                 value={value}
                 onChange={onChange}
+                onKeyDown={onKeyDown}
             />
             <Icon
                 className={isError ? 'error show' : 'error'}

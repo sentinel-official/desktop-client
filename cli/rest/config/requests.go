@@ -7,9 +7,10 @@ import (
 )
 
 type RequestUpdateConfig struct {
-	Setup bool   `json:"setup"`
-	From  string `json:"from"`
-	Chain struct {
+	Setup    bool   `json:"setup"`
+	Password string `json:"password"`
+	From     string `json:"from"`
+	Chain    struct {
 		BroadcastMode      string  `json:"broadcast_mode"`
 		Fees               string  `json:"fees"`
 		GasAdjustment      float64 `json:"gas_adjustment"`

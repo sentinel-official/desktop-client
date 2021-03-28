@@ -1,5 +1,5 @@
 import * as PropTypes from 'prop-types';
-import { COIN_DENOM } from '../../constants/common';
+import { COIN_DISPLAY_DENOM } from '../../constants/common';
 import { Tab, Tabs } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { getConfiguration, putConfiguration } from '../../actions/configuration';
@@ -133,7 +133,7 @@ const Wallet = (props) => {
                                         />
                                         <TextBox
                                             className="sub-text"
-                                            value={`(${COIN_DENOM})`}
+                                            value={`(${COIN_DISPLAY_DENOM})`}
                                         />
                                     </div>
                                     <Icon

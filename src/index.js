@@ -8,7 +8,6 @@ import Axios, { withInterceptors } from './services/axios';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import reducer from './reducers';
-import reportWebVitals from './reportWebVitals';
 import thunk from 'redux-thunk';
 
 const store = createStore(
@@ -29,4 +28,3 @@ const app = (
 );
 
 ReactDOM.render(app, document.getElementById('root'));
-reportWebVitals();

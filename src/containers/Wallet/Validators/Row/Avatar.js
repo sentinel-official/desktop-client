@@ -24,6 +24,10 @@ const Avatar = ({ identity }) => {
 
         Axios.get(url)
             .then((res) => {
+                if (res?.data?.them === undefined) {
+                    return;
+                }
+
                 const url = res?.data?.them[0]?.pictures?.primary?.url;
                 if (url) {
                     globals.validators.avatars[identity] = url;
