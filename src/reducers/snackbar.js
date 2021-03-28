@@ -1,6 +1,6 @@
 import { AUTHENTICATION_POST_ERROR } from '../constants/authentication';
 import { CONFIGURATION_GET_ERROR, CONFIGURATION_PUT_ERROR } from '../constants/configuration';
-import { KEYS_GET_ERROR, KEYS_POST_ERROR } from '../constants/keys';
+import { KEYS_DELETE_ERROR, KEYS_GET_ERROR, KEYS_POST_ERROR } from '../constants/keys';
 import { SNACKBAR_HIDE, SNACKBAR_SHOW } from '../constants/snackbar';
 import { capitalizeFirstLetter } from '../utils/string';
 
@@ -18,6 +18,7 @@ const _ = (state = {
     case CONFIGURATION_PUT_ERROR:
     case KEYS_GET_ERROR:
     case KEYS_POST_ERROR:
+    case KEYS_DELETE_ERROR:
         return {
             ...state,
             open: true,

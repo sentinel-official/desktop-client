@@ -1,8 +1,8 @@
 import { bech32 } from 'bech32';
 
 export const ValidateAmount = (value) => {
-    if (value === 0) {
-        return new Error('Value must be greater than 0');
+    if (value === '') {
+        return new Error('amount value is empty');
     }
 
     return new Error('');

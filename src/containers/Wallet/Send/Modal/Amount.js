@@ -6,8 +6,6 @@ import TextBox from '../../../../components/TextBox';
 const Amount = ({
     value,
 }) => {
-    value = value.toString();
-
     return (
         <TextBox
             className="address"
@@ -17,7 +15,7 @@ const Amount = ({
 };
 
 Amount.propTypes = {
-    value: PropTypes.number.isRequired,
+    value: PropTypes.string.isRequired,
 };
 
 const stateToProps = (state) => {

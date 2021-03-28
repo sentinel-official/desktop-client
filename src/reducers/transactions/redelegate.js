@@ -80,7 +80,7 @@ const to = (state = {
 };
 
 const amount = (state = {
-    value: 0,
+    value: '',
     error: {
         message: '',
     },
@@ -102,7 +102,7 @@ const amount = (state = {
     case TX_REDELEGATE_MODAL_HIDE:
         return {
             ...state,
-            value: 0,
+            value: '',
             error: {
                 ...state.error,
                 message: '',

@@ -1,6 +1,8 @@
 package config
 
 import (
+	"crypto/sha256"
+	"fmt"
 	"io/ioutil"
 	"net/http"
 	"os"
@@ -53,6 +55,9 @@ func HandlerUpdateConfig(ctx *context.Context) http.HandlerFunc {
 			client.WithFrom(body.From).
 				WithFromName(body.From).
 				WithFromAddress(info.GetAddress())
+		}
+		if body.Password != "" && body.Password != cfg.Password {
+			cfg.Password = fmt.Sprintf("%X", sha256.Sum256([]byte(body.Password)))
 		}
 		if body.Chain.BroadcastMode != cfg.Chain.BroadcastMode {
 			cfg.Chain.BroadcastMode = body.Chain.BroadcastMode

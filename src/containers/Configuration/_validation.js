@@ -27,6 +27,10 @@ export const ValidateGasPrices = (value) => {
     return new Error('');
 };
 
+export const ValidatePassword = (value) => {
+    return new Error('');
+};
+
 export const ValidateRPCAddress = (value) => {
     value = value.trim();
     if (value.length === 0) {

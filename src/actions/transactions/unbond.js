@@ -1,4 +1,4 @@
-import { COIN_DENOM, emptyFunc } from '../../constants/common';
+import { COIN_DECIMALS, COIN_DENOM, emptyFunc } from '../../constants/common';
 import {
     TX_UNBOND_AMOUNT_SET,
     TX_UNBOND_ERROR,
@@ -83,7 +83,7 @@ export const txUnbond = (cb = emptyFunc) => (dispatch, getState) => {
                 from: from.value.trim(),
                 amount: {
                     denom: COIN_DENOM,
-                    value: amount.value * Math.pow(10, 6),
+                    value: amount.value * Math.pow(10, COIN_DECIMALS),
                 },
                 memo: memo.value.trim(),
                 password: password.value.trim(),

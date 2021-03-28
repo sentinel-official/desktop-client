@@ -35,7 +35,7 @@ const Delegate = (props) => {
 
 Delegate.propTypes = {
     amount: PropTypes.shape({
-        value: PropTypes.number.isRequired,
+        value: PropTypes.string.isRequired,
         error: PropTypes.shape({
             message: PropTypes.string.isRequired,
         }).isRequired,

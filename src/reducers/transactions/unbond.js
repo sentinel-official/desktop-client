@@ -45,7 +45,7 @@ const from = (state = {
 };
 
 const amount = (state = {
-    value: 0,
+    value: '',
     error: {
         message: '',
     },

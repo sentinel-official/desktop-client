@@ -52,7 +52,7 @@ const Row = ({
                 {delegation}
             </TableCell>
             <TableCell>
-                {active ? <Delegate to={item.address}/> : null}
+                {item.jailed === false ? <Delegate to={item.address}/> : null}
                 {item.delegation?.shares ? <Redelegate from={item.address}/> : null}
                 {item.delegation?.shares ? <Unbond from={item.address}/> : null}
             </TableCell>
