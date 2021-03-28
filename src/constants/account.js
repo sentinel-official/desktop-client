@@ -1,10 +1,13 @@
-export const ACCOUNT_CREATION_STEP_SET = 'ACCOUNT_CREATION_STEP_SET';
+import { managerBaseURL } from './common';
 
-export const ACCOUNT_NAME_SET = 'ACCOUNT_NAME_SET';
-export const PASSWORD_SET = 'PASSWORD_SET';
+export const ACCOUNT_GET_IN_PROGRESS = 'ACCOUNT_GET_IN_PROGRESS';
+export const ACCOUNT_GET_SUCCESS = 'ACCOUNT_GET_SUCCESS';
+export const ACCOUNT_GET_ERROR = 'ACCOUNT_GET_ERROR';
 
-export const SEED_VALUES_SET = 'SEED_VALUES_SET';
-export const MISSING_SEED_INDEX = 'MISSING_SEED_INDEX';
-export const CONTINUE_BUTTON_SHOW = 'CONTINUE_BUTTON_SHOW';
+export const accountGetURL = (address) => {
+    const baseURL = managerBaseURL();
+    return `${baseURL}/accounts/${address}`;
+};
 
-export const ACCOUNT_CREATION_TAB_VALUE_SET = 'ACCOUNT_CREATION_TAB_VALUE_SET';
+export const ACCOUNT_PASSWORD_SET = 'ACCOUNT_PASSWORD_SET';
+export const ACCOUNT_PASSWORD_VISIBLE_SET = 'ACCOUNT_PASSWORD_VISIBLE_SET';

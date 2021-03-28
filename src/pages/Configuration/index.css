@@ -1,0 +1,61 @@
+.config-section {
+    display: flex;
+    justify-content: center;
+}
+
+.config-row {
+    width: 75%;
+    display: flex;
+    align-items: center;
+    place-items: flex-start;
+    margin: auto auto 50px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.config-section .section-body {
+    width: 100%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.login-title {
+    text-align: center;
+}
+
+.config-row .form-group {
+    margin: 15px 0;
+}
+
+.config-row .form-group.trust-node {
+    margin: 18px 0;
+}
+
+@media (max-width: 767px) {
+    .config-section .section-body {
+        padding-top: 20px;
+    }
+
+    .config-row {
+        display: block;
+        margin-bottom: 70px;
+    }
+}
+
+@media (max-width: 1200px) {
+    .config-row {
+        width: 90%;
+    }
+
+    .config-row .button-group button {
+        padding: 5px 12px;
+        font-size: 14px;
+    }
+}
+
+@media (min-width: 1201px) and (max-width: 1400px) {
+    .config-row {
+        width: 85%;
+    }
+}

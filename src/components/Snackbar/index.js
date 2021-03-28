@@ -1,22 +1,33 @@
-import { Slide, Snackbar as MaterialSnackbar } from '@material-ui/core';
-import * as PropTypes from 'prop-types';
-import React from 'react';
 import './index.css';
+import * as PropTypes from 'prop-types';
+import { Snackbar as MaterialSnackbar, Slide } from '@material-ui/core';
+import React from 'react';
 
-const TransitionUp = (props) => <Slide direction="up" {...props}/>;
+const TransitionUp = (props) => {
+    return <Slide direction="down" {...props}/>;
+};
 
-const Snackbar = (props) => {
+const Snackbar = ({
+    message,
+    open,
+    onClose,
+}) => {
     return (
         <MaterialSnackbar
-            autoHideDuration={5000}
-            className="snackbar"
             ContentProps={{
                 'aria-describedby': 'message-id',
             }}
-            message={<span id="message-id">{props.message}</span>}
-            open={props.open}
             TransitionComponent={TransitionUp}
-            onClose={props.onClose}/>
+            anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+            }}
+            autoHideDuration={5000}
+            className="snackbar"
+            message={<span id="message-id">{message}</span>}
+            open={open}
+            onClose={onClose}
+        />
     );
 };
 

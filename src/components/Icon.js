@@ -2,12 +2,15 @@ import * as PropTypes from 'prop-types';
 import React from 'react';
 import icons from '../assets/icons.svg';
 
-const Icon = (props) => {
+const Icon = ({
+    className,
+    icon,
+}) => {
     return (
         <svg
-            className={`icon icon-${props.className}`}
+            className={`icon icon-${className}`}
             viewBox="0 0 16 16">
-            <use xlinkHref={`${icons}#icon-${props.icon}`}/>
+            <use xlinkHref={`${icons}#icon-${icon}`}/>
         </svg>
     );
 };

@@ -1,58 +1,83 @@
 import {
-    ACCOUNT_CREATION_STEP_SET,
-    ACCOUNT_CREATION_TAB_VALUE_SET,
-    ACCOUNT_NAME_SET,
-    CONTINUE_BUTTON_SHOW,
-    MISSING_SEED_INDEX,
-    PASSWORD_SET,
-    SEED_VALUES_SET,
+    ACCOUNT_GET_ERROR,
+    ACCOUNT_GET_IN_PROGRESS,
+    ACCOUNT_GET_SUCCESS,
+    ACCOUNT_PASSWORD_SET,
+    ACCOUNT_PASSWORD_VISIBLE_SET,
+    accountGetURL,
 } from '../constants/account';
+import { emptyFunc } from '../constants/common';
+import Async from 'async';
+import Axios from '../services/axios';
+import Lodash from 'lodash';
 
-export const setAccountCreationStep = (value) => {
+export const getAccountInProgress = (data) => {
     return {
-        type: ACCOUNT_CREATION_STEP_SET,
-        value,
+        type: ACCOUNT_GET_IN_PROGRESS,
+        data,
     };
 };
 
-export const setAccountName = (value) => {
+export const getAccountSuccess = (data) => {
     return {
-        type: ACCOUNT_NAME_SET,
-        value,
+        type: ACCOUNT_GET_SUCCESS,
+        data,
     };
 };
 
-export const setPassword = (value) => {
+export const getAccountError = (data) => {
     return {
-        type: PASSWORD_SET,
-        value,
+        type: ACCOUNT_GET_ERROR,
+        data,
     };
 };
 
-export const setMissingSeed = (value) => {
+export const getAccount = (cb = emptyFunc) => (dispatch, getState) => {
+    Async.waterfall([
+        (next) => {
+            dispatch(getAccountInProgress(null));
+            next(null);
+        }, (next) => {
+            const {
+                keys: {
+                    items,
+                    name,
+                },
+            } = getState();
+
+            const item = Lodash.find(items, ['name', name]);
+            const url = accountGetURL(item.address);
+            Axios.get(url)
+                .then((res) => {
+                    try {
+                        next(null, res?.data?.result);
+                    } catch (e) {
+                        console.error(e);
+                    }
+                })
+                .catch((error) => {
+                    console.error(error);
+
+                    dispatch(getAccountError(error?.response?.data?.error || error));
+                    next(error);
+                });
+        }, (result, next) => {
+            dispatch(getAccountSuccess(result));
+            next(null);
+        },
+    ], cb);
+};
+
+export const setAccountPassword = (data) => {
     return {
-        type: MISSING_SEED_INDEX,
-        value,
+        type: ACCOUNT_PASSWORD_SET,
+        data,
     };
 };
 
-export const setSeedValues = (value) => {
+export const setAccountPasswordVisible = (data) => {
     return {
-        type: SEED_VALUES_SET,
-        value,
-    };
-};
-
-export const showContinueButton = (value) => {
-    return {
-        type: CONTINUE_BUTTON_SHOW,
-        value,
-    };
-};
-
-export const setTabValue = (value) => {
-    return {
-        type: ACCOUNT_CREATION_TAB_VALUE_SET,
-        value,
+        type: ACCOUNT_PASSWORD_VISIBLE_SET,
+        data,
     };
 };

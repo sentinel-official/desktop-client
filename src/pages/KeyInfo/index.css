@@ -1,0 +1,91 @@
+.account-create-row {
+    width: 50%;
+    margin: auto auto 50px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.account-create-section .create-section-body {
+    width: 100%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.login-title {
+    text-align: center;
+}
+
+@media (max-width: 962px) {
+    .account-create-row {
+        width: 80%;
+    }
+}
+
+.section-body .key-info {
+    width: 70%;
+    margin-bottom: 100px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.label-icon {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.label-icon .label {
+    margin: 0 10px 0 0;
+}
+
+.label-icon a {
+    margin: 0 0 5px 0 !important;
+    width: 24px;
+    height: 24px;
+    background: #DEE9EF;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.label-icon a .icon {
+    width: 14px;
+}
+
+.checkbox-section {
+    margin-right: 10px;
+}
+
+.checkbox-section .custom-checkbox .custom-control-label {
+    text-transform: none;
+}
+
+.checkbox-section .custom-control-label::before {
+    width: 1.4rem;
+    top: 0.05rem;
+    left: -1.8rem;
+    height: 1.4rem;
+    border-width: 2px;
+}
+
+.checkbox-section .custom-control-label::after {
+    top: 0.05rem;
+    width: 1.4rem;
+    left: -1.8rem;
+    height: 1.4rem;
+}
+
+.checkbox-section .custom-checkbox .custom-control-label::before {
+    border-radius: 50%;
+}
+
+.checkbox-section .custom-control-input:checked ~ .custom-control-label::before {
+    background-color: #FFFFFF;
+}
+
+.checkbox-section .custom-checkbox .custom-control-input:checked ~ .custom-control-label::after {
+    background-image: url('../../assets/Checkbox.svg');
+}

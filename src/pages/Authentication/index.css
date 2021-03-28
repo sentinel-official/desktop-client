@@ -1,0 +1,39 @@
+.auth-container {
+    display: flex;
+    height: 100vh;
+    flex-wrap: wrap;
+}
+
+.auth-container .col-md-4, .auth-container .col-md-8 {
+    padding: 0;
+}
+
+.login-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-body {
+    margin-bottom: 50px;
+    width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    min-width: 300px;
+}
+
+@media (max-width: 767px) {
+    .login-section {
+        flex: 1;
+    }
+
+    .auth-container .col-md-8 {
+        padding: 0 25px;
+    }
+}
+
+@media (max-width: 962px) {
+    .login-body {
+        width: 450px;
+    }
+}

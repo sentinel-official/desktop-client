@@ -1,143 +1,315 @@
-import Axios from 'axios';
 import {
-    ACTIVE_ACCOUNT_SET,
-    KEYS_ADD_ERROR,
-    KEYS_ADD_IN_PROGRESS,
-    KEYS_ADD_SUCCESS,
+    KEYS_CREATE_MODAL_HIDE,
+    KEYS_CREATE_MODAL_SHOW,
     KEYS_DELETE_ERROR,
     KEYS_DELETE_IN_PROGRESS,
+    KEYS_DELETE_NAME_SET,
+    KEYS_DELETE_PASSWORD_SET,
+    KEYS_DELETE_PASSWORD_VISIBLE_SET,
     KEYS_DELETE_SUCCESS,
-    KEYS_FETCH_ERROR,
-    KEYS_FETCH_IN_PROGRESS,
-    KEYS_FETCH_SUCCESS,
-    LOCAL_STORAGE_SEED_SET,
+    KEYS_GET_ERROR,
+    KEYS_GET_IN_PROGRESS,
+    KEYS_GET_SUCCESS,
+    KEYS_INFO_MODAL_HIDE,
+    KEYS_INFO_MODAL_SHOW,
+    KEYS_LIST_MODAL_HIDE,
+    KEYS_LIST_MODAL_SHOW,
+    KEYS_NAME_SET,
+    KEYS_PASSWORD_VISIBLE_SET,
+    KEYS_POST_ERROR,
+    KEYS_POST_IN_PROGRESS,
+    KEYS_POST_SUCCESS,
+    KEY_MNEMONIC_SET,
+    KEY_NAME_SET,
+    KEY_PASSWORD_SET,
+    keysDeleteURL,
+    keysGetURL,
+    keysPostURL,
 } from '../constants/keys';
-import { deleteAccountURL, KEYS_GET } from '../constants/url';
+import { emptyFunc } from '../constants/common';
+import Async from 'async';
+import Axios from '../services/axios';
 
-const fetchKeysInProgress = () => {
+export const getKeysInProgress = (data) => {
     return {
-        type: KEYS_FETCH_IN_PROGRESS,
+        type: KEYS_GET_IN_PROGRESS,
+        data,
     };
 };
 
-const fetchKeysSuccess = (items) => {
+export const getKeysSuccess = (data) => {
     return {
-        type: KEYS_FETCH_SUCCESS,
-        items,
+        type: KEYS_GET_SUCCESS,
+        data,
     };
 };
 
-const fetchKeysError = (error) => {
+export const getKeysError = (data) => {
     return {
-        type: KEYS_FETCH_ERROR,
-        error,
+        type: KEYS_GET_ERROR,
+        data,
     };
 };
 
-export const fetchKeys = (cb) => (dispatch) => {
-    dispatch(fetchKeysInProgress());
+export const getKeys = (history, cb = emptyFunc) => (dispatch, getState) => {
+    Async.waterfall([
+        (next) => {
+            dispatch(getKeysInProgress(null));
+            next(null);
+        }, (next) => {
+            const url = keysGetURL();
+            Axios.get(url)
+                .then((res) => {
+                    try {
+                        next(null, res?.data?.result);
+                    } catch (e) {
+                        console.error(e);
+                    }
+                })
+                .catch((error) => {
+                    console.error(error);
 
-    Axios.get(KEYS_GET)
-        .then((res) => {
-            dispatch(fetchKeysSuccess(res.data.result));
+                    dispatch(getKeysError(error?.response?.data?.error || error));
+                    next(error);
+                });
+        }, (result, next) => {
+            dispatch(getKeysSuccess(result));
+            next(null);
+        }, (next) => {
+            const { keys } = getState();
 
-            if (cb) {
-                cb(null);
+            if (keys.items.length === 0) {
+                history.push('/keys');
+                next(new Error(''));
+            } else {
+                next(null);
             }
-        })
-        .catch((error) => {
-            dispatch(fetchKeysError(error.response && error.response.data && error.response.data.error));
+        },
+    ], cb);
+};
 
-            if (cb) {
-                cb(error);
+export const setKeyName = (data) => {
+    return {
+        type: KEY_NAME_SET,
+        data,
+    };
+};
+
+export const setKeyPassword = (data) => {
+    return {
+        type: KEY_PASSWORD_SET,
+        data,
+    };
+};
+
+export const setKeyPasswordVisible = (data) => {
+    return {
+        type: KEYS_PASSWORD_VISIBLE_SET,
+        data,
+    };
+};
+
+export const setKeyMnemonic = (data) => {
+    return {
+        type: KEY_MNEMONIC_SET,
+        data,
+    };
+};
+
+export const postKeysInProgress = (data) => {
+    return {
+        type: KEYS_POST_IN_PROGRESS,
+        data,
+    };
+};
+
+export const postKeysSuccess = (data) => {
+    return {
+        type: KEYS_POST_SUCCESS,
+        data,
+    };
+};
+
+export const postKeysError = (data) => {
+    return {
+        type: KEYS_POST_ERROR,
+        data,
+    };
+};
+
+export const postKeys = (history, cb = emptyFunc) => (dispatch, getState) => {
+    Async.waterfall([
+        (next) => {
+            dispatch(postKeysInProgress(null));
+            next(null);
+        }, (next) => {
+            const {
+                keys: {
+                    post: {
+                        mnemonic,
+                        name,
+                        password,
+                    },
+                },
+            } = getState();
+
+            const url = keysPostURL();
+            Axios.post(url, {
+                mnemonic: mnemonic.value.trim(),
+                name: name.value.trim(),
+                password: password.value.trim(),
+            }).then((res) => {
+                try {
+                    next(null, res?.data?.result);
+                } catch (e) {
+                    console.error(e);
+                }
+            }).catch((error) => {
+                console.error(error);
+
+                dispatch(postKeysError(error?.response?.data?.error || error));
+                next(error);
+            });
+        }, (result, next) => {
+            dispatch(postKeysSuccess(result));
+            next(null);
+        }, (next) => {
+            if (history) {
+                const { keys } = getState();
+
+                history.push(`/keys/${keys.post.info.name}`);
+                next(new Error(''));
+            } else {
+                next(null);
             }
-        });
+        },
+    ], cb);
 };
 
-const addKeysInProgress = () => {
+export const showKeysListModal = (data) => {
     return {
-        type: KEYS_ADD_IN_PROGRESS,
+        type: KEYS_LIST_MODAL_SHOW,
+        data,
     };
 };
 
-const addKeysSuccess = (items) => {
+export const hideKeysListModal = (data) => {
     return {
-        type: KEYS_ADD_SUCCESS,
-        items,
+        type: KEYS_LIST_MODAL_HIDE,
+        data,
     };
 };
 
-const addKeysError = (error) => {
+export const showKeysCreateModal = (data) => {
     return {
-        type: KEYS_ADD_ERROR,
-        error,
+        type: KEYS_CREATE_MODAL_SHOW,
+        data,
     };
 };
 
-export const addKeys = (data, cb) => (dispatch) => {
-    dispatch(addKeysInProgress());
-
-    Axios.post(KEYS_GET, data)
-        .then((res) => {
-            if (res.data.result) {
-                localStorage.setItem('pub_key', res.data.result.pub_key && res.data.result.pub_key);
-                localStorage.setItem('address', res.data.result.address && res.data.result.address);
-                localStorage.setItem('mnemonic', res.data.result.mnemonic && res.data.result.mnemonic);
-            }
-            dispatch(addKeysSuccess(res.data.result));
-            cb(null);
-        })
-        .catch((error) => {
-            dispatch(addKeysError(error.response && error.response.data && error.response.data.error));
-            cb(error);
-        });
-};
-
-export const setActiveAccount = (value) => {
+export const hideKeysCreateModal = (data) => {
     return {
-        type: ACTIVE_ACCOUNT_SET,
-        value,
+        type: KEYS_CREATE_MODAL_HIDE,
+        data,
     };
 };
 
-const deleteKeysInProgress = () => {
+export const setKeysDeletePassword = (data) => {
+    return {
+        type: KEYS_DELETE_PASSWORD_SET,
+        data,
+    };
+};
+
+export const setKeysDeletePasswordVisible = (data) => {
+    return {
+        type: KEYS_DELETE_PASSWORD_VISIBLE_SET,
+        data,
+    };
+};
+
+export const setKeysDeleteNameSet = (data) => {
+    return {
+        type: KEYS_DELETE_NAME_SET,
+        data,
+    };
+};
+
+export const setKeysName = (data) => {
+    return {
+        type: KEYS_NAME_SET,
+        data,
+    };
+};
+
+export const showKeysInfoModal = (data) => {
+    return {
+        type: KEYS_INFO_MODAL_SHOW,
+        data,
+    };
+};
+
+export const hideKeysInfoModal = (data) => {
+    return {
+        type: KEYS_INFO_MODAL_HIDE,
+        data,
+    };
+};
+
+export const deleteKeysInProgress = (data) => {
     return {
         type: KEYS_DELETE_IN_PROGRESS,
+        data,
     };
 };
 
-const deleteKeysSuccess = (message) => {
+export const deleteKeysSuccess = (data) => {
     return {
         type: KEYS_DELETE_SUCCESS,
-        message,
+        data,
     };
 };
 
-const deleteKeysError = (error) => {
+export const deleteKeysError = (data) => {
     return {
         type: KEYS_DELETE_ERROR,
-        error,
+        data,
     };
 };
 
-export const deleteKeys = (data, name, cb) => (dispatch) => {
-    dispatch(deleteKeysInProgress());
+export const deleteKeys = (cb = emptyFunc) => (dispatch, getState) => {
+    Async.waterfall([
+        (next) => {
+            dispatch(deleteKeysInProgress(null));
+            next(null);
+        }, (next) => {
+            const {
+                keys: {
+                    delete: {
+                        name,
+                        password,
+                    },
+                },
+            } = getState();
 
-    const url = deleteAccountURL(name);
-    Axios.delete(url, { data: data })
-        .then((res) => {
-            dispatch(deleteKeysSuccess('Success'));
-            cb(null);
-        })
-        .catch((error) => {
-            dispatch(deleteKeysError(error.response && error.response.data && error.response.data.error));
-            cb(error);
-        });
-};
+            const url = keysDeleteURL(name);
+            Axios.post(url, {
+                password: password.value.trim(),
+            }).then((res) => {
+                try {
+                    next(null, res?.data?.result);
+                } catch (e) {
+                    console.error(e);
+                }
+            }).catch((error) => {
+                console.error(error);
 
-export const setLocalSeed = (value) => {
-    return {
-        type: LOCAL_STORAGE_SEED_SET,
-        value,
-    };
+                dispatch(deleteKeysError(error?.response?.data?.error || error));
+                next(error);
+            });
+        }, (result, next) => {
+            dispatch(deleteKeysSuccess(result));
+            next(null);
+        },
+    ], cb);
 };

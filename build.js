@@ -1,30 +1,38 @@
 const builder = require('electron-builder');
 
+const compression = process.env.NODE_ENV === 'production' ? 'maximum' : 'store';
+
 builder.build({
     targets: builder.Platform.current().createTarget(),
     config: {
-        productName: 'Sentinel Desktop',
-        compression: process.env.NODE_ENV === 'production' ? 'maximum' : 'store',
-        extraResources: [
-            'bin/manager',
+        files: [
+            './bin/**/*',
+            './build/**/*',
+            './electron/**/*',
         ],
+        extends: null,
+        asar: false,
+        appId: 'co.sentinel.desktop',
+        productName: 'Sentinel',
+        compression: compression,
         linux: {
             category: 'Utility',
-            executableName: 'sentinel-desktop',
-            icon: 'build/electron/',
-            target: process.env.NODE_ENV === 'production' ? [
+            executableName: 'sentinel',
+            icon: './electron/',
+            target: [
                 'AppImage',
                 'deb',
-            ] : [
                 'dir',
+                'tar.gz',
             ],
         },
         mac: {
             category: 'public.app-category.utilities',
-            icon: 'build/electron/icon.icns',
+            icon: './electron/icon.icns',
+            minimumSystemVersion: '10.12.0',
         },
         win: {
-            icon: 'build/electron/icon.ico',
+            icon: './electron/icon.ico',
         },
     },
 }).then(() => {

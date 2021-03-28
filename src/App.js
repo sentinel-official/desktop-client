@@ -1,20 +1,41 @@
+import './App.css';
+import { Redirect, Route, Switch, withRouter } from 'react-router-dom';
+import PrivateRoute from './containers/PrivateRoute';
 import React from 'react';
-import './app.css';
-import SideBar from './containers/Sidebar';
-import Snackbar from './containers/Snackbar';
-import Routes from './Router';
+import Snackbar from './containers/common/Snackbar';
+import routes from './routes';
 
 const App = () => {
     return (
-        <div className="sentinel">
-            <div className="main_content">
-                <SideBar/>
-                <div className="content_div scroll_bar_div">
-                    <Routes/>
-                </div>
-                <Snackbar/>
-            </div>
-        </div>
+        <>
+            <Switch>
+                {
+                    routes.map((route) => {
+                        if (route.private) {
+                            return (
+                                <PrivateRoute
+                                    key={route.path}
+                                    exact
+                                    component={withRouter(route.component)}
+                                    path={route.path}
+                                />
+                            );
+                        }
+
+                        return (
+                            <Route
+                                key={route.path}
+                                exact
+                                component={withRouter(route.component)}
+                                path={route.path}
+                            />
+                        );
+                    })
+                }
+                <Redirect to={'/'}/>
+            </Switch>
+            <Snackbar/>
+        </>
     );
 };
 

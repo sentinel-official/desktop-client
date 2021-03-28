@@ -1,0 +1,7 @@
+.splash-container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: radial-gradient(50% 166.98% at 50% 50%, #142E54 0%, #142D51 100%);
+}

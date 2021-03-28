@@ -1,86 +1,95 @@
 {
   "env": {
     "browser": true,
-    "commonjs": true,
-    "es6": true,
-    "node": true
+    "es2021": true
   },
   "extends": [
     "eslint:recommended",
     "plugin:react/recommended",
     "standard"
   ],
-  "globals": {
-    "Atomics": "readonly",
-    "SharedArrayBuffer": "readonly"
-  },
   "parserOptions": {
     "ecmaFeatures": {
       "jsx": true
     },
-    "ecmaVersion": 2018,
+    "ecmaVersion": 12,
     "sourceType": "module"
   },
   "plugins": [
-    "react"
+    "react",
+    "sort-imports-es6-autofix"
   ],
-  "settings": {
-    "react": {
-      "version": "detect"
-    }
-  },
   "rules": {
     "indent": [
-      2,
+      "error",
       4
     ],
     "arrow-parens": [
-      2,
+      "error",
       "always"
     ],
     "semi": [
-      2,
+      "error",
       "always"
     ],
     "comma-dangle": [
-      2,
+      "error",
       "always-multiline"
     ],
     "jsx-quotes": [
-      2
-    ],
-    "dot-notation": [
-      2,
-      {
-        "allowPattern": "^[0-9A-Za-z]+(_[0-9A-Za-z]+)+$"
-      }
+      "error"
     ],
     "curly": [
-      2,
+      "error",
       "all"
     ],
     "react/jsx-first-prop-new-line": [
-      2,
+      "error",
       "multiline-multiprop"
     ],
     "react/jsx-indent-props": [
-      2,
+      "error",
       "first"
     ],
     "react/sort-prop-types": [
-      2,
+      "error",
       {
         "callbacksLast": true,
         "requiredFirst": true
       }
     ],
     "react/jsx-sort-props": [
-      2,
+      "error",
       {
         "callbacksLast": true,
         "reservedFirst": true,
         "shorthandFirst": true
       }
-    ]
+    ],
+    "sort-imports-es6-autofix/sort-imports-es6": [
+      "warn",
+      {
+        "ignoreCase": false,
+        "ignoreMemberSort": false,
+        "memberSyntaxSortOrder": [
+          "none",
+          "all",
+          "multiple",
+          "single"
+        ]
+      }
+    ],
+    "dot-notation": [
+      "error",
+      {
+        "allowPattern": "^[a-z]+(_[a-z]+)+$"
+      }
+    ],
+    "react/sort-comp": 2
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
   }
 }

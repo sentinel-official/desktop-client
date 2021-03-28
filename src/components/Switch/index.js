@@ -1,25 +1,32 @@
-import { Switch as MaterialSwitch } from '@material-ui/core';
 import * as PropTypes from 'prop-types';
+import { Form } from 'react-bootstrap';
 import React from 'react';
-import './index.css';
 
-const Switch = (props) => {
+const Switch = ({
+    className,
+    id,
+    checked,
+    label,
+    onChange,
+}) => {
     return (
-        <MaterialSwitch
-            checked={props.value}
-            className="switch"
-            color="primary"
-            inputProps={props.inputProps}
-            name={props.name}
-            onChange={(e) => props.onChange(e.target.checked)}
+        <Form.Check
+            custom
+            checked={checked}
+            className={className}
+            id={id}
+            label={label}
+            type="switch"
+            onChange={onChange}
         />
     );
 };
 
 Switch.propTypes = {
-    inputProps: PropTypes.object.isRequired,
-    name: PropTypes.string.isRequired,
-    value: PropTypes.bool.isRequired,
+    checked: PropTypes.bool.isRequired,
+    className: PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired,
+    label: PropTypes.string.isRequired,
     onChange: PropTypes.func.isRequired,
 };
 

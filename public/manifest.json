@@ -1,6 +1,6 @@
 {
   "short_name": "Sentinel",
-  "name": "Sentinel Desktop Client",
+  "name": "Sentinel Desktop/Web Client",
   "icons": [
     {
       "src": "favicon.ico",
@@ -8,12 +8,12 @@
       "type": "image/x-icon"
     },
     {
-      "src": "assets/logos/sentinel_192x192.png",
+      "src": "assets/192x192.png",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "assets/logos/sentinel_512x512.png",
+      "src": "assets/512x512.png",
       "type": "image/png",
       "sizes": "512x512"
     }

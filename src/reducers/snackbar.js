@@ -1,44 +1,32 @@
-import { combineReducers } from 'redux';
-import { WITHDRAW_ALL_ERROR, WITHDRAW_ERROR } from '../constants/distribution';
-import { KEYS_ADD_ERROR, KEYS_DELETE_ERROR, KEYS_DELETE_SUCCESS, KEYS_FETCH_ERROR } from '../constants/keys';
-import { FAUCET_TRANSFER_FETCH_ERROR, FAUCET_TRANSFER_FETCH_SUCCESS } from '../constants/navbar';
+import { AUTHENTICATION_POST_ERROR } from '../constants/authentication';
+import { CONFIGURATION_GET_ERROR, CONFIGURATION_PUT_ERROR } from '../constants/configuration';
+import { KEYS_DELETE_ERROR, KEYS_GET_ERROR, KEYS_POST_ERROR } from '../constants/keys';
 import { SNACKBAR_HIDE, SNACKBAR_SHOW } from '../constants/snackbar';
-import {
-    ACTIVE_VALIDATORS_LIST_FETCH_ERROR,
-    DELEGATION_ERROR,
-    DELEGATIONS_VALIDATORS_LIST_FETCH_ERROR,
-    IN_ACTIVE_VALIDATORS_LIST_FETCH_ERROR,
-    OUT_OF_GAS,
-    RE_DELEGATE_ERROR,
-    UN_BOND_ERROR,
-    VALIDATORS_LIST_FETCH_ERROR,
-} from '../constants/staking';
-import {
-    OTHER_TRANSACTIONS_FETCH_ERROR,
-    RECEIVED_TRANSACTIONS_FETCH_ERROR,
-    SENT_TRANSACTIONS_FETCH_ERROR,
-    TRANSACTION_HASH_ERROR,
-    TRANSACTION_HASH_SUCCESS,
-} from '../constants/transactions';
-import { TRANSFER_TOKENS_ERROR, TRANSFER_TOKENS_SUCCESS, WALLET_DETAILS_GET_ERROR } from '../constants/wallet';
+import { capitalizeFirstLetter } from '../utils/string';
 
-const snackbar = (state = {
+const _ = (state = {
     open: false,
     message: '',
-}, action) => {
-    switch (action.type) {
-    case TRANSFER_TOKENS_SUCCESS:
-    case KEYS_DELETE_SUCCESS:
-    case TRANSACTION_HASH_SUCCESS:
-    case FAUCET_TRANSFER_FETCH_SUCCESS:
-    case OUT_OF_GAS:
+}, {
+    type,
+    data,
+}) => {
+    switch (type) {
     case SNACKBAR_SHOW:
+    case AUTHENTICATION_POST_ERROR:
+    case CONFIGURATION_GET_ERROR:
+    case CONFIGURATION_PUT_ERROR:
+    case KEYS_GET_ERROR:
+    case KEYS_POST_ERROR:
+    case KEYS_DELETE_ERROR:
         return {
+            ...state,
             open: true,
-            message: action.message,
+            message: capitalizeFirstLetter(data.message),
         };
     case SNACKBAR_HIDE:
         return {
+            ...state,
             open: false,
             message: '',
         };
@@ -47,45 +35,4 @@ const snackbar = (state = {
     }
 };
 
-const error = (state = {
-    module: '',
-    code: 0,
-}, action) => {
-    switch (action.type) {
-    case WALLET_DETAILS_GET_ERROR:
-    case DELEGATION_ERROR:
-    case WITHDRAW_ALL_ERROR:
-    case WITHDRAW_ERROR:
-    case KEYS_FETCH_ERROR:
-    case KEYS_ADD_ERROR:
-    case KEYS_DELETE_ERROR:
-    case FAUCET_TRANSFER_FETCH_ERROR:
-    case RE_DELEGATE_ERROR:
-    case VALIDATORS_LIST_FETCH_ERROR:
-    case DELEGATIONS_VALIDATORS_LIST_FETCH_ERROR:
-    case ACTIVE_VALIDATORS_LIST_FETCH_ERROR:
-    case IN_ACTIVE_VALIDATORS_LIST_FETCH_ERROR:
-    case TRANSACTION_HASH_ERROR:
-    case SENT_TRANSACTIONS_FETCH_ERROR:
-    case RECEIVED_TRANSACTIONS_FETCH_ERROR:
-    case OTHER_TRANSACTIONS_FETCH_ERROR:
-    case UN_BOND_ERROR:
-    case TRANSFER_TOKENS_ERROR:
-        return {
-            module: (action.error && action.error.module) || '',
-            code: (action.error && action.error.code) || '',
-        };
-    case SNACKBAR_HIDE:
-        return {
-            module: '',
-            code: 0,
-        };
-    default:
-        return state;
-    }
-};
-
-export default combineReducers({
-    snackbar,
-    error,
-});
+export default _;

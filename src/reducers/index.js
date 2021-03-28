@@ -1,24 +1,28 @@
 import { combineReducers } from 'redux';
 import account from './account';
-import distribution from './distribution';
+import authentication from './authentication';
+import coingecko from './coingecko';
+import configuration from './configuration';
+import delegations from './delegations';
 import keys from './keys';
-import language from './language';
-import navBar from './navbar';
-import sidebar from './sidebar';
+import proposals from './proposals';
 import snackbar from './snackbar';
-import staking from './staking';
+import splash from './splash';
 import transactions from './transactions';
-import wallet from './wallet';
+import validators from './validators';
 
-export default combineReducers({
-    sidebar,
+const root = combineReducers({
     account,
-    wallet,
-    transactions,
-    navBar,
-    staking,
-    distribution,
-    snackbar,
+    authentication,
+    coingecko,
+    configuration,
+    delegations,
     keys,
-    language,
+    proposals,
+    snackbar,
+    splash,
+    transactions,
+    validators,
 });
+
+export default root;

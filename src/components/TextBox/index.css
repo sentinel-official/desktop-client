@@ -1,0 +1,62 @@
+.splash-text {
+    font-family: 'Overpass', sans-serif;
+    position: absolute;
+    bottom: 40px;
+    color: rgba(255, 255, 255, 0.43);
+}
+
+.side-bar-text {
+    color: #8EA1C8;
+    font-size: 16px;
+    margin: 0;
+    padding: 10px 0;
+}
+
+.side-bar-text-logo {
+    font-family: 'Overpass', sans-serif;
+    font-weight: bold;
+    font-size: 24px;
+    text-align: center;
+    letter-spacing: 0.14em;
+    color: #FFFFFF;
+    margin: 0;
+}
+
+.side-bar-version-text {
+    font-family: 'Overpass', sans-serif;
+    font-size: 12px;
+    text-align: center;
+    color: #FFFFFF;
+    margin: 0;
+}
+
+.login-title, .title {
+    font-weight: 500;
+    font-size: 36px;
+    color: #142D51;
+}
+
+.value {
+    color: #252E40;
+    font-weight: normal;
+    font-size: 18px;
+    word-break: break-word;
+}
+
+.seed {
+    border: 2px dashed #8EA1C8;
+    padding: 15px;
+    line-height: 2;
+    word-spacing: 20px;
+}
+
+.seed-note {
+    font-size: 14px;
+    color: #8EA1C8;
+}
+
+@media (max-width: 767px) {
+    .login-title, .title {
+        font-size: 26px;
+    }
+}

@@ -1,57 +1,46 @@
-import { makeStyles, MenuItem, TextField } from '@material-ui/core';
-import classNames from 'classnames';
-import * as PropTypes from 'prop-types';
-import React from 'react';
 import './index.css';
+import * as PropTypes from 'prop-types';
+import MenuItem from '@material-ui/core/MenuItem';
+import React from 'react';
+import Select from '@material-ui/core/Select';
 
-const useStyles = makeStyles((theme) => ({
-    root: {
-        '& .MuiOutlinedInput-root': {
-            '&.Mui-focused fieldset': {
-                borderColor: '#1B253A',
-            },
-        },
-    },
-}));
-
-const SelectField = (props) => {
-    const onChange = (e) => props.onChange(e.target.value);
-
+const SelectField = ({
+    className,
+    items,
+    menuItemClassName,
+    value,
+    onChange,
+}) => {
     return (
-        <TextField
-            select
-            className={classNames(useStyles().root, 'select_field')}
-            id={props.id}
-            margin="normal"
-            name={props.name}
-            value={props.value}
-            variant="outlined"
+        <Select
+            className={className}
+            displayEmpty={true}
+            value={value}
             onChange={onChange}>
+            <MenuItem
+                key={0}
+                className={menuItemClassName}
+                value="">
+                {'None'}
+            </MenuItem>
             {
-                props.items.map((item) => (
+                items.map((item, index) => (
                     <MenuItem
-                        key={item.key || item.value || item.name}
-                        value={item.value || item.name}>
-                        {item.img}
-                        {item.name}
+                        key={index + 1}
+                        className={menuItemClassName}
+                        value={item.address}>
+                        {item.description.moniker}
                     </MenuItem>
                 ))
             }
-        </TextField>
+        </Select>
     );
 };
 
 SelectField.propTypes = {
-    id: PropTypes.string.isRequired,
-    items: PropTypes.arrayOf(
-        PropTypes.shape({
-            key: PropTypes.string,
-            name: PropTypes.string.isRequired,
-            value: PropTypes.string,
-            img: PropTypes.element,
-        }),
-    ).isRequired,
-    name: PropTypes.string.isRequired,
+    className: PropTypes.string.isRequired,
+    items: PropTypes.array.isRequired,
+    menuItemClassName: PropTypes.string.isRequired,
     value: PropTypes.string.isRequired,
     onChange: PropTypes.func.isRequired,
 };
