@@ -77,8 +77,8 @@ const totalVotingPower = (state = {
 };
 
 const sort = (state = {
-    by: 'amount.value',
-    order: 'desc',
+    by: '',
+    order: '',
 }, {
     type,
     data,

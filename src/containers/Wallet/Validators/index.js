@@ -100,6 +100,8 @@ const Validators = ({
         });
     });
 
+    items = Lodash.shuffle(items);
+
     items = Lodash.orderBy(items, [sort.by], [sort.order]);
 
     const onClick = (by) => {
