@@ -40,7 +40,12 @@ const Row = ({
                 </div>
             </TableCell>
             <TableCell>
-                {item.description.moniker}
+                <a
+                    href={item.description.website}
+                    rel="noopener noreferrer"
+                    target="_blank">
+                    {item.description.moniker}
+                </a>
             </TableCell>
             <TableCell>
                 {`${votingPower} (${votingPowerPercentage}%)`}
