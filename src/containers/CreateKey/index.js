@@ -26,7 +26,7 @@ const CreateKey = ({ history }) => {
                         <div className="form-group">
                             <Label
                                 className="label"
-                                label="Name"
+                                label="Name *"
                             />
                             <Name/>
                         </div>
@@ -34,7 +34,7 @@ const CreateKey = ({ history }) => {
                             <div className="form-group">
                                 <Label
                                     className="label"
-                                    label="PASSWORD"
+                                    label="Password *"
                                 />
                                 <Password/>
                             </div>
@@ -44,7 +44,7 @@ const CreateKey = ({ history }) => {
                         <div className="form-group">
                             <Label
                                 className="label"
-                                label="Mnemonic"
+                                label="Mnemonic (optional)"
                             />
                             <Mnemonic/>
                         </div>

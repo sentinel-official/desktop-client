@@ -7,6 +7,7 @@ import {
     KEYS_POST_ERROR,
     KEYS_POST_IN_PROGRESS,
     KEYS_POST_SUCCESS,
+    KEY_MNEMONIC_SAVED_SET,
     KEY_MNEMONIC_SET,
     KEY_NAME_SET,
     KEY_PASSWORD_SET,
@@ -90,6 +91,7 @@ const password = (state = {
 
 const mnemonic = (state = {
     value: '',
+    saved: false,
     error: {
         message: '',
     },
@@ -116,6 +118,11 @@ const mnemonic = (state = {
                 ...state.error,
                 message: '',
             },
+        };
+    case KEY_MNEMONIC_SAVED_SET:
+        return {
+            ...state,
+            saved: data.saved,
         };
     default:
         return state;
