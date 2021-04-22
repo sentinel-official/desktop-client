@@ -1,4 +1,5 @@
 import * as PropTypes from 'prop-types';
+import { addHTTPSURLSchema } from '../../../../utils/string';
 import { connect } from 'react-redux';
 import { encodeToBech32 } from '../../../../utils/bech32';
 import { isActive } from '../../../../utils/validator';
@@ -48,12 +49,16 @@ const Row = ({
                     container={true}
                     spacing={1}>
                     <Grid item>
-                        <a
-                            href={item.description.website}
-                            rel="noopener noreferrer"
-                            target="_blank">
-                            {item.description.moniker}
-                        </a>
+                        {
+                            item.description.website
+                                ? <a
+                                    href={addHTTPSURLSchema(item.description.website)}
+                                    rel="noopener noreferrer"
+                                    target="_blank">
+                                    {item.description.moniker}
+                                </a>
+                                : item.description.moniker
+                        }
                     </Grid>
                     <Grid item>
                         <Copy text={address}/>
