@@ -12,7 +12,7 @@ import Table from '../../../components/Table';
 const columns = [
     {
         id: '',
-        key: '',
+        key: 'rank',
         label: '',
         sort: false,
     },
@@ -42,7 +42,7 @@ const columns = [
     },
     {
         id: '',
-        key: '',
+        key: 'actions',
         label: '',
         sort: false,
     },

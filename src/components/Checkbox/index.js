@@ -4,12 +4,14 @@ import React from 'react';
 const Checkbox = ({
     checked,
     className,
+    id,
     onChange,
 }) => {
     return (
         <input
             checked={checked}
             className={className}
+            id={id}
             type="checkbox"
             onChange={onChange}
         />
@@ -19,6 +21,7 @@ const Checkbox = ({
 Checkbox.propTypes = {
     checked: PropTypes.bool.isRequired,
     className: PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired,
     onChange: PropTypes.func.isRequired,
 };
 

@@ -6,6 +6,7 @@ import React from 'react';
 
 const Note = ({
     checked,
+    id,
     setKeyMnemonicSaved,
 }) => {
     const onChange = ({ target: { checked } }) => {
@@ -18,6 +19,7 @@ const Note = ({
         <Checkbox
             checked={checked}
             className="custom-control-input"
+            id={id}
             onChange={onChange}
         />
     );
@@ -25,6 +27,7 @@ const Note = ({
 
 Note.propTypes = {
     checked: PropTypes.bool.isRequired,
+    id: PropTypes.string.isRequired,
     setKeyMnemonicSaved: PropTypes.func.isRequired,
 };
 

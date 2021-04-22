@@ -57,7 +57,7 @@ const KeyInfo = ({ history }) => {
                             <div className="login-button flex-center">
                                 <div className="checkbox-section">
                                     <div className="custom-control custom-checkbox">
-                                        <Note/>
+                                        <Note id="customCheck"/>
                                         <label
                                             className="custom-control-label"
                                             htmlFor="customCheck">
