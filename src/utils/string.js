@@ -5,6 +5,6 @@ export const capitalizeFirstLetter = (value) => {
     return value.charAt(0).toUpperCase() + value.slice(1);
 };
 
-export const addHTTPSURLSchema = (value) => {
+export const addHTTPSURLScheme = (value) => {
     return HTTPSURLRegex.test(value) ? value : `https://${value}`;
 };

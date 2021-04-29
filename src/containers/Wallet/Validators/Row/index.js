@@ -1,5 +1,5 @@
 import * as PropTypes from 'prop-types';
-import { addHTTPSURLSchema } from '../../../../utils/string';
+import { addHTTPSURLScheme } from '../../../../utils/string';
 import { connect } from 'react-redux';
 import { encodeToBech32 } from '../../../../utils/bech32';
 import { isActive } from '../../../../utils/validator';
@@ -52,7 +52,7 @@ const Row = ({
                         {
                             item.description.website
                                 ? <a
-                                    href={addHTTPSURLSchema(item.description.website)}
+                                    href={addHTTPSURLScheme(item.description.website)}
                                     rel="noopener noreferrer"
                                     target="_blank">
                                     {item.description.moniker}
