@@ -1,8 +1,12 @@
 import * as PropTypes from 'prop-types';
+import { addHTTPSURLScheme } from '../../../../utils/string';
 import { connect } from 'react-redux';
+import { encodeToBech32 } from '../../../../utils/bech32';
 import { isActive } from '../../../../utils/validator';
 import Avatar from './Avatar';
+import Copy from '../../../../components/Copy';
 import Delegate from './Delegate';
+import Grid from '@material-ui/core/Grid';
 import React from 'react';
 import Redelegate from './Redelegate';
 import TableCell from '@material-ui/core/TableCell';
@@ -14,6 +18,7 @@ const Row = ({
     totalVotingPower,
 }) => {
     const active = isActive(item);
+    const address = encodeToBech32(item.address, 'sentvaloper');
 
     let votingPower = item.amount.value * Math.pow(10, -6);
     let votingPowerPercentage = active
@@ -40,7 +45,25 @@ const Row = ({
                 </div>
             </TableCell>
             <TableCell>
-                {item.description.moniker}
+                <Grid
+                    container={true}
+                    spacing={1}>
+                    <Grid item>
+                        {
+                            item.description.website
+                                ? <a
+                                    href={addHTTPSURLScheme(item.description.website)}
+                                    rel="noopener noreferrer"
+                                    target="_blank">
+                                    {item.description.moniker}
+                                </a>
+                                : item.description.moniker
+                        }
+                    </Grid>
+                    <Grid item>
+                        <Copy text={address}/>
+                    </Grid>
+                </Grid>
             </TableCell>
             <TableCell>
                 {`${votingPower} (${votingPowerPercentage}%)`}

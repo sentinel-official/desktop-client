@@ -33,6 +33,16 @@ const SelectField = ({
                     </MenuItem>
                 ))
             }
+            {
+                items.length > 1 && (
+                    <MenuItem
+                        key={-1}
+                        className={menuItemClassName}
+                        value="All">
+                        All
+                    </MenuItem>
+                )
+            }
         </Select>
     );
 };

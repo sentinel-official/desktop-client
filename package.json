@@ -9,7 +9,7 @@
     "email": "support.desktop@sentinel.co",
     "url": "https://sentinel.co"
   },
-  "private": true,
+  "private": false,
   "devDependencies": {
     "@material-ui/core": "^4.11.3",
     "@material-ui/icons": "^4.11.2",
@@ -21,6 +21,8 @@
     "bootstrap": "^4.6.0",
     "electron": "^12.0.2",
     "electron-builder": "^22.10.5",
+    "electron-log": "^4.3.4",
+    "electron-updater": "^4.3.8",
     "env-cmd": "^10.1.0",
     "eslint": "^7.23.0",
     "eslint-config-standard": "^16.0.2",

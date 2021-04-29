@@ -5,7 +5,7 @@ import React from 'react';
 import TextBox from '../../../../components/TextBox';
 
 const FromAddress = (props) => {
-    const value = encodeToBech32(props.value, 'sentvaloper');
+    const value = props.value === 'All' ? props.value : encodeToBech32(props.value, 'sentvaloper');
 
     return (
         <TextBox

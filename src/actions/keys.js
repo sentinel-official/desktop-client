@@ -19,6 +19,7 @@ import {
     KEYS_POST_ERROR,
     KEYS_POST_IN_PROGRESS,
     KEYS_POST_SUCCESS,
+    KEY_MNEMONIC_SAVED_SET,
     KEY_MNEMONIC_SET,
     KEY_NAME_SET,
     KEY_PASSWORD_SET,
@@ -112,6 +113,13 @@ export const setKeyPasswordVisible = (data) => {
 export const setKeyMnemonic = (data) => {
     return {
         type: KEY_MNEMONIC_SET,
+        data,
+    };
+};
+
+export const setKeyMnemonicSaved = (data) => {
+    return {
+        type: KEY_MNEMONIC_SAVED_SET,
         data,
     };
 };

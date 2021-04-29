@@ -33,7 +33,7 @@ const ModalCreate = ({
                 <div className="form-group">
                     <Label
                         className="label"
-                        label="Name"
+                        label="Name *"
                     />
                     <Name/>
                 </div>
@@ -41,7 +41,7 @@ const ModalCreate = ({
                     <div className="form-group">
                         <Label
                             className=""
-                            label="Password"
+                            label="Password *"
                         />
                         <Password/>
                     </div>
@@ -51,7 +51,7 @@ const ModalCreate = ({
                 <div className="form-group">
                     <Label
                         className="label"
-                        label="Mnemonic"
+                        label="Mnemonic (optional)"
                     />
                     <Mnemonic/>
                 </div>
