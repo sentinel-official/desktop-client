@@ -9,13 +9,13 @@ const {
 const globals = require('./globals');
 
 ipcMain.on(MANAGER_LISTEN_URL_GET_REQUEST, (event, args) => {
-    console.log('EVENT:', event, 'ARGS:', args);
+    console.log('EVENT: MANAGER_LISTEN_URL_GET_REQUEST', 'ARGS:', args);
 
     event.returnValue = globals.listenURL;
 });
 
 ipcMain.on(MANAGER_START_REQUEST, (event, args) => {
-    console.log('EVENT:', event, 'ARGS:', args);
+    console.log('EVENT: MANAGER_START_REQUEST', 'ARGS:', args);
 
     const manager = spawn(
         path.join(__dirname, '../bin/manager'),
