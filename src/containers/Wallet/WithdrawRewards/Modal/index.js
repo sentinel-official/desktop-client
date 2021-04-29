@@ -33,7 +33,7 @@ const Modal = (props) => {
                 <div className="flex-item">
                     <Label
                         className=""
-                        label="From Address"
+                        label="From"
                     />
                     <FromAddress/>
                 </div>

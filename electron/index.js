@@ -7,6 +7,7 @@ const {
 const path = require('path');
 const menu = require('./menu');
 const globals = require('./globals');
+const { autoUpdater } = require('electron-updater');
 
 Menu.setApplicationMenu(menu);
 app.commandLine.appendSwitch('ignore-certificate-errors', 'true');
@@ -34,6 +35,7 @@ const createMainWindow = () => {
 };
 
 app.on('ready', () => {
+    autoUpdater.checkForUpdates().catch(console.error);
     createMainWindow();
 });
 

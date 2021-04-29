@@ -8,12 +8,16 @@ const FromName = ({
     items,
     value,
 }) => {
-    const item = Lodash.find(items, ['address', value]);
+    let name = value;
+    if (name !== 'All') {
+        const item = Lodash.find(items, ['address', value]);
+        name = item.description.moniker;
+    }
 
     return (
         <TextBox
             className="account-name"
-            value={item.description.moniker}
+            value={name}
         />
     );
 };

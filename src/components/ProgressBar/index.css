@@ -9,7 +9,7 @@
 }
 
 .bar-container > div > div > div {
-    background: #129EED;
+    background-color: #129EED !important;
     border: 3px solid #153F6A;
     box-sizing: border-box;
     box-shadow: 0 -2px 14px rgba(18, 158, 237, 0.3);

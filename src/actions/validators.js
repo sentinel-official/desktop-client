@@ -67,6 +67,7 @@ export const getValidators = (cb = emptyFunc) => (dispatch, getState) => {
                 }
             });
 
+            result = Lodash.shuffle(result);
             dispatch(getValidatorsSuccess(result));
             next(null);
         },
