@@ -19,8 +19,8 @@ const Memo = (props) => {
         <TextArea
             className="form-control seed-text-field"
             error={props.input.error}
-            name="Memo"
-            placeholder="Enter Memo"
+            name="Note"
+            placeholder="Enter Note"
             required={true}
             rows={3}
             value={props.input.value}

@@ -47,7 +47,7 @@ const ModalUnbond = (props) => {
                 <div className="form-group">
                     <Label
                         className=""
-                        label="Memo"
+                        label="Note"
                     />
                     <Memo/>
                 </div>

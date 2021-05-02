@@ -1,5 +1,5 @@
 import * as PropTypes from 'prop-types';
-import { ValidateMemo, ValidatePassword } from './_validation';
+import { ValidateMemo, ValidatePassword } from '../../../common/_validation';
 import { connect } from 'react-redux';
 import { txWithdraw } from '../../../../actions/transactions/withdraw';
 import Button from '../../../../components/Button';
