@@ -11,7 +11,7 @@ import {
     txDelegateURL,
 } from '../../constants/transactions';
 import Async from 'async';
-import Axios from '../../services/axios';
+import Axios from 'axios';
 import Lodash from 'lodash';
 
 export const setTxDelegateTo = (data) => {
@@ -63,7 +63,6 @@ export const txDelegate = (cb = emptyFunc) => (dispatch, getState) => {
             next(null);
         }, (next) => {
             const {
-                account: { password },
                 keys: {
                     items,
                     name,
@@ -86,7 +85,6 @@ export const txDelegate = (cb = emptyFunc) => (dispatch, getState) => {
                     value: amount.value * Math.pow(10, COIN_DECIMALS),
                 },
                 memo: memo.value.trim(),
-                password: password.value.trim(),
             })
                 .then((res) => {
                     try {

@@ -1,14 +1,12 @@
 import * as PropTypes from 'prop-types';
 import {
     ValidateBroadcastMode,
-    ValidateFees,
     ValidateGas,
     ValidateGasAdjustment,
     ValidateGasPrices,
     ValidateID,
     ValidateRPCAddress,
     ValidateSimulateAndExecute,
-    ValidateTrustNode,
 } from '../../Configuration/_validation';
 import { connect } from 'react-redux';
 import { hideConfigurationModal, putConfiguration } from '../../../actions/configuration';
@@ -32,14 +30,12 @@ const Submit = (props) => {
 
     const disabled = (
         ValidateBroadcastMode(props.chain.broadcastMode.value).message !== '' ||
-        ValidateFees(props.chain.fees.value).message !== '' ||
         ValidateGasAdjustment(props.chain.gasAdjustment.value).message !== '' ||
         ValidateGasPrices(props.chain.gasPrices.value).message !== '' ||
         ValidateGas(props.chain.gas.value).message !== '' ||
         ValidateID(props.chain.id.value).message !== '' ||
         ValidateRPCAddress(props.chain.RPCAddress.value).message !== '' ||
-        ValidateSimulateAndExecute(props.chain.simulateAndExecute.value).message !== '' ||
-        ValidateTrustNode(props.chain.trustNode.value).message !== ''
+        ValidateSimulateAndExecute(props.chain.simulateAndExecute.value).message !== ''
     );
 
     return (
@@ -57,12 +53,6 @@ const Submit = (props) => {
 Submit.propTypes = {
     chain: PropTypes.shape({
         broadcastMode: PropTypes.shape({
-            value: PropTypes.string.isRequired,
-            error: PropTypes.shape({
-                message: PropTypes.string.isRequired,
-            }).isRequired,
-        }).isRequired,
-        fees: PropTypes.shape({
             value: PropTypes.string.isRequired,
             error: PropTypes.shape({
                 message: PropTypes.string.isRequired,
@@ -104,12 +94,6 @@ Submit.propTypes = {
                 message: PropTypes.string.isRequired,
             }).isRequired,
         }).isRequired,
-        trustNode: PropTypes.shape({
-            value: PropTypes.bool.isRequired,
-            error: PropTypes.shape({
-                message: PropTypes.string.isRequired,
-            }).isRequired,
-        }).isRequired,
     }).isRequired,
     hideConfigurationModal: PropTypes.func.isRequired,
     inProgress: PropTypes.bool.isRequired,
@@ -120,14 +104,12 @@ const stateToProps = (state) => {
     return {
         chain: {
             broadcastMode: state.configuration.chain.broadcastMode,
-            fees: state.configuration.chain.fees,
             gasAdjustment: state.configuration.chain.gasAdjustment,
             gasPrices: state.configuration.chain.gasPrices,
             gas: state.configuration.chain.gas,
             id: state.configuration.chain.id,
             RPCAddress: state.configuration.chain.RPCAddress,
             simulateAndExecute: state.configuration.chain.simulateAndExecute,
-            trustNode: state.configuration.chain.trustNode,
         },
         inProgress: state.configuration.put.inProgress,
     };

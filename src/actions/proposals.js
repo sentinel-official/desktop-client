@@ -6,7 +6,7 @@ import {
 } from '../constants/proposals';
 import { emptyFunc } from '../constants/common';
 import Async from 'async';
-import Axios from '../services/axios';
+import Axios from 'axios';
 
 export const getProposalsInProgress = (data) => {
     return {

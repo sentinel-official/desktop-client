@@ -1,5 +1,4 @@
 import * as PropTypes from 'prop-types';
-import { ValidatePassword } from '../../../../../common/_validation';
 import { connect } from 'react-redux';
 import { deleteKeys, getKeys } from '../../../../../../actions/keys';
 import Button from '../../../../../../components/Button';
@@ -16,14 +15,10 @@ const Submit = (props) => {
         });
     };
 
-    const disabled = (
-        ValidatePassword(props.password.value).message !== ''
-    );
-
     return (
         <Button
             className="btn button-primary button-large"
-            disabled={disabled}
+            disabled={false}
             inProgress={props.inProgress}
             type="button"
             value="Delete"
@@ -36,18 +31,11 @@ Submit.propTypes = {
     deleteKeys: PropTypes.func.isRequired,
     getKeys: PropTypes.func.isRequired,
     inProgress: PropTypes.bool.isRequired,
-    password: PropTypes.shape({
-        value: PropTypes.string.isRequired,
-        error: PropTypes.shape({
-            message: PropTypes.string.isRequired,
-        }).isRequired,
-    }).isRequired,
 };
 
 const stateToProps = (state) => {
     return {
         inProgress: state.keys.delete.inProgress,
-        password: state.keys.delete.password,
     };
 };
 

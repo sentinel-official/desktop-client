@@ -25,16 +25,16 @@ const Header = ({
                                 {
                                     item.key === sort.by
                                         ? sort.order === 'asc'
-                                            ? <div className="sort-icon">
-                                                <Icon
-                                                    className="arrow-up"
-                                                    icon="arrowUp"/>
-                                            </div>
-                                            : <div className="sort-icon">
-                                                <Icon
-                                                    className="arrowDown"
-                                                    icon="arrowDown"/>
-                                            </div>
+                                        ? <div className="sort-icon">
+                                            <Icon
+                                                className="arrow-up"
+                                                icon="arrowUp"/>
+                                        </div>
+                                        : <div className="sort-icon">
+                                            <Icon
+                                                className="arrowDown"
+                                                icon="arrowDown"/>
+                                        </div>
                                         : null
                                 }
                             </div>

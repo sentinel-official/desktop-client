@@ -1,14 +1,7 @@
-import {
-    ACCOUNT_GET_ERROR,
-    ACCOUNT_GET_IN_PROGRESS,
-    ACCOUNT_GET_SUCCESS,
-    ACCOUNT_PASSWORD_SET,
-    ACCOUNT_PASSWORD_VISIBLE_SET,
-    accountGetURL,
-} from '../constants/account';
+import { ACCOUNT_GET_ERROR, ACCOUNT_GET_IN_PROGRESS, ACCOUNT_GET_SUCCESS, accountGetURL } from '../constants/account';
 import { emptyFunc } from '../constants/common';
 import Async from 'async';
-import Axios from '../services/axios';
+import Axios from 'axios';
 import Lodash from 'lodash';
 
 export const getAccountInProgress = (data) => {
@@ -66,18 +59,4 @@ export const getAccount = (cb = emptyFunc) => (dispatch, getState) => {
             next(null);
         },
     ], cb);
-};
-
-export const setAccountPassword = (data) => {
-    return {
-        type: ACCOUNT_PASSWORD_SET,
-        data,
-    };
-};
-
-export const setAccountPasswordVisible = (data) => {
-    return {
-        type: ACCOUNT_PASSWORD_VISIBLE_SET,
-        data,
-    };
 };

@@ -2,8 +2,6 @@ import * as PropTypes from 'prop-types';
 import { Modal as ReactModal } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { hideTxUnbondModal } from '../../../../actions/transactions/unbond';
-import AccountPassword from '../../../common/AccountPassword';
-import AccountPasswordView from '../../../common/AccountPasswordView';
 import Amount from './Amount';
 import FromAddress from './FromAddress';
 import FromName from './FromName';
@@ -50,16 +48,6 @@ const ModalUnbond = (props) => {
                         label="Memo"
                     />
                     <Memo/>
-                </div>
-                <div className="password-box">
-                    <div className="form-group">
-                        <Label
-                            className=""
-                            label="Password"
-                        />
-                        <AccountPassword/>
-                    </div>
-                    <AccountPasswordView/>
                 </div>
                 <Unbond/>
             </ReactModal.Body>

@@ -1,5 +1,4 @@
 import { connect } from 'react-redux';
-import { encodeToBech32 } from '../../../../../utils/bech32';
 import { setKeysDeleteNameSet } from '../../../../../actions/keys';
 import Collapse from '@material-ui/core/Collapse';
 import Delete from './Delete';
@@ -23,8 +22,6 @@ const Row = ({
     setKeysDeleteNameSet,
     putConfigurationInProgress,
 }) => {
-    address = encodeToBech32(address, 'sent');
-
     const onClickDelete = () => {
         if (name === expand) {
             return;

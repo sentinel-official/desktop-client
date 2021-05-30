@@ -1,20 +1,16 @@
 import {
     CONFIGURATION_CHAIN_BROADCAST_MODE_SET,
-    CONFIGURATION_CHAIN_FEES_SET,
     CONFIGURATION_CHAIN_GAS_ADJUSTMENT_SET,
     CONFIGURATION_CHAIN_GAS_PRICES_SET,
     CONFIGURATION_CHAIN_GAS_SET,
     CONFIGURATION_CHAIN_ID_SET,
     CONFIGURATION_CHAIN_RPC_ADDRESS_SET,
     CONFIGURATION_CHAIN_SIMULATE_AND_EXECUTE_SET,
-    CONFIGURATION_CHAIN_TRUST_NODE_SET,
     CONFIGURATION_GET_ERROR,
     CONFIGURATION_GET_IN_PROGRESS,
     CONFIGURATION_GET_SUCCESS,
     CONFIGURATION_MODAL_HIDE,
     CONFIGURATION_MODAL_SHOW,
-    CONFIGURATION_PASSWORD_SET,
-    CONFIGURATION_PASSWORD_VISIBLE_SET,
     CONFIGURATION_PUT_ERROR,
     CONFIGURATION_PUT_IN_PROGRESS,
     CONFIGURATION_PUT_SUCCESS,
@@ -24,7 +20,7 @@ import {
 } from '../constants/configuration';
 import { emptyFunc } from '../constants/common';
 import Async from 'async';
-import Axios from '../services/axios';
+import Axios from 'axios';
 
 export const setConfigurationSetup = (data) => {
     return {
@@ -36,13 +32,6 @@ export const setConfigurationSetup = (data) => {
 export const setConfigurationChainBroadcastMode = (data) => {
     return {
         type: CONFIGURATION_CHAIN_BROADCAST_MODE_SET,
-        data,
-    };
-};
-
-export const setConfigurationChainFees = (data) => {
-    return {
-        type: CONFIGURATION_CHAIN_FEES_SET,
         data,
     };
 };
@@ -85,27 +74,6 @@ export const setConfigurationChainRPCAddress = (data) => {
 export const setConfigurationChainSimulateAndExecute = (data) => {
     return {
         type: CONFIGURATION_CHAIN_SIMULATE_AND_EXECUTE_SET,
-        data,
-    };
-};
-
-export const setConfigurationChainTrustNode = (data) => {
-    return {
-        type: CONFIGURATION_CHAIN_TRUST_NODE_SET,
-        data,
-    };
-};
-
-export const setConfigurationPassword = (data) => {
-    return {
-        type: CONFIGURATION_PASSWORD_SET,
-        data,
-    };
-};
-
-export const setConfigurationPasswordVisible = (data) => {
-    return {
-        type: CONFIGURATION_PASSWORD_VISIBLE_SET,
         data,
     };
 };
@@ -202,33 +170,27 @@ export const putConfiguration = (from, cb = emptyFunc) => (dispatch, getState) =
                 configuration: {
                     chain: {
                         broadcastMode,
-                        fees,
                         gasAdjustment,
                         gasPrices,
                         gas,
                         id,
                         RPCAddress,
                         simulateAndExecute,
-                        trustNode,
                     },
-                    password,
                 },
             } = getState();
 
             const url = configurationPutURL();
             Axios.put(url, {
                 from: from || name,
-                password: password.value.trim() || '',
                 chain: {
                     broadcast_mode: broadcastMode.value.trim(),
-                    fees: fees.value.trim(),
                     gas_adjustment: gasAdjustment.value,
                     gas_prices: gasPrices.value.trim(),
                     gas: gas.value,
                     id: id.value.trim(),
                     rpc_address: RPCAddress.value.trim(),
                     simulate_and_execute: simulateAndExecute.value,
-                    trust_node: trustNode.value,
                 },
                 setup: false,
             })

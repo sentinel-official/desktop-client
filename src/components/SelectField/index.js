@@ -28,7 +28,7 @@ const SelectField = ({
                     <MenuItem
                         key={index + 1}
                         className={menuItemClassName}
-                        value={item.address}>
+                        value={item['operator_address']}>
                         {item.description.moniker}
                     </MenuItem>
                 ))

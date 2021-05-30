@@ -11,7 +11,7 @@ import {
 } from '../../constants/transactions';
 import { emptyFunc } from '../../constants/common';
 import Async from 'async';
-import Axios from '../../services/axios';
+import Axios from 'axios';
 
 export const setTxVoteID = (data) => {
     return {
@@ -62,7 +62,6 @@ export const txVote = (cb = emptyFunc) => (dispatch, getState) => {
             next(null);
         }, (next) => {
             const {
-                account: { password },
                 transactions: {
                     vote: {
                         id,
@@ -76,7 +75,6 @@ export const txVote = (cb = emptyFunc) => (dispatch, getState) => {
             Axios.post(url, {
                 option: option.value.trim(),
                 memo: memo.value.trim(),
-                password: password.value.trim(),
             })
                 .then((res) => {
                     try {

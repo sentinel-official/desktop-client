@@ -11,8 +11,8 @@
   },
   "private": false,
   "dependencies": {
-    "electron-log": "^4.3.4",
-    "electron-updater": "^4.3.8"
+    "electron-log": "^4.3.5",
+    "electron-updater": "^4.3.9"
   },
   "devDependencies": {
     "@material-ui/core": "^4.11.4",
@@ -23,15 +23,15 @@
     "bech32": "^2.0.0",
     "bignumber.js": "^9.0.1",
     "bootstrap": "^4.6.0",
-    "electron": "^12.0.5",
+    "electron": "^13.0.1",
     "electron-builder": "^22.10.5",
     "env-cmd": "^10.1.0",
-    "eslint": "^7.25.0",
-    "eslint-config-standard": "^16.0.2",
-    "eslint-plugin-import": "^2.22.1",
+    "eslint": "^7.27.0",
+    "eslint-config-standard": "^16.0.3",
+    "eslint-plugin-import": "^2.23.4",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^5.1.0",
-    "eslint-plugin-react": "^7.23.2",
+    "eslint-plugin-react": "^7.24.0",
     "eslint-plugin-sort-exports": "^0.4.0",
     "eslint-plugin-sort-imports-es6-autofix": "^0.6.0",
     "lodash": "^4.17.21",

@@ -10,9 +10,8 @@ import {
     TX_SEND_TO_SET,
     txSendURL,
 } from '../../constants/transactions';
-import { decodeFromBech32 } from '../../utils/bech32';
 import Async from 'async';
-import Axios from '../../services/axios';
+import Axios from 'axios';
 
 export const setTxSendTo = (data) => {
     return {
@@ -70,18 +69,16 @@ export const txSend = (cb = emptyFunc) => (dispatch, getState) => {
                         memo,
                     },
                 },
-                account: { password },
             } = getState();
 
             const url = txSendURL();
             Axios.post(url, {
-                to: decodeFromBech32(to.value.trim()),
+                to: to.value.trim(),
                 amount: [{
                     denom: COIN_DENOM,
                     value: amount.value * Math.pow(10, COIN_DECIMALS),
                 }],
                 memo: memo.value.trim(),
-                password: password.value.trim(),
             })
                 .then((res) => {
                     try {

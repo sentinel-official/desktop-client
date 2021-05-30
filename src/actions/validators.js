@@ -9,7 +9,7 @@ import {
 import { emptyFunc } from '../constants/common';
 import { isActive } from '../utils/validator';
 import Async from 'async';
-import Axios from '../services/axios';
+import Axios from 'axios';
 import Lodash from 'lodash';
 
 export const getValidatorsInProgress = (data) => {
@@ -39,7 +39,7 @@ export const getValidators = (cb = emptyFunc) => (dispatch, getState) => {
             dispatch(getValidatorsInProgress(null));
             next(null);
         }, (next) => {
-            const url = validatorsGetURL();
+            const url = `${validatorsGetURL()}?limit=1000`;
             Axios.get(url)
                 .then((res) => {
                     try {
@@ -55,7 +55,7 @@ export const getValidators = (cb = emptyFunc) => (dispatch, getState) => {
                     next(error);
                 });
         }, (result, next) => {
-            result = Lodash.orderBy(result, ['amount.value'], ['desc']);
+            result = Lodash.orderBy(result, ['tokens'], ['desc']);
 
             let activeIndex = 0;
             let inactiveIndex = 0;

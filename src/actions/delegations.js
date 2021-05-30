@@ -6,7 +6,7 @@ import {
 } from '../constants/delegations';
 import { emptyFunc } from '../constants/common';
 import Async from 'async';
-import Axios from '../services/axios';
+import Axios from 'axios';
 import Lodash from 'lodash';
 
 export const getDelegationsInProgress = (data) => {
