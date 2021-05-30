@@ -3,17 +3,16 @@ package staking
 import (
 	"time"
 
-	"github.com/cosmos/cosmos-sdk/x/staking"
+	stakingtypes "github.com/cosmos/cosmos-sdk/x/staking/types"
 	"github.com/tendermint/tendermint/libs/bytes"
-
-	"github.com/sentinel-official/desktop-client/cli/x/other"
 )
 
 type Description struct {
-	Moniker  string `json:"moniker"`
-	Identity string `json:"identity"`
-	Website  string `json:"website"`
-	Details  string `json:"details"`
+	Moniker         string `json:"moniker"`
+	Identity        string `json:"identity"`
+	Website         string `json:"website"`
+	SecurityContact string `json:"security_contact"`
+	Details         string `json:"details"`
 }
 
 type Commission struct {
@@ -24,60 +23,58 @@ type Commission struct {
 }
 
 type Validator struct {
-	Address          string `json:"address"`
-	ConsensusAddress string `json:"consensus_address"`
-	ConsensusPubKey  string `json:"consensus_pub_key"`
-
-	Description Description `json:"description"`
-	Commission  Commission  `json:"commission"`
-
-	Jailed     bool   `json:"jailed"`
-	BondStatus string `json:"bond_status"`
-
-	Amount            other.Coin `json:"amount"`
-	DelegatorShares   string     `json:"delegator_shares"`
-	MinSelfDelegation int64      `json:"min_self_delegation"`
-
-	UnbondingHeight         int64     `json:"unbonding_height"`
-	UnbondingCompletionTime time.Time `json:"unbonding_completion_time"`
+	OperatorAddress   string      `json:"operator_address"`
+	ConsensusPubKey   string      `json:"consensus_pub_key"`
+	Jailed            bool        `json:"jailed"`
+	Status            string      `json:"status"`
+	Tokens            int64       `json:"tokens"`
+	DelegatorShares   string      `json:"delegator_shares"`
+	Description       Description `json:"description"`
+	UnbondingHeight   int64       `json:"unbonding_height"`
+	UnbondingTime     time.Time   `json:"unbonding_time"`
+	Commission        Commission  `json:"commission"`
+	MinSelfDelegation int64       `json:"min_self_delegation"`
+	ConsensusPower    int64       `json:"consensus_power"`
 }
 
-func NewValidatorFromRaw(v staking.Validator) Validator {
+func NewValidatorFromRaw(item *stakingtypes.Validator) Validator {
+	if item == nil {
+		return Validator{}
+	}
+
 	return Validator{
-		Address:          bytes.HexBytes(v.OperatorAddress.Bytes()).String(),
-		ConsensusAddress: bytes.HexBytes(v.ConsPubKey.Address().Bytes()).String(),
-		ConsensusPubKey:  bytes.HexBytes(v.ConsPubKey.Bytes()).String(),
+		OperatorAddress: item.OperatorAddress,
+		ConsensusPubKey: bytes.HexBytes(item.ConsensusPubkey.GetValue()).String(),
+		Jailed:          item.Jailed,
+		Status:          item.Status.String(),
+		Tokens:          item.Tokens.Int64(),
+		DelegatorShares: item.DelegatorShares.String(),
 		Description: Description{
-			Moniker:  v.Description.Moniker,
-			Identity: v.Description.Identity,
-			Website:  v.Description.Website,
-			Details:  v.Description.Details,
+			Moniker:         item.Description.Moniker,
+			Identity:        item.Description.Identity,
+			Website:         item.Description.Website,
+			SecurityContact: item.Description.SecurityContact,
+			Details:         item.Description.Details,
 		},
+		UnbondingHeight: item.UnbondingHeight,
+		UnbondingTime:   item.UnbondingTime,
 		Commission: Commission{
-			Rate:          v.Commission.Rate.String(),
-			MaxRate:       v.Commission.MaxRate.String(),
-			MaxChangeRate: v.Commission.MaxChangeRate.String(),
-			UpdatedAt:     v.Commission.UpdateTime,
+			Rate:          item.Commission.Rate.String(),
+			MaxRate:       item.Commission.MaxRate.String(),
+			MaxChangeRate: item.Commission.MaxChangeRate.String(),
+			UpdatedAt:     item.Commission.UpdateTime,
 		},
-		Jailed:     v.Jailed,
-		BondStatus: v.Status.String(),
-		Amount: other.Coin{
-			Denom: "",
-			Value: v.Tokens.Int64(),
-		},
-		DelegatorShares:         v.DelegatorShares.String(),
-		MinSelfDelegation:       v.MinSelfDelegation.Int64(),
-		UnbondingHeight:         v.UnbondingHeight,
-		UnbondingCompletionTime: v.UnbondingCompletionTime,
+		MinSelfDelegation: item.MinSelfDelegation.Int64(),
+		ConsensusPower:    item.ConsensusPower(),
 	}
 }
 
 type Validators []Validator
 
-func NewValidatorsFromRaw(items staking.Validators) Validators {
+func NewValidatorsFromRaw(items stakingtypes.Validators) Validators {
 	validators := make(Validators, 0, len(items))
 	for _, item := range items {
-		validators = append(validators, NewValidatorFromRaw(item))
+		validators = append(validators, NewValidatorFromRaw(&item))
 	}
 
 	return validators

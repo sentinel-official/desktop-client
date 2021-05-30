@@ -1,37 +1,39 @@
 package auth
 
 import (
-	"github.com/cosmos/cosmos-sdk/x/auth/exported"
-	"github.com/tendermint/tendermint/libs/bytes"
+	authtypes "github.com/cosmos/cosmos-sdk/x/auth/types"
 
-	"github.com/sentinel-official/desktop-client/cli/x/other"
+	"github.com/sentinel-official/desktop-client/cli/x/common"
 )
 
 type Account struct {
 	Address  string      `json:"address"`
 	PubKey   string      `json:"pub_key"`
-	Coins    other.Coins `json:"coins"`
+	Balance  common.Coin `json:"balance"`
 	Sequence uint64      `json:"sequence"`
 	Number   uint64      `json:"number"`
 }
 
-func NewAccountFromRaw(item exported.Account) (account Account) {
+func (a Account) WithBalance(balance common.Coin) Account {
+	a.Balance = balance
+	return a
+}
+
+func NewAccountFromRaw(item authtypes.AccountI) Account {
 	if item == nil {
-		return Account{
-			Coins: other.Coins{other.Coin{Denom: "", Value: 0}},
-		}
+		return Account{}
 	}
 
-	if item.GetPubKey() == nil {
-		account.PubKey = ""
-	} else {
-		account.PubKey = bytes.HexBytes(item.GetPubKey().Bytes()).String()
+	return Account{
+		Address: item.GetAddress().String(),
+		PubKey: func() string {
+			if item.GetPubKey() == nil {
+				return ""
+			}
+
+			return item.GetPubKey().String()
+		}(),
+		Sequence: item.GetSequence(),
+		Number:   item.GetAccountNumber(),
 	}
-
-	account.Address = bytes.HexBytes(item.GetAddress().Bytes()).String()
-	account.Coins = other.NewCoinsFromRaw(item.GetCoins())
-	account.Sequence = item.GetSequence()
-	account.Number = item.GetAccountNumber()
-
-	return account
 }

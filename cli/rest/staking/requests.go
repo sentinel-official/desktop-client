@@ -2,18 +2,15 @@ package staking
 
 import (
 	"encoding/json"
-	"fmt"
 	"net/http"
 
-	"github.com/sentinel-official/desktop-client/cli/x/other"
+	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
 type RequestDelegate struct {
-	Memo     string `json:"memo"`
-	Password string `json:"password"`
-
-	To     string     `json:"to"`
-	Amount other.Coin `json:"amount"`
+	Memo string `json:"memo"`
+	To   string `json:"to"`
+	Coin string `json:"coin"`
 }
 
 func NewRequestDelegate(r *http.Request) (*RequestDelegate, error) {
@@ -26,26 +23,21 @@ func NewRequestDelegate(r *http.Request) (*RequestDelegate, error) {
 }
 
 func (r *RequestDelegate) Validate() error {
-	if r.Password == "" {
-		return fmt.Errorf("invalid field Password")
+	if _, err := sdk.ValAddressFromBech32(r.To); err != nil {
+		return err
 	}
-	if r.To == "" {
-		return fmt.Errorf("invalid field To")
-	}
-	if r.Amount.Value <= 0 || r.Amount.Denom == "" {
-		return fmt.Errorf("invalid field Amount")
+	if _, err := sdk.ParseCoinNormalized(r.Coin); err != nil {
+		return err
 	}
 
 	return nil
 }
 
 type RequestRedelegate struct {
-	Memo     string `json:"memo"`
-	Password string `json:"password"`
-
-	From   string     `json:"from"`
-	To     string     `json:"to"`
-	Amount other.Coin `json:"amount"`
+	Memo string `json:"memo"`
+	From string `json:"from"`
+	To   string `json:"to"`
+	Coin string `json:"amount"`
 }
 
 func NewRequestRedelegate(r *http.Request) (*RequestRedelegate, error) {
@@ -58,28 +50,23 @@ func NewRequestRedelegate(r *http.Request) (*RequestRedelegate, error) {
 }
 
 func (r *RequestRedelegate) Validate() error {
-	if r.Password == "" {
-		return fmt.Errorf("invalid field Password")
+	if _, err := sdk.ValAddressFromBech32(r.From); err != nil {
+		return err
 	}
-	if r.From == "" {
-		return fmt.Errorf("invalid field From")
+	if _, err := sdk.ValAddressFromBech32(r.To); err != nil {
+		return err
 	}
-	if r.To == "" {
-		return fmt.Errorf("invalid field To")
-	}
-	if r.Amount.Value <= 0 || r.Amount.Denom == "" {
-		return fmt.Errorf("invalid field Amount")
+	if _, err := sdk.ParseCoinNormalized(r.Coin); err != nil {
+		return err
 	}
 
 	return nil
 }
 
 type RequestUnbond struct {
-	Memo     string `json:"memo"`
-	Password string `json:"password"`
-
-	From   string     `json:"from"`
-	Amount other.Coin `json:"amount"`
+	Memo string `json:"memo"`
+	From string `json:"from"`
+	Coin string `json:"coin"`
 }
 
 func NewRequestUnbond(r *http.Request) (*RequestUnbond, error) {
@@ -92,14 +79,11 @@ func NewRequestUnbond(r *http.Request) (*RequestUnbond, error) {
 }
 
 func (r *RequestUnbond) Validate() error {
-	if r.Password == "" {
-		return fmt.Errorf("invalid field Password")
+	if _, err := sdk.ValAddressFromBech32(r.From); err != nil {
+		return err
 	}
-	if r.From == "" {
-		return fmt.Errorf("invalid field From")
-	}
-	if r.Amount.Value <= 0 || r.Amount.Denom == "" {
-		return fmt.Errorf("invalid field Amount")
+	if _, err := sdk.ParseCoinNormalized(r.Coin); err != nil {
+		return err
 	}
 
 	return nil

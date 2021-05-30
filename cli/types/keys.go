@@ -16,4 +16,5 @@ var (
 
 		return filepath.Join(home, ".sentinel", "client")
 	}()
+	Denom = "udvpn"
 )

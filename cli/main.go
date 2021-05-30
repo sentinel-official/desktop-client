@@ -42,16 +42,20 @@ func main() {
 					}
 				}
 
-				if err := cfg.LoadFromPath(filepath.Join(home, "config.toml")); err != nil {
+				cfgPath := filepath.Join(home, "config.toml")
+				if _, err := os.Stat(cfgPath); err != nil {
+					if err := cfg.SaveToPath(cfgPath); err != nil {
+						return err
+					}
+				}
+
+				if err := cfg.LoadFromPath(cfgPath); err != nil {
 					return err
 				}
 
 				defCfg := types.NewConfig().WithDefaultValues()
 				if viper.GetString(flagChainBroadcastMode) != defCfg.Chain.BroadcastMode {
 					cfg.Chain.BroadcastMode = viper.GetString(flagChainBroadcastMode)
-				}
-				if viper.GetString(flagChainFees) != defCfg.Chain.Fees {
-					cfg.Chain.Fees = viper.GetString(flagChainFees)
 				}
 				if viper.GetFloat64(flagChainGasAdjustment) != defCfg.Chain.GasAdjustment {
 					cfg.Chain.GasAdjustment = viper.GetFloat64(flagChainGasAdjustment)
@@ -71,9 +75,6 @@ func main() {
 				if viper.GetBool(flagChainSimulateAndExecute) != defCfg.Chain.SimulateAndExecute {
 					cfg.Chain.SimulateAndExecute = viper.GetBool(flagChainSimulateAndExecute)
 				}
-				if viper.GetBool(flagChainTrustNode) != defCfg.Chain.TrustNode {
-					cfg.Chain.TrustNode = viper.GetBool(flagChainTrustNode)
-				}
 
 				return cfg.Validate()
 			},
@@ -82,14 +83,12 @@ func main() {
 
 	root.PersistentFlags().String(types.FlagHome, types.DefaultHomeDirectory, "")
 	root.PersistentFlags().String(flagChainBroadcastMode, cfg.Chain.BroadcastMode, "")
-	root.PersistentFlags().String(flagChainFees, cfg.Chain.Fees, "")
 	root.PersistentFlags().Float64(flagChainGasAdjustment, cfg.Chain.GasAdjustment, "")
 	root.PersistentFlags().String(flagChainGasPrices, cfg.Chain.GasPrices, "")
 	root.PersistentFlags().Uint64(flagChainGas, cfg.Chain.Gas, "")
 	root.PersistentFlags().String(flagChainID, cfg.Chain.ID, "")
 	root.PersistentFlags().String(flagChainRPCAddress, cfg.Chain.RPCAddress, "")
 	root.PersistentFlags().Bool(flagChainSimulateAndExecute, cfg.Chain.SimulateAndExecute, "")
-	root.PersistentFlags().Bool(flagChainTrustNode, cfg.Chain.TrustNode, "")
 
 	_ = viper.BindPFlag(types.FlagHome, root.PersistentFlags().Lookup(types.FlagHome))
 	_ = viper.BindPFlag(flagChainBroadcastMode, root.PersistentFlags().Lookup(flagChainBroadcastMode))

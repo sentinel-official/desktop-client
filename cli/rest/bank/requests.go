@@ -2,18 +2,15 @@ package bank
 
 import (
 	"encoding/json"
-	"fmt"
 	"net/http"
 
-	"github.com/sentinel-official/desktop-client/cli/x/other"
+	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
 type RequestSend struct {
-	Memo     string `json:"memo"`
-	Password string `json:"password"`
-
-	To     string      `json:"to"`
-	Amount other.Coins `json:"amount"`
+	Memo  string `json:"memo"`
+	To    string `json:"to"`
+	Coins string `json:"coins"`
 }
 
 func NewRequestSend(r *http.Request) (*RequestSend, error) {
@@ -26,14 +23,11 @@ func NewRequestSend(r *http.Request) (*RequestSend, error) {
 }
 
 func (r *RequestSend) Validate() error {
-	if r.Password == "" {
-		return fmt.Errorf("invalid field Password")
+	if _, err := sdk.AccAddressFromBech32(r.To); err != nil {
+		return err
 	}
-	if r.To == "" {
-		return fmt.Errorf("invalid field To")
-	}
-	if len(r.Amount) == 0 {
-		return fmt.Errorf("invalid field Amount")
+	if _, err := sdk.ParseCoinsNormalized(r.Coins); err != nil {
+		return err
 	}
 
 	return nil

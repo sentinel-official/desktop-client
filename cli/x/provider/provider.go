@@ -1,8 +1,7 @@
 package provider
 
 import (
-	"github.com/sentinel-official/hub/x/provider"
-	"github.com/tendermint/tendermint/libs/bytes"
+	providertypes "github.com/sentinel-official/hub/x/provider/types"
 )
 
 type Provider struct {
@@ -13,9 +12,9 @@ type Provider struct {
 	Description string `json:"description"`
 }
 
-func NewProviderFromRaw(item provider.Provider) Provider {
+func NewProviderFromRaw(item *providertypes.Provider) Provider {
 	return Provider{
-		Address:     bytes.HexBytes(item.Address.Bytes()).String(),
+		Address:     item.Address,
 		Name:        item.Name,
 		Identity:    item.Identity,
 		Website:     item.Website,
@@ -25,10 +24,10 @@ func NewProviderFromRaw(item provider.Provider) Provider {
 
 type Providers []Provider
 
-func NewProvidersFromRaw(items provider.Providers) Providers {
+func NewProvidersFromRaw(items providertypes.Providers) Providers {
 	providers := make(Providers, 0, len(items))
 	for _, item := range items {
-		providers = append(providers, NewProviderFromRaw(item))
+		providers = append(providers, NewProviderFromRaw(&item))
 	}
 
 	return providers

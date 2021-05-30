@@ -1,14 +1,13 @@
 package subscription
 
 import (
-	"encoding/hex"
 	"net/http"
-	"net/url"
 	"strconv"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/gorilla/mux"
-	hub "github.com/sentinel-official/hub/types"
+	hubtypes "github.com/sentinel-official/hub/types"
+	subscriptiontypes "github.com/sentinel-official/hub/x/subscription/types"
 
 	"github.com/sentinel-official/desktop-client/cli/context"
 	"github.com/sentinel-official/desktop-client/cli/utils"
@@ -17,7 +16,9 @@ import (
 
 func HandlerGetSubscription(ctx *context.Context) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		vars := mux.Vars(r)
+		var (
+			vars = mux.Vars(r)
+		)
 
 		id, err := strconv.ParseUint(vars["id"], 10, 64)
 		if err != nil {
@@ -25,105 +26,100 @@ func HandlerGetSubscription(ctx *context.Context) http.HandlerFunc {
 			return
 		}
 
-		result, err := ctx.Client().QuerySubscription(id)
+		res, err := ctx.Client().QuerySubscription(id)
 		if err != nil {
 			utils.WriteErrorToResponse(w, http.StatusInternalServerError, 1002, err.Error())
 			return
 		}
 
-		items := subscription.NewSubscriptionFromRaw(result)
-		utils.WriteResultToResponse(w, http.StatusOK, items)
+		item := subscription.NewSubscriptionFromRaw(res)
+		utils.WriteResultToResponse(w, http.StatusOK, item)
 	}
-}
-
-func parseQuery(query url.Values) (status hub.Status, skip, limit int, err error) {
-	skip = 0
-	if query.Get("skip") != "" {
-		skip, err = strconv.Atoi(query.Get("skip"))
-		if err != nil {
-			return status, 0, 0, err
-		}
-	}
-
-	limit = 25
-	if query.Get("limit") != "" {
-		limit, err = strconv.Atoi(query.Get("limit"))
-		if err != nil {
-			return status, 0, 0, err
-		}
-	}
-
-	if query.Get("status") != "" {
-		status = hub.StatusFromString(query.Get("status"))
-	}
-
-	return status, skip, limit, nil
 }
 
 func HandlerGetSubscriptionsForAddress(ctx *context.Context) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		status, skip, limit, err := parseQuery(r.URL.Query())
+		var (
+			values = r.URL.Query()
+			vars   = mux.Vars(r)
+			status = hubtypes.StatusFromString(values.Get("status"))
+		)
+
+		address, err := sdk.AccAddressFromBech32(vars["address"])
 		if err != nil {
 			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1001, err.Error())
 			return
 		}
-
-		vars := mux.Vars(r)
-
-		if ctx.Client().FromAddressHex() != vars["address"] {
+		if !ctx.Client().FromAddress().Equals(address) {
 			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1002, "")
 			return
 		}
 
-		address, err := hex.DecodeString(vars["address"])
+		pagination, err := utils.ParsePaginationQuery(values)
 		if err != nil {
-			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1003, err.Error())
+			utils.WriteErrorToResponse(w, http.StatusInternalServerError, 1003, err.Error())
 			return
 		}
 
-		result, err := ctx.Client().QuerySubscriptionsForAddress(address, status, skip, limit)
+		res, err := ctx.Client().QuerySubscriptionsForAddress(address, status, pagination)
 		if err != nil {
 			utils.WriteErrorToResponse(w, http.StatusInternalServerError, 1004, err.Error())
 			return
 		}
 
-		items := subscription.NewSubscriptionsFromRaw(result)
+		items := subscription.NewSubscriptionsFromRaw(res)
 		utils.WriteResultToResponse(w, http.StatusOK, items)
 	}
 }
 
 func HandlerAddSubscription(ctx *context.Context) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		vars := mux.Vars(r)
+		var (
+			vars = mux.Vars(r)
+		)
 
-		if ctx.Client().FromAddressHex() != vars["address"] {
-			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1001, "")
+		address, err := sdk.AccAddressFromBech32(vars["address"])
+		if err != nil {
+			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1001, err.Error())
+			return
+		}
+		if !ctx.Client().FromAddress().Equals(address) {
+			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1002, "")
 			return
 		}
 
 		body, err := NewRequestAddSubscription(r)
 		if err != nil {
-			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1002, err.Error())
-			return
-		}
-		if err := body.Validate(); err != nil {
 			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1003, err.Error())
 			return
 		}
+		if err := body.Validate(); err != nil {
+			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1004, err.Error())
+			return
+		}
 
-		var message sdk.Msg
+		var (
+			message sdk.Msg
+			from    = ctx.Client().FromAddress()
+		)
+
 		if body.ID == 0 {
-			message, err = subscription.NewMsgSubscribeToNode(ctx.AddressHex(), body.To, body.Amount).Raw()
-			if err != nil {
-				utils.WriteErrorToResponse(w, http.StatusInternalServerError, 1004, err.Error())
-				return
-			}
+			var (
+				to, _   = hubtypes.NodeAddressFromBech32(body.To)
+				coin, _ = sdk.ParseCoinNormalized(body.Coin)
+			)
+
+			message = subscriptiontypes.NewMsgSubscribeToNodeRequest(
+				from,
+				to,
+				coin,
+			)
 		} else {
-			message, err = subscription.NewMsgSubscribeToPlan(ctx.AddressHex(), body.ID, body.Denom).Raw()
-			if err != nil {
-				utils.WriteErrorToResponse(w, http.StatusInternalServerError, 1004, err.Error())
-				return
-			}
+			message = subscriptiontypes.NewMsgSubscribeToPlanRequest(
+				from,
+				body.ID,
+				body.Denom,
+			)
 		}
 
 		if err := message.ValidateBasic(); err != nil {
@@ -131,7 +127,7 @@ func HandlerAddSubscription(ctx *context.Context) http.HandlerFunc {
 			return
 		}
 
-		res, err := ctx.Client().Tx(body.Memo, body.Password, message)
+		res, err := ctx.Client().BroadcastTx(body.Memo, message)
 		if err != nil {
 			utils.WriteErrorToResponse(w, http.StatusInternalServerError, 1006, err.Error())
 			return
@@ -143,41 +139,49 @@ func HandlerAddSubscription(ctx *context.Context) http.HandlerFunc {
 
 func HandlerCancelSubscription(ctx *context.Context) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		vars := mux.Vars(r)
+		var (
+			vars = mux.Vars(r)
+		)
 
-		if ctx.Client().FromAddressHex() != vars["address"] {
-			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1001, "")
+		address, err := sdk.AccAddressFromBech32(vars["address"])
+		if err != nil {
+			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1001, err.Error())
+			return
+		}
+		if !ctx.Client().FromAddress().Equals(address) {
+			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1002, "")
 			return
 		}
 
 		id, err := strconv.ParseUint(vars["id"], 10, 64)
 		if err != nil {
-			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1002, err.Error())
+			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1003, err.Error())
 			return
 		}
 
 		body, err := NewRequestCancelSubscription(r)
 		if err != nil {
-			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1003, err.Error())
-			return
-		}
-		if err := body.Validate(); err != nil {
 			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1004, err.Error())
 			return
 		}
-
-		message, err := subscription.NewMsgCancel(ctx.AddressHex(), id).Raw()
-		if err != nil {
-			utils.WriteErrorToResponse(w, http.StatusInternalServerError, 1005, err.Error())
+		if err := body.Validate(); err != nil {
+			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1005, err.Error())
 			return
 		}
+
+		var (
+			message = subscriptiontypes.NewMsgCancelRequest(
+				ctx.Client().FromAddress(),
+				id,
+			)
+		)
 
 		if err := message.ValidateBasic(); err != nil {
 			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1006, err.Error())
 			return
 		}
 
-		res, err := ctx.Client().Tx(body.Memo, body.Password, message)
+		res, err := ctx.Client().BroadcastTx(body.Memo, message)
 		if err != nil {
 			utils.WriteErrorToResponse(w, http.StatusInternalServerError, 1007, err.Error())
 			return
@@ -189,34 +193,43 @@ func HandlerCancelSubscription(ctx *context.Context) http.HandlerFunc {
 
 func HandlerGetQuota(ctx *context.Context) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		vars := mux.Vars(r)
+		var (
+			vars = mux.Vars(r)
+		)
 
-		id, err := strconv.ParseUint(vars["id"], 10, 64)
+		address, err := sdk.AccAddressFromBech32(vars["address"])
 		if err != nil {
 			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1001, err.Error())
 			return
 		}
-
-		address, err := hex.DecodeString(vars["address"])
-		if err != nil {
-			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1002, err.Error())
+		if !ctx.Client().FromAddress().Equals(address) {
+			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1002, "")
 			return
 		}
 
-		result, err := ctx.Client().QueryQuota(id, address)
+		id, err := strconv.ParseUint(vars["id"], 10, 64)
 		if err != nil {
-			utils.WriteErrorToResponse(w, http.StatusInternalServerError, 1003, err.Error())
+			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1003, err.Error())
 			return
 		}
 
-		items := subscription.NewQuotaFromRaw(result)
-		utils.WriteResultToResponse(w, http.StatusOK, items)
+		res, err := ctx.Client().QueryQuota(id, address)
+		if err != nil {
+			utils.WriteErrorToResponse(w, http.StatusInternalServerError, 1004, err.Error())
+			return
+		}
+
+		item := subscription.NewQuotaFromRaw(res)
+		utils.WriteResultToResponse(w, http.StatusOK, item)
 	}
 }
 
 func HandlerGetQuotas(ctx *context.Context) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		vars := mux.Vars(r)
+		var (
+			vars   = mux.Vars(r)
+			values = r.URL.Query()
+		)
 
 		id, err := strconv.ParseUint(vars["id"], 10, 64)
 		if err != nil {
@@ -224,19 +237,19 @@ func HandlerGetQuotas(ctx *context.Context) http.HandlerFunc {
 			return
 		}
 
-		_, skip, limit, err := parseQuery(r.URL.Query())
+		pagination, err := utils.ParsePaginationQuery(values)
 		if err != nil {
-			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1002, err.Error())
+			utils.WriteErrorToResponse(w, http.StatusInternalServerError, 1002, err.Error())
 			return
 		}
 
-		result, err := ctx.Client().QueryQuotas(id, skip, limit)
+		res, err := ctx.Client().QueryQuotas(id, pagination)
 		if err != nil {
 			utils.WriteErrorToResponse(w, http.StatusInternalServerError, 1003, err.Error())
 			return
 		}
 
-		items := subscription.NewQuotasFromRaw(result)
+		items := subscription.NewQuotasFromRaw(res)
 		utils.WriteResultToResponse(w, http.StatusOK, items)
 	}
 }

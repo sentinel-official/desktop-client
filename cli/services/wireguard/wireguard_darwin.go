@@ -17,7 +17,9 @@ func (w *WireGuard) RealInterface() (string, error) {
 		return "", err
 	}
 
-	scanner := bufio.NewReader(nameFile)
+	var (
+		scanner = bufio.NewReader(nameFile)
+	)
 
 	line, err := scanner.ReadString('\n')
 	if err != nil {

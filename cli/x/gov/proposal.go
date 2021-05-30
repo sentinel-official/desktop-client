@@ -3,10 +3,9 @@ package gov
 import (
 	"time"
 
-	"github.com/cosmos/cosmos-sdk/x/gov"
-	"github.com/tendermint/tendermint/libs/bytes"
+	govtypes "github.com/cosmos/cosmos-sdk/x/gov/types"
 
-	"github.com/sentinel-official/desktop-client/cli/x/other"
+	"github.com/sentinel-official/desktop-client/cli/x/common"
 )
 
 type TallyResult struct {
@@ -16,34 +15,42 @@ type TallyResult struct {
 	NoWithVeto int64 `json:"no_with_veto"`
 }
 
-type Proposal struct {
-	Index           uint64      `json:"index"`
-	Type            string      `json:"type"`
-	Title           string      `json:"title"`
-	Description     string      `json:"description"`
-	Status          string      `json:"status"`
-	Deposit         other.Coins `json:"deposit"`
-	TallyResult     TallyResult `json:"tally_result"`
-	SubmitTime      time.Time   `json:"submit_time"`
-	DepositEndTime  time.Time   `json:"deposit_end_time"`
-	VotingStartTime time.Time   `json:"voting_start_time"`
-	VotingEndTime   time.Time   `json:"voting_end_time"`
+type Content struct {
+	Title       string `json:"title"`
+	Description string `json:"description"`
+	Route       string `json:"route"`
+	Type        string `json:"type"`
 }
 
-func NewProposalFromRaw(item gov.Proposal) Proposal {
+type Proposal struct {
+	Id              uint64       `json:"id"`
+	Status          string       `json:"status"`
+	Content         Content      `json:"content"`
+	TallyResult     TallyResult  `json:"tally_result"`
+	TotalDeposit    common.Coins `json:"total_deposit"`
+	SubmitTime      time.Time    `json:"submit_time"`
+	DepositEndTime  time.Time    `json:"deposit_end_time"`
+	VotingStartTime time.Time    `json:"voting_start_time"`
+	VotingEndTime   time.Time    `json:"voting_end_time"`
+}
+
+func NewProposalFromRaw(item *govtypes.Proposal) Proposal {
 	return Proposal{
-		Index:       item.ProposalID,
-		Type:        item.ProposalType(),
-		Title:       item.GetTitle(),
-		Description: item.GetDescription(),
-		Status:      item.Status.String(),
-		Deposit:     other.NewCoinsFromRaw(item.TotalDeposit),
+		Id:     item.ProposalId,
+		Status: item.Status.String(),
+		Content: Content{
+			Title:       item.GetContent().GetTitle(),
+			Description: item.GetContent().GetDescription(),
+			Route:       item.GetContent().ProposalRoute(),
+			Type:        item.GetContent().ProposalType(),
+		},
 		TallyResult: TallyResult{
 			Yes:        item.FinalTallyResult.Yes.Int64(),
 			Abstain:    item.FinalTallyResult.Abstain.Int64(),
 			No:         item.FinalTallyResult.No.Int64(),
 			NoWithVeto: item.FinalTallyResult.NoWithVeto.Int64(),
 		},
+		TotalDeposit:    common.NewCoinsFromRaw(item.TotalDeposit),
 		SubmitTime:      item.SubmitTime,
 		DepositEndTime:  item.DepositEndTime,
 		VotingStartTime: item.VotingStartTime,
@@ -53,26 +60,26 @@ func NewProposalFromRaw(item gov.Proposal) Proposal {
 
 type Proposals []Proposal
 
-func NewProposalsFromRaw(items gov.Proposals) Proposals {
+func NewProposalsFromRaw(items govtypes.Proposals) Proposals {
 	proposals := make(Proposals, 0, len(items))
 	for _, proposal := range items {
-		proposals = append(proposals, NewProposalFromRaw(proposal))
+		proposals = append(proposals, NewProposalFromRaw(&proposal))
 	}
 
 	return proposals
 }
 
-func NewDepositFromRaw(deposit gov.Deposit) other.Deposit {
-	return other.Deposit{
-		Address: bytes.HexBytes(deposit.Depositor.Bytes()).String(),
-		Amount:  other.NewCoinsFromRaw(deposit.Amount),
+func NewDepositFromRaw(deposit *govtypes.Deposit) common.Deposit {
+	return common.Deposit{
+		Address: deposit.Depositor,
+		Amount:  common.NewCoinsFromRaw(deposit.Amount),
 	}
 }
 
-func NewDepositsFromRaw(items gov.Deposits) other.Deposits {
-	deposits := make(other.Deposits, 0, len(items))
+func NewDepositsFromRaw(items govtypes.Deposits) common.Deposits {
+	deposits := make(common.Deposits, 0, len(items))
 	for _, deposit := range items {
-		deposits = append(deposits, NewDepositFromRaw(deposit))
+		deposits = append(deposits, NewDepositFromRaw(&deposit))
 	}
 
 	return deposits

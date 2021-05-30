@@ -2,14 +2,13 @@ package gov
 
 import (
 	"encoding/json"
-	"fmt"
 	"net/http"
+
+	govtypes "github.com/cosmos/cosmos-sdk/x/gov/types"
 )
 
 type RequestVote struct {
-	Memo     string `json:"memo"`
-	Password string `json:"password"`
-
+	Memo   string `json:"memo"`
 	Option string `json:"option"`
 }
 
@@ -23,11 +22,8 @@ func NewRequestVote(r *http.Request) (*RequestVote, error) {
 }
 
 func (r *RequestVote) Validate() error {
-	if r.Password == "" {
-		return fmt.Errorf("invalid field Password")
-	}
-	if r.Option == "" {
-		return fmt.Errorf("invalid field Option")
+	if _, err := govtypes.VoteOptionFromString(r.Option); err != nil {
+		return err
 	}
 
 	return nil

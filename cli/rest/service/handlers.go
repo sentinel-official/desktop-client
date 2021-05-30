@@ -9,7 +9,7 @@ import (
 	"github.com/sentinel-official/desktop-client/cli/context"
 	"github.com/sentinel-official/desktop-client/cli/types"
 	"github.com/sentinel-official/desktop-client/cli/utils"
-	"github.com/sentinel-official/desktop-client/cli/x/other"
+	"github.com/sentinel-official/desktop-client/cli/x/common"
 )
 
 func HandlerStatus(ctx *context.Context) http.HandlerFunc {
@@ -38,15 +38,17 @@ func HandlerStatus(ctx *context.Context) http.HandlerFunc {
 			return
 		}
 
-		utils.WriteResultToResponse(w, http.StatusOK, ResponseStatus{
-			Bandwidth: other.Bandwidth{
-				Upload:   upload,
-				Download: download,
+		utils.WriteResultToResponse(w, http.StatusOK,
+			ResponseStatus{
+				From: status.From,
+				ID:   status.ID,
+				To:   status.To,
+				Bandwidth: common.Bandwidth{
+					Upload:   upload,
+					Download: download,
+				},
 			},
-			From: status.From,
-			ID:   status.ID,
-			To:   status.To,
-		})
+		)
 	}
 }
 

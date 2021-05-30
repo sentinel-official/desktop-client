@@ -1,13 +1,11 @@
 package plan
 
 import (
-	"encoding/hex"
 	"net/http"
-	"net/url"
 	"strconv"
 
 	"github.com/gorilla/mux"
-	hub "github.com/sentinel-official/hub/types"
+	hubtypes "github.com/sentinel-official/hub/types"
 
 	"github.com/sentinel-official/desktop-client/cli/context"
 	"github.com/sentinel-official/desktop-client/cli/utils"
@@ -16,7 +14,9 @@ import (
 
 func HandlerGetPlan(ctx *context.Context) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		vars := mux.Vars(r)
+		var (
+			vars = mux.Vars(r)
+		)
 
 		id, err := strconv.ParseUint(vars["id"], 10, 64)
 		if err != nil {
@@ -24,65 +24,44 @@ func HandlerGetPlan(ctx *context.Context) http.HandlerFunc {
 			return
 		}
 
-		result, err := ctx.Client().QueryPlan(id)
+		res, err := ctx.Client().QueryPlan(id)
 		if err != nil {
 			utils.WriteErrorToResponse(w, http.StatusInternalServerError, 1002, err.Error())
 			return
 		}
 
-		items := plan.NewPlanFromRaw(result)
-		utils.WriteResultToResponse(w, http.StatusOK, items)
+		item := plan.NewPlanFromRaw(res)
+		utils.WriteResultToResponse(w, http.StatusOK, item)
 	}
-}
-
-func parseQuery(query url.Values) (skip, limit int, status hub.Status, err error) {
-	skip = 0
-	if query.Get("skip") != "" {
-		skip, err = strconv.Atoi(query.Get("skip"))
-		if err != nil {
-			return 0, 0, 0, err
-		}
-	}
-
-	limit = 25
-	if query.Get("limit") != "" {
-		limit, err = strconv.Atoi(query.Get("limit"))
-		if err != nil {
-			return 0, 0, 0, err
-		}
-	}
-
-	status = hub.StatusActive
-	if query.Get("status") != "" {
-		status = hub.StatusFromString(query.Get("status"))
-	}
-
-	return skip, limit, status, nil
 }
 
 func HandlerGetPlansForProvider(ctx *context.Context) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		skip, limit, status, err := parseQuery(r.URL.Query())
+		var (
+			values = r.URL.Query()
+			vars   = mux.Vars(r)
+			status = hubtypes.StatusFromString(values.Get("status"))
+		)
+
+		pagination, err := utils.ParsePaginationQuery(values)
 		if err != nil {
-			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1001, err.Error())
+			utils.WriteErrorToResponse(w, http.StatusInternalServerError, 1001, err.Error())
 			return
 		}
 
-		vars := mux.Vars(r)
-
-		address, err := hex.DecodeString(vars["address"])
+		address, err := hubtypes.ProvAddressFromBech32(vars["address"])
 		if err != nil {
 			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1002, err.Error())
 			return
 		}
 
-		result, err := ctx.Client().QueryPlansForProvider(address, status, skip, limit)
+		res, err := ctx.Client().QueryPlansForProvider(address, status, pagination)
 		if err != nil {
 			utils.WriteErrorToResponse(w, http.StatusInternalServerError, 1003, err.Error())
 			return
 		}
 
-		items := plan.NewPlansFromRaw(result)
+		items := plan.NewPlansFromRaw(res)
 		utils.WriteResultToResponse(w, http.StatusOK, items)
 	}
 }

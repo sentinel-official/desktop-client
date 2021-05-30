@@ -11,5 +11,5 @@ import (
 func RegisterRoutes(r *mux.Router, ctx *context.Context) {
 	r.Name("GetDeposit").
 		Methods(http.MethodGet).Path("/accounts/{address}/deposits").
-		HandlerFunc(HandlerGetDeposit(ctx))
+		HandlerFunc(HandlerGetDeposits(ctx))
 }

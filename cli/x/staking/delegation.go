@@ -1,30 +1,34 @@
 package staking
 
 import (
-	"github.com/cosmos/cosmos-sdk/x/staking"
-	"github.com/tendermint/tendermint/libs/bytes"
+	stakingtypes "github.com/cosmos/cosmos-sdk/x/staking/types"
+
+	"github.com/sentinel-official/desktop-client/cli/x/common"
 )
 
 type Delegation struct {
-	DelegatorAddress string `json:"delegator_address"`
-	ValidatorAddress string `json:"validator_address"`
-	Shares           string `json:"shares"`
+	DelegatorAddress string      `json:"delegator_address"`
+	ValidatorAddress string      `json:"validator_address"`
+	Shares           string      `json:"shares"`
+	Balance          common.Coin `json:"balance"`
 }
 
-func NewDelegationFromRaw(delegation staking.Delegation) Delegation {
+func NewDelegationFromRaw(item stakingtypes.DelegationResponse) Delegation {
 	return Delegation{
-		DelegatorAddress: bytes.HexBytes(delegation.DelegatorAddress.Bytes()).String(),
-		ValidatorAddress: bytes.HexBytes(delegation.ValidatorAddress.Bytes()).String(),
-		Shares:           delegation.Shares.String(),
+		DelegatorAddress: item.Delegation.DelegatorAddress,
+		ValidatorAddress: item.Delegation.ValidatorAddress,
+		Shares:           item.Delegation.Shares.String(),
+		Balance:          common.NewCoinFromRaw(&item.Balance),
 	}
 }
 
 type Delegations []Delegation
 
-func NewDelegationsFromRaw(items staking.Delegations) Delegations {
+func NewDelegationsFromRaw(items stakingtypes.DelegationResponses) Delegations {
 	delegations := make(Delegations, 0, len(items))
 	for _, item := range items {
 		delegations = append(delegations, NewDelegationFromRaw(item))
 	}
+
 	return delegations
 }
