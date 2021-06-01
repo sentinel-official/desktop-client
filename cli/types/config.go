@@ -15,6 +15,7 @@ import (
 var (
 	ct = strings.TrimSpace(`
 setup = {{ .Setup }}
+version = {{ .Version }}
 
 [chain]
 broadcast_mode = "{{ .Chain.BroadcastMode }}"
@@ -40,8 +41,9 @@ allowed_origins = "{{ .CORS.AllowedOrigins }}"
 )
 
 type Config struct {
-	Setup bool `json:"setup"`
-	Chain struct {
+	Setup   bool   `json:"setup"`
+	Version uint64 `json:"version"`
+	Chain   struct {
 		BroadcastMode      string  `json:"broadcast_mode"`
 		GasAdjustment      float64 `json:"gas_adjustment"`
 		GasPrices          string  `json:"gas_prices"`
@@ -61,21 +63,23 @@ func NewConfig() *Config {
 
 func (c *Config) Copy() *Config {
 	return &Config{
-		Setup: c.Setup,
-		Chain: c.Chain,
-		CORS:  c.CORS,
+		Setup:   c.Setup,
+		Version: c.Version,
+		Chain:   c.Chain,
+		CORS:    c.CORS,
 	}
 }
 
 func (c *Config) WithDefaultValues() *Config {
 	c.Setup = true
+	c.Version = 2
 	c.Chain.BroadcastMode = "block"
 	c.Chain.Gas = 5e5
-	c.Chain.GasAdjustment = 0
+	c.Chain.GasAdjustment = 1.05
 	c.Chain.GasPrices = "0.1udvpn"
 	c.Chain.ID = "sentinelhub-2"
 	c.Chain.RPCAddress = "https://rpc.sentinel.co:443"
-	c.Chain.SimulateAndExecute = true
+	c.Chain.SimulateAndExecute = false
 	c.CORS.AllowedOrigins = ""
 
 	return c

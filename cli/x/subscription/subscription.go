@@ -42,8 +42,8 @@ type Subscriptions []Subscription
 
 func NewSubscriptionsFromRaw(items subscriptiontypes.Subscriptions) Subscriptions {
 	subscriptions := make(Subscriptions, 0, len(items))
-	for _, item := range items {
-		subscriptions = append(subscriptions, NewSubscriptionFromRaw(&item))
+	for i := range items {
+		subscriptions = append(subscriptions, NewSubscriptionFromRaw(&items[i]))
 	}
 
 	return subscriptions

@@ -1,7 +1,6 @@
 package cmd
 
 import (
-	"bufio"
 	"fmt"
 	"log"
 	"net/http"
@@ -38,6 +37,7 @@ import (
 	"github.com/sentinel-official/desktop-client/cli/rest/staking"
 	"github.com/sentinel-official/desktop-client/cli/rest/subscription"
 	"github.com/sentinel-official/desktop-client/cli/types"
+	"github.com/sentinel-official/desktop-client/cli/utils"
 )
 
 func ServerCmd(cfg *types.Config) *cobra.Command {
@@ -64,12 +64,7 @@ func ServerCmd(cfg *types.Config) *cobra.Command {
 				return err
 			}
 
-			var (
-				buildFolder = filepath.Join(home, "build")
-				encoding    = params.MakeEncodingConfig()
-				reader      = bufio.NewReader(cmd.InOrStdin())
-			)
-
+			encoding := params.MakeEncodingConfig()
 			std.RegisterInterfaces(encoding.InterfaceRegistry)
 			hub.ModuleBasics.RegisterInterfaces(encoding.InterfaceRegistry)
 
@@ -78,7 +73,7 @@ func ServerCmd(cfg *types.Config) *cobra.Command {
 				return err
 			}
 
-			kr, err := keyring.New("sentinel", keyring.BackendOS, home, reader)
+			kr, err := keyring.New("sentinel", keyring.BackendOS, home, cmd.InOrStdin())
 			if err != nil {
 				return err
 			}
@@ -100,7 +95,8 @@ func ServerCmd(cfg *types.Config) *cobra.Command {
 			ctx := context.NewContext().
 				WithHome(home).
 				WithConfig(cfg).
-				WithClient(client)
+				WithClient(client).
+				WithToken(utils.RandomStringHex(32))
 
 			var (
 				muxRouter    = mux.NewRouter()
@@ -108,10 +104,8 @@ func ServerCmd(cfg *types.Config) *cobra.Command {
 			)
 
 			muxRouter.Use(middlewares.Log)
-			muxRouter.PathPrefix("/").
-				Handler(http.FileServer(http.Dir(buildFolder)))
-
 			prefixRouter.Use(middlewares.AddHeaders)
+			prefixRouter.Use(middlewares.TokenVerify(ctx))
 			account.RegisterRoutes(prefixRouter, ctx)
 			bank.RegisterRoutes(prefixRouter, ctx)
 			config.RegisterRoutes(prefixRouter, ctx)
@@ -131,7 +125,7 @@ func ServerCmd(cfg *types.Config) *cobra.Command {
 				cors.Options{
 					AllowedOrigins: strings.Split(cfg.CORS.AllowedOrigins, ","),
 					AllowedMethods: []string{http.MethodGet, http.MethodPost, http.MethodPut},
-					AllowedHeaders: []string{"Content-Type"},
+					AllowedHeaders: []string{"Content-Type", "Authorization"},
 				},
 			).Handler(muxRouter)
 
@@ -140,14 +134,20 @@ func ServerCmd(cfg *types.Config) *cobra.Command {
 				return err
 			}
 
-			log.Println("Listening on URL", listenURL)
+			switch url.Scheme {
+			case "http", "https":
+			default:
+				return fmt.Errorf("invalid listen URL schema")
+			}
+
+			log.Printf("URL: %s, TOKEN: %s", listenURL, ctx.Token())
 			switch url.Scheme {
 			case "http":
 				return http.ListenAndServe(url.Host, router)
 			case "https":
 				return http.ListenAndServeTLS(url.Host, certFile, keyFile, router)
 			default:
-				return fmt.Errorf("invalid listen URL schema")
+				return nil
 			}
 		},
 	}

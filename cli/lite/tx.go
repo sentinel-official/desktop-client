@@ -1,6 +1,8 @@
 package lite
 
 import (
+	"fmt"
+
 	"github.com/cosmos/cosmos-sdk/client/tx"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 )
@@ -45,5 +47,13 @@ func (c *Client) BroadcastTx(memo string, messages ...sdk.Msg) (res *sdk.TxRespo
 		return nil, err
 	}
 
-	return c.ctx.BroadcastTx(txBytes)
+	result, err := c.ctx.BroadcastTx(txBytes)
+	if err != nil {
+		return nil, err
+	}
+	if result.Code != 0 {
+		return nil, fmt.Errorf(result.RawLog)
+	}
+
+	return result, nil
 }

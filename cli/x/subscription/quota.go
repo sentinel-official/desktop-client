@@ -22,8 +22,8 @@ type Quotas []Quota
 
 func NewQuotasFromRaw(items subscriptiontypes.Quotas) Quotas {
 	quotas := make(Quotas, 0, len(items))
-	for _, item := range items {
-		quotas = append(quotas, NewQuotaFromRaw(&item))
+	for i := range items {
+		quotas = append(quotas, NewQuotaFromRaw(&items[i]))
 	}
 
 	return quotas

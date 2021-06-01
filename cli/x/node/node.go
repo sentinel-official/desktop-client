@@ -32,8 +32,8 @@ type Nodes []Node
 
 func NewNodesFromRaw(items nodetypes.Nodes) Nodes {
 	nodes := make(Nodes, 0, len(items))
-	for _, item := range items {
-		nodes = append(nodes, NewNodeFromRaw(&item))
+	for i := range items {
+		nodes = append(nodes, NewNodeFromRaw(&items[i]))
 	}
 
 	return nodes

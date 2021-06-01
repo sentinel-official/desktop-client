@@ -5,12 +5,14 @@ import (
 	"net/http"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
+
+	"github.com/sentinel-official/desktop-client/cli/x/common"
 )
 
 type RequestDelegate struct {
-	Memo string `json:"memo"`
-	To   string `json:"to"`
-	Coin string `json:"coin"`
+	Memo string      `json:"memo"`
+	To   string      `json:"to"`
+	Coin common.Coin `json:"coin"`
 }
 
 func NewRequestDelegate(r *http.Request) (*RequestDelegate, error) {
@@ -26,18 +28,15 @@ func (r *RequestDelegate) Validate() error {
 	if _, err := sdk.ValAddressFromBech32(r.To); err != nil {
 		return err
 	}
-	if _, err := sdk.ParseCoinNormalized(r.Coin); err != nil {
-		return err
-	}
 
 	return nil
 }
 
 type RequestRedelegate struct {
-	Memo string `json:"memo"`
-	From string `json:"from"`
-	To   string `json:"to"`
-	Coin string `json:"amount"`
+	Memo string      `json:"memo"`
+	From string      `json:"from"`
+	To   string      `json:"to"`
+	Coin common.Coin `json:"coin"`
 }
 
 func NewRequestRedelegate(r *http.Request) (*RequestRedelegate, error) {
@@ -56,17 +55,14 @@ func (r *RequestRedelegate) Validate() error {
 	if _, err := sdk.ValAddressFromBech32(r.To); err != nil {
 		return err
 	}
-	if _, err := sdk.ParseCoinNormalized(r.Coin); err != nil {
-		return err
-	}
 
 	return nil
 }
 
 type RequestUnbond struct {
-	Memo string `json:"memo"`
-	From string `json:"from"`
-	Coin string `json:"coin"`
+	Memo string      `json:"memo"`
+	From string      `json:"from"`
+	Coin common.Coin `json:"coin"`
 }
 
 func NewRequestUnbond(r *http.Request) (*RequestUnbond, error) {
@@ -80,9 +76,6 @@ func NewRequestUnbond(r *http.Request) (*RequestUnbond, error) {
 
 func (r *RequestUnbond) Validate() error {
 	if _, err := sdk.ValAddressFromBech32(r.From); err != nil {
-		return err
-	}
-	if _, err := sdk.ParseCoinNormalized(r.Coin); err != nil {
 		return err
 	}
 

@@ -27,8 +27,8 @@ type Coins []Coin
 
 func NewCoinsFromRaw(items sdk.Coins) Coins {
 	coins := make(Coins, 0, items.Len())
-	for _, item := range items {
-		coins = append(coins, NewCoinFromRaw(&item))
+	for i := range items {
+		coins = append(coins, NewCoinFromRaw(&items[i]))
 	}
 
 	return coins
@@ -66,8 +66,8 @@ type DecCoins []DecCoin
 
 func NewDecCoinsFromRaw(items sdk.DecCoins) DecCoins {
 	coins := make(DecCoins, 0, items.Len())
-	for _, item := range items {
-		coins = append(coins, NewDecCoinFromRaw(&item))
+	for i := range items {
+		coins = append(coins, NewDecCoinFromRaw(&items[i]))
 	}
 
 	return coins

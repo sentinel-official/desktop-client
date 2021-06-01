@@ -26,8 +26,8 @@ type Providers []Provider
 
 func NewProvidersFromRaw(items providertypes.Providers) Providers {
 	providers := make(Providers, 0, len(items))
-	for _, item := range items {
-		providers = append(providers, NewProviderFromRaw(&item))
+	for i := range items {
+		providers = append(providers, NewProviderFromRaw(&items[i]))
 	}
 
 	return providers

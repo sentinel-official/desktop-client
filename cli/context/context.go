@@ -9,6 +9,7 @@ import (
 
 type Context struct {
 	home    string
+	token   string
 	ctx     context.Context
 	service types.Service
 	client  *lite.Client
@@ -22,12 +23,14 @@ func NewContext() *Context {
 }
 
 func (c *Context) WithHome(v string) *Context             { c.home = v; return c }
+func (c *Context) WithToken(v string) *Context            { c.token = v; return c }
 func (c *Context) WithClient(v *lite.Client) *Context     { c.client = v; return c }
 func (c *Context) WithConfig(v *types.Config) *Context    { c.config = v; return c }
 func (c *Context) WithContext(v context.Context) *Context { c.ctx = v; return c }
 func (c *Context) WithService(v types.Service) *Context   { c.service = v; return c }
 
 func (c *Context) Home() string             { return c.home }
+func (c *Context) Token() string            { return c.token }
 func (c *Context) Client() *lite.Client     { return c.client }
 func (c *Context) Config() *types.Config    { return c.config }
 func (c *Context) Context() context.Context { return c.ctx }

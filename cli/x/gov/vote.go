@@ -22,8 +22,8 @@ type Votes []Vote
 
 func NewVotesFromRaw(items govtypes.Votes) Votes {
 	votes := make(Votes, 0, len(items))
-	for _, item := range items {
-		votes = append(votes, NewVoteFromRaw(&item))
+	for i := range items {
+		votes = append(votes, NewVoteFromRaw(&items[i]))
 	}
 
 	return votes

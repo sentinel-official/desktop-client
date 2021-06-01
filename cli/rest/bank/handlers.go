@@ -23,14 +23,12 @@ func HandlerSend(ctx *context.Context) http.HandlerFunc {
 		}
 
 		var (
-			to, _    = sdk.AccAddressFromBech32(body.To)
-			coins, _ = sdk.ParseCoinsNormalized(body.Coins)
-		)
-
-		message := banktypes.NewMsgSend(
-			ctx.Client().FromAddress(),
-			to,
-			coins,
+			to, _   = sdk.AccAddressFromBech32(body.To)
+			message = banktypes.NewMsgSend(
+				ctx.Client().FromAddress(),
+				to,
+				body.Coins.Raw(),
+			)
 		)
 
 		if err := message.ValidateBasic(); err != nil {

@@ -118,8 +118,7 @@ func (c *Client) QueryProposals() (govtypes.Proposals, error) {
 	)
 
 	res, err := qc.Proposals(context.Background(),
-		&govtypes.QueryProposalsRequest{
-		},
+		&govtypes.QueryProposalsRequest{},
 	)
 	if err != nil {
 		return nil, utils.IsNotFoundError(err)

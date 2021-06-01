@@ -20,8 +20,8 @@ type Deposits []Deposit
 
 func NewDepositsFromRaw(items deposittypes.Deposits) Deposits {
 	deposits := make(Deposits, 0, len(items))
-	for _, item := range items {
-		deposits = append(deposits, NewDepositFromRaw(&item))
+	for i := range items {
+		deposits = append(deposits, NewDepositFromRaw(&items[i]))
 	}
 
 	return deposits

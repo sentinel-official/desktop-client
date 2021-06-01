@@ -62,8 +62,8 @@ type Proposals []Proposal
 
 func NewProposalsFromRaw(items govtypes.Proposals) Proposals {
 	proposals := make(Proposals, 0, len(items))
-	for _, proposal := range items {
-		proposals = append(proposals, NewProposalFromRaw(&proposal))
+	for i := range items {
+		proposals = append(proposals, NewProposalFromRaw(&items[i]))
 	}
 
 	return proposals
@@ -78,8 +78,8 @@ func NewDepositFromRaw(deposit *govtypes.Deposit) common.Deposit {
 
 func NewDepositsFromRaw(items govtypes.Deposits) common.Deposits {
 	deposits := make(common.Deposits, 0, len(items))
-	for _, deposit := range items {
-		deposits = append(deposits, NewDepositFromRaw(&deposit))
+	for i := range items {
+		deposits = append(deposits, NewDepositFromRaw(&items[i]))
 	}
 
 	return deposits

@@ -7,19 +7,16 @@ import (
 )
 
 type RequestUpdateConfig struct {
-	Setup    bool   `json:"setup"`
-	Password string `json:"password"`
-	From     string `json:"from"`
-	Chain    struct {
+	Setup bool   `json:"setup"`
+	From  string `json:"from"`
+	Chain struct {
 		BroadcastMode      string  `json:"broadcast_mode"`
-		Fees               string  `json:"fees"`
 		GasAdjustment      float64 `json:"gas_adjustment"`
 		GasPrices          string  `json:"gas_prices"`
 		Gas                uint64  `json:"gas"`
 		ID                 string  `json:"id"`
 		RPCAddress         string  `json:"rpc_address"`
 		SimulateAndExecute bool    `json:"simulate_and_execute"`
-		TrustNode          bool    `json:"trust_node"`
 	} `json:"chain"`
 }
 

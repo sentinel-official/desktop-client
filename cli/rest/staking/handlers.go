@@ -114,11 +114,10 @@ func HandlerDelegate(ctx *context.Context) http.HandlerFunc {
 
 		var (
 			to, _   = sdk.ValAddressFromBech32(body.To)
-			coin, _ = sdk.ParseCoinNormalized(body.Coin)
 			message = stakingtypes.NewMsgDelegate(
 				ctx.Client().FromAddress(),
 				to,
-				coin,
+				body.Coin.Raw(),
 			)
 		)
 
@@ -166,12 +165,11 @@ func HandlerRedelegate(ctx *context.Context) http.HandlerFunc {
 		var (
 			from, _ = sdk.ValAddressFromBech32(body.From)
 			to, _   = sdk.ValAddressFromBech32(body.To)
-			coin, _ = sdk.ParseCoinNormalized(body.Coin)
 			message = stakingtypes.NewMsgBeginRedelegate(
 				ctx.Client().FromAddress(),
 				from,
 				to,
-				coin,
+				body.Coin.Raw(),
 			)
 		)
 
@@ -218,11 +216,10 @@ func HandlerUndelegate(ctx *context.Context) http.HandlerFunc {
 
 		var (
 			from, _ = sdk.ValAddressFromBech32(body.From)
-			coin, _ = sdk.ParseCoinNormalized(body.Coin)
 			message = stakingtypes.NewMsgUndelegate(
 				ctx.Client().FromAddress(),
 				from,
-				coin,
+				body.Coin.Raw(),
 			)
 		)
 

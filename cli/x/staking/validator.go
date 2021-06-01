@@ -73,8 +73,8 @@ type Validators []Validator
 
 func NewValidatorsFromRaw(items stakingtypes.Validators) Validators {
 	validators := make(Validators, 0, len(items))
-	for _, item := range items {
-		validators = append(validators, NewValidatorFromRaw(&item))
+	for i := range items {
+		validators = append(validators, NewValidatorFromRaw(&items[i]))
 	}
 
 	return validators

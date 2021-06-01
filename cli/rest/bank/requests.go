@@ -5,12 +5,14 @@ import (
 	"net/http"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
+
+	"github.com/sentinel-official/desktop-client/cli/x/common"
 )
 
 type RequestSend struct {
-	Memo  string `json:"memo"`
-	To    string `json:"to"`
-	Coins string `json:"coins"`
+	Memo  string       `json:"memo"`
+	To    string       `json:"to"`
+	Coins common.Coins `json:"coins"`
 }
 
 func NewRequestSend(r *http.Request) (*RequestSend, error) {
@@ -24,9 +26,6 @@ func NewRequestSend(r *http.Request) (*RequestSend, error) {
 
 func (r *RequestSend) Validate() error {
 	if _, err := sdk.AccAddressFromBech32(r.To); err != nil {
-		return err
-	}
-	if _, err := sdk.ParseCoinsNormalized(r.Coins); err != nil {
 		return err
 	}
 
