@@ -1,5 +1,5 @@
 import * as PropTypes from 'prop-types';
-import { ValidateMnemonic, ValidateName, ValidatePassword } from './_validation';
+import { ValidateMnemonic, ValidateName } from './_validation';
 import { connect } from 'react-redux';
 import { postKeys } from '../../actions/keys';
 import Button from '../../components/Button';
@@ -16,8 +16,7 @@ const Submit = (props) => {
 
     const disabled = (
         ValidateMnemonic(props.mnemonic.value).message !== '' ||
-        ValidateName(props.name.value).message !== '' ||
-        ValidatePassword(props.password.value).message !== ''
+        ValidateName(props.name.value).message !== ''
     );
 
     return (
@@ -49,12 +48,6 @@ Submit.propTypes = {
             message: PropTypes.string.isRequired,
         }).isRequired,
     }).isRequired,
-    password: PropTypes.shape({
-        value: PropTypes.string.isRequired,
-        error: PropTypes.shape({
-            message: PropTypes.string.isRequired,
-        }).isRequired,
-    }).isRequired,
     onClick: PropTypes.func.isRequired,
 };
 
@@ -62,7 +55,6 @@ const stateToProps = (state) => {
     return {
         mnemonic: state.keys.post.mnemonic,
         name: state.keys.post.name,
-        password: state.keys.post.password,
         inProgress: state.keys.post.inProgress,
     };
 };

@@ -1,6 +1,5 @@
 import * as PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { encodeToBech32 } from '../../../utils/bech32';
 import Address from './Address';
 import AddressCopy from './AddressCopy';
 import Lodash from 'lodash';
@@ -13,7 +12,6 @@ const Receive = ({
     items,
 }) => {
     const item = Lodash.find(items, ['name', name]);
-    const address = encodeToBech32(item.address, 'sent');
 
     return (
         <>
@@ -21,16 +19,16 @@ const Receive = ({
                 className="qr-title"
                 value="Show QR code to Receive Amount"/>
             <div className="qr-box">
-                <QRCode value={address}/>
+                <QRCode value={item.address}/>
             </div>
             <div className="copy-address">
                 <TextBox
                     className=""
                     value="Address"
                 />
-                <AddressCopy text={address}/>
+                <AddressCopy text={item.address}/>
             </div>
-            <Address value={address}/>
+            <Address value={item.address}/>
         </>
     );
 };

@@ -1,4 +1,3 @@
-import { AUTHENTICATION_POST_ERROR } from '../constants/authentication';
 import { CONFIGURATION_GET_ERROR, CONFIGURATION_PUT_ERROR } from '../constants/configuration';
 import { KEYS_DELETE_ERROR, KEYS_GET_ERROR, KEYS_POST_ERROR } from '../constants/keys';
 import { SNACKBAR_HIDE, SNACKBAR_SHOW } from '../constants/snackbar';
@@ -13,7 +12,6 @@ const _ = (state = {
 }) => {
     switch (type) {
     case SNACKBAR_SHOW:
-    case AUTHENTICATION_POST_ERROR:
     case CONFIGURATION_GET_ERROR:
     case CONFIGURATION_PUT_ERROR:
     case KEYS_GET_ERROR:

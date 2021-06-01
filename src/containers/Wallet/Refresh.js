@@ -18,28 +18,14 @@ const Refresh = (props) => {
         }
 
         setInProgress(true);
-        Async.waterfall([
-            (next1) => props.getAccount(next1),
-            (next1) => {
-                Async.parallel([
-                    (next2) => props.getCoingecko(next2),
-                    (next2) => props.getValidators(next2),
-                    (next2) => props.getDelegations(next2),
-                ], next1);
-            },
+        Async.parallel([
+            (next) => props.getAccount(next),
+            (next) => props.getCoingecko(next),
+            (next) => props.getValidators(next),
+            (next) => props.getDelegations(next),
         ], () => {
             setInProgress(false);
         });
-        //
-        // setInProgress(true);
-        // Async.parallel([
-        //     (next) => props.getAccount(next),
-        //     (next) => props.getCoingecko(next),
-        //     (next) => props.getValidators(next),
-        //     (next) => props.getDelegations(next),
-        // ], () => {
-        //     setInProgress(false);
-        // });
     };
 
     return (

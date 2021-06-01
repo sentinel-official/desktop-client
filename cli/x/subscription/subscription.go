@@ -3,34 +3,35 @@ package subscription
 import (
 	"time"
 
-	"github.com/sentinel-official/hub/x/subscription"
-	"github.com/tendermint/tendermint/libs/bytes"
+	subscriptiontypes "github.com/sentinel-official/hub/x/subscription/types"
 
-	"github.com/sentinel-official/desktop-client/cli/x/other"
+	"github.com/sentinel-official/desktop-client/cli/x/common"
 )
 
 type Subscription struct {
-	ID       uint64     `json:"id"`
-	Owner    string     `json:"owner"`
-	Plan     uint64     `json:"plan,omitempty"`
-	Expiry   time.Time  `json:"expiry,omitempty"`
-	Node     string     `json:"node,omitempty"`
-	Price    other.Coin `json:"price,omitempty"`
-	Deposit  other.Coin `json:"deposit,omitempty"`
-	Free     int64      `json:"free"`
-	Status   string     `json:"status"`
-	StatusAt time.Time  `json:"status_at"`
+	Id       uint64      `json:"id"`
+	Owner    string      `json:"owner"`
+	Plan     uint64      `json:"plan,omitempty"`
+	Expiry   time.Time   `json:"expiry,omitempty"`
+	Denom    string      `json:"denom"`
+	Node     string      `json:"node,omitempty"`
+	Price    common.Coin `json:"price,omitempty"`
+	Deposit  common.Coin `json:"deposit,omitempty"`
+	Free     int64       `json:"free"`
+	Status   string      `json:"status"`
+	StatusAt time.Time   `json:"status_at"`
 }
 
-func NewSubscriptionFromRaw(item subscription.Subscription) Subscription {
+func NewSubscriptionFromRaw(item *subscriptiontypes.Subscription) Subscription {
 	return Subscription{
-		ID:       item.ID,
-		Owner:    bytes.HexBytes(item.Owner.Bytes()).String(),
+		Id:       item.Id,
+		Owner:    item.Owner,
 		Plan:     item.Plan,
 		Expiry:   item.Expiry,
-		Node:     bytes.HexBytes(item.Node.Bytes()).String(),
-		Price:    other.NewCoinFromRaw(item.Price),
-		Deposit:  other.NewCoinFromRaw(item.Deposit),
+		Denom:    item.Denom,
+		Node:     item.Node,
+		Price:    common.NewCoinFromRaw(&item.Price),
+		Deposit:  common.NewCoinFromRaw(&item.Deposit),
 		Free:     item.Free.Int64(),
 		Status:   item.Status.String(),
 		StatusAt: item.StatusAt,
@@ -39,10 +40,10 @@ func NewSubscriptionFromRaw(item subscription.Subscription) Subscription {
 
 type Subscriptions []Subscription
 
-func NewSubscriptionsFromRaw(items subscription.Subscriptions) Subscriptions {
+func NewSubscriptionsFromRaw(items subscriptiontypes.Subscriptions) Subscriptions {
 	subscriptions := make(Subscriptions, 0, len(items))
-	for _, item := range items {
-		subscriptions = append(subscriptions, NewSubscriptionFromRaw(item))
+	for i := range items {
+		subscriptions = append(subscriptions, NewSubscriptionFromRaw(&items[i]))
 	}
 
 	return subscriptions

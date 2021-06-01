@@ -8,18 +8,21 @@ import (
 	"path/filepath"
 	"strings"
 
-	clientutils "github.com/cosmos/cosmos-sdk/x/auth/client/utils"
+	"github.com/cosmos/cosmos-sdk/crypto/keyring"
+	"github.com/cosmos/cosmos-sdk/std"
+	authtypes "github.com/cosmos/cosmos-sdk/x/auth/types"
 	"github.com/gorilla/mux"
 	"github.com/rs/cors"
 	"github.com/sentinel-official/hub"
+	"github.com/sentinel-official/hub/params"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
+	rpchttp "github.com/tendermint/tendermint/rpc/client/http"
 
 	"github.com/sentinel-official/desktop-client/cli/context"
 	"github.com/sentinel-official/desktop-client/cli/lite"
 	"github.com/sentinel-official/desktop-client/cli/middlewares"
 	"github.com/sentinel-official/desktop-client/cli/rest/account"
-	"github.com/sentinel-official/desktop-client/cli/rest/auth"
 	"github.com/sentinel-official/desktop-client/cli/rest/bank"
 	"github.com/sentinel-official/desktop-client/cli/rest/config"
 	"github.com/sentinel-official/desktop-client/cli/rest/deposit"
@@ -34,6 +37,7 @@ import (
 	"github.com/sentinel-official/desktop-client/cli/rest/staking"
 	"github.com/sentinel-official/desktop-client/cli/rest/subscription"
 	"github.com/sentinel-official/desktop-client/cli/types"
+	"github.com/sentinel-official/desktop-client/cli/utils"
 )
 
 func ServerCmd(cfg *types.Config) *cobra.Command {
@@ -60,59 +64,68 @@ func ServerCmd(cfg *types.Config) *cobra.Command {
 				return err
 			}
 
-			var (
-				cdc         = hub.MakeCodec()
-				buildFolder = filepath.Join(home, "build")
-			)
+			encoding := params.MakeEncodingConfig()
+			std.RegisterInterfaces(encoding.InterfaceRegistry)
+			hub.ModuleBasics.RegisterInterfaces(encoding.InterfaceRegistry)
 
-			client, err := lite.NewClientFromConfig(cfg)
+			rpcclient, err := rpchttp.New(cfg.Chain.RPCAddress, "/websocket")
 			if err != nil {
 				return err
 			}
 
-			client.WithCodec(cdc).
-				WithTxEncoder(clientutils.GetTxEncoder(cdc))
+			kr, err := keyring.New("sentinel", keyring.BackendOS, home, cmd.InOrStdin())
+			if err != nil {
+				return err
+			}
+
+			client := lite.NewDefaultClient().
+				WithAccountRetriever(authtypes.AccountRetriever{}).
+				WithChainID(cfg.Chain.ID).
+				WithClient(rpcclient).
+				WithGas(cfg.Chain.Gas).
+				WithGasAdjustment(cfg.Chain.GasAdjustment).
+				WithGasPrices(cfg.Chain.GasPrices).
+				WithInterfaceRegistry(encoding.InterfaceRegistry).
+				WithKeyring(kr).
+				WithLegacyAmino(encoding.Amino).
+				WithNodeURI(cfg.Chain.RPCAddress).
+				WithSimulateAndExecute(cfg.Chain.SimulateAndExecute).
+				WithTxConfig(encoding.TxConfig)
 
 			ctx := context.NewContext().
 				WithHome(home).
 				WithConfig(cfg).
-				WithClient(client)
+				WithClient(client).
+				WithToken(utils.RandomStringHex(32))
 
 			var (
-				muxRouter         = mux.NewRouter()
-				protectedRouter   = muxRouter.PathPrefix("/api/v1").Subrouter()
-				unprotectedRouter = muxRouter.PathPrefix("/api/v1").Subrouter()
+				muxRouter    = mux.NewRouter()
+				prefixRouter = muxRouter.PathPrefix("/api/v1").Subrouter()
 			)
 
 			muxRouter.Use(middlewares.Log)
-			muxRouter.PathPrefix("/").
-				Handler(http.FileServer(http.Dir(buildFolder)))
-
-			unprotectedRouter.Use(middlewares.AddHeaders)
-			auth.RegisterRoutes(unprotectedRouter, ctx)
-
-			protectedRouter.Use(middlewares.AddHeaders)
-			protectedRouter.Use(middlewares.TokenVerify(ctx))
-			account.RegisterRoutes(protectedRouter, ctx)
-			bank.RegisterRoutes(protectedRouter, ctx)
-			config.RegisterRoutes(protectedRouter, ctx)
-			deposit.RegisterRoutes(protectedRouter, ctx)
-			distribution.RegisterRoutes(protectedRouter, ctx)
-			gov.RegisterRoutes(protectedRouter, ctx)
-			keys.RegisterRoutes(protectedRouter, ctx)
-			node.RegisterRoutes(protectedRouter, ctx)
-			plan.RegisterRoutes(protectedRouter, ctx)
-			provider.RegisterRoutes(protectedRouter, ctx)
-			service.RegisterRoutes(protectedRouter, ctx)
-			session.RegisterRoutes(protectedRouter, ctx)
-			staking.RegisterRoutes(protectedRouter, ctx)
-			subscription.RegisterRoutes(protectedRouter, ctx)
+			prefixRouter.Use(middlewares.AddHeaders)
+			prefixRouter.Use(middlewares.TokenVerify(ctx))
+			account.RegisterRoutes(prefixRouter, ctx)
+			bank.RegisterRoutes(prefixRouter, ctx)
+			config.RegisterRoutes(prefixRouter, ctx)
+			deposit.RegisterRoutes(prefixRouter, ctx)
+			distribution.RegisterRoutes(prefixRouter, ctx)
+			gov.RegisterRoutes(prefixRouter, ctx)
+			keys.RegisterRoutes(prefixRouter, ctx)
+			node.RegisterRoutes(prefixRouter, ctx)
+			plan.RegisterRoutes(prefixRouter, ctx)
+			provider.RegisterRoutes(prefixRouter, ctx)
+			service.RegisterRoutes(prefixRouter, ctx)
+			session.RegisterRoutes(prefixRouter, ctx)
+			staking.RegisterRoutes(prefixRouter, ctx)
+			subscription.RegisterRoutes(prefixRouter, ctx)
 
 			router := cors.New(
 				cors.Options{
 					AllowedOrigins: strings.Split(cfg.CORS.AllowedOrigins, ","),
 					AllowedMethods: []string{http.MethodGet, http.MethodPost, http.MethodPut},
-					AllowedHeaders: []string{"Authorization", "Content-Type"},
+					AllowedHeaders: []string{"Content-Type", "Authorization"},
 				},
 			).Handler(muxRouter)
 
@@ -121,14 +134,20 @@ func ServerCmd(cfg *types.Config) *cobra.Command {
 				return err
 			}
 
-			log.Printf("Listening on URL %s\n", listenURL)
+			switch url.Scheme {
+			case "http", "https":
+			default:
+				return fmt.Errorf("invalid listen URL schema")
+			}
+
+			log.Printf("URL: %s, TOKEN: %s", listenURL, ctx.Token())
 			switch url.Scheme {
 			case "http":
 				return http.ListenAndServe(url.Host, router)
 			case "https":
 				return http.ListenAndServeTLS(url.Host, certFile, keyFile, router)
 			default:
-				return fmt.Errorf("invalid listen URL schema")
+				return nil
 			}
 		},
 	}

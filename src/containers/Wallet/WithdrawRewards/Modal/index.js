@@ -2,8 +2,6 @@ import * as PropTypes from 'prop-types';
 import { Modal as ReactModal } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { hideTxWithdrawModal } from '../../../../actions/transactions/withdraw';
-import AccountPassword from '../../../common/AccountPassword';
-import AccountPasswordView from '../../../common/AccountPasswordView';
 import FromAddress from './FromAddress';
 import FromName from './FromName';
 import Label from '../../../../components/Label';
@@ -43,16 +41,6 @@ const Modal = (props) => {
                         label="Memo"
                     />
                     <Memo/>
-                </div>
-                <div className="password-box">
-                    <div className="form-group">
-                        <Label
-                            className=""
-                            label="Password"
-                        />
-                        <AccountPassword/>
-                    </div>
-                    <AccountPasswordView/>
                 </div>
                 <Withdraw/>
             </ReactModal.Body>

@@ -5,11 +5,9 @@ import { hideKeysCreateModal } from '../../../../actions/keys';
 import Label from '../../../../components/Label';
 import Mnemonic from '../../../CreateKey/Mnemonic';
 import Name from '../../../CreateKey/Name';
-import Password from '../../../CreateKey/Password';
 import React from 'react';
 import Submit from './Submit';
 import TextBox from '../../../../components/TextBox';
-import ViewPassword from '../../../CreateKey/ViewPassword';
 
 const ModalCreate = ({
     show,
@@ -36,16 +34,6 @@ const ModalCreate = ({
                         label="Name *"
                     />
                     <Name/>
-                </div>
-                <div className="password-box">
-                    <div className="form-group">
-                        <Label
-                            className=""
-                            label="Password *"
-                        />
-                        <Password/>
-                    </div>
-                    <ViewPassword/>
                 </div>
                 <hr/>
                 <div className="form-group">

@@ -67,7 +67,7 @@ const amount = (state = {
     case TX_UNBOND_MODAL_HIDE:
         return {
             ...state,
-            value: 0,
+            value: '',
             error: {
                 ...state.error,
                 message: '',

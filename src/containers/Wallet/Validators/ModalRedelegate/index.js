@@ -2,8 +2,6 @@ import * as PropTypes from 'prop-types';
 import { Modal as ReactModal } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { hideTxRedelegateModal } from '../../../../actions/transactions/redelegate';
-import AccountPassword from '../../../common/AccountPassword';
-import AccountPasswordView from '../../../common/AccountPasswordView';
 import Amount from './Amount';
 import FromAddress from './FromAddress';
 import FromName from './FromName';
@@ -57,16 +55,6 @@ const ModalRedelegate = (props) => {
                         label="Memo"
                     />
                     <Memo/>
-                </div>
-                <div className="password-box">
-                    <div className="form-group">
-                        <Label
-                            className=""
-                            label="Password"
-                        />
-                        <AccountPassword/>
-                    </div>
-                    <AccountPasswordView/>
                 </div>
                 <Redelegate/>
             </ReactModal.Body>

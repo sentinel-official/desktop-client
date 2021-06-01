@@ -4,8 +4,6 @@ import {
     KEYS_DELETE_ERROR,
     KEYS_DELETE_IN_PROGRESS,
     KEYS_DELETE_NAME_SET,
-    KEYS_DELETE_PASSWORD_SET,
-    KEYS_DELETE_PASSWORD_VISIBLE_SET,
     KEYS_DELETE_SUCCESS,
     KEYS_GET_ERROR,
     KEYS_GET_IN_PROGRESS,
@@ -15,14 +13,12 @@ import {
     KEYS_LIST_MODAL_HIDE,
     KEYS_LIST_MODAL_SHOW,
     KEYS_NAME_SET,
-    KEYS_PASSWORD_VISIBLE_SET,
     KEYS_POST_ERROR,
     KEYS_POST_IN_PROGRESS,
     KEYS_POST_SUCCESS,
     KEY_MNEMONIC_SAVED_SET,
     KEY_MNEMONIC_SET,
     KEY_NAME_SET,
-    KEY_PASSWORD_SET,
     keysDeleteURL,
     keysGetURL,
     keysPostURL,
@@ -96,20 +92,6 @@ export const setKeyName = (data) => {
     };
 };
 
-export const setKeyPassword = (data) => {
-    return {
-        type: KEY_PASSWORD_SET,
-        data,
-    };
-};
-
-export const setKeyPasswordVisible = (data) => {
-    return {
-        type: KEYS_PASSWORD_VISIBLE_SET,
-        data,
-    };
-};
-
 export const setKeyMnemonic = (data) => {
     return {
         type: KEY_MNEMONIC_SET,
@@ -156,7 +138,6 @@ export const postKeys = (history, cb = emptyFunc) => (dispatch, getState) => {
                     post: {
                         mnemonic,
                         name,
-                        password,
                     },
                 },
             } = getState();
@@ -165,7 +146,6 @@ export const postKeys = (history, cb = emptyFunc) => (dispatch, getState) => {
             Axios.post(url, {
                 mnemonic: mnemonic.value.trim(),
                 name: name.value.trim(),
-                password: password.value.trim(),
             }).then((res) => {
                 try {
                     next(null, res?.data?.result);
@@ -218,20 +198,6 @@ export const showKeysCreateModal = (data) => {
 export const hideKeysCreateModal = (data) => {
     return {
         type: KEYS_CREATE_MODAL_HIDE,
-        data,
-    };
-};
-
-export const setKeysDeletePassword = (data) => {
-    return {
-        type: KEYS_DELETE_PASSWORD_SET,
-        data,
-    };
-};
-
-export const setKeysDeletePasswordVisible = (data) => {
-    return {
-        type: KEYS_DELETE_PASSWORD_VISIBLE_SET,
         data,
     };
 };
@@ -295,15 +261,12 @@ export const deleteKeys = (cb = emptyFunc) => (dispatch, getState) => {
                 keys: {
                     delete: {
                         name,
-                        password,
                     },
                 },
             } = getState();
 
             const url = keysDeleteURL(name);
-            Axios.post(url, {
-                password: password.value.trim(),
-            }).then((res) => {
+            Axios.post(url, {}).then((res) => {
                 try {
                     next(null, res?.data?.result);
                 } catch (e) {

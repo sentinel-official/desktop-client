@@ -1,30 +1,29 @@
 package gov
 
 import (
-	"github.com/cosmos/cosmos-sdk/x/gov"
-	"github.com/tendermint/tendermint/libs/bytes"
+	govtypes "github.com/cosmos/cosmos-sdk/x/gov/types"
 )
 
 type Vote struct {
-	ProposalID uint64 `json:"proposal_id"`
+	ProposalId uint64 `json:"proposal_id"`
 	Voter      string `json:"voter"`
 	Option     string `json:"option"`
 }
 
-func NewVoteFromRaw(vote gov.Vote) Vote {
+func NewVoteFromRaw(vote *govtypes.Vote) Vote {
 	return Vote{
-		ProposalID: vote.ProposalID,
-		Voter:      bytes.HexBytes(vote.Voter.Bytes()).String(),
+		ProposalId: vote.ProposalId,
+		Voter:      vote.Voter,
 		Option:     vote.Option.String(),
 	}
 }
 
 type Votes []Vote
 
-func NewVotesFromRaw(items gov.Votes) Votes {
+func NewVotesFromRaw(items govtypes.Votes) Votes {
 	votes := make(Votes, 0, len(items))
-	for _, item := range items {
-		votes = append(votes, NewVoteFromRaw(item))
+	for i := range items {
+		votes = append(votes, NewVoteFromRaw(&items[i]))
 	}
 
 	return votes

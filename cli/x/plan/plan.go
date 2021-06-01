@@ -3,27 +3,26 @@ package plan
 import (
 	"time"
 
-	"github.com/sentinel-official/hub/x/plan"
-	"github.com/tendermint/tendermint/libs/bytes"
+	plantypes "github.com/sentinel-official/hub/x/plan/types"
 
-	"github.com/sentinel-official/desktop-client/cli/x/other"
+	"github.com/sentinel-official/desktop-client/cli/x/common"
 )
 
 type Plan struct {
-	ID       uint64      `json:"id"`
-	Provider string      `json:"provider"`
-	Price    other.Coins `json:"price"`
-	Validity int64       `json:"validity"`
-	Bytes    int64       `json:"bytes"`
-	Status   string      `json:"status"`
-	StatusAt time.Time   `json:"status_at"`
+	Id       uint64       `json:"id"`
+	Provider string       `json:"provider"`
+	Price    common.Coins `json:"price"`
+	Validity int64        `json:"validity"`
+	Bytes    int64        `json:"bytes"`
+	Status   string       `json:"status"`
+	StatusAt time.Time    `json:"status_at"`
 }
 
-func NewPlanFromRaw(item plan.Plan) Plan {
+func NewPlanFromRaw(item *plantypes.Plan) Plan {
 	return Plan{
-		ID:       item.ID,
-		Provider: bytes.HexBytes(item.Provider.Bytes()).String(),
-		Price:    other.NewCoinsFromRaw(item.Price),
+		Id:       item.Id,
+		Provider: item.Provider,
+		Price:    common.NewCoinsFromRaw(item.Price),
 		Validity: item.Validity.Nanoseconds(),
 		Bytes:    item.Bytes.Int64(),
 		Status:   item.Status.String(),
@@ -33,10 +32,10 @@ func NewPlanFromRaw(item plan.Plan) Plan {
 
 type Plans []Plan
 
-func NewPlansFromRaw(items plan.Plans) Plans {
+func NewPlansFromRaw(items plantypes.Plans) Plans {
 	plans := make(Plans, 0, len(items))
 	for _, item := range items {
-		plans = append(plans, NewPlanFromRaw(item))
+		plans = append(plans, NewPlanFromRaw(&item))
 	}
 
 	return plans

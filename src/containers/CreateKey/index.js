@@ -2,13 +2,11 @@ import * as PropTypes from 'prop-types';
 import Label from '../../components/Label';
 import Mnemonic from './Mnemonic';
 import Name from './Name';
-import Password from './Password';
 import React from 'react';
 import Sidebar from '../common/SidebarOnboard';
 import SocialIcons from '../../components/SocialIcons';
 import Submit from './Submit';
 import TextBox from '../../components/TextBox';
-import ViewPassword from './ViewPassword';
 
 const CreateKey = ({ history }) => {
     return (
@@ -29,16 +27,6 @@ const CreateKey = ({ history }) => {
                                 label="Name *"
                             />
                             <Name/>
-                        </div>
-                        <div className="password-box create-key-password">
-                            <div className="form-group">
-                                <Label
-                                    className="label"
-                                    label="Password *"
-                                />
-                                <Password/>
-                            </div>
-                            <ViewPassword/>
                         </div>
                         <hr/>
                         <div className="form-group">

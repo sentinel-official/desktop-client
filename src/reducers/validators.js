@@ -59,10 +59,10 @@ const totalVotingPower = (state = {
     switch (type) {
     case VALIDATORS_GET_SUCCESS: {
         const active = Lodash.sumBy(data, (item) => {
-            return isActive(item) ? item.amount.value : 0;
+            return isActive(item) ? item.tokens : 0;
         });
         const inactive = Lodash.sumBy(data, (item) => {
-            return isActive(item) ? 0 : item.amount.value;
+            return isActive(item) ? 0 : item.tokens;
         });
 
         return {

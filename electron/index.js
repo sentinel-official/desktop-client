@@ -19,6 +19,7 @@ const createMainWindow = () => {
         icon: path.join(__dirname, 'icon.png'),
         minHeight: 480,
         minWidth: 852,
+        show: false,
         title: 'Sentinel',
         webPreferences: {
             enableWebSQL: false,
@@ -29,8 +30,9 @@ const createMainWindow = () => {
     });
 
     const indexFile = path.join(__dirname, '../build/index.html');
-    window.loadFile(indexFile).then().catch(console.error);
-
+    window.loadFile(indexFile).then(() => {
+        window.show();
+    }).catch(console.error);
     globals.window = window;
 };
 

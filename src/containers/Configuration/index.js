@@ -5,7 +5,6 @@ import Gas from './Gas';
 import GasAdjustment from './GasAdjustment';
 import GasPrices from './GasPrices';
 import Label from '../../components/Label';
-import Password from './Password';
 import RPCAddress from './RPCAddress';
 import React from 'react';
 import Sidebar from '../common/SidebarOnboard';
@@ -14,7 +13,6 @@ import SocialIcons from '../../components/SocialIcons';
 import Submit from './Submit';
 import TextBox from '../../components/TextBox';
 import Tooltip from '../../components/Tooltip/Tooltip';
-import TrustNode from './TrustNode';
 
 const Configuration = ({ history }) => {
     return (
@@ -27,19 +25,6 @@ const Configuration = ({ history }) => {
                     <TextBox className="login-title" value="Configuration"/>
                     <div className="config-row">
                         <div className="col-md-6">
-                            <div className="form-group">
-                                <div className="label-icon">
-                                    <Label
-                                        className="label"
-                                        label="Application Password"
-                                    />
-                                    <Tooltip
-                                        icon="tooltip"
-                                        value="Help"
-                                    />
-                                </div>
-                                <Password/>
-                            </div>
                             <div className="form-group">
                                 <div className="label-icon">
                                     <Label
@@ -119,19 +104,6 @@ const Configuration = ({ history }) => {
                                     />
                                 </div>
                                 <SimulateAndExecute/>
-                            </div>
-                            <div className="form-group trust-node">
-                                <div className="label-icon">
-                                    <Label
-                                        className="label"
-                                        label="Trust Node"
-                                    />
-                                    <Tooltip
-                                        icon="tooltip"
-                                        value="Help"
-                                    />
-                                </div>
-                                <TrustNode/>
                             </div>
                             <div className="form-group">
                                 <div className="label-icon">

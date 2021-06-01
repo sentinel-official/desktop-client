@@ -1,5 +1,5 @@
 import * as PropTypes from 'prop-types';
-import { ValidateMemo, ValidatePassword } from '../../../common/_validation';
+import { ValidateMemo } from '../../../common/_validation';
 import { connect } from 'react-redux';
 import { txSend } from '../../../../actions/transactions/send';
 import Button from '../../../../components/Button';
@@ -15,8 +15,7 @@ const Send = (props) => {
     };
 
     const disabled = (
-        ValidateMemo(props.memo.value).message !== '' ||
-        ValidatePassword(props.password.value).message !== ''
+        ValidateMemo(props.memo.value).message !== ''
     );
 
     return (
@@ -39,12 +38,6 @@ Send.propTypes = {
             message: PropTypes.string.isRequired,
         }).isRequired,
     }).isRequired,
-    password: PropTypes.shape({
-        value: PropTypes.string.isRequired,
-        error: PropTypes.shape({
-            message: PropTypes.string.isRequired,
-        }).isRequired,
-    }).isRequired,
     txSend: PropTypes.func.isRequired,
 };
 
@@ -52,7 +45,6 @@ const stateToProps = (state) => {
     return {
         inProgress: state.transactions.send.inProgress,
         memo: state.transactions.send.memo,
-        password: state.account.password,
     };
 };
 

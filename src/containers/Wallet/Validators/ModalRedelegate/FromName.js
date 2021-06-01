@@ -8,7 +8,7 @@ const FromName = ({
     items,
     value,
 }) => {
-    const item = Lodash.find(items, ['address', value]);
+    const item = Lodash.find(items, ['operator_address', value]);
 
     return (
         <TextBox
@@ -21,7 +21,7 @@ const FromName = ({
 FromName.propTypes = {
     items: PropTypes.arrayOf(
         PropTypes.shape({
-            address: PropTypes.string.isRequired,
+            operator_address: PropTypes.string.isRequired,
             description: PropTypes.shape({
                 moniker: PropTypes.string.isRequired,
             }).isRequired,
