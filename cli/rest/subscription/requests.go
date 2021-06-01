@@ -2,19 +2,16 @@ package subscription
 
 import (
 	"encoding/json"
-	"fmt"
 	"net/http"
 
-	"github.com/sentinel-official/desktop-client/cli/x/other"
+	sdk "github.com/cosmos/cosmos-sdk/types"
+	hubtypes "github.com/sentinel-official/hub/types"
 )
 
 type RequestAddSubscription struct {
-	Memo     string `json:"memo"`
-	Password string `json:"password"`
-
-	To     string     `json:"to"`
-	Amount other.Coin `json:"amount"`
-
+	Memo  string `json:"memo"`
+	To    string `json:"to"`
+	Coin  string `json:"coin"`
 	ID    uint64 `json:"id"`
 	Denom string `json:"denom"`
 }
@@ -29,16 +26,27 @@ func NewRequestAddSubscription(r *http.Request) (*RequestAddSubscription, error)
 }
 
 func (r *RequestAddSubscription) Validate() error {
-	if r.Password == "" {
-		return fmt.Errorf("invalid field Password")
+	if r.To != "" {
+		if _, err := hubtypes.NodeAddressFromBech32(r.To); err != nil {
+			return err
+		}
+	}
+	if r.Coin != "" {
+		if _, err := sdk.ParseCoinNormalized(r.Coin); err != nil {
+			return err
+		}
+	}
+	if r.Denom != "" {
+		if err := sdk.ValidateDenom(r.Denom); err != nil {
+			return err
+		}
 	}
 
 	return nil
 }
 
 type RequestCancelSubscription struct {
-	Memo     string `json:"memo"`
-	Password string `json:"password"`
+	Memo string `json:"memo"`
 }
 
 func NewRequestCancelSubscription(r *http.Request) (*RequestCancelSubscription, error) {
@@ -51,9 +59,5 @@ func NewRequestCancelSubscription(r *http.Request) (*RequestCancelSubscription, 
 }
 
 func (r *RequestCancelSubscription) Validate() error {
-	if r.Password == "" {
-		return fmt.Errorf("invalid field Password")
-	}
-
 	return nil
 }

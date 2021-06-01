@@ -1,296 +1,342 @@
 package lite
 
 import (
-	"fmt"
+	"context"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	"github.com/cosmos/cosmos-sdk/x/auth"
-	"github.com/cosmos/cosmos-sdk/x/auth/exported"
-	"github.com/cosmos/cosmos-sdk/x/gov"
-	"github.com/cosmos/cosmos-sdk/x/staking"
-	hub "github.com/sentinel-official/hub/types"
-	"github.com/sentinel-official/hub/x/deposit"
-	"github.com/sentinel-official/hub/x/node"
-	"github.com/sentinel-official/hub/x/plan"
-	"github.com/sentinel-official/hub/x/provider"
-	"github.com/sentinel-official/hub/x/session"
-	"github.com/sentinel-official/hub/x/subscription"
-	"github.com/sentinel-official/hub/x/vpn"
+	"github.com/cosmos/cosmos-sdk/types/query"
+	authtypes "github.com/cosmos/cosmos-sdk/x/auth/types"
+	banktypes "github.com/cosmos/cosmos-sdk/x/bank/types"
+	govtypes "github.com/cosmos/cosmos-sdk/x/gov/types"
+	stakingtypes "github.com/cosmos/cosmos-sdk/x/staking/types"
+	hubtypes "github.com/sentinel-official/hub/types"
+	deposittypes "github.com/sentinel-official/hub/x/deposit/types"
+	nodetypes "github.com/sentinel-official/hub/x/node/types"
+	plantypes "github.com/sentinel-official/hub/x/plan/types"
+	providertypes "github.com/sentinel-official/hub/x/provider/types"
+	sessiontypes "github.com/sentinel-official/hub/x/session/types"
+	subscriptiontypes "github.com/sentinel-official/hub/x/subscription/types"
+
+	"github.com/sentinel-official/desktop-client/cli/utils"
 )
 
-func (c *Client) Query(path string, params, result interface{}) error {
-	bytes, err := c.ctx.Codec.MarshalJSON(params)
+func (c *Client) QueryAccount(address sdk.AccAddress) (authtypes.AccountI, error) {
+	var (
+		account authtypes.AccountI
+		qc      = authtypes.NewQueryClient(c.ctx)
+	)
+
+	res, err := qc.Account(context.Background(),
+		&authtypes.QueryAccountRequest{
+			Address: address.String(),
+		},
+	)
 	if err != nil {
-		return err
+		return nil, utils.IsNotFoundError(err)
 	}
 
-	res, _, err := c.ctx.QueryWithData(path, bytes)
+	if err := c.ctx.InterfaceRegistry.UnpackAny(res.Account, &account); err != nil {
+		return nil, err
+	}
+
+	return account, nil
+}
+
+func (c *Client) QueryBalance(address sdk.AccAddress, denom string) (*sdk.Coin, error) {
+	var (
+		qc = banktypes.NewQueryClient(c.ctx)
+	)
+
+	res, err := qc.Balance(context.Background(),
+		&banktypes.QueryBalanceRequest{
+			Address: address.String(),
+			Denom:   denom,
+		},
+	)
 	if err != nil {
-		return err
-	}
-	if res == nil {
-		return nil
+		return nil, utils.IsNotFoundError(err)
 	}
 
-	return c.ctx.Codec.UnmarshalJSON(res, result)
+	return res.Balance, nil
 }
 
-func (c *Client) QueryAccount(address sdk.AccAddress) (exported.Account, error) {
+func (c *Client) QueryValidator(address sdk.ValAddress) (*stakingtypes.Validator, error) {
 	var (
-		result exported.Account
-		path   = fmt.Sprintf("custom/%s/%s", auth.QuerierRoute, auth.QueryAccount)
+		qc = stakingtypes.NewQueryClient(c.ctx)
 	)
 
-	if err := c.Query(path, auth.NewQueryAccountParams(address), &result); err != nil {
-		return result, err
+	res, err := qc.Validator(context.Background(),
+		&stakingtypes.QueryValidatorRequest{
+			ValidatorAddr: address.String(),
+		},
+	)
+	if err != nil {
+		return nil, utils.IsNotFoundError(err)
 	}
 
-	return result, nil
+	return &res.Validator, nil
 }
 
-func (c *Client) QueryValidator(address sdk.ValAddress) (staking.Validator, error) {
+func (c *Client) QueryValidators(status string, pagination *query.PageRequest) (stakingtypes.Validators, error) {
 	var (
-		result staking.Validator
-		path   = fmt.Sprintf("custom/%s/%s", staking.QuerierRoute, staking.QueryValidator)
+		qc = stakingtypes.NewQueryClient(c.ctx)
 	)
 
-	if err := c.Query(path, staking.NewQueryValidatorParams(address), &result); err != nil {
-		return result, err
+	res, err := qc.Validators(context.Background(),
+		&stakingtypes.QueryValidatorsRequest{
+			Status:     status,
+			Pagination: pagination,
+		},
+	)
+	if err != nil {
+		return nil, utils.IsNotFoundError(err)
 	}
 
-	return result, nil
+	return res.Validators, nil
 }
 
-func (c *Client) QueryValidators(page, limit int, status string) (staking.Validators, error) {
+func (c *Client) QueryDelegations(address sdk.AccAddress) (stakingtypes.DelegationResponses, error) {
 	var (
-		result staking.Validators
-		path   = fmt.Sprintf("custom/%s/%s", staking.QuerierRoute, staking.QueryValidators)
+		qc = stakingtypes.NewQueryClient(c.ctx)
 	)
 
-	if err := c.Query(path, staking.NewQueryValidatorsParams(page, limit, status), &result); err != nil {
-		return result, err
+	res, err := qc.DelegatorDelegations(context.Background(),
+		&stakingtypes.QueryDelegatorDelegationsRequest{
+			DelegatorAddr: address.String(),
+		},
+	)
+	if err != nil {
+		return nil, utils.IsNotFoundError(err)
 	}
 
-	return result, nil
+	return res.DelegationResponses, nil
 }
 
-func (c *Client) QueryDelegations(address sdk.AccAddress) (staking.Delegations, error) {
+func (c *Client) QueryProposals() (govtypes.Proposals, error) {
 	var (
-		result staking.Delegations
-		path   = fmt.Sprintf("custom/%s/%s", staking.QuerierRoute, staking.QueryDelegatorDelegations)
+		qc = govtypes.NewQueryClient(c.ctx)
 	)
 
-	if err := c.Query(path, staking.NewQueryDelegatorParams(address), &result); err != nil {
-		return result, err
+	res, err := qc.Proposals(context.Background(),
+		&govtypes.QueryProposalsRequest{},
+	)
+	if err != nil {
+		return nil, utils.IsNotFoundError(err)
 	}
 
-	return result, nil
+	return res.Proposals, nil
 }
 
-func (c *Client) QueryProposals() (gov.Proposals, error) {
+func (c *Client) QueryProposalVote(id uint64, address sdk.AccAddress) (*govtypes.Vote, error) {
 	var (
-		result gov.Proposals
-		path   = fmt.Sprintf("custom/%s/%s", gov.QuerierRoute, gov.QueryProposals)
+		qc = govtypes.NewQueryClient(c.ctx)
 	)
 
-	if err := c.Query(path, gov.NewQueryProposalsParams(0, 0, gov.StatusNil, nil, nil), &result); err != nil {
-		return result, err
+	res, err := qc.Vote(context.Background(),
+		&govtypes.QueryVoteRequest{
+			ProposalId: id,
+			Voter:      address.String(),
+		},
+	)
+	if err != nil {
+		return nil, utils.IsNotFoundError(err)
 	}
 
-	return result, nil
+	return &res.Vote, nil
 }
 
-func (c *Client) QueryProposalVote(id uint64, address sdk.AccAddress) (gov.Vote, error) {
+func (c *Client) QueryDeposit(address sdk.AccAddress) (*deposittypes.Deposit, error) {
 	var (
-		result gov.Vote
-		path   = fmt.Sprintf("custom/%s/%s", gov.QuerierRoute, gov.QueryVote)
+		qc = deposittypes.NewQueryServiceClient(c.ctx)
 	)
 
-	if err := c.Query(path, gov.NewQueryVoteParams(id, address), &result); err != nil {
-		return result, err
+	res, err := qc.QueryDeposit(context.Background(),
+		deposittypes.NewQueryDepositRequest(address))
+	if err != nil {
+		return nil, utils.IsNotFoundError(err)
 	}
 
-	return result, nil
+	return &res.Deposit, nil
 }
 
-func (c *Client) QueryDeposit(address sdk.AccAddress) (deposit.Deposit, error) {
+func (c *Client) QueryProvider(address hubtypes.ProvAddress) (*providertypes.Provider, error) {
 	var (
-		result deposit.Deposit
-		path   = fmt.Sprintf("custom/%s/%s/%s", vpn.QuerierRoute, deposit.QuerierRoute, deposit.QueryDeposit)
+		qc = providertypes.NewQueryServiceClient(c.ctx)
 	)
 
-	if err := c.Query(path, deposit.NewQueryDepositParams(address), &result); err != nil {
-		return result, err
+	res, err := qc.QueryProvider(context.Background(),
+		providertypes.NewQueryProviderRequest(address))
+	if err != nil {
+		return nil, utils.IsNotFoundError(err)
 	}
 
-	return result, nil
+	return &res.Provider, nil
 }
 
-func (c *Client) QueryProvider(address hub.ProvAddress) (provider.Provider, error) {
+func (c *Client) QueryProviders(pagination *query.PageRequest) (providertypes.Providers, error) {
 	var (
-		result provider.Provider
-		path   = fmt.Sprintf("custom/%s/%s/%s", vpn.QuerierRoute, provider.QuerierRoute, provider.QueryProvider)
+		qc = providertypes.NewQueryServiceClient(c.ctx)
 	)
 
-	if err := c.Query(path, provider.NewQueryProviderParams(address), &result); err != nil {
-		return result, err
+	res, err := qc.QueryProviders(context.Background(),
+		providertypes.NewQueryProvidersRequest(pagination))
+	if err != nil {
+		return nil, utils.IsNotFoundError(err)
 	}
 
-	return result, nil
+	return res.Providers, nil
 }
 
-func (c *Client) QueryProviders(skip, limit int) (provider.Providers, error) {
+func (c *Client) QueryNode(address hubtypes.NodeAddress) (*nodetypes.Node, error) {
 	var (
-		result provider.Providers
-		path   = fmt.Sprintf("custom/%s/%s/%s", vpn.QuerierRoute, provider.QuerierRoute, provider.QueryProviders)
+		qc = nodetypes.NewQueryServiceClient(c.ctx)
 	)
 
-	if err := c.Query(path, provider.NewQueryProvidersParams(skip, limit), &result); err != nil {
-		return result, err
+	res, err := qc.QueryNode(context.Background(),
+		nodetypes.NewQueryNodeRequest(address))
+	if err != nil {
+		return nil, utils.IsNotFoundError(err)
 	}
 
-	return result, nil
+	return &res.Node, nil
 }
 
-func (c *Client) QueryNode(address hub.NodeAddress) (node.Node, error) {
+func (c *Client) QueryNodes(status hubtypes.Status, pagination *query.PageRequest) (nodetypes.Nodes, error) {
 	var (
-		result node.Node
-		path   = fmt.Sprintf("custom/%s/%s/%s", vpn.QuerierRoute, node.QuerierRoute, node.QueryNode)
+		qc = nodetypes.NewQueryServiceClient(c.ctx)
 	)
 
-	if err := c.Query(path, node.NewQueryNodeParams(address), &result); err != nil {
-		return result, err
+	res, err := qc.QueryNodes(context.Background(),
+		nodetypes.NewQueryNodesRequest(status, pagination))
+	if err != nil {
+		return nil, utils.IsNotFoundError(err)
 	}
 
-	return result, nil
+	return res.Nodes, nil
 }
 
-func (c *Client) QueryNodes(status hub.Status, skip, limit int) (node.Nodes, error) {
+func (c *Client) QueryNodesForPlan(id uint64, pagination *query.PageRequest) (nodetypes.Nodes, error) {
 	var (
-		result node.Nodes
-		path   = fmt.Sprintf("custom/%s/%s/%s", vpn.QuerierRoute, node.QuerierRoute, node.QueryNodes)
+		qc = plantypes.NewQueryServiceClient(c.ctx)
 	)
 
-	if err := c.Query(path, node.NewQueryNodesParams(status, skip, limit), &result); err != nil {
-		return result, err
+	res, err := qc.QueryNodesForPlan(context.Background(),
+		plantypes.NewQueryNodesForPlanRequest(id, pagination))
+	if err != nil {
+		return nil, utils.IsNotFoundError(err)
 	}
 
-	return result, nil
+	return res.Nodes, nil
 }
 
-func (c *Client) QueryNodesForPlan(id uint64, skip, limit int) (node.Nodes, error) {
+func (c *Client) QueryPlan(id uint64) (*plantypes.Plan, error) {
 	var (
-		result node.Nodes
-		path   = fmt.Sprintf("custom/%s/%s/%s", vpn.QuerierRoute, plan.QuerierRoute, plan.QueryNodesForPlan)
+		qc = plantypes.NewQueryServiceClient(c.ctx)
 	)
 
-	if err := c.Query(path, plan.NewQueryNodesForPlanParams(id, skip, limit), &result); err != nil {
-		return result, err
+	res, err := qc.QueryPlan(context.Background(),
+		plantypes.NewQueryPlanRequest(id))
+	if err != nil {
+		return nil, utils.IsNotFoundError(err)
 	}
 
-	return result, nil
+	return &res.Plan, nil
 }
 
-func (c *Client) QueryPlan(id uint64) (plan.Plan, error) {
+func (c *Client) QueryPlansForProvider(address hubtypes.ProvAddress, status hubtypes.Status, pagination *query.PageRequest) (plantypes.Plans, error) {
 	var (
-		result plan.Plan
-		path   = fmt.Sprintf("custom/%s/%s/%s", vpn.QuerierRoute, plan.QuerierRoute, plan.QueryPlan)
+		qc = plantypes.NewQueryServiceClient(c.ctx)
 	)
 
-	if err := c.Query(path, plan.NewQueryPlanParams(id), &result); err != nil {
-		return result, err
+	res, err := qc.QueryPlansForProvider(context.Background(),
+		plantypes.NewQueryPlansForProviderRequest(address, status, pagination))
+	if err != nil {
+		return nil, utils.IsNotFoundError(err)
 	}
 
-	return result, nil
+	return res.Plans, nil
 }
 
-func (c *Client) QueryPlansForProvider(address hub.ProvAddress, status hub.Status, skip, limit int) (plan.Plans, error) {
+func (c *Client) QuerySubscription(id uint64) (*subscriptiontypes.Subscription, error) {
 	var (
-		result plan.Plans
-		path   = fmt.Sprintf("custom/%s/%s/%s", vpn.QuerierRoute, plan.QuerierRoute, plan.QueryPlansForProvider)
+		qc = subscriptiontypes.NewQueryServiceClient(c.ctx)
 	)
 
-	if err := c.Query(path, plan.NewQueryPlansForProviderParams(address, status, skip, limit), &result); err != nil {
-		return result, err
+	res, err := qc.QuerySubscription(context.Background(),
+		subscriptiontypes.NewQuerySubscriptionRequest(id))
+	if err != nil {
+		return nil, utils.IsNotFoundError(err)
 	}
 
-	return result, nil
+	return &res.Subscription, nil
 }
 
-func (c *Client) QuerySubscription(id uint64) (subscription.Subscription, error) {
+func (c *Client) QuerySubscriptionsForAddress(address sdk.AccAddress, status hubtypes.Status, pagination *query.PageRequest) (subscriptiontypes.Subscriptions, error) {
 	var (
-		result subscription.Subscription
-		path   = fmt.Sprintf("custom/%s/%s/%s", vpn.QuerierRoute, subscription.QuerierRoute, subscription.QuerySubscription)
+		qc = subscriptiontypes.NewQueryServiceClient(c.ctx)
 	)
 
-	if err := c.Query(path, subscription.NewQuerySubscriptionParams(id), &result); err != nil {
-		return result, err
+	res, err := qc.QuerySubscriptionsForAddress(context.Background(),
+		subscriptiontypes.NewQuerySubscriptionsForAddressRequest(address, status, pagination))
+	if err != nil {
+		return nil, utils.IsNotFoundError(err)
 	}
 
-	return result, nil
+	return res.Subscriptions, nil
 }
 
-func (c *Client) QuerySubscriptionsForAddress(address sdk.AccAddress, status hub.Status, skip, limit int) (subscription.Subscriptions, error) {
+func (c *Client) QueryQuota(id uint64, address sdk.AccAddress) (*subscriptiontypes.Quota, error) {
 	var (
-		result subscription.Subscriptions
-		path   = fmt.Sprintf("custom/%s/%s/%s", vpn.QuerierRoute, subscription.QuerierRoute, subscription.QuerySubscriptionsForAddress)
+		qc = subscriptiontypes.NewQueryServiceClient(c.ctx)
 	)
 
-	if err := c.Query(path, subscription.NewQuerySubscriptionsForAddressParams(address, status, skip, limit), &result); err != nil {
-		return result, err
+	res, err := qc.QueryQuota(context.Background(),
+		subscriptiontypes.NewQueryQuotaRequest(id, address))
+	if err != nil {
+		return nil, utils.IsNotFoundError(err)
 	}
 
-	return result, nil
+	return &res.Quota, nil
 }
 
-func (c *Client) QueryQuota(id uint64, address sdk.AccAddress) (subscription.Quota, error) {
+func (c *Client) QueryQuotas(id uint64, pagination *query.PageRequest) (subscriptiontypes.Quotas, error) {
 	var (
-		result subscription.Quota
-		path   = fmt.Sprintf("custom/%s/%s/%s", vpn.QuerierRoute, subscription.QuerierRoute, subscription.QueryQuota)
+		qc = subscriptiontypes.NewQueryServiceClient(c.ctx)
 	)
 
-	if err := c.Query(path, subscription.NewQueryQuotaParams(id, address), &result); err != nil {
-		return result, err
+	res, err := qc.QueryQuotas(context.Background(),
+		subscriptiontypes.NewQueryQuotasRequest(id, pagination))
+	if err != nil {
+		return nil, utils.IsNotFoundError(err)
 	}
 
-	return result, nil
+	return res.Quotas, nil
 }
 
-func (c *Client) QueryQuotas(id uint64, skip, limit int) (subscription.Quotas, error) {
+func (c *Client) QuerySession(id uint64) (*sessiontypes.Session, error) {
 	var (
-		result subscription.Quotas
-		path   = fmt.Sprintf("custom/%s/%s/%s", vpn.QuerierRoute, subscription.QuerierRoute, subscription.QueryQuotas)
+		qc = sessiontypes.NewQueryServiceClient(c.ctx)
 	)
 
-	if err := c.Query(path, subscription.NewQueryQuotasParams(id, skip, limit), &result); err != nil {
-		return result, err
+	res, err := qc.QuerySession(context.Background(),
+		sessiontypes.NewQuerySessionRequest(id))
+	if err != nil {
+		return nil, utils.IsNotFoundError(err)
 	}
 
-	return result, nil
+	return &res.Session, nil
 }
 
-func (c *Client) QuerySession(id uint64) (session.Session, error) {
+func (c *Client) QuerySessionsForAddress(address sdk.AccAddress, status hubtypes.Status, pagination *query.PageRequest) (sessiontypes.Sessions, error) {
 	var (
-		result session.Session
-		path   = fmt.Sprintf("custom/%s/%s/%s", vpn.QuerierRoute, session.QuerierRoute, session.QuerySession)
+		qc = sessiontypes.NewQueryServiceClient(c.ctx)
 	)
 
-	if err := c.Query(path, session.NewQuerySessionParams(id), &result); err != nil {
-		return result, err
+	res, err := qc.QuerySessionsForAddress(context.Background(),
+		sessiontypes.NewQuerySessionsForAddressRequest(address, status, pagination))
+	if err != nil {
+		return nil, utils.IsNotFoundError(err)
 	}
 
-	return result, nil
-}
-
-func (c *Client) QuerySessionsForAddress(address sdk.AccAddress, status hub.Status, skip, limit int) (session.Sessions, error) {
-	var (
-		result session.Sessions
-		path   = fmt.Sprintf("custom/%s/%s/%s", vpn.QuerierRoute, session.QuerierRoute, session.QuerySessionsForAddress)
-	)
-
-	if err := c.Query(path, session.NewQuerySessionsForAddressParams(address, status, skip, limit), &result); err != nil {
-		return result, err
-	}
-
-	return result, nil
+	return res.Sessions, nil
 }

@@ -1,13 +1,13 @@
 import * as PropTypes from 'prop-types';
 import { ValidateAmount } from './_validation';
 import { connect } from 'react-redux';
-import { floatCoinFromCoins, validAmountFromInput } from '../../../../utils/amount';
+import { floatCoin, validAmountFromInput } from '../../../../utils/amount';
 import { setTxDelegateAmount } from '../../../../actions/transactions/delegate';
 import NumberInputField from '../../../../components/NumberInputField';
 import React from 'react';
 
 const Amount = (props) => {
-    const amount = floatCoinFromCoins(props.coins);
+    const amount = floatCoin(props.balance);
 
     const onChange = ({ target: { value } }) => {
         value = validAmountFromInput(amount, props.input.value, value);
@@ -37,12 +37,10 @@ const Amount = (props) => {
 };
 
 Amount.propTypes = {
-    coins: PropTypes.arrayOf(
-        PropTypes.shape({
-            denom: PropTypes.string.isRequired,
-            value: PropTypes.number.isRequired,
-        }).isRequired,
-    ).isRequired,
+    balance: PropTypes.shape({
+        denom: PropTypes.string.isRequired,
+        value: PropTypes.number.isRequired,
+    }).isRequired,
     input: PropTypes.shape({
         value: PropTypes.string.isRequired,
         error: PropTypes.shape({
@@ -54,7 +52,7 @@ Amount.propTypes = {
 
 const stateToProps = (state) => {
     return {
-        coins: state.account.info.coins,
+        balance: state.account.info.balance,
         input: state.transactions.delegate.amount,
     };
 };

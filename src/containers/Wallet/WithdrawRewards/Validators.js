@@ -20,7 +20,7 @@ const Validators = ({
 
     const items = [];
     validators.forEach((validator) => {
-        const delegation = _find(delegations, ['validator_address', validator.address]);
+        const delegation = _find(delegations, ['validator_address', validator['operator_address']]);
         if (delegation) {
             items.push({
                 ...validator,
@@ -50,7 +50,7 @@ Validators.propTypes = {
     setTxWithdrawFrom: PropTypes.func.isRequired,
     validators: PropTypes.arrayOf(
         PropTypes.shape({
-            address: PropTypes.string.isRequired,
+            operator_address: PropTypes.string.isRequired,
             description: PropTypes.shape({
                 moniker: PropTypes.string.isRequired,
             }).isRequired,

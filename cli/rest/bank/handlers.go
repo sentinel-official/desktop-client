@@ -3,9 +3,11 @@ package bank
 import (
 	"net/http"
 
+	sdk "github.com/cosmos/cosmos-sdk/types"
+	banktypes "github.com/cosmos/cosmos-sdk/x/bank/types"
+
 	"github.com/sentinel-official/desktop-client/cli/context"
 	"github.com/sentinel-official/desktop-client/cli/utils"
-	"github.com/sentinel-official/desktop-client/cli/x/bank"
 )
 
 func HandlerSend(ctx *context.Context) http.HandlerFunc {
@@ -20,20 +22,23 @@ func HandlerSend(ctx *context.Context) http.HandlerFunc {
 			return
 		}
 
-		message, err := bank.NewMsgSend(ctx.AddressHex(), body.To, body.Amount).Raw()
-		if err != nil {
-			utils.WriteErrorToResponse(w, http.StatusInternalServerError, 1003, err.Error())
-			return
-		}
+		var (
+			to, _   = sdk.AccAddressFromBech32(body.To)
+			message = banktypes.NewMsgSend(
+				ctx.Client().FromAddress(),
+				to,
+				body.Coins.Raw(),
+			)
+		)
 
 		if err := message.ValidateBasic(); err != nil {
-			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1004, err.Error())
+			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1003, err.Error())
 			return
 		}
 
-		res, err := ctx.Client().Tx(body.Memo, body.Password, message)
+		res, err := ctx.Client().BroadcastTx(body.Memo, message)
 		if err != nil {
-			utils.WriteErrorToResponse(w, http.StatusInternalServerError, 1005, err.Error())
+			utils.WriteErrorToResponse(w, http.StatusInternalServerError, 1004, err.Error())
 			return
 		}
 

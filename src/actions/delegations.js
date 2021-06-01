@@ -44,7 +44,7 @@ export const getDelegations = (cb = emptyFunc) => (dispatch, getState) => {
             } = getState();
 
             const item = Lodash.find(items, ['name', name]);
-            const url = delegationsGetURL(item.address);
+            const url = `${delegationsGetURL(item.address)}?limit=1000`;
             Axios.get(url)
                 .then((res) => {
                     try {

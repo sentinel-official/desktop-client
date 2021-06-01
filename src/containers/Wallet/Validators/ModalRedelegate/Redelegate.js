@@ -1,6 +1,6 @@
 import * as PropTypes from 'prop-types';
 import { ValidateAmount, ValidateToAddress } from './_validation';
-import { ValidateMemo, ValidatePassword } from '../../../common/_validation';
+import { ValidateMemo } from '../../../common/_validation';
 import { connect } from 'react-redux';
 import { txRedelegate } from '../../../../actions/transactions/redelegate';
 import Button from '../../../../components/Button';
@@ -10,8 +10,7 @@ const Redelegate = (props) => {
     const disabled = (
         ValidateToAddress(props.to.value).message !== '' ||
         ValidateAmount(props.amount.value).message !== '' ||
-        ValidateMemo(props.memo.value).message !== '' ||
-        ValidatePassword(props.password.value).message !== ''
+        ValidateMemo(props.memo.value).message !== ''
     );
 
     return (
@@ -40,12 +39,6 @@ Redelegate.propTypes = {
             message: PropTypes.string.isRequired,
         }).isRequired,
     }).isRequired,
-    password: PropTypes.shape({
-        value: PropTypes.string.isRequired,
-        error: PropTypes.shape({
-            message: PropTypes.string.isRequired,
-        }).isRequired,
-    }).isRequired,
     to: PropTypes.shape({
         value: PropTypes.string.isRequired,
         error: PropTypes.shape({
@@ -60,7 +53,6 @@ const stateToProps = (state) => {
         amount: state.transactions.redelegate.amount,
         inProgress: state.transactions.redelegate.inProgress,
         memo: state.transactions.redelegate.memo,
-        password: state.account.password,
         to: state.transactions.redelegate.to,
     };
 };

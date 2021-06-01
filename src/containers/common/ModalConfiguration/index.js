@@ -9,14 +9,12 @@ import GasAdjustment from '../../Configuration/GasAdjustment';
 import GasPrices from '../../Configuration/GasPrices';
 import Label from '../../../components/Label';
 import Loader from '../../../components/Loader';
-import Password from '../../Configuration/Password';
 import RPCAddress from '../../Configuration/RPCAddress';
 import React, { useEffect, useState } from 'react';
 import SimulateAndExecute from '../../Configuration/SimulateAndExecute';
 import Submit from './Submit';
 import TextBox from '../../../components/TextBox';
 import Tooltip from '../../../components/Tooltip/Tooltip';
-import TrustNode from '../../Configuration/TrustNode';
 
 const ModalConfiguration = (props) => {
     const [loading, setLoading] = useState(true);
@@ -57,19 +55,6 @@ const ModalConfiguration = (props) => {
                         : <>
                             <div className="row">
                                 <div className="col-md-6">
-                                    <div className="form-group">
-                                        <div className="label-icon">
-                                            <Label
-                                                className="label"
-                                                label="Application Password"
-                                            />
-                                            <Tooltip
-                                                icon="tooltip"
-                                                value="Help"
-                                            />
-                                        </div>
-                                        <Password/>
-                                    </div>
                                     <div className="form-group">
                                         <div className="label-icon">
                                             <Label
@@ -149,19 +134,6 @@ const ModalConfiguration = (props) => {
                                             />
                                         </div>
                                         <SimulateAndExecute/>
-                                    </div>
-                                    <div className="form-group">
-                                        <div className="label-icon">
-                                            <Label
-                                                className="label"
-                                                label="Trust Node"
-                                            />
-                                            <Tooltip
-                                                icon="tooltip"
-                                                value="Help"
-                                            />
-                                        </div>
-                                        <TrustNode/>
                                     </div>
                                     <div className="form-group">
                                         <div className="label-icon">

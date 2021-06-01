@@ -1,8 +1,7 @@
 package subscription
 
 import (
-	"github.com/sentinel-official/hub/x/subscription"
-	"github.com/tendermint/tendermint/libs/bytes"
+	subscriptiontypes "github.com/sentinel-official/hub/x/subscription/types"
 )
 
 type Quota struct {
@@ -11,9 +10,9 @@ type Quota struct {
 	Allocated int64  `json:"allocated"`
 }
 
-func NewQuotaFromRaw(item subscription.Quota) Quota {
+func NewQuotaFromRaw(item *subscriptiontypes.Quota) Quota {
 	return Quota{
-		Address:   bytes.HexBytes(item.Address.Bytes()).String(),
+		Address:   item.Address,
 		Consumed:  item.Consumed.Int64(),
 		Allocated: item.Allocated.Int64(),
 	}
@@ -21,10 +20,10 @@ func NewQuotaFromRaw(item subscription.Quota) Quota {
 
 type Quotas []Quota
 
-func NewQuotasFromRaw(items subscription.Quotas) Quotas {
+func NewQuotasFromRaw(items subscriptiontypes.Quotas) Quotas {
 	quotas := make(Quotas, 0, len(items))
-	for _, item := range items {
-		quotas = append(quotas, NewQuotaFromRaw(item))
+	for i := range items {
+		quotas = append(quotas, NewQuotaFromRaw(&items[i]))
 	}
 
 	return quotas

@@ -2,8 +2,6 @@ import * as PropTypes from 'prop-types';
 import { Modal as ReactModal } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { hideTxDelegateModal } from '../../../../actions/transactions/delegate';
-import AccountPassword from '../../../common/AccountPassword';
-import AccountPasswordView from '../../../common/AccountPasswordView';
 import Amount from './Amount';
 import Delegate from './Delegate';
 import Label from '../../../../components/Label';
@@ -49,16 +47,6 @@ const ModalDelegate = (props) => {
                         label="Memo"
                     />
                     <Memo/>
-                </div>
-                <div className="password-box">
-                    <div className="form-group">
-                        <Label
-                            className=""
-                            label="Password"
-                        />
-                        <AccountPassword/>
-                    </div>
-                    <AccountPasswordView/>
                 </div>
                 <Delegate/>
             </ReactModal.Body>

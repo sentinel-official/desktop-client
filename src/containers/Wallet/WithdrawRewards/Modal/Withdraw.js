@@ -1,5 +1,5 @@
 import * as PropTypes from 'prop-types';
-import { ValidateMemo, ValidatePassword } from './_validation';
+import { ValidateMemo } from './_validation';
 import { connect } from 'react-redux';
 import { txWithdraw } from '../../../../actions/transactions/withdraw';
 import Button from '../../../../components/Button';
@@ -15,8 +15,7 @@ const Withdraw = (props) => {
     };
 
     const disabled = (
-        ValidateMemo(props.memo.value).message !== '' ||
-        ValidatePassword(props.password.value).message !== ''
+        ValidateMemo(props.memo.value).message !== ''
     );
 
     return (
@@ -39,12 +38,6 @@ Withdraw.propTypes = {
             message: PropTypes.string.isRequired,
         }).isRequired,
     }).isRequired,
-    password: PropTypes.shape({
-        value: PropTypes.string.isRequired,
-        error: PropTypes.shape({
-            message: PropTypes.string.isRequired,
-        }).isRequired,
-    }).isRequired,
     txWithdraw: PropTypes.func.isRequired,
 };
 
@@ -52,7 +45,6 @@ const stateToProps = (state) => {
     return {
         inProgress: state.transactions.withdraw.inProgress,
         memo: state.transactions.withdraw.memo,
-        password: state.account.password,
     };
 };
 

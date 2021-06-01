@@ -2,8 +2,6 @@ import {
     CONFIGURATION_GET_SUCCESS,
     CONFIGURATION_MODAL_HIDE,
     CONFIGURATION_MODAL_SHOW,
-    CONFIGURATION_PASSWORD_SET,
-    CONFIGURATION_PASSWORD_VISIBLE_SET,
     CONFIGURATION_PUT_SUCCESS,
     CONFIGURATION_SETUP_SET,
 } from '../../constants/configuration';
@@ -42,45 +40,6 @@ const setup = (state = {
     }
 };
 
-const password = (state = {
-    value: '',
-    error: {
-        message: '',
-    },
-    visible: false,
-}, {
-    data,
-    type,
-}) => {
-    switch (type) {
-    case CONFIGURATION_GET_SUCCESS:
-    case CONFIGURATION_PUT_SUCCESS:
-        return {
-            ...state,
-            value: '',
-            error: {
-                message: '',
-            },
-            visible: false,
-        };
-    case CONFIGURATION_PASSWORD_SET:
-        return {
-            ...state,
-            value: data.value,
-            error: {
-                message: data.error.message,
-            },
-        };
-    case CONFIGURATION_PASSWORD_VISIBLE_SET:
-        return {
-            ...state,
-            visible: data.visible,
-        };
-    default:
-        return state;
-    }
-};
-
 const modal = (state = false, {
     type,
 }) => {
@@ -97,7 +56,6 @@ const modal = (state = false, {
 
 export default combineReducers({
     setup,
-    password,
     modal,
     chain,
     get,

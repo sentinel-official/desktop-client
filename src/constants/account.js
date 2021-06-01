@@ -8,6 +8,3 @@ export const accountGetURL = (address) => {
     const baseURL = managerBaseURL();
     return `${baseURL}/accounts/${address}`;
 };
-
-export const ACCOUNT_PASSWORD_SET = 'ACCOUNT_PASSWORD_SET';
-export const ACCOUNT_PASSWORD_VISIBLE_SET = 'ACCOUNT_PASSWORD_VISIBLE_SET';

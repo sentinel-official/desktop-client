@@ -1,7 +1,6 @@
 import * as PropTypes from 'prop-types';
 import { addHTTPSURLScheme } from '../../../../utils/string';
 import { connect } from 'react-redux';
-import { encodeToBech32 } from '../../../../utils/bech32';
 import { isActive } from '../../../../utils/validator';
 import Avatar from './Avatar';
 import Copy from '../../../../components/Copy';
@@ -18,15 +17,14 @@ const Row = ({
     totalVotingPower,
 }) => {
     const active = isActive(item);
-    const address = encodeToBech32(item.address, 'sentvaloper');
 
-    let votingPower = item.amount.value * Math.pow(10, -6);
+    let votingPower = item.tokens * Math.pow(10, -6);
     let votingPowerPercentage = active
-        ? item.amount.value * 100 / totalVotingPower.active
-        : item.amount.value * 100 / totalVotingPower.inactive;
+        ? item.tokens * 100 / totalVotingPower.active
+        : item.tokens * 100 / totalVotingPower.inactive;
 
     let commissionRate = item.commission.rate * 100;
-    let delegation = item.delegation ? item.amount.value * parseFloat(item.delegation.shares) : 0;
+    let delegation = item.delegation ? item.tokens * parseFloat(item.delegation.shares) : 0;
     delegation = (delegation / parseFloat(item['delegator_shares'])) * Math.pow(10, -6);
 
     votingPower = parseFloat(votingPower.toFixed(2)).toLocaleString();
@@ -61,7 +59,7 @@ const Row = ({
                         }
                     </Grid>
                     <Grid item>
-                        <Copy text={address}/>
+                        <Copy text={item['operator_address']}/>
                     </Grid>
                 </Grid>
             </TableCell>
@@ -75,9 +73,9 @@ const Row = ({
                 {delegation}
             </TableCell>
             <TableCell>
-                {item.jailed === false ? <Delegate to={item.address}/> : null}
-                {item.delegation?.shares ? <Redelegate from={item.address}/> : null}
-                {item.delegation?.shares ? <Unbond from={item.address}/> : null}
+                {item.jailed === false ? <Delegate to={item['operator_address']}/> : null}
+                {item.delegation?.shares ? <Redelegate from={item['operator_address']}/> : null}
+                {item.delegation?.shares ? <Unbond from={item['operator_address']}/> : null}
             </TableCell>
         </TableRow>
     );
@@ -85,11 +83,9 @@ const Row = ({
 
 Row.propTypes = {
     item: PropTypes.shape({
-        address: PropTypes.string.isRequired,
-        amount: PropTypes.shape({
-            value: PropTypes.number.isRequired,
-        }).isRequired,
-        bond_status: PropTypes.string.isRequired,
+        operator_address: PropTypes.string.isRequired,
+        tokens: PropTypes.number.isRequired,
+        status: PropTypes.string.isRequired,
         commission: PropTypes.shape({
             rate: PropTypes.string.isRequired,
             updated_at: PropTypes.string.isRequired,

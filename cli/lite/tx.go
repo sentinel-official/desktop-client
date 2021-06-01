@@ -3,51 +3,57 @@ package lite
 import (
 	"fmt"
 
+	"github.com/cosmos/cosmos-sdk/client/tx"
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	"github.com/cosmos/cosmos-sdk/x/auth/client/utils"
 )
 
-func (c *Client) Tx(memo, password string, messages ...sdk.Msg) (sdk.TxResponse, error) {
+func (c *Client) BroadcastTx(memo string, messages ...sdk.Msg) (res *sdk.TxResponse, err error) {
 	c.mutex.Lock()
 	defer c.mutex.Unlock()
 
-	account, err := c.QueryAccount(c.ctx.FromAddress)
+	account, err := c.AccountRetriever().GetAccount(c.ctx, c.FromAddress())
 	if err != nil {
-		return sdk.TxResponse{}, err
+		return nil, err
 	}
 
-	txb := c.txb.
-		WithMemo(memo).
-		WithAccountNumber(account.GetAccountNumber()).
-		WithSequence(account.GetSequence())
+	var (
+		name = c.From()
+		txf  = c.txf.
+			WithAccountNumber(account.GetAccountNumber()).
+			WithMemo(memo).
+			WithSequence(account.GetSequence())
+	)
 
-	if txb.GasAdjustment() > 0 {
-		txb, err = utils.EnrichWithGas(txb, c.ctx, messages)
+	if c.SimulateAndExecute() {
+		_, adjusted, err := tx.CalculateGas(c.ctx.QueryWithData, txf, messages...)
 		if err != nil {
-			return sdk.TxResponse{}, err
+			return nil, err
 		}
+
+		txf = txf.WithGas(adjusted)
 	}
 
-	bytes, err := txb.BuildAndSign(c.ctx.From, password, messages)
+	txb, err := tx.BuildUnsignedTx(txf, messages...)
 	if err != nil {
-		return sdk.TxResponse{}, err
+		return nil, err
 	}
 
-	node, err := c.ctx.GetNode()
+	if err := tx.Sign(txf, name, txb, true); err != nil {
+		return nil, err
+	}
+
+	txBytes, err := c.TxConfig().TxEncoder()(txb.GetTx())
 	if err != nil {
-		return sdk.TxResponse{}, err
+		return nil, err
 	}
 
-	result, err := node.BroadcastTxCommit(bytes)
+	result, err := c.ctx.BroadcastTx(txBytes)
 	if err != nil {
-		return sdk.TxResponse{}, err
+		return nil, err
 	}
-	if !result.CheckTx.IsOK() {
-		return sdk.TxResponse{}, fmt.Errorf(result.CheckTx.Log)
-	}
-	if !result.DeliverTx.IsOK() {
-		return sdk.TxResponse{}, fmt.Errorf(result.DeliverTx.Log)
+	if result.Code != 0 {
+		return nil, fmt.Errorf(result.RawLog)
 	}
 
-	return sdk.NewResponseFormatBroadcastTxCommit(result), nil
+	return result, nil
 }

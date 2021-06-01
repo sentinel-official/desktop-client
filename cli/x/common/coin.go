@@ -1,4 +1,4 @@
-package other
+package common
 
 import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
@@ -9,7 +9,7 @@ type Coin struct {
 	Value int64  `json:"value"`
 }
 
-func NewCoinFromRaw(item sdk.Coin) Coin {
+func NewCoinFromRaw(item *sdk.Coin) Coin {
 	return Coin{
 		Denom: item.Denom,
 		Value: item.Amount.Int64(),
@@ -27,8 +27,8 @@ type Coins []Coin
 
 func NewCoinsFromRaw(items sdk.Coins) Coins {
 	coins := make(Coins, 0, items.Len())
-	for _, item := range items {
-		coins = append(coins, NewCoinFromRaw(item))
+	for i := range items {
+		coins = append(coins, NewCoinFromRaw(&items[i]))
 	}
 
 	return coins
@@ -48,7 +48,7 @@ type DecCoin struct {
 	Value string `json:"value"`
 }
 
-func NewDecCoinFromRaw(item sdk.DecCoin) DecCoin {
+func NewDecCoinFromRaw(item *sdk.DecCoin) DecCoin {
 	return DecCoin{
 		Denom: item.Denom,
 		Value: item.Amount.String(),
@@ -66,8 +66,8 @@ type DecCoins []DecCoin
 
 func NewDecCoinsFromRaw(items sdk.DecCoins) DecCoins {
 	coins := make(DecCoins, 0, items.Len())
-	for _, item := range items {
-		coins = append(coins, NewDecCoinFromRaw(item))
+	for i := range items {
+		coins = append(coins, NewDecCoinFromRaw(&items[i]))
 	}
 
 	return coins

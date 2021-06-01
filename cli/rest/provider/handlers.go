@@ -1,12 +1,10 @@
 package provider
 
 import (
-	"encoding/hex"
 	"net/http"
-	"net/url"
-	"strconv"
 
 	"github.com/gorilla/mux"
+	hubtypes "github.com/sentinel-official/hub/types"
 
 	"github.com/sentinel-official/desktop-client/cli/context"
 	"github.com/sentinel-official/desktop-client/cli/utils"
@@ -15,60 +13,46 @@ import (
 
 func HandlerGetProvider(ctx *context.Context) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		vars := mux.Vars(r)
+		var (
+			vars = mux.Vars(r)
+		)
 
-		address, err := hex.DecodeString(vars["address"])
+		address, err := hubtypes.ProvAddressFromBech32(vars["address"])
 		if err != nil {
 			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1001, err.Error())
 			return
 		}
 
-		result, err := ctx.Client().QueryProvider(address)
+		res, err := ctx.Client().QueryProvider(address)
 		if err != nil {
 			utils.WriteErrorToResponse(w, http.StatusInternalServerError, 1002, err.Error())
 			return
 		}
 
-		items := provider.NewProviderFromRaw(result)
-		utils.WriteResultToResponse(w, http.StatusOK, items)
+		item := provider.NewProviderFromRaw(res)
+		utils.WriteResultToResponse(w, http.StatusOK, item)
 	}
-}
-
-func parseQuery(query url.Values) (skip, limit int, err error) {
-	skip = 0
-	if query.Get("skip") != "" {
-		skip, err = strconv.Atoi(query.Get("skip"))
-		if err != nil {
-			return 0, 0, err
-		}
-	}
-
-	limit = 25
-	if query.Get("limit") != "" {
-		limit, err = strconv.Atoi(query.Get("limit"))
-		if err != nil {
-			return 0, 0, err
-		}
-	}
-
-	return skip, limit, nil
 }
 
 func HandlerGetProviders(ctx *context.Context) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		skip, limit, err := parseQuery(r.URL.Query())
+		var (
+			values = r.URL.Query()
+		)
+
+		pagination, err := utils.ParsePaginationQuery(values)
 		if err != nil {
-			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1001, err.Error())
+			utils.WriteErrorToResponse(w, http.StatusInternalServerError, 1001, err.Error())
 			return
 		}
 
-		result, err := ctx.Client().QueryProviders(skip, limit)
+		res, err := ctx.Client().QueryProviders(pagination)
 		if err != nil {
 			utils.WriteErrorToResponse(w, http.StatusInternalServerError, 1002, err.Error())
 			return
 		}
 
-		items := provider.NewProvidersFromRaw(result)
+		items := provider.NewProvidersFromRaw(res)
 		utils.WriteResultToResponse(w, http.StatusOK, items)
 	}
 }

@@ -24,7 +24,7 @@ const columns = [
     },
     {
         id: 'voting_power',
-        key: 'amount.value',
+        key: 'tokens',
         label: 'Voting Power',
         sort: true,
     },
@@ -64,11 +64,8 @@ const Validators = ({
         setLoading(true);
 
         Async.parallel([
-            (next) => {
-                getValidators(next);
-            }, (next) => {
-                getDelegations(next);
-            },
+            (next) => getValidators(next),
+            (next) => getDelegations(next),
         ], () => {
             setLoading(false);
         });
@@ -81,11 +78,11 @@ const Validators = ({
     const filteredValidators = [];
     validators.forEach((validator) => {
         if (status === 1) {
-            if (validator.jailed === false && validator['bond_status'] === 'Bonded') {
+            if (validator.jailed === false && validator.status === 'BOND_STATUS_BONDED') {
                 filteredValidators.push(validator);
             }
         } else {
-            if (validator.jailed === true || validator['bond_status'] !== 'Bonded') {
+            if (validator.jailed === true || validator.status !== 'BOND_STATUS_BONDED') {
                 filteredValidators.push(validator);
             }
         }
@@ -93,7 +90,7 @@ const Validators = ({
 
     let items = [];
     filteredValidators.forEach((validator) => {
-        const delegation = Lodash.find(delegations, ['validator_address', validator.address]);
+        const delegation = Lodash.find(delegations, ['validator_address', validator['operator_address']]);
         items.push({
             ...validator,
             delegation,
@@ -142,11 +139,9 @@ Validators.propTypes = {
     status: PropTypes.number.isRequired,
     validators: PropTypes.arrayOf(
         PropTypes.shape({
-            address: PropTypes.string.isRequired,
-            amount: PropTypes.shape({
-                value: PropTypes.number.isRequired,
-            }).isRequired,
-            bond_status: PropTypes.string.isRequired,
+            operator_address: PropTypes.string.isRequired,
+            tokens: PropTypes.number.isRequired,
+            status: PropTypes.string.isRequired,
             commission: PropTypes.shape({
                 rate: PropTypes.string.isRequired,
                 updated_at: PropTypes.string.isRequired,

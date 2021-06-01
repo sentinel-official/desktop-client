@@ -1,13 +1,11 @@
 package node
 
 import (
-	"encoding/hex"
 	"net/http"
-	"net/url"
 	"strconv"
 
 	"github.com/gorilla/mux"
-	hub "github.com/sentinel-official/hub/types"
+	hubtypes "github.com/sentinel-official/hub/types"
 
 	"github.com/sentinel-official/desktop-client/cli/context"
 	"github.com/sentinel-official/desktop-client/cli/utils"
@@ -16,78 +14,63 @@ import (
 
 func HandlerGetNode(ctx *context.Context) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		vars := mux.Vars(r)
+		var (
+			vars = mux.Vars(r)
+		)
 
-		address, err := hex.DecodeString(vars["address"])
+		address, err := hubtypes.NodeAddressFromBech32(vars["address"])
 		if err != nil {
 			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1001, err.Error())
 			return
 		}
 
-		result, err := ctx.Client().QueryNode(address)
+		res, err := ctx.Client().QueryNode(address)
 		if err != nil {
 			utils.WriteErrorToResponse(w, http.StatusInternalServerError, 1002, err.Error())
 			return
 		}
 
-		items := node.NewNodeFromRaw(result)
-		utils.WriteResultToResponse(w, http.StatusOK, items)
+		item := node.NewNodeFromRaw(res)
+		utils.WriteResultToResponse(w, http.StatusOK, item)
 	}
-}
-
-func parseQuery(query url.Values) (skip, limit int, status hub.Status, err error) {
-	skip = 0
-	if query.Get("skip") != "" {
-		skip, err = strconv.Atoi(query.Get("skip"))
-		if err != nil {
-			return 0, 0, 0, err
-		}
-	}
-
-	limit = 25
-	if query.Get("limit") != "" {
-		limit, err = strconv.Atoi(query.Get("limit"))
-		if err != nil {
-			return 0, 0, 0, err
-		}
-	}
-
-	status = hub.StatusActive
-	if query.Get("status") != "" {
-		status = hub.StatusFromString(query.Get("status"))
-	}
-
-	return skip, limit, status, nil
 }
 
 func HandlerGetNodes(ctx *context.Context) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		skip, limit, status, err := parseQuery(r.URL.Query())
+		var (
+			values = r.URL.Query()
+			status = hubtypes.StatusFromString(values.Get("status"))
+		)
+
+		pagination, err := utils.ParsePaginationQuery(values)
 		if err != nil {
-			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1001, err.Error())
+			utils.WriteErrorToResponse(w, http.StatusInternalServerError, 1001, err.Error())
 			return
 		}
 
-		result, err := ctx.Client().QueryNodes(status, skip, limit)
+		res, err := ctx.Client().QueryNodes(status, pagination)
 		if err != nil {
 			utils.WriteErrorToResponse(w, http.StatusInternalServerError, 1002, err.Error())
 			return
 		}
 
-		items := node.NewNodesFromRaw(result)
+		items := node.NewNodesFromRaw(res)
 		utils.WriteResultToResponse(w, http.StatusOK, items)
 	}
 }
 
 func HandlerGetNodesForPlan(ctx *context.Context) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		skip, limit, _, err := parseQuery(r.URL.Query())
+		var (
+			values = r.URL.Query()
+			vars   = mux.Vars(r)
+		)
+
+		pagination, err := utils.ParsePaginationQuery(values)
 		if err != nil {
-			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1001, err.Error())
+			utils.WriteErrorToResponse(w, http.StatusInternalServerError, 1001, err.Error())
 			return
 		}
-
-		vars := mux.Vars(r)
 
 		plan, err := strconv.ParseUint(vars["id"], 10, 64)
 		if err != nil {
@@ -95,13 +78,13 @@ func HandlerGetNodesForPlan(ctx *context.Context) http.HandlerFunc {
 			return
 		}
 
-		result, err := ctx.Client().QueryNodesForPlan(plan, skip, limit)
+		res, err := ctx.Client().QueryNodesForPlan(plan, pagination)
 		if err != nil {
 			utils.WriteErrorToResponse(w, http.StatusInternalServerError, 1003, err.Error())
 			return
 		}
 
-		items := node.NewNodesFromRaw(result)
+		items := node.NewNodesFromRaw(res)
 		utils.WriteResultToResponse(w, http.StatusOK, items)
 	}
 }

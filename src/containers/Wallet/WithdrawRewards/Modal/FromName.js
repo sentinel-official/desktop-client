@@ -10,7 +10,7 @@ const FromName = ({
 }) => {
     let name = value;
     if (name !== 'All') {
-        const item = Lodash.find(items, ['address', value]);
+        const item = Lodash.find(items, ['operator_address', value]);
         name = item.description.moniker;
     }
 
@@ -25,7 +25,7 @@ const FromName = ({
 FromName.propTypes = {
     items: PropTypes.arrayOf(
         PropTypes.shape({
-            address: PropTypes.string.isRequired,
+            operator_address: PropTypes.string.isRequired,
             description: PropTypes.shape({
                 moniker: PropTypes.string.isRequired,
             }).isRequired,

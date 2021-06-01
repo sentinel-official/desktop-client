@@ -14,7 +14,7 @@ const Balance = (props) => {
         props.getAccount();
     }, [props.name]);
 
-    let tokens = (props.coins[0]?.value * Math.pow(10, -6)) || 0;
+    let tokens = (props.balance.value * Math.pow(10, -6)) || 0;
     let USD = tokens * props.rate;
 
     tokens = parseFloat(tokens.toFixed(2)).toLocaleString();
@@ -41,12 +41,10 @@ const Balance = (props) => {
 };
 
 Balance.propTypes = {
-    coins: PropTypes.arrayOf(
-        PropTypes.shape({
-            denom: PropTypes.string.isRequired,
-            value: PropTypes.number.isRequired,
-        }).isRequired,
-    ).isRequired,
+    balance: PropTypes.shape({
+        denom: PropTypes.string.isRequired,
+        value: PropTypes.number.isRequired,
+    }).isRequired,
     getAccount: PropTypes.func.isRequired,
     getCoingecko: PropTypes.func.isRequired,
     name: PropTypes.string.isRequired,
@@ -55,7 +53,7 @@ Balance.propTypes = {
 
 const stateToProps = (state) => {
     return {
-        coins: state.account.info.coins,
+        balance: state.account.info.balance,
         name: state.keys.name,
         rate: state.coingecko.rate,
     };

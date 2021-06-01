@@ -1,7 +1,7 @@
-package other
+package common
 
 import (
-	hub "github.com/sentinel-official/hub/types"
+	hubtypes "github.com/sentinel-official/hub/types"
 )
 
 type Bandwidth struct {
@@ -9,7 +9,7 @@ type Bandwidth struct {
 	Download int64 `json:"download"`
 }
 
-func NewBandwidthFromRaw(item hub.Bandwidth) Bandwidth {
+func NewBandwidthFromRaw(item hubtypes.Bandwidth) Bandwidth {
 	return Bandwidth{
 		Upload:   item.Upload.Int64(),
 		Download: item.Download.Int64(),

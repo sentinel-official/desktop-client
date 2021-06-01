@@ -55,7 +55,6 @@ export const txWithdraw = (cb = emptyFunc) => (dispatch, getState) => {
             next(null);
         }, (next) => {
             const {
-                account: { password },
                 keys: {
                     items,
                     name,
@@ -75,7 +74,6 @@ export const txWithdraw = (cb = emptyFunc) => (dispatch, getState) => {
             Axios.post(url, {
                 validators,
                 memo: memo.value.trim(),
-                password: password.value.trim(),
             })
                 .then((res) => {
                     try {

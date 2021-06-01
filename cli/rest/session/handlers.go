@@ -10,13 +10,14 @@ import (
 	"fmt"
 	"net"
 	"net/http"
-	"net/url"
 	"path/filepath"
 	"strconv"
 	"time"
 
+	sdk "github.com/cosmos/cosmos-sdk/types"
+	"github.com/go-kit/kit/transport/http/jsonrpc"
 	"github.com/gorilla/mux"
-	hub "github.com/sentinel-official/hub/types"
+	hubtypes "github.com/sentinel-official/hub/types"
 
 	"github.com/sentinel-official/desktop-client/cli/context"
 	"github.com/sentinel-official/desktop-client/cli/services/wireguard"
@@ -28,7 +29,9 @@ import (
 
 func HandlerGetSession(ctx *context.Context) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		vars := mux.Vars(r)
+		var (
+			vars = mux.Vars(r)
+		)
 
 		id, err := strconv.ParseUint(vars["id"], 10, 64)
 		if err != nil {
@@ -36,67 +39,48 @@ func HandlerGetSession(ctx *context.Context) http.HandlerFunc {
 			return
 		}
 
-		result, err := ctx.Client().QuerySession(id)
+		res, err := ctx.Client().QuerySession(id)
 		if err != nil {
 			utils.WriteErrorToResponse(w, http.StatusInternalServerError, 1002, err.Error())
 			return
 		}
 
-		items := session.NewSessionFromRaw(result)
-		utils.WriteResultToResponse(w, http.StatusOK, items)
+		item := session.NewSessionFromRaw(res)
+		utils.WriteResultToResponse(w, http.StatusOK, item)
 	}
-}
-
-func parseQuery(query url.Values) (skip, limit int, status hub.Status, err error) {
-	skip = 0
-	if query.Get("skip") != "" {
-		skip, err = strconv.Atoi(query.Get("skip"))
-		if err != nil {
-			return 0, 0, status, err
-		}
-	}
-
-	limit = 25
-	if query.Get("limit") != "" {
-		limit, err = strconv.Atoi(query.Get("limit"))
-		if err != nil {
-			return 0, 0, status, err
-		}
-	}
-
-	status = hub.StatusFromString(query.Get("status"))
-
-	return skip, limit, status, nil
 }
 
 func HandlerGetSessionsForAddress(ctx *context.Context) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		skip, limit, status, err := parseQuery(r.URL.Query())
+		var (
+			values = r.URL.Query()
+			vars   = mux.Vars(r)
+			status = hubtypes.StatusFromString(values.Get("status"))
+		)
+
+		address, err := sdk.AccAddressFromBech32(vars["address"])
 		if err != nil {
 			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1001, err.Error())
 			return
 		}
-
-		vars := mux.Vars(r)
-
-		if ctx.Client().FromAddressHex() != vars["address"] {
+		if !ctx.Client().FromAddress().Equals(address) {
 			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1002, "")
 			return
 		}
 
-		address, err := hex.DecodeString(vars["address"])
+		pagination, err := utils.ParsePaginationQuery(values)
 		if err != nil {
-			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1003, err.Error())
+			utils.WriteErrorToResponse(w, http.StatusInternalServerError, 1003, err.Error())
 			return
 		}
 
-		result, err := ctx.Client().QuerySessionsForAddress(address, status, skip, limit)
+		res, err := ctx.Client().QuerySessionsForAddress(address, status, pagination)
 		if err != nil {
 			utils.WriteErrorToResponse(w, http.StatusInternalServerError, 1004, err.Error())
 			return
 		}
 
-		items := session.NewSessionsFromRaw(result)
+		items := session.NewSessionsFromRaw(res)
 		utils.WriteResultToResponse(w, http.StatusOK, items)
 	}
 }
@@ -114,54 +98,61 @@ func HandlerStartSession(ctx *context.Context) http.HandlerFunc {
 	)
 
 	return func(w http.ResponseWriter, r *http.Request) {
-		service := ctx.Service()
+		var (
+			service = ctx.Service()
+			vars    = mux.Vars(r)
+		)
+
 		if service != nil {
 			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1001, "")
 			return
 		}
 
-		vars := mux.Vars(r)
-
-		if ctx.Client().FromAddressHex() != vars["address"] {
-			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1002, "")
+		address, err := sdk.AccAddressFromBech32(vars["address"])
+		if err != nil {
+			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1002, err.Error())
+			return
+		}
+		if !ctx.Client().FromAddress().Equals(address) {
+			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1003, "")
 			return
 		}
 
 		id, err := strconv.ParseUint(vars["id"], 10, 64)
 		if err != nil {
-			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1003, err.Error())
+			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1004, err.Error())
 			return
 		}
 
 		body, err := NewRequestAddSession(r)
 		if err != nil {
-			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1004, err.Error())
+			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1005, err.Error())
 			return
 		}
 		if err := body.Validate(); err != nil {
-			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1005, err.Error())
+			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1006, err.Error())
 			return
 		}
 
 		to, err := hex.DecodeString(body.To)
 		if err != nil {
-			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1006, err.Error())
+			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1007, err.Error())
 			return
 		}
 
 		node, err := ctx.Client().QueryNode(to)
 		if err != nil {
-			utils.WriteErrorToResponse(w, http.StatusInternalServerError, 1007, err.Error())
+			utils.WriteErrorToResponse(w, http.StatusInternalServerError, 1008, err.Error())
 			return
 		}
-		if node.Address == nil {
-			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1008, "")
+		if node.Address == "" {
+			utils.WriteErrorToResponse(w, http.StatusBadRequest, 1009, "")
 			return
 		}
 
 		privateKey, err := wgt.NewPrivateKey()
 		if err != nil {
-			utils.WriteErrorToResponse(w, http.StatusInternalServerError, 1009, err.Error())
+			utils.WriteErrorToResponse(w, http.StatusInternalServerError, 1010, err.Error())
 			return
 		}
 
@@ -171,15 +162,18 @@ func HandlerStartSession(ctx *context.Context) http.HandlerFunc {
 			},
 		)
 		if err != nil {
-			utils.WriteErrorToResponse(w, http.StatusInternalServerError, 1010, err.Error())
+			utils.WriteErrorToResponse(w, http.StatusInternalServerError, 1011, err.Error())
 			return
 		}
 
-		endpoint := fmt.Sprintf("%s/accounts/%s/subscriptions/%d/sessions", node.RemoteURL, ctx.AddressHex(), id)
+		var (
+			response types.Response
+			endpoint = fmt.Sprintf("%s/accounts/%s/subscriptions/%d/sessions", node.RemoteURL, address, id)
+		)
 
-		resp, err := client.Post(endpoint, "application/json", bytes.NewBuffer(request))
+		resp, err := client.Post(endpoint, jsonrpc.ContentType, bytes.NewBuffer(request))
 		if err != nil {
-			utils.WriteErrorToResponse(w, http.StatusInternalServerError, 1011, err.Error())
+			utils.WriteErrorToResponse(w, http.StatusInternalServerError, 1012, err.Error())
 			return
 		}
 
@@ -187,23 +181,22 @@ func HandlerStartSession(ctx *context.Context) http.HandlerFunc {
 			_ = resp.Body.Close()
 		}()
 
-		var response types.Response
 		if err := json.NewDecoder(resp.Body).Decode(&response); err != nil {
-			utils.WriteErrorToResponse(w, http.StatusInternalServerError, 1012, err.Error())
+			utils.WriteErrorToResponse(w, http.StatusInternalServerError, 1013, err.Error())
 			return
 		}
 		if !response.Success || response.Error != nil {
-			utils.WriteErrorToResponse(w, resp.StatusCode, 1013, response.Error.Message)
+			utils.WriteErrorToResponse(w, http.StatusInternalServerError, 1014, "")
 			return
 		}
 
 		result, err := base64.StdEncoding.DecodeString(response.Result.(string))
 		if err != nil {
-			utils.WriteErrorToResponse(w, http.StatusInternalServerError, 1014, err.Error())
+			utils.WriteErrorToResponse(w, http.StatusInternalServerError, 1015, err.Error())
 			return
 		}
 		if len(result) != 58 {
-			utils.WriteErrorToResponse(w, http.StatusInternalServerError, 1015, "")
+			utils.WriteErrorToResponse(w, http.StatusInternalServerError, 1016, "")
 			return
 		}
 
@@ -215,7 +208,7 @@ func HandlerStartSession(ctx *context.Context) http.HandlerFunc {
 
 		listenPort, err := utils.GetFreeUDPPort()
 		if err != nil {
-			utils.WriteErrorToResponse(w, http.StatusInternalServerError, 1016, err.Error())
+			utils.WriteErrorToResponse(w, http.StatusInternalServerError, 1017, err.Error())
 			return
 		}
 
@@ -249,14 +242,14 @@ func HandlerStartSession(ctx *context.Context) http.HandlerFunc {
 		}
 
 		status := types.NewStatus().
-			WithFrom(ctx.Client().FromAddressHex()).
+			WithFrom(ctx.Client().FromAddress().String()).
 			WithID(id).
 			WithName(cfg.Name).
 			WithTo(body.To)
 
 		info, err := json.Marshal(status)
 		if err != nil {
-			utils.WriteErrorToResponse(w, http.StatusInternalServerError, 1017, err.Error())
+			utils.WriteErrorToResponse(w, http.StatusInternalServerError, 1018, err.Error())
 			return
 		}
 
@@ -266,20 +259,20 @@ func HandlerStartSession(ctx *context.Context) http.HandlerFunc {
 			WithInfo(info)
 
 		if err := service.PreUp(); err != nil {
-			utils.WriteErrorToResponse(w, http.StatusInternalServerError, 1018, err.Error())
-			return
-		}
-		if err := service.Up(); err != nil {
 			utils.WriteErrorToResponse(w, http.StatusInternalServerError, 1019, err.Error())
 			return
 		}
-		if err := service.PostUp(); err != nil {
+		if err := service.Up(); err != nil {
 			utils.WriteErrorToResponse(w, http.StatusInternalServerError, 1020, err.Error())
+			return
+		}
+		if err := service.PostUp(); err != nil {
+			utils.WriteErrorToResponse(w, http.StatusInternalServerError, 1021, err.Error())
 			return
 		}
 
 		if err := status.SaveToPath(filepath.Join(ctx.Home(), "status.json")); err != nil {
-			utils.WriteErrorToResponse(w, http.StatusInternalServerError, 1021, err.Error())
+			utils.WriteErrorToResponse(w, http.StatusInternalServerError, 1022, err.Error())
 			return
 		}
 

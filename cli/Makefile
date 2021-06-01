@@ -12,10 +12,10 @@ BUILD_FLAGS := -tags "${BUILD_TAGS}" -ldflags "${LD_FLAGS}"
 all: mod_verify test benchmark install
 
 install: mod_verify
-	go build -mod=readonly ${BUILD_FLAGS} -o ${GOPATH}/bin/sdccli main.go
+	go build -mod=readonly ${BUILD_FLAGS} -o ${GOPATH}/bin/sentinelcli main.go
 
 build: mod_verify
-	go build -mod=readonly ${BUILD_FLAGS} -o ../bin/manager main.go
+	go build -mod=readonly ${BUILD_FLAGS} -o ../bin/sentinelcli main.go
 
 test:
 	@go test -mod=readonly -cover ${PACKAGES}
