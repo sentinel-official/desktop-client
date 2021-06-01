@@ -2,6 +2,7 @@ import * as PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { isManagerRunning } from '../../utils/manager';
 import { setSplashStatus } from '../../actions/splash';
+import { withInterceptors } from '../../services/axios';
 import Image from '../../components/Image';
 import LogoWithText from '../../assets/LogoWithText.svg';
 import ProgressBar from './ProgressBar';
@@ -16,6 +17,7 @@ const Splash = ({
     useEffect(() => {
         const { electron } = window;
         if (electron === undefined) {
+            withInterceptors(process.env.REACT_APP_TOKEN);
             setSplashStatus({
                 completed: 150,
                 message: 'THE MANAGER IS RUNNING SUCCESSFULLY',
@@ -39,6 +41,8 @@ const Splash = ({
             console.log('EVENT:', event, 'ARGS:', args);
 
             if (args.success === true) {
+                withInterceptors(args.data.token);
+
                 setSplashStatus({
                     completed: 60,
                     message: 'THE MANAGER IS STARTED SUCCESSFULLY',

@@ -1,7 +1,4 @@
 import {
-    KEY_MNEMONIC_SAVED_SET,
-    KEY_MNEMONIC_SET,
-    KEY_NAME_SET,
     KEYS_CREATE_MODAL_HIDE,
     KEYS_CREATE_MODAL_SHOW,
     KEYS_DELETE_ERROR,
@@ -19,13 +16,16 @@ import {
     KEYS_POST_ERROR,
     KEYS_POST_IN_PROGRESS,
     KEYS_POST_SUCCESS,
+    KEY_MNEMONIC_SAVED_SET,
+    KEY_MNEMONIC_SET,
+    KEY_NAME_SET,
     keysDeleteURL,
     keysGetURL,
     keysPostURL,
 } from '../constants/keys';
 import { emptyFunc } from '../constants/common';
 import Async from 'async';
-import Axios from 'axios';
+import Axios from '../services/axios';
 
 export const getKeysInProgress = (data) => {
     return {

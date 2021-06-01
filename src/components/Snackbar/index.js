@@ -1,6 +1,6 @@
 import './index.css';
 import * as PropTypes from 'prop-types';
-import { Slide, Snackbar as MaterialSnackbar } from '@material-ui/core';
+import { Snackbar as MaterialSnackbar, Slide } from '@material-ui/core';
 import React from 'react';
 
 const TransitionUp = (props) => {

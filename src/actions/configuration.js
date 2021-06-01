@@ -20,7 +20,7 @@ import {
 } from '../constants/configuration';
 import { emptyFunc } from '../constants/common';
 import Async from 'async';
-import Axios from 'axios';
+import Axios from '../services/axios';
 
 export const setConfigurationSetup = (data) => {
     return {

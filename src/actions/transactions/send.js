@@ -11,7 +11,7 @@ import {
     txSendURL,
 } from '../../constants/transactions';
 import Async from 'async';
-import Axios from 'axios';
+import Axios from '../../services/axios';
 
 export const setTxSendTo = (data) => {
     return {
@@ -74,7 +74,7 @@ export const txSend = (cb = emptyFunc) => (dispatch, getState) => {
             const url = txSendURL();
             Axios.post(url, {
                 to: to.value.trim(),
-                amount: [{
+                coins: [{
                     denom: COIN_DENOM,
                     value: amount.value * Math.pow(10, COIN_DECIMALS),
                 }],

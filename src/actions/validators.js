@@ -9,7 +9,7 @@ import {
 import { emptyFunc } from '../constants/common';
 import { isActive } from '../utils/validator';
 import Async from 'async';
-import Axios from 'axios';
+import Axios from '../services/axios';
 import Lodash from 'lodash';
 
 export const getValidatorsInProgress = (data) => {

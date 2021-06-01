@@ -11,7 +11,7 @@ import {
     txDelegateURL,
 } from '../../constants/transactions';
 import Async from 'async';
-import Axios from 'axios';
+import Axios from '../../services/axios';
 import Lodash from 'lodash';
 
 export const setTxDelegateTo = (data) => {
@@ -80,7 +80,7 @@ export const txDelegate = (cb = emptyFunc) => (dispatch, getState) => {
             const url = txDelegateURL(item.address);
             Axios.post(url, {
                 to: to.value.trim(),
-                amount: {
+                coin: {
                     denom: COIN_DENOM,
                     value: amount.value * Math.pow(10, COIN_DECIMALS),
                 },

@@ -11,7 +11,7 @@ import {
     txUnbondURL,
 } from '../../constants/transactions';
 import Async from 'async';
-import Axios from 'axios';
+import Axios from '../../services/axios';
 import Lodash from 'lodash';
 
 export const setTxUnbondFrom = (data) => {
@@ -80,7 +80,7 @@ export const txUnbond = (cb = emptyFunc) => (dispatch, getState) => {
             const url = txUnbondURL(item.address);
             Axios.post(url, {
                 from: from.value.trim(),
-                amount: {
+                coin: {
                     denom: COIN_DENOM,
                     value: amount.value * Math.pow(10, COIN_DECIMALS),
                 },

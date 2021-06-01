@@ -1,7 +1,7 @@
 import { ACCOUNT_GET_ERROR, ACCOUNT_GET_IN_PROGRESS, ACCOUNT_GET_SUCCESS, accountGetURL } from '../constants/account';
 import { emptyFunc } from '../constants/common';
 import Async from 'async';
-import Axios from 'axios';
+import Axios from '../services/axios';
 import Lodash from 'lodash';
 
 export const getAccountInProgress = (data) => {

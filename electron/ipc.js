@@ -48,10 +48,17 @@ ipcMain.on(MANAGER_START_REQUEST, (event, args) => {
             return;
         }
 
+        const index = data.indexOf('TOKEN: ');
+        if (index === -1) {
+            return;
+        }
+
         success = true;
         globals.window.webContents.send(MANAGER_START_RESPONSE, {
             success: true,
-            data,
+            data: {
+                token: data.substring(index + 7).trim(),
+            },
         });
     });
 

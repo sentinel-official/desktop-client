@@ -1,7 +1,4 @@
 import {
-    KEY_MNEMONIC_SAVED_SET,
-    KEY_MNEMONIC_SET,
-    KEY_NAME_SET,
     KEYS_CREATE_MODAL_HIDE,
     KEYS_CREATE_MODAL_SHOW,
     KEYS_INFO_MODAL_HIDE,
@@ -9,6 +6,9 @@ import {
     KEYS_POST_ERROR,
     KEYS_POST_IN_PROGRESS,
     KEYS_POST_SUCCESS,
+    KEY_MNEMONIC_SAVED_SET,
+    KEY_MNEMONIC_SET,
+    KEY_NAME_SET,
 } from '../../constants/keys';
 import { combineReducers } from 'redux';
 

@@ -6,7 +6,7 @@ import {
 } from '../constants/delegations';
 import { emptyFunc } from '../constants/common';
 import Async from 'async';
-import Axios from 'axios';
+import Axios from '../services/axios';
 import Lodash from 'lodash';
 
 export const getDelegationsInProgress = (data) => {
@@ -44,7 +44,7 @@ export const getDelegations = (cb = emptyFunc) => (dispatch, getState) => {
             } = getState();
 
             const item = Lodash.find(items, ['name', name]);
-            const url = delegationsGetURL(item.address);
+            const url = `${delegationsGetURL(item.address)}?limit=1000`;
             Axios.get(url)
                 .then((res) => {
                     try {

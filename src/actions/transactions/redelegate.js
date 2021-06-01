@@ -12,7 +12,7 @@ import {
     txRedelegateURL,
 } from '../../constants/transactions';
 import Async from 'async';
-import Axios from 'axios';
+import Axios from '../../services/axios';
 import Lodash from 'lodash';
 
 export const setTxRedelegateFrom = (data) => {
@@ -90,7 +90,7 @@ export const txRedelegate = (cb = emptyFunc) => (dispatch, getState) => {
             Axios.post(url, {
                 from: from.value.trim(),
                 to: to.value.trim(),
-                amount: {
+                coin: {
                     denom: COIN_DENOM,
                     value: amount.value * Math.pow(10, COIN_DECIMALS),
                 },
