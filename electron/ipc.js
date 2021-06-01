@@ -18,7 +18,7 @@ ipcMain.on(MANAGER_START_REQUEST, (event, args) => {
     console.log('EVENT: MANAGER_START_REQUEST', 'ARGS:', args);
 
     const manager = spawn(
-        path.join(__dirname, '../bin/manager'),
+        path.join(__dirname, '../bin/sentinelcli'),
         ['server', '--listen-url', globals.listenURL],
         { detached: false },
     );
