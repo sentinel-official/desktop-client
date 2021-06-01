@@ -1,6 +1,6 @@
 {
   "name": "sentinel",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "main": "./electron/index.js",
   "homepage": "./",
   "description": "Sentinel desktop and web client.",
