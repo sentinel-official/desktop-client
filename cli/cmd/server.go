@@ -45,13 +45,13 @@ func ServerCmd(cfg *types.Config) *cobra.Command {
 		listenURL string
 		keyFile   string
 		certFile  string
+		defCfg    = types.NewConfig().WithDefaultValues()
 	)
 
 	cmd := &cobra.Command{
 		Use:   "server",
 		Short: "Start REST API server",
 		PreRunE: func(cmd *cobra.Command, args []string) error {
-			defCfg := types.NewConfig().WithDefaultValues()
 			if viper.GetString(flagCORSAllowedOrigins) != defCfg.CORS.AllowedOrigins {
 				cfg.CORS.AllowedOrigins = viper.GetString(flagCORSAllowedOrigins)
 			}
@@ -155,7 +155,7 @@ func ServerCmd(cfg *types.Config) *cobra.Command {
 	cmd.Flags().StringVar(&listenURL, flagListenURL, types.DefaultListenURL, "")
 	cmd.Flags().StringVar(&keyFile, flagTLSKey, filepath.Join(types.DefaultHomeDirectory, "tls.key"), "")
 	cmd.Flags().StringVar(&certFile, flagTLSCrt, filepath.Join(types.DefaultHomeDirectory, "tls.crt"), "")
-	cmd.Flags().String(flagCORSAllowedOrigins, cfg.CORS.AllowedOrigins, "")
+	cmd.Flags().String(flagCORSAllowedOrigins, defCfg.CORS.AllowedOrigins, "")
 
 	_ = viper.BindPFlag(flagCORSAllowedOrigins, cmd.Flags().Lookup(flagCORSAllowedOrigins))
 

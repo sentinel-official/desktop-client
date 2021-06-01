@@ -28,8 +28,9 @@ func main() {
 	sent.GetConfig().Seal()
 
 	var (
-		cfg  = types.NewConfig().WithDefaultValues()
-		root = &cobra.Command{
+		cfg    = types.NewConfig()
+		defCfg = types.NewConfig().WithDefaultValues()
+		root   = &cobra.Command{
 			Use:          "sdccli",
 			SilenceUsage: true,
 			PersistentPreRunE: func(_ *cobra.Command, _ []string) error {
@@ -42,7 +43,7 @@ func main() {
 
 				cfgPath := filepath.Join(home, "config.toml")
 				if _, err := os.Stat(cfgPath); err != nil {
-					if err := cfg.SaveToPath(cfgPath); err != nil {
+					if err := cfg.WithDefaultValues().SaveToPath(cfgPath); err != nil {
 						return err
 					}
 				}
@@ -51,7 +52,6 @@ func main() {
 					return err
 				}
 
-				defCfg := types.NewConfig().WithDefaultValues()
 				if cfg.Version != defCfg.Version {
 					if err := defCfg.SaveToPath(cfgPath); err != nil {
 						return err
@@ -90,13 +90,13 @@ func main() {
 	)
 
 	root.PersistentFlags().String(types.FlagHome, types.DefaultHomeDirectory, "")
-	root.PersistentFlags().String(flagChainBroadcastMode, cfg.Chain.BroadcastMode, "")
-	root.PersistentFlags().Float64(flagChainGasAdjustment, cfg.Chain.GasAdjustment, "")
-	root.PersistentFlags().String(flagChainGasPrices, cfg.Chain.GasPrices, "")
-	root.PersistentFlags().Uint64(flagChainGas, cfg.Chain.Gas, "")
-	root.PersistentFlags().String(flagChainID, cfg.Chain.ID, "")
-	root.PersistentFlags().String(flagChainRPCAddress, cfg.Chain.RPCAddress, "")
-	root.PersistentFlags().Bool(flagChainSimulateAndExecute, cfg.Chain.SimulateAndExecute, "")
+	root.PersistentFlags().String(flagChainBroadcastMode, defCfg.Chain.BroadcastMode, "")
+	root.PersistentFlags().Float64(flagChainGasAdjustment, defCfg.Chain.GasAdjustment, "")
+	root.PersistentFlags().String(flagChainGasPrices, defCfg.Chain.GasPrices, "")
+	root.PersistentFlags().Uint64(flagChainGas, defCfg.Chain.Gas, "")
+	root.PersistentFlags().String(flagChainID, defCfg.Chain.ID, "")
+	root.PersistentFlags().String(flagChainRPCAddress, defCfg.Chain.RPCAddress, "")
+	root.PersistentFlags().Bool(flagChainSimulateAndExecute, defCfg.Chain.SimulateAndExecute, "")
 
 	_ = viper.BindPFlag(types.FlagHome, root.PersistentFlags().Lookup(types.FlagHome))
 	_ = viper.BindPFlag(flagChainBroadcastMode, root.PersistentFlags().Lookup(flagChainBroadcastMode))
